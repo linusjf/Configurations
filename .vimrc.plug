@@ -1,1 +1,25 @@
-.vimrc.plug
+call plug#begin('~/.vim/plugged')
+
+"Fugitive Vim Github Wrappern 'valloric/youcompleteme'
+
+call plug#end()
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" Add plugins here
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ehamberg/vim-cute-python'
+Plugin 'luchermitte/vimfold4c'
+Plugin 'wolfgangmehner/c.vim'
+Plugin 'shougo/neocomplete.vim'
+
+call vundle#end()
+
+
