@@ -86,3 +86,7 @@ set clipboard=unnamedplus
  if filereadable(expand("~/.vimrc.plug"))
      source ~/.vimrc.plug
  endif
+
+call pathogen#infect() 
+
+call pathogen#helptags()

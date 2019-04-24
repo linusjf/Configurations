@@ -12,8 +12,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
 Plugin 'pangloss/vim-javascript'
 Plugin 'ehamberg/vim-cute-python'
 Plugin 'luchermitte/vimfold4c'
@@ -22,4 +20,7 @@ Plugin 'shougo/neocomplete.vim'
 
 call vundle#end()
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_auto_jump = 1
 
