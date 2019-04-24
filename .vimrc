@@ -90,3 +90,6 @@ set clipboard=unnamedplus
 call pathogen#infect() 
 
 call pathogen#helptags()
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
