@@ -76,10 +76,6 @@ set viminfo='100,<9999,s100
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-" Automatically save and load folds
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent
-
 set clipboard=unnamedplus
 
  " Call the .vimrc.plug file
@@ -90,6 +86,3 @@ set clipboard=unnamedplus
 call pathogen#infect() 
 
 call pathogen#helptags()
-
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview

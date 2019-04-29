@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 "Fugitive Vim Github Wrappern 'valloric/youcompleteme'
-
+Plug 'tibabit/vim-templates'
 call plug#end()
 
 set rtp+=~/.vim/bundle/Vundle.vim
