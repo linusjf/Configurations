@@ -24,3 +24,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_jump = 1
 
+let g:tmpl_auto_initialize = 0 
+let g:tmpl_search_paths = ['~/templates']
+let g:tmpl_author_email = 'john.doe@example.com'
