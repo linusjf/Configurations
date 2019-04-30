@@ -1,1 +1,2 @@
-/data/data/com.termux/files/home/config/bin/gitssh
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
