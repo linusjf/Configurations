@@ -1,3 +1,8 @@
+execute pathogen#infect()
+
+filetype plugin indent on
+syntax on
+
 " Set compatibility to Vim only.
 set nocompatible
 

@@ -1,3 +1,2 @@
 mv ~/$1 .
-dir=`dirname $1`
-ln -s ~/config/$1 ~/dir
+ln -s ~/config/$1 ~/
