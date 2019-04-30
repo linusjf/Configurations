@@ -5,4 +5,4 @@ export GREP_OPTIONS=' — color=auto'
 # Set Vim as my default editor
 export EDITOR=vim
 export HISTSIZE=10000
-export HISTFILESIZE=120000	
+export HISTFILESIZE=120000
