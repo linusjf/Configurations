@@ -6,3 +6,5 @@ export GREP_OPTIONS=' — color=auto'
 export EDITOR=vim
 export HISTSIZE=10000
 export HISTFILESIZE=120000
+source ~/bin/ssh-find-agent.sh
+set_ssh_agent_socket

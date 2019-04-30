@@ -1,2 +1,5 @@
-eval "$(ssh-agent -s)"
-ssh-add -k ~/.ssh/id_rsa
+#!/bin/bash
+#eval "$(ssh-agent -s)"
+ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}'` || ssh-add -t 0 ~/.ssh/id_rsa
+gitpush
+exit 0
