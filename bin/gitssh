@@ -1,5 +1,5 @@
 #!/bin/bash
-#eval "$(ssh-agent -s)"
-ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}'` || ssh-add -t 0 ~/.ssh/id_rsa
-gitpush
-bash -i
+eval "$(ssh-agent -s)"
+ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}'` || ssh-add -v -t 0 ~/.ssh/id_rsa
+bash -c gitpush
+#exec gitpush
