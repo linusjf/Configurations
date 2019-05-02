@@ -9,7 +9,6 @@
 ######################################################################
 
 set -e
-set -x
 command=''
 trap message EXIT
 function message()
