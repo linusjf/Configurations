@@ -7,21 +7,29 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description : 
 ######################################################################
-
+RED="\033[0;31m"
+NC="\033[0m" # No Color
 set -e
-command=''
+command=""
 trap message EXIT
 function message()
 {
-echo exit $? from last command: $command
+  ret=$?
+  if [ $ret -eq 0 ]
+  then
+    echo exit $ret from last command: $command
+  else
+    echo ${RED}exit $ret from last command: $command${NC}
+fi
+  exit $ret
 }
-command=$(echo git push -u origin development)
-git push -u origin development
-command=$(echo git checkout master)
-git checkout master
-command=$(echo git merge development)
-git merge development
-command=$(echo git push -u origin master)
-git push -u origin master
-command=$(echo git checkout development)
-git checkout development
+command="git push -u origin development"
+$command
+command="git checkout master"
+$command
+command="git merge development"
+$command
+command="git push -u origin master"
+$command
+command="git checkout development"
+$command
