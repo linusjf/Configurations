@@ -1,4 +1,15 @@
-#!/bin/bash
+#! /usr/bin/env bash
+
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : gitpush
+# @created     : Thursday May 02, 2019 21:07:57 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description : 
+######################################################################
+
+set -e
+trap 'echo "exit $? due to $previous_command"' EXIT
 git push -u origin development
 git checkout master
 git merge development

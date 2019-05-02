@@ -1,5 +1,12 @@
-#!/bin/bash
+#! /usr/bin/env bash
+
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : gitssh
+# @created     : Thursday May 02, 2019 21:09:20 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description : 
+######################################################################
+
 eval "$(ssh-agent -s)"
 ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}'` || ssh-add -v -t 0 ~/.ssh/id_rsa
-bash -c gitpush
-#exec gitpush
