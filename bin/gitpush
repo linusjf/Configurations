@@ -9,13 +9,20 @@
 ######################################################################
 
 set -e
+set -x
+command=''
 trap message EXIT
 function message()
 {
-echo exit $? due to [!:0] with arguments [!:*]
+echo exit $? from last command: $command
 }
+command=$(echo git push -u origin development)
 git push -u origin development
+command=$(echo git checkout master)
 git checkout master
+command=$(echo git merge development)
 git merge development
+command=$(echo git push -u origin master)
 git push -u origin master
+command=$(echo git checkout development)
 git checkout development
