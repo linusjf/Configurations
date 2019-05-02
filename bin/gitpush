@@ -9,7 +9,11 @@
 ######################################################################
 
 set -e
-trap 'echo "exit $? due to $previous_command"' EXIT
+trap message EXIT
+function message()
+{
+echo 'exit $? due to ["!:0"] with arguments ["!:*"]'
+}
 git push -u origin development
 git checkout master
 git merge development
