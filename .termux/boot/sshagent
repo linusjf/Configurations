@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : sshagent
+# @created     : Tuesday Apr 30, 2019 11:10:49 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description : 
+######################################################################
+termux-wake-lock
+echo hello
+eval "$(ssh-agent -s)"
