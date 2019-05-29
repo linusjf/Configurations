@@ -9,3 +9,11 @@ export HISTFILESIZE=120000
 source ~/bin/ssh-find-agent.sh
 set_ssh_agent_socket
 unset GREP_OPTIONS
+shopt -s autocd
+shopt -s cdspell
+shopt -s cmdhist
+shopt -s direxpand
+shopt -s dirspell
+shopt -s dotglob
+shopt -s globstar
+

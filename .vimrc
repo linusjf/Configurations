@@ -88,6 +88,5 @@ set clipboard=unnamedplus
      source ~/.vimrc.plug
  endif
 
-call pathogen#infect() 
 
 call pathogen#helptags()
