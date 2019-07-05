@@ -16,4 +16,4 @@ shopt -s direxpand
 shopt -s dirspell
 shopt -s dotglob
 shopt -s globstar
-
+export DISPLAY=":1"
