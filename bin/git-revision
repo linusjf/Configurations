@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/bin/bash
 
 revisioncount=`git log --oneline | wc -l`
 projectversion=`git describe --tags --long`
