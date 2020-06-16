@@ -25,6 +25,8 @@ fi
 }
 command="git checkout master"
 $command
+command="git config pull.rebase false"
+$command
 command="git pull"
 $command
 command="git checkout development"
