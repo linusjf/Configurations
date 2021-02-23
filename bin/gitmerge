@@ -9,9 +9,12 @@
 ######################################################################
 RED="\033[0;31m"
 NC="\033[0m" # No Color
-set -e
-command=""
-trap message EXIT
+
+function doesMasterExist() {
+git rev-parse --verify master &> /dev/null
+return $?
+}
+
 function message()
 {
   ret=$?
@@ -23,7 +26,21 @@ function message()
 fi
   exit $ret
 }
-command="git checkout master"
+
+doesMasterExist
+master=$?
+mainBranch="master"
+
+set -e
+command=""
+trap message EXIT
+
+if [ $master -ne 0 ]
+then
+  mainBranch="main"
+fi
+
+command="git checkout ${mainBranch}"
 $command
 command="git config pull.rebase false"
 $command
@@ -31,7 +48,7 @@ command="git pull"
 $command
 command="git checkout development"
 $command
-command="git merge master"
+command="git merge ${mainBranch}"
 $command
 command="gitpush"
 $command

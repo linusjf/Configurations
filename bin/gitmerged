@@ -9,6 +9,12 @@
 ######################################################################
 RED="\033[0;31m"
 NC="\033[0m" # No Color
+
+function doesMasterExist() {
+git rev-parse --verify master &> /dev/null
+return $?
+}
+
 set -e
 command=""
 trap message EXIT
@@ -23,11 +29,25 @@ function message()
 fi
   exit $ret
 }
-command="git checkout master"
+
+doesMasterExist
+master=$?
+mainBranch="master"
+
+set -e
+command=""
+trap message EXIT
+
+if [ $master -ne 0 ]
+then
+  mainBranch="main"
+fi
+
+command="git checkout ${mainBranch}"
 $command
 command="git merge development"
 $command
-command="git push -u origin master"
+command="git push -u origin ${mainBranch}"
 $command
 command="git checkout development"
 $command
