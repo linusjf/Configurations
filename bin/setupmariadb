@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+(
+ cd "$PREFIX"/etc;
+mkdir my.cnf.d;
+)
+
+# use the following command to install securely
+# mysql_secure_installation 
+mysql_install_db 
+

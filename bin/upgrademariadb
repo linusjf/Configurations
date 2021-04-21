@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+mysql_upgrade -u u0_a286 --force 

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+declare -i exitCode=0
+rm ./check.errors
+for f in *.sql
+do
+  sqlcheck -c -v -f "$f" | tee -a check.errors
+  exitCode="$exitCode"+"$?"
+done
+exit "$exitCode"
+
+

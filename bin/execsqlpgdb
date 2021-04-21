@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+host="$1"
+db="$2"
+script="$3"
+psql -h "$host" -d "$db" -f -a "$script"
