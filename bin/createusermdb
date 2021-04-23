@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+if [ $# -ne 2 ];
+then 
+  echo "usage: $0 user pwd"
+  echo "user - user name"
+  echo "pwd - password"
+  exit 1
+fi
+username="$1"
+password="$2"
+sql="CREATE USER '$username'@'%' IDENTIFIED BY '$password';"
+grant="GRANT ALL PRIVILEGES ON *.* TO '$username'@'%';"
+echo "$sql" > create.sql
+echo "$grant" >> create.sql
+(mysql --user=u0_a286 -D mysql -h localhost < create.sql \
+  && rm create.sql)
+exit $?
