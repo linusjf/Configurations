@@ -1,4 +1,5 @@
 alias vim='nvim'
+alias node='node --unhandled-rejections=strict'
 alias loadbash='source ~/.bash_profile'
 # Let there be color in grep!
 #export GREP_OPTIONS=' — color=auto'
