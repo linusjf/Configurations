@@ -1,3 +1,5 @@
 [user]
 	email = linus.fernandes@gmail.com
 	name = fernal73
+[pull]
+	ff = only
