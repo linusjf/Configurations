@@ -40,12 +40,15 @@ if [ $master -ne 0 ]
 then
   mainBranch="main"
 fi
-
+command="git pull"
+$command
 command="git push -u origin development"
 $command
 command="git checkout ${mainBranch}"
 $command
 command="git merge --no-edit development"
+$command
+command="git pull"
 $command
 command="git push -u origin ${mainBranch}"
 $command
