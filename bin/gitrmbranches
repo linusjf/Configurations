@@ -62,6 +62,26 @@ trap message EXIT
 # prune local branches
 command="git fetch -p"
 $command
+command="git branch -r --merged $mainBranch"
+
+for var in $($command)
+do
+  if [[ "$var" == *"development"* ]] \
+    || [[ "$var" == *"$mainBranch"* ]] \
+    || [[ "$var" == *"HEAD"* ]] \
+    || [[ "$var" == *"->"* ]] 
+    then
+      continue
+    else
+      echo "Delete branch $var (y/n)?"
+      read answer
+      if [ $answer = 'Y' ] || [ $answer = 'y' ]
+      then
+        git push origin --delete $(branchName "$var")
+      fi
+  fi
+done
+
 command="delUnmerged $mainBranch 1"
 $command
 command="echo 'About to delete all unmerged branches. Are you sure (y/n)?'"
