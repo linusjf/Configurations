@@ -72,6 +72,9 @@ auto_completion_tab_key_behavior = "smart"
 
     name = "junegunn/vim-github-dashboard"
     merged = false
+    
+    name = "kdheepak/JuliaFormatter.vim"
+    merged = false
 
 [[layers]] 
     name = "lang#java"
