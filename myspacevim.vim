@@ -38,6 +38,4 @@ endfunction
 
 function! myspacevim#after() abort
 iunmap jk
-iunmap <localleader>jf
-iunmap <localleader>jf
 endfunction
