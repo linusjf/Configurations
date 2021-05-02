@@ -175,3 +175,6 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
   name = "lang#lisp"
+
+[[layers]]
+  name = "lang#sql"
