@@ -178,3 +178,15 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
   name = "lang#sql"
+
+[[layers]]
+  name = "lang#xml"
+
+[[layers]]
+  name = "lang#xquery"
+
+[[layers]]
+  name = "lang#groovy"
+
+[[layers]]
+  name = "lang#json"
