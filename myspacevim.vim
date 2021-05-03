@@ -1,6 +1,7 @@
 function! myspacevim#before() abort
   au BufRead,BufNewFile *.R setlocal textwidth=80
   au BufRead,BufNewFile *.r setlocal textwidth=80
+  au BufRead,BufNewFile *.jl setlocal textwidth=80
 let g:neomake_enabled_c_makers = ['clang']
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
