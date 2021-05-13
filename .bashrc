@@ -18,3 +18,4 @@ shopt -s dirspell
 shopt -s dotglob
 shopt -s globstar
 export DISPLAY=":0"
+fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
