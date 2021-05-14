@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+NUM_WORDS="${1:-10}"
+STOP_WORDS="${2:-stopwords}"
+tr '[:upper:]' '[:lower:]' \
+  | grep -oE "[a-z\']{2,}" \
+  |sort | grep -Fvwf "${STOP_WORDS}" \
+  | uniq -c | sort -nr \
+  | head -n "${NUM_WORDS}"
