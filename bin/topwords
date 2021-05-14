@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 NUM_WORDS="${1:-10}"
 STOP_WORDS="${2:-stopwords}"
+if [[ ! -f "$STOP_WORDS" ]];
+then
+  curl -sL "https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/stopwords-en.txt" \
+  | sort > "$STOP_WORDS"
+fi
 tr '[:upper:]' '[:lower:]' \
   | grep -oE "[a-z\']{2,}" \
   |sort | grep -Fvwf "${STOP_WORDS}" \
