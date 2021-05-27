@@ -76,6 +76,9 @@ auto_completion_tab_key_behavior = "smart"
     name = "kdheepak/JuliaFormatter.vim"
     merged = false
 
+    name = "nono/jquery.vim"
+    merged = false
+
 [[layers]] 
     name = "lang#java"
 
