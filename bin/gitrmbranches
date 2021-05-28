@@ -38,10 +38,12 @@ function delUnmerged() {
   if [[ "$2" == 0 ]]
   then
     git branch -r --no-merged "$1" \
+      | grep -v "$1" \
       | xargs -I{}  bash -c "branchName {}" \
       | xargs git push origin --delete
   else
     git branch -r --no-merged "$1" \
+      | grep -v "$1" \
       | xargs -I{}  bash -c "branchName {}" \
       | xargs git push origin --delete --dry-run
   fi
@@ -84,12 +86,15 @@ done
 
 command="delUnmerged $mainBranch 1"
 $command
-command="echo 'About to delete all unmerged branches. Are you sure (y/n)?'"
-$command
-command="read var"
-$command
-if [ "$var" = 'Y' ] || [ "$var" = 'y' ]
+if [[ $? == 0 ]];
 then
-  command="delUnmerged $mainBranch 0"
+  command="echo 'About to delete all unmerged branches. Are you sure (y/n)?'"
   $command
+  command="read var"
+  $command
+  if [ "$var" = 'Y' ] || [ "$var" = 'y' ]
+  then
+    command="delUnmerged $mainBranch 0"
+    $command
+  fi
 fi
