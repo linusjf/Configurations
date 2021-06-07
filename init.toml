@@ -196,6 +196,3 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
   name = "lang#json"
-
-[[layers]]
-  name = "lang#typescript"
