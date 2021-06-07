@@ -78,6 +78,9 @@ auto_completion_tab_key_behavior = "smart"
 
     name = "nono/jquery.vim"
     merged = false
+    
+    name = "tibabit/vim-templates"
+    merged = false
 
 [[layers]] 
     name = "lang#java"
@@ -193,3 +196,6 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
   name = "lang#json"
+
+[[layers]]
+  name = "lang#typescript"
