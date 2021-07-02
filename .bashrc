@@ -1,3 +1,5 @@
+alias setclip='termux-set-clipboard'
+alias getclip='termux-get-clipboard'
 alias vim='nvim'
 alias node='node --unhandled-rejections=strict'
 alias loadbash='source ~/.bash_profile'
