@@ -82,6 +82,10 @@ auto_completion_tab_key_behavior = "smart"
     name = "tibabit/vim-templates"
     merged = false
 
+    name = 'editorconfig/editorconfig-vim'
+    merged = false
+
+
 [[layers]] 
     name = "lang#java"
 
