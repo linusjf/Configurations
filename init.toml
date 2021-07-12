@@ -123,7 +123,7 @@ auto_completion_tab_key_behavior = "smart"
     name = "lang#c"
     enable_clang_syntax_highlight = true
     [layer.clang_std]
-    cpp = "c++20"
+    cpp = "c++2a"
 
 [[layers]] 
     name = "lang#r"
