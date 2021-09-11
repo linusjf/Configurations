@@ -3,6 +3,7 @@ alias getclip='termux-get-clipboard'
 alias vim='nvim'
 alias node='node --unhandled-rejections=strict'
 alias loadbash='source ~/.bash_profile'
+alias arch='startarch'
 # Let there be color in grep!
 #export GREP_OPTIONS=' — color=auto'
 # Set Vim as my default editor
