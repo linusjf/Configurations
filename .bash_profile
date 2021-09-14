@@ -9,7 +9,7 @@ then
   export JAVA_HOME=/usr/lib/jvm/$(archlinux-java status | grep 'default' | awk '{print $1}')
   export PATH="$JAVA_HOME/bin:$PATH:~/jacorb-3.9/bin:~/LearnJava:$HOME/bin:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
 else
-  export PATH="$PATH:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
+  export PATH="$HOME/bin:$PATH:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
 fi
 
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
