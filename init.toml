@@ -10,6 +10,8 @@
 
 # All SpaceVim options are below [options] snippet
 [options]
+    default_indent = 2
+    expand_tab = true
     # set spacevim theme. by default colorscheme layer is not loaded,
     # if you want to use more colorscheme, please load the colorscheme
     # layer, the value of this option is a string.
@@ -78,8 +80,11 @@ auto_completion_tab_key_behavior = "smart"
 
     name = "nono/jquery.vim"
     merged = true
+
+    name = 'tibabit/vim-templates'
+    merged = true
     
-    name = "tibabit/vim-templates"
+    name = 'aperezdc/vim-template'
     merged = true
 
     name = 'editorconfig/editorconfig-vim'

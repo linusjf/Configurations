@@ -43,6 +43,9 @@ let g:tmpl_author_name = 'Linus Fernandes'
 let g:tmpl_project = 'Github Learning Repos'
 let g:tmpl_company = 'Linus Fernandes'
 let g:tmpl_copyright = 'Copyright (c) g:tmpl_company'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_auto_jump = 1
 endfunction
 
 function! myspacevim#after() abort
