@@ -85,6 +85,24 @@ auto_completion_tab_key_behavior = "smart"
     name = 'editorconfig/editorconfig-vim'
     merged = true
 
+    name = 'tpope/vim-surround'
+    merged = true
+
+    name = 'scrooloose/nerdtree'
+    merged = true
+
+    name = 'scrooloose/syntastic'
+    merged = true
+
+    name = 'pangloss/vim-javascript'
+    merged = true
+
+    name = 'luchermitte/vimfold4c'
+    merged = true
+
+    name = 'shougo/neocomplete.vim'
+    merged = true
+
 [[layers]] 
     name = "lang#java"
 
