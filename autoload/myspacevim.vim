@@ -36,6 +36,13 @@ let g:JuliaFormatter_options = {
 "other configs
 let g:github_dashboard = { 'username': 'fernal73', 'password': $GITHUB_TOKEN }
 let g:gista#client#default_username = 'monkeyxite'
+let g:tmpl_auto_initialize = 1 
+let g:tmpl_search_paths = ['~/templates']
+let g:tmpl_author_email = 'linusfernandes at gmail dot com'
+let g:tmpl_author_name = 'Linus Fernandes'
+let g:tmpl_project = 'Github Learning Repos'
+let g:tmpl_company = 'Linus Fernandes'
+let g:tmpl_copyright = 'Copyright (c) g:tmpl_company'
 endfunction
 
 function! myspacevim#after() abort
