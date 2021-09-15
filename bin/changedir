@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-cd ~/arch/root/"$1"
+if [ -f /etc/os-release ]
+then 
+  cd ~/"$1"
+else
+  cd ~/arch/root/"$1"
+fi
