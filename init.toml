@@ -82,7 +82,7 @@ auto_completion_tab_key_behavior = "smart"
     merged = true
 
     name = 'tibabit/vim-templates'
-    merged = true
+    merged = false
     
     name = 'aperezdc/vim-template'
     merged = true
