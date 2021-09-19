@@ -50,21 +50,17 @@
 # Enable autocomplete layer
 [[layers]]
     name = "autocomplete"
-# auto_completion_return_key_behavior = "nil"
-auto_completion_tab_key_behavior = "smart"
+    auto_completion_tab_key_behavior = "smart"
     auto_completion_delay = 200
     auto_completion_complete_with_key_sequence = "nil"
     auto_completion_complete_with_key_sequence_delay = 0.1
-    # name = "autocomplete"
-      auto-completion-return-key-behavior = "complete"
-#    auto-completion-tab-key-behavior = "cycle"
+    auto-completion-return-key-behavior = "complete"
 
 [[layers]]
     name = "shell"
     default_position = "top"
     default_height = 30
 
-# This is an example for adding custom plugins lilydjwg/colorizer
 [[custom_plugins]]
     repo = "vim-scripts/dbext.vim"
     merged = false
@@ -85,13 +81,13 @@ auto_completion_tab_key_behavior = "smart"
     repo = "nono/jquery.vim"
     merged = false
 
-[[custom_plugins]]
-    repo = 'tibabit/vim-templates'
-    merged = false
+#[[custom_plugins]]
+#   repo = 'tibabit/vim-templates'
+#   merged = false
     
 [[custom_plugins]]
-    repo = 'aperezdc/vim-template'
-    merged = false
+   repo = 'aperezdc/vim-template'
+   merged = false
 
 [[custom_plugins]]
     repo = 'editorconfig/editorconfig-vim'
@@ -135,12 +131,6 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]] 
     name = "lang#python"
-#    python_file_head = [
-#     '#!/usr/bin/env python',
-#     '# -*- coding: utf-8 -*-',
-#     '',
-#     ''
-#   ]
     enable_typeinfo = true
 
 [[layers]] 
