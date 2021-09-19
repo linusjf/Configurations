@@ -66,47 +66,60 @@ auto_completion_tab_key_behavior = "smart"
 
 # This is an example for adding custom plugins lilydjwg/colorizer
 [[custom_plugins]]
-    name = "vim-scripts/dbext.vim"
-    merged = true
-    
-    name = "lilydjwg/colorizer"
-    merged = true
-
-    name = "junegunn/vim-github-dashboard"
-    merged = true
-    
-    name = "kdheepak/JuliaFormatter.vim"
-    merged = true
-
-    name = "nono/jquery.vim"
-    merged = true
-
-    name = 'tibabit/vim-templates'
+    repo = "vim-scripts/dbext.vim"
     merged = false
     
-    name = 'aperezdc/vim-template'
-    merged = true
+[[custom_plugins]]
+    repo = "lilydjwg/colorizer"
+    merged = false
 
-    name = 'editorconfig/editorconfig-vim'
-    merged = true
+[[custom_plugins]]
+    repo = "junegunn/vim-github-dashboard"
+    merged = false
+    
+[[custom_plugins]]
+    repo = "kdheepak/JuliaFormatter.vim"
+    merged = false
 
-    name = 'tpope/vim-surround'
-    merged = true
+[[custom_plugins]]
+    repo = "nono/jquery.vim"
+    merged = false
 
-    name = 'scrooloose/nerdtree'
-    merged = true
+[[custom_plugins]]
+    repo = 'tibabit/vim-templates'
+    merged = false
+    
+[[custom_plugins]]
+    repo = 'aperezdc/vim-template'
+    merged = false
 
-    name = 'scrooloose/syntastic'
-    merged = true
+[[custom_plugins]]
+    repo = 'editorconfig/editorconfig-vim'
+    merged = false
 
-    name = 'pangloss/vim-javascript'
-    merged = true
+[[custom_plugins]]
+    repo = 'tpope/vim-surround'
+    merged = false
 
-    name = 'luchermitte/vimfold4c'
-    merged = true
+[[custom_plugins]]
+    repo = 'scrooloose/nerdtree'
+    merged = false
 
-    name = 'shougo/neocomplete.vim'
-    merged = true
+[[custom_plugins]]
+    repo = 'scrooloose/syntastic'
+    merged = false
+
+[[custom_plugins]]
+    repo = 'pangloss/vim-javascript'
+    merged = false
+
+[[custom_plugins]]
+    repo = 'luchermitte/vimfold4c'
+    merged = false
+
+[[custom_plugins]]
+    repo = 'shougo/neocomplete.vim'
+    merged = false
 
 [[layers]] 
     name = "lang#java"
@@ -122,12 +135,12 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]] 
     name = "lang#python"
-    python_file_head = [
-      '#!/usr/bin/env python',
-      '# -*- coding: utf-8 -*-',
-      '',
-      ''
-    ]
+#    python_file_head = [
+#     '#!/usr/bin/env python',
+#     '# -*- coding: utf-8 -*-',
+#     '',
+#     ''
+#   ]
     enable_typeinfo = true
 
 [[layers]] 
