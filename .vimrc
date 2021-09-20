@@ -1,5 +1,3 @@
-execute pathogen#infect()
-
 filetype plugin indent on
 syntax on
 
@@ -83,10 +81,3 @@ vnoremap <Space> zf
 
 set clipboard=unnamedplus
 
- " Call the .vimrc.plug file
- if filereadable(expand("~/.vimrc.plug"))
-     source ~/.vimrc.plug
- endif
-
-
-call pathogen#helptags()
