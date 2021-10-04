@@ -55,4 +55,6 @@ export NODE_PATH=/usr/lib/node_modules
 #export TZDIR=/data/data/com.termux/files/usr/share/zoneinfo:/data/data/com.termux/files/usr/share/mysql/mysql-test/std_data/zoneinfo
 export TZDIR=/usr/share/zoneinfo:/usr/share/mysql/mysql-test/std_data/zoneinfo
 export PKG_CONFIG_PATH='/usr/lib/pkgconfig/libgit2.pc'
+export AWS_ACCESS_KEY_ID=$(cat .aws/aws_access_key_id) 
+export AWS_SECRET_ACCESS_KEY=$(cat .aws/aws_secret_access_key)
 ## .bash_profile EOF
