@@ -15,17 +15,17 @@ fi
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]
 then
-[ -e /etc/mota ] && . /etc/mota
+	[ -e /etc/mota ] && . /etc/mota
 fi
 if [ -e "$HOME"/.chushlogin ]
 then
-rm -f "$HOME"/.chushlogin
+	rm -f "$HOME"/.chushlogin
 fi
 PS1="\[\e[38;5;148m\]\u\[\e[1;0m\]\A\[\e[1;38;5;112m\]\W\[\e[0m\]$ "
 export ANDROID_DATA="/data"
 export ANDROID_ROOT="/system"
 export BOOTCLASSPATH="/system/framework/core-oj.jar:/system/framework/core-libart.jar:/system/framework/conscrypt.jar:/system/framework/okhttp.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/system/framework/apache-xml.jar:/system/framework/org.apache.http.legacy.boot.jar:/system/framework/tcmiface.jar:/system/framework/WfdCommon.jar:/system/framework/oem-services.jar:/system/framework/qcom.fmradio.jar:/system/framework/qcmediaplayer.jar:/system/framework/telephony-ext.jar:/system/app/miui/miui.apk:/system/app/miuisystem/miuisystem.apk"
-if [ ! istermux ] 
+if [ !istermux ] 
 then
   export LANG="en_GB.UTF-8"
   export LANGUAGE="en_GB.UTF-8"
@@ -55,6 +55,9 @@ export NODE_PATH=/usr/lib/node_modules
 #export TZDIR=/data/data/com.termux/files/usr/share/zoneinfo:/data/data/com.termux/files/usr/share/mysql/mysql-test/std_data/zoneinfo
 export TZDIR=/usr/share/zoneinfo:/usr/share/mysql/mysql-test/std_data/zoneinfo
 export PKG_CONFIG_PATH='/usr/lib/pkgconfig/libgit2.pc'
-export AWS_ACCESS_KEY_ID=$(cat .aws/aws_access_key_id) 
-export AWS_SECRET_ACCESS_KEY=$(cat .aws/aws_secret_access_key)
+if [ !istermux ] 
+then
+    export AWS_ACCESS_KEY_ID=$(cat .aws/aws_access_key_id) 
+    export AWS_SECRET_ACCESS_KEY=$(cat .aws/aws_secret_access_key)
+fi
 ## .bash_profile EOF
