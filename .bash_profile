@@ -59,5 +59,7 @@ if [[ "$istermux" != 1 ]]
 then
   export AWS_ACCESS_KEY_ID=$(cat .aws/aws_access_key_id) 
   export AWS_SECRET_ACCESS_KEY=$(cat .aws/aws_secret_access_key)
+  export OMPI_ALLOW_RUN_AS_ROOT=1
+  export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 fi
 ## .bash_profile EOF
