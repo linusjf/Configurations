@@ -214,9 +214,6 @@
   name = "lang#julia"
 
 [[layers]]
-  name = "lang#lisp"
-
-[[layers]]
   name = "lang#sql"
 
 [[layers]]
