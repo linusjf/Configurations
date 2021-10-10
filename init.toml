@@ -110,10 +110,6 @@
     merged = false
 
 [[custom_plugins]]
-    repo = 'luchermitte/vimfold4c'
-    merged = false
-
-[[custom_plugins]]
     repo = 'shougo/neocomplete.vim'
     merged = false
 
