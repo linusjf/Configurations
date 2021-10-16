@@ -40,7 +40,7 @@ if [ $master -ne 0 ]
 then
   mainBranch="main"
 fi
-command="git pull --ff-only"
+command="git pull --rebase"
 $command
 command="git push -u origin development"
 $command
@@ -48,7 +48,7 @@ command="git checkout ${mainBranch}"
 $command
 command="git merge --no-edit development"
 $command
-command="git pull --ff-only"
+command="git pull --rebase"
 $command
 command="git push -u origin ${mainBranch}"
 $command
