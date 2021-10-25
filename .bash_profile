@@ -2,6 +2,9 @@ declare -i istermux=1
 if [ -f /etc/os-release ]
 then 
   istermux=0
+  export TERMUX=0
+else
+  export TERMUX=1
 fi
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]
