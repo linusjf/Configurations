@@ -54,3 +54,5 @@ command="git push -u origin ${mainBranch}"
 $command
 command="git checkout development"
 $command
+command="git merge ${mainBranch}"
+$command
