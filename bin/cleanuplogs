@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Cleanup, version 3
+
+#  Warning:
+#  -------
+#  This script uses quite a number of features that will be explained
+#+ later on.
+#  By the time you've finished the first half of the book,
+#+ there should be nothing mysterious about it.
+
+LOG_DIR=/var/log
+ROOT_UID=0     # Only users with $UID 0 have root privileges.
+LINES=50       # Default number of lines saved.
+E_XCD=86       # Can't change directory?
+E_NOTROOT=87   # Non-root exit error.
+
+# Run as root, of course.
+if [ "$UID" -ne "$ROOT_UID" ]
+then
+  echo "Must be root to run this script."
+  exit $E_NOTROOT
+fi  
+
+E_WRONGARGS=85  # Non-numerical argument (bad argument format).
+#
+case "$1" in
+""      ) lines=50;;
+*[!0-9]*) echo "Usage: `basename $0` lines-to-cleanup";
+exit $E_WRONGARGS;;
+*       ) lines=$1;;
+esac
+
+cd $LOG_DIR
+
+cd /var/log || {
+  echo "Cannot change to necessary directory." >&2
+    exit $E_XCD;
+}
+
+#tail -n $lines messages > mesg.temp # Save last section of message log file.
+#mv mesg.temp messages               # Rename it as system log file.
+tail -n $lines pacman.log > pacman.temp # Save last section of pacman log file.
+mv pacman.temp pacman.log               # Rename it as system log file.
+
+cat /dev/null > wtmp  #  ': > wtmp' and '> wtmp'  have the same effect.
+echo "Log files cleaned up."
+exit 0
