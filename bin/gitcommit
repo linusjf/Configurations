@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : gitcommit
+# @created     : Tuesday Jan 11, 2022 08:00:00 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description : 
+######################################################################
+command="git commit -F commit.txt"
+$command
