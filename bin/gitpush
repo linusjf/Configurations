@@ -56,3 +56,4 @@ command="git checkout development"
 $command
 command="git merge ${mainBranch}"
 $command
+exit $?

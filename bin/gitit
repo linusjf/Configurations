@@ -2,13 +2,10 @@
 
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
-# @file        : gitadd
-# @created     : Tuesday Feb 8, 2022 08:00:00 IST
+# @file        : gitit
+# @created     : Friday Feb 11, 2022 08:00:00 IST
 # @copyright   : Copyright (c) Linus Fernandes
 # @description : 
 ######################################################################
-command="git add ."
-$command
-command="git status"
-$command
+gitadd && gitcommit && gitpush
 exit $?
