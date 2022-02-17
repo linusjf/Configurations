@@ -1,0 +1,1 @@
+feat: add shortcut for pkg clean and pkg autoclean

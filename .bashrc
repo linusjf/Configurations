@@ -1,3 +1,4 @@
+alias pkgclean='pkg clean && pkg autoclean'
 alias ..='cd ../.. && pwd'
 alias ...='cd ../../.. && pwd'
 alias ....='cd ../../../.. && pwd'
