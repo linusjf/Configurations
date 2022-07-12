@@ -78,6 +78,10 @@
     merged = false
 
 [[custom_plugins]]
+    repo = "github/copilot.vim"
+    merged = false
+
+[[custom_plugins]]
     repo = "nono/jquery.vim"
     merged = false
 
