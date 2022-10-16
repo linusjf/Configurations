@@ -62,6 +62,10 @@
     default_height = 30
 
 [[custom_plugins]]
+    name = "MaxMEllon/vim-jsx-pretty"
+    merged = false
+
+[[custom_plugins]]
     repo = "vim-scripts/dbext.vim"
     merged = false
     
@@ -74,10 +78,6 @@
     merged = false
     
 [[custom_plugins]]
-    repo = "kdheepak/JuliaFormatter.vim"
-    merged = false
-
-[[custom_plugins]]
     repo = "github/copilot.vim"
     merged = false
 
@@ -85,10 +85,6 @@
     repo = "nono/jquery.vim"
     merged = false
 
-#[[custom_plugins]]
-#   repo = 'tibabit/vim-templates'
-#   merged = false
-    
 [[custom_plugins]]
    repo = 'aperezdc/vim-template'
    merged = false
