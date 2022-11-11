@@ -10,10 +10,10 @@ alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]
 then
   export JAVA_HOME=/usr/lib/jvm/$(archlinux-java status | grep 'default' | awk '{print $1}')
-  export PATH="$JAVA_HOME/bin:$PATH:~/jacorb-3.9/bin:~/LearnJava:$HOME/bin:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
+  export PATH="$JAVA_HOME/bin:$PATH:~/jacorb-3.9/bin:~/LearnJava:$HOME/binaries:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
   export PYTHON3_HOST_PROG="/usr/bin/python"
 else
-  export PATH="$HOME/bin:$PATH:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
+  export PATH="$HOME/binaries:$PATH:/usr/sbin:/sbin:/bin:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin"
   export PYTHON3_HOST_PROG="/data/data/com.termux/files/usr/bin/python"
 fi
 
