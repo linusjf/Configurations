@@ -1,3 +1,20 @@
+
+function _AM_() {
+command -v am 1>/dev/null || cp "/data/data/com.termux/files/usr"/bin/am "/usr/local/termuxarch/bin"
+}
+function _PWD_() {
+printf '%s\n' "$PWD"
+}
+function git-branch() {
+if [ -d .git ]
+then
+printf "%s" "($(git branch | awk '/\*/{print $2}'))";
+fi
+}
+function em() {
+[ -x /usr/bin/make ] || { pc base base-devel || pci base base-devel ; }
+{ [ -x /usr/local/termuxarch/bin/uemacs ] && /usr/local/termuxarch/bin/uemacs "$@" ; } || { { { cd || exit 69 ; } && [ -d uemacs ] || gcl https://github.com/torvalds/uemacs ; } && { [ -d uemacs ] && { cd uemacs || exit 69 ; } ; } && printf '%s\n' "making uemacs" && make && cp -f em /usr/local/termuxarch/bin/uemacs && make clean && /usr/local/termuxarch/bin/uemacs emacs.hlp ; }
+}
 alias pkgclean='pkg clean && pkg autoclean'
 alias ..='cd ../.. && pwd'
 alias ...='cd ../../.. && pwd'
