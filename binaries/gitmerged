@@ -10,14 +10,6 @@
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 
-function doesMasterExist() {
-git rev-parse --verify master &> /dev/null
-return $?
-}
-
-set -e
-command=""
-trap message EXIT
 function message()
 {
   ret=$?
@@ -32,18 +24,11 @@ fi
   exit $ret
 }
 
-doesMasterExist
-master=$?
-mainBranch="master"
-
 set -e
 command=""
 trap message EXIT
 
-if [ $master -ne 0 ]
-then
-  mainBranch="main"
-fi
+mainBranch="main"
 
 command="git checkout ${mainBranch}"
 $command
