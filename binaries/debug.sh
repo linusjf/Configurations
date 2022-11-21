@@ -1,0 +1,5 @@
+function debug() { 
+  echo "Executing: $@";
+  $@;
+}
+

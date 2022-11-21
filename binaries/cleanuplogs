@@ -7,17 +7,10 @@
 #+ later on.
 #  By the time you've finished the first half of the book,
 #+ there should be nothing mysterious about it.
-function debug() { 
-  echo "Executing: $@";
-  $@;
-}
-
+MY_DIR="$(dirname $(readlink -f $0))"
+source "$MY_DIR"/debug.sh
 DEBUG=false
-if $DEBUG
-then
-  echo "DEBUG mode on."
-  set -xve
-fi
+source "$MY_DIR"/debugon.sh
 LOG_DIR=/var/log
 # Only users with $UID 0 have root privileges.
 ROOT_UID=0    
@@ -57,14 +50,12 @@ cd $LOG_DIR || {
 }
 
 # Save last section of pacman log file.
-tail -n $lines pacman.log > pacman.temp 
+tail -n $lines pacman.log > pacman.temp
 # Rename it as log file.
 mv pacman.temp pacman.log               
 
-cat /dev/null > wtmp  #  ': > wtmp' and '> wtmp' have the same effect.
+#  ': > wtmp' and '> wtmp' have the same effect.
+cat /dev/null > wtmp  
 echo "Log files cleaned up."
-if [ $DEBUG ]
-then
-  set +xve
-fi
+source "$MY_DIR"/debugoff.sh
 exit 0
