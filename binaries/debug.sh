@@ -2,4 +2,3 @@ function debug() {
   echo "Executing: $@";
   $@;
 }
-
