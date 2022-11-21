@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 DEBUG=false
-if [ $DEBUG ]
-then
-  echo "DEBUG mode on."
-  set -xve
-fi
+$DEBUG && {
+  echo "DEBUG mode on.";
+  set -xve;
+}
 exitcode=0
 if [ -f /etc/os-release ]
 then 
@@ -14,9 +13,8 @@ else
   cd ~/arch/root/"$1"
   exitcode="$?"
 fi
-if [ $DEBUG ]
-then
-  set +xve
-fi
+$DEBUG && {
+  set +xve;
+}
 exit "$exitcode"
 

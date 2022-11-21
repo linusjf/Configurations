@@ -7,7 +7,12 @@
 #+ later on.
 #  By the time you've finished the first half of the book,
 #+ there should be nothing mysterious about it.
-
+DEBUG=false
+if $DEBUG
+then
+  echo "DEBUG mode on."
+  set -xve
+fi
 LOG_DIR=/var/log
 # Only users with $UID 0 have root privileges.
 ROOT_UID=0    
@@ -46,9 +51,15 @@ cd $LOG_DIR || {
   exit $E_XCD;
 }
 
-tail -n $lines pacman.log > pacman.temp # Save last section of pacman log file.
-mv pacman.temp pacman.log               # Rename it as system log file.
+# Save last section of pacman log file.
+tail -n $lines pacman.log > pacman.temp 
+# Rename it as log file.
+mv pacman.temp pacman.log               
 
 cat /dev/null > wtmp  #  ': > wtmp' and '> wtmp' have the same effect.
 echo "Log files cleaned up."
+if [ $DEBUG ]
+then
+  set +xve
+fi
 exit 0
