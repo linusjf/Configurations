@@ -17,6 +17,10 @@ else
   export PYTHON3_HOST_PROG="/data/data/com.termux/files/usr/bin/python"
 fi
 
+if [[ "$istermux" == 1 ]]
+then
+  updatedb
+fi
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]
 then
