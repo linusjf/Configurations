@@ -74,6 +74,7 @@ alias node='node --unhandled-rejections=strict'
 alias loadbash='source ~/.bash_profile'
 alias arch='startarch'
 alias which='command -v'
+alias view='nvim -R'
 # Let there be color in grep!
 #export GREP_OPTIONS=' — color=auto'
 # Set Vim as my default editor
