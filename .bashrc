@@ -30,6 +30,7 @@ alias aiaviewd='am start -a android.intent.action.VIEW -d '
 alias aiawebsearch='am start -a android.intent.action.WEB_SEARCH'
 alias C='cd .. && pwd'
 alias c='cd .. && pwd'
+alias cls='clear'
 alias CW='cat $(which' # use a ) to complete this alias
 alias Cw='cat $(which' # use a ) to complete this alias
 alias cw='cat $(which' # use a ) to complete this alias
