@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+rm $PREFIX/var/run/crond.pid
+exit "$?"
