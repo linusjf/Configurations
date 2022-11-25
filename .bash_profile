@@ -78,4 +78,5 @@ then
   --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
   --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED "
 fi
+set -o vi
 # .bash_profile EOF
