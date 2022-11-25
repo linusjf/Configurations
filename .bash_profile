@@ -1,3 +1,4 @@
+source ~/.bashrc
 declare -i istermux=1
 if [ -f /etc/os-release ]
 then 
