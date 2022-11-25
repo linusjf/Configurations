@@ -80,6 +80,7 @@ alias view='nvim -R'
 #export GREP_OPTIONS=' — color=auto'
 # Set Vim as my default editor
 export EDITOR=vim
+export PAGER=less
 export HISTSIZE=10000
 export HISTFILESIZE=120000
 source ~/binaries/ssh-find-agent.sh
