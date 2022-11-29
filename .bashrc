@@ -74,6 +74,7 @@ alias vim='nvim'
 alias node='node --unhandled-rejections=strict'
 alias loadbash='source ~/.bash_profile'
 alias arch='startarch'
+alias archlinus='startarch login linus'
 alias which='command -v'
 alias view='nvim -R'
 # Let there be color in grep!
