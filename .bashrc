@@ -78,6 +78,7 @@ alias kali='startkali'
 alias archlinus='startarch login linus'
 alias which='command -v'
 alias view='nvim -R'
+alias scapy='scapy -s scapy.sess'
 # Let there be color in grep!
 #export GREP_OPTIONS=' — color=auto'
 # Set Vim as my default editor
