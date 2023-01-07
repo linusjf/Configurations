@@ -85,10 +85,6 @@
     repo = "nono/jquery.vim"
     merged = false
 
-#[[custom_plugins]]
- #  repo = 'aperezdc/vim-template'
-  # merged = false
-
 [[custom_plugins]]
    repo = 'tibabit/vim-templates'
    merged = false
@@ -131,7 +127,10 @@
 
 [[layers]] 
     name = "lang#python"
+    python_file_head = []
     enable_typeinfo = true
+    format_on_save = true
+    enabled_linters = ['python', 'pylint']
 
 [[layers]] 
     name = "lang#javascript"
