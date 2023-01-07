@@ -195,6 +195,9 @@
   name = "VersionControl"
 
 [[layers]]
+  name = "ssh"
+
+[[layers]]
   name = "lang#assembly"
 
 [[layers]]
@@ -232,3 +235,6 @@
 
 [[layers]]
   name = "lang#d"
+
+[[layers]]
+  name = "lang#graphql"
