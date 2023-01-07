@@ -130,7 +130,7 @@
     python_file_head = []
     enable_typeinfo = true
     format_on_save = true
-    enabled_linters = ['python', 'pylint']
+    enabled_linters = ['python']
 
 [[layers]] 
     name = "lang#javascript"
