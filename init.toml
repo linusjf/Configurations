@@ -85,8 +85,12 @@
     repo = "nono/jquery.vim"
     merged = false
 
+#[[custom_plugins]]
+ #  repo = 'aperezdc/vim-template'
+  # merged = false
+
 [[custom_plugins]]
-   repo = 'aperezdc/vim-template'
+   repo = 'tibabit/vim-templates'
    merged = false
 
 [[custom_plugins]]
