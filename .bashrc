@@ -98,8 +98,15 @@ shopt -s dotglob
 shopt -s globstar
 export DISPLAY=":0"
 export BROWSER=termux-open-url
+export GITGUARDIAN_API_KEY="$(cat .gitguardiantoken)"
 fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/root/.sdkman"
 [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
 `which env_parallel.bash`
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
