@@ -1,6 +1,6 @@
 source ~/.bashrc
 declare -i istermux=1
-if [ -f /etc/os-release ]
+if [ -f $PREFIX/etc/os-release ]
 then 
   istermux=0
   export TERMUX=0
@@ -25,7 +25,7 @@ fi
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]
 then
-	[ -e /etc/mota ] && . /etc/mota
+	[ -e $PREFIX/etc/mota ] && . $PREFIX/etc/mota
 fi
 if [ -e "$HOME"/.chushlogin ]
 then
@@ -61,9 +61,7 @@ export TZ="Asia/Calcutta"
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
-# export PATH=/data/data/com.termux/files/home/.cargo/bin:~/bin/:/data/data/com.termux/files/home/pear/bin:/data/data/com.termux/files/home/.dub/packages/dfmt-0.13.4/dfmt/bin/:$PATH
 export NODE_PATH=/usr/lib/node_modules
-#export TZDIR=/data/data/com.termux/files/usr/share/zoneinfo:/data/data/com.termux/files/usr/share/mysql/mysql-test/std_data/zoneinfo
 export TZDIR=/usr/share/zoneinfo:/usr/share/mysql/mysql-test/std_data/zoneinfo
 export PKG_CONFIG_PATH='/usr/lib/pkgconfig/libgit2.pc'
 if [[ "$istermux" != 1 ]]
