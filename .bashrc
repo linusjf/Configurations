@@ -98,7 +98,7 @@ shopt -s dotglob
 shopt -s globstar
 export DISPLAY=":0"
 export BROWSER=termux-open-url
-export GITGUARDIAN_API_KEY="$(cat ./.gitguardiantoken)"
+export GITGUARDIAN_API_KEY="$(cat ~/.gitguardiantoken)"
 fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/root/.sdkman"
