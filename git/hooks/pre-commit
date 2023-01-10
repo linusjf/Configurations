@@ -8,4 +8,4 @@ if [[ -f .git/hooks/pre-commit ]]; then
     fi
 fi
 
-ggshield secret scan pre-commit "$@" 2> /dev/null
+ggshield secret scan pre-commit "$@"
