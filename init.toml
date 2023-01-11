@@ -121,6 +121,10 @@
     repo = 'preservim/vim-markdown'
     merged = false
 
+[[custom_plugins]]
+    repo = 'mzlogin/vim-markdown-toc'
+    merged = false
+
 [[layers]] 
     name = "lang#java"
 
