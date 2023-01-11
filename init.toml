@@ -113,6 +113,14 @@
     repo = 'shougo/neocomplete.vim'
     merged = false
 
+[[custom_plugins]]
+    repo = 'godlygeek/tabular'
+    merged = false
+
+[[custom_plugins]]
+    repo = 'preservim/vim-markdown'
+    merged = false
+
 [[layers]] 
     name = "lang#java"
 
@@ -180,9 +188,6 @@
 
 [[layers]]
     name = "lang#latex"
-
-[[layers]]
-    name = "lang#markdown"
 
 [[layers]]
     name = "ui"
