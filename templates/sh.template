@@ -1,11 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ######################################################################
 # @author      : {{NAME}} ({{EMAIL}})
 # @file        : {{FILE}}
 # @created     : {{TIMESTAMP}}
 #
-# @description : {{CURSOR}}
+# @description :{{CURSOR}}
 ######################################################################
 
 
