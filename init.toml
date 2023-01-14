@@ -131,6 +131,7 @@
 
 [[layers]]
     name = "lang#sh"
+    bash_file_head = []
 
 [[layers]]
   name = "lang#jsonnet"

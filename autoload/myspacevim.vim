@@ -42,7 +42,7 @@ let g:tmpl_author_email = 'linusfernandes at gmail dot com'
 let g:tmpl_author_name = 'Linus Fernandes'
 let g:tmpl_project = 'Github Learning Repos'
 let g:tmpl_company = 'Linus Fernandes'
-let g:tmpl_copyright = 'Copyright (c) g:tmpl_company'
+let g:tmpl_copyright = 'Copyright (c) g:tmpl_company, all rights reserved.'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_jump = 1
@@ -52,6 +52,10 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_auto_extension_ext = 'md'
+iabbrev <buffer> --- <c-k>-M
+" Show column numbers
+set ruler
+set rulerformat=%l,%v
 endfunction
 
 function! myspacevim#after() abort
