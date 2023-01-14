@@ -10,6 +10,7 @@
 
 # All SpaceVim options are below [options] snippet
 [options]
+    automatic_update = true
     default_indent = 2
     expand_tab = true
     # set spacevim theme. by default colorscheme layer is not loaded,

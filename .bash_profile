@@ -77,4 +77,5 @@ then
   --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED "
 fi
 set -o vi
+#set -o nounset
 # .bash_profile EOF

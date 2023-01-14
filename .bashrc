@@ -95,7 +95,8 @@ shopt -s cmdhist
 shopt -s direxpand
 shopt -s dirspell
 shopt -s dotglob
-shopt -s globstar
+shopt -s nullglob globstar
+#set -euo pipefail
 export DISPLAY=":0"
 export BROWSER=termux-open-url
 export GITGUARDIAN_API_KEY="$(cat ~/.gitguardiantoken)"
