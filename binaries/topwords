@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+function require() { 
+  hash "$@" || exit 127; 
+}
+require curl sort tr grep uniq head
 NUM_WORDS="${1:-10}"
 STOP_WORDS="${2:-stopwords}"
 if [[ ! -f "$STOP_WORDS" ]];
