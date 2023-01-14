@@ -61,6 +61,10 @@ set listchars=tab:›,trail:•,extends:#,nbsp:.
 " Show line numbers
 set number
 
+" Show column numbers
+set ruler
+set rulerformat=%l,%v
+
 " Set status line display
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
 
