@@ -8,5 +8,5 @@
 # @description : 
 ######################################################################
 command="git log -n 1"
-$command
+"$command"
 exit $?

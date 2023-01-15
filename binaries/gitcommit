@@ -8,5 +8,5 @@
 # @description : 
 ######################################################################
 command="git commit -F commit.txt"
-$command
+eval "$command"
 exit $?

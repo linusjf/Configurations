@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
@@ -13,15 +13,15 @@ NC="\033[0m" # No Color
 function message()
 {
   ret=$?
-  if [ $ret -eq 0 ]
+  if [ "$ret" -eq 0 ]
   then
-    echo exit $ret from last command: $command
+    echo "exit $ret from last command: $command"
   else
-    echo ${RED}exit $ret from last command: $command${NC}
-    echo ${RED}returning to branch development
+    echo "${RED}exit $ret from last command: $command${NC}"
+    echo "${RED}returning to branch development"
     git checkout development
 fi
-  exit $ret
+  exit "$ret"
 }
 
 set -e
@@ -31,10 +31,10 @@ trap message EXIT
 mainBranch="main"
 
 command="git checkout ${mainBranch}"
-$command
+"$command"
 command="git merge development"
-$command
+"$command"
 command="git push -u origin ${mainBranch}"
-$command
+"$command"
 command="git checkout development"
-$command
+"$command"
