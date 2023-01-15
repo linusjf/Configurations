@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+function require() {
+hash $@ || exit 127;
+}
+require rm sqlcheck tee
 declare -i exitCode=0
 rm ./check.errors
 for f in *.sql
