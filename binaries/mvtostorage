@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
-mkdir -p /data/data/com.termux/files/home/storage/downloads/"$1"/
-find . -name "$2" | parallel -I% --max-args 1 mv % /data/data/com.termux/files/home/storage/downloads/"$1"
+function require() {
+hash "$@" || exit 127;
+}
+require mkdir find parallel mv
+mkdir -p "${PREFIX}/home/storage/downloads/${1}" /
+find . -name "$2" | parallel -I% --max-args 1 mv % "${PREFIX}/home/storage/downloads/${1}"

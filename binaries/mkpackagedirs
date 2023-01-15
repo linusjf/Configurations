@@ -8,7 +8,7 @@
 # @description : Makes package directories from specified package name.
 ######################################################################
 function require() {
-hash "$@" | exit 127;
+hash "$@" || exit 127;
 }
 require sed mkdir
 usage ()
