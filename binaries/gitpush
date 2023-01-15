@@ -13,7 +13,7 @@ NC="\033[0m" # No Color
 function message()
 {
   ret=$?
-  if [ "$ret "-eq 0 ]
+  if [ "$ret" -eq 0 ]
   then
     echo "exit $ret from last command: $command"
   else
