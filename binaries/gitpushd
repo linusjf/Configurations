@@ -26,4 +26,4 @@ fi
   exit $ret
 }
 command="git push -u origin development"
-$command
+eval "$command"

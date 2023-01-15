@@ -13,12 +13,12 @@ NC="\033[0m" # No Color
 function message()
 {
   ret=$?
-  if [ $ret -eq 0 ]
+  if [ "$ret "-eq 0 ]
   then
-    echo exit $ret from last command: $command
+    echo "exit $ret from last command: $command"
   else
-    echo ${RED}exit $ret from last command: $command${NC}
-    echo ${RED}returning to branch development
+    echo "${RED}exit $ret from last command: $command${NC}"
+    echo "${RED}returning to branch development"
     git checkout development
 fi
   exit $ret
@@ -31,19 +31,19 @@ trap message EXIT
 mainBranch="main"
 
 command="git pull --rebase"
-$command
+eval "$command"
 command="git push -u origin development"
-$command
+eval "$command"
 command="git checkout ${mainBranch}"
-$command
+eval "$command"
 command="git merge --no-edit development"
-$command
+eval "$command"
 command="git pull --rebase"
-$command
+eval "$command"
 command="git push -u origin ${mainBranch}"
-$command
+eval "$command"
 command="git checkout development"
-$command
+eval "$command"
 command="git merge ${mainBranch}"
-$command
+eval "$command"
 exit $?

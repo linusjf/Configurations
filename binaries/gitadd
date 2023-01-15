@@ -8,7 +8,7 @@
 # @description : 
 ######################################################################
 command="git add ."
-$command
+eval "$command"
 command="git status"
-$command
+eval "$command"
 exit $?

@@ -31,12 +31,12 @@ trap message EXIT
 mainBranch="main"
 
 command="git checkout development"
-$command
+eval "$command"
 command="git pull"
-$command
+eval "$command"
 command="git checkout ${mainBranch}"
-$command
+eval "$command"
 command="git pull"
-$command
+eval "$command"
 command="git checkout development"
-$command
+eval "$command"
