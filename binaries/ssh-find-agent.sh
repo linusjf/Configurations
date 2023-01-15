@@ -35,7 +35,7 @@ _LIVE_AGENT_SOCK_LIST=()
 _debug_print() {
 	if [[ $_DEBUG -gt 0 ]]
 	then
-		printf "%s\n" $1
+		printf "%s\n" "$1"
 	fi
 }
  
@@ -56,7 +56,7 @@ find_all_gnome_keyring_agent_sockets() {
  
 find_all_osx_keychain_agent_sockets() {
 	[[ -n "$TMPDIR" ]] || TMPDIR=/tmp
-	_OSX_KEYCHAIN_AGENT_SOCKETS=`find $TMPDIR/ -type s -regex '.*/ssh-.*/agent..*$' 2> /dev/null`
+	_OSX_KEYCHAIN_AGENT_SOCKETS=`find "${TMPDIR}/" -type s -regex '.*/ssh-.*/agent..*$' 2> /dev/null`
 	_debug_print "$_OSX_KEYCHAIN_AGENT_SOCKETS"
 }
  
@@ -65,7 +65,7 @@ test_agent_socket() {
 	SSH_AUTH_SOCK=$SOCKET ssh-add -l 2> /dev/null > /dev/null
 	result=$?
  
-	_debug_print $result
+	_debug_print "$result"
  
 	if [[ $result -eq 0 ]]
 	then
@@ -94,38 +94,38 @@ test_agent_socket() {
 }
  
 find_live_gnome_keyring_agents() {
-	for i in $_GNOME_KEYRING_AGENT_SOCKETS
+	for i in "$_GNOME_KEYRING_AGENT_SOCKETS"
 	do
-		test_agent_socket $i
+		test_agent_socket "$i"
 	done
 }
  
 find_live_osx_keychain_agents() {
-	for i in $_OSX_KEYCHAIN_AGENT_SOCKETS
+	for i in "$_OSX_KEYCHAIN_AGENT_SOCKETS"
 	do
-		test_agent_socket $i
+		test_agent_socket "$i"
 	done
 }
  
 find_live_gpg_agents() {
-	for i in $_GPG_AGENT_SOCKETS
+	for i in "$_GPG_AGENT_SOCKETS"
 	do
-		test_agent_socket $i
+		test_agent_socket "$i"
 	done
 }
  
 find_live_ssh_agents() {
-	for i in $_SSH_AGENT_SOCKETS
+	for i in "$_SSH_AGENT_SOCKETS"
 	do
-		test_agent_socket $i
+		test_agent_socket "$i"
 	done
 }
  
 function fingerprints() {
 	local file="$1"
 	while read l; do
-		[[ -n $l && ${l###} = $l ]] && ssh-keygen -l -f /dev/stdin <<<$l
-	done < $file
+		[[ -n $l && ${l###} = $l ]] && ssh-keygen -l -f /dev/stdin <<<"$l"
+	done < "$file"
 }
  
 find_all_agent_sockets() {
@@ -143,7 +143,7 @@ find_all_agent_sockets() {
 	find_live_gnome_keyring_agents
 	find_live_osx_keychain_agents
 	_debug_print "$_LIVE_AGENT_LIST"
-	_LIVE_AGENT_LIST=$(echo $_LIVE_AGENT_LIST | tr ' ' '\n' | sort -n -t: -k 2 -k 1 | uniq)
+	_LIVE_AGENT_LIST=$(echo "$_LIVE_AGENT_LIST" | tr ' ' '\n' | sort -n -t: -k 2 -k 1 | uniq)
 	_LIVE_AGENT_SOCK_LIST=()
 	_debug_print "SORTED: $_LIVE_AGENT_LIST"
 	if [ -e ~/.ssh/authorized_keys ] ; then
@@ -152,19 +152,19 @@ find_all_agent_sockets() {
 	if [[ $_SHOW_IDENTITY -gt 0 ]]
 	then
 		i=0
-		for a in $_LIVE_AGENT_LIST ; do
+		for a in "$_LIVE_AGENT_LIST" ; do
 			sock=${a/:*/}
 			_LIVE_AGENT_SOCK_LIST[$i]=$sock
 			# technically we could have multiple keys forwarded
 			# But I haven't seen anyone do it
 			akeys=$(SSH_AUTH_SOCK=$sock ssh-add -l)
-			key_size=$(echo ${akeys} | awk '{print $1}')
-			fingerprint=$(echo ${akeys} | awk '{print $2}')
-			remote_name=$(echo ${akeys} | awk '{print $3}')
+			key_size=$(echo "$akeys" | awk '{print $1}')
+			fingerprint=$(echo "$akeys" | awk '{print $2}')
+			remote_name=$(echo "$akeys" | awk '{print $3}')
 			if [ -e ~/.ssh/authorized_keys ] ; then
-				authorized_entry=$(fingerprints ~/.ssh/authorized_keys | grep $fingerprint)
+				authorized_entry=$(fingerprints ~/.ssh/authorized_keys | grep "$fingerprint")
 			fi
-			comment=$(echo ${authorized_entry} | awk '{print $3,$4,$5,$6,$7}')
+			comment=$(echo "$authorized_entry" | awk '{print $3,$4,$5,$6,$7}')
 			printf "export SSH_AUTH_SOCK=%s \t#%i) \t%s\n" "$sock" $((i+1)) "$comment"
 			i=$((i+1))
 		done
@@ -178,17 +178,17 @@ set_ssh_agent_socket() {
 	then
 		find_all_agent_sockets -i
  
-		if [ -z "$_LIVE_AGENT_LIST" ] ; then
+		if [ "$_LIVE_AGENT_LIST" = "" ] ; then
 			echo "No agents found"
 			return 1
 		fi
  
 		echo -n "Choose (1-${#_LIVE_AGENT_SOCK_LIST[@]})? "
 		read choice
-		if [ -n "$choice" ]
+		if [ "$choice" != "" ]
 		then
 			n=$((choice-1))
-			if [ -z "${_LIVE_AGENT_SOCK_LIST[$n]}" ] ; then
+			if [ "${_LIVE_AGENT_SOCK_LIST[$n]}" = "" ] ; then
 				echo "Invalid choice"
 				return 1
 			fi
@@ -198,15 +198,15 @@ set_ssh_agent_socket() {
 	else
 		# Choose the first available
 		SOCK=$(find_all_agent_sockets|tail -n 1|awk -F: '{print $1}')
-		if [ -z "$SOCK" ] ; then
+		if [ "$SOCK" = "" ] ; then
 			return 1
 		fi
 		export SSH_AUTH_SOCK=$SOCK
 	fi
  
 	# set agent pid
-	if [ -n "$SSH_AUTH_SOCK" ] ; then
-		export SSH_AGENT_PID=$((`echo $SSH_AUTH_SOCK | cut -d. -f2` + 1))
+	if [ "$SSH_AUTH_SOCK" != "" ] ; then
+		export SSH_AGENT_PID=$((`echo "$SSH_AUTH_SOCK" | cut -d. -f2` + 1))
 	fi
  
 	return 0
