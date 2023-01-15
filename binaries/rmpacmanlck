@@ -3,5 +3,5 @@ function require() {
 hash "$@" || exit 127;
 }
 require rm
-rm -f "$PREFIX"/var/lib/pacman/db.lck
+rm -f "${PREFIX}/var/lib/pacman/db.lck"
 exit "$?"
