@@ -8,15 +8,15 @@ if [[ -z "$@" ]]; then
 fi
 
 # Required program(s)
-req_progs=(7z unrar unzip)
-for p in ${req_progs[@]}; do
+req_progs=(7z unrar unzip tar bunzip2 ar gunzip uncompress)
+for p in "${req_progs[@]}"; do
     hash "$p" 2>&- || \
     { echo >&2 " Required program \"$p\" not installed."; exit 1; }
 done
 
 # Test if file exists
 if [ ! -f "$@" ]; then
-    echo "File "$@" doesn't exist"
+    echo "File $@ doesn't exist"
     exit
 fi
 
