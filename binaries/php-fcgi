@@ -2,7 +2,7 @@
 function require() {
 hash "$@" || exit 127;
 }
-require basename start-stop-daemon killall start stop  
+require basename start-stop-daemon killall 
 BIND=127.0.0.1:9000
 USER=u0_a286
 PHP_FCGI_CHILDREN=15
@@ -13,14 +13,14 @@ PHP_CGI_NAME="$(basename "$PHP_CGI")"
 PHP_CGI_ARGS="- USER=$USER PATH=${PREFIX}/usr/bin PHP_FCGI_CHILDREN=$PHP_FCGI_CHILDREN PHP_FCGI_MAX_REQUESTS=$PHP_FCGI_MAX_REQUESTS $PHP_CGI -b $BIND"
 RETVAL=0
 
-start() {
+function start() {
       echo -n "Starting PHP FastCGI: "
       start-stop-daemon --quiet --start --background --chuid "$USER" --exec "${PREFIX}/usr/bin" -- "$PHP_CGI_ARGS"
       RETVAL=$?
       echo "$PHP_CGI_NAME."
 }
 
-stop() {
+function stop() {
       echo -n "Stopping PHP FastCGI: "
       killall -q -w -u "$USER" "$PHP_CGI"
       RETVAL=$?
