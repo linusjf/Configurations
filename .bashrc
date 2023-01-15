@@ -97,6 +97,7 @@ shopt -s dirspell
 shopt -s dotglob
 shopt -s nullglob globstar
 #set -euo pipefail
+set -o noclobber
 export DISPLAY=":0"
 export BROWSER=termux-open-url
 export GITGUARDIAN_API_KEY="$(cat ~/.gitguardiantoken)"
