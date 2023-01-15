@@ -7,18 +7,20 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description : Makes package directories from specified package name.
 ######################################################################
-
+function require() {
+hash "$@" | exit 127;
+}
+require sed mkdir
 usage ()
 {
   echo 'Usage : mkpackagedirs <package>'
   echo 'package - name of java package'
   exit 1
 }
-if [ -z "$1" ]
-  then
+if test "$1" = ""; then
   usage
 else
-  dir=$(echo "$1" | sed -e 's/\./\//g')
+  dir=$(echo "$1" | sed -e 's|\.|/|g')
   echo "$dir"
   mkdir -p "$dir"
   exit $?

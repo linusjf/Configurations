@@ -10,6 +10,10 @@
 #                Use from directory containing source files.
 #                Also creates package-info.java if it does not exist already.
 ######################################################################
+function require() {
+hash "$@" || exit 127;
+}
+require head grep mv awk sed find 
 package=""
 pkgInfoFile="package-info.java"
 dir=""
@@ -20,7 +24,7 @@ readarray -t args < <(find . -maxdepth 1 \
 for file in "${args[@]}"
   do
     count=$(head -1 "$file" | grep -c 'package')
-    if [ $count -ne 0 ]
+    if [ "$count" -ne 0 ]
     then
       package=$(head -1 "$file" | grep 'package' | awk '{print $2}' | sed 's/;//')
       dir=$(mkpackagedirs "$package")
