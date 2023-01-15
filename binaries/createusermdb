@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+function require() {
+hash "$@" || exit 127
+}
+require mysql rm
 if [ $# -ne 3 ];
 then 
   echo "usage: $0 user pwd"
