@@ -20,7 +20,7 @@ function message()
     echo "${RED}returning to branch development"
     git checkout development
 fi
-  exit $ret
+  exit "$ret"
 }
 
 function branchName() { 
@@ -55,7 +55,7 @@ command="git fetch -p"
 eval "$command"
 command="git branch -r --merged $mainBranch"
 
-for var in $($command)
+for var in "$($command)"
 do
   if [[ "$var" == *"development"* ]] \
     || [[ "$var" == *"$mainBranch"* ]] \
@@ -66,9 +66,9 @@ do
     else
       echo "Delete branch $var (y/n)?"
       read answer
-      if [ $answer = 'Y' ] || [ $answer = 'y' ]
+      if [ "$answer" = 'Y' ] || [ "$answer" = 'y' ]
       then
-        git push origin --delete $(branchName "$var")
+        git push origin --delete "$(branchName "$var")"
       fi
   fi
 done

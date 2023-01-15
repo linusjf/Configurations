@@ -21,7 +21,7 @@ function message()
     echo "${RED}returning to branch development"
     git checkout development
 fi
-  exit $ret
+  exit "$ret"
 }
 
 set -e

@@ -15,15 +15,15 @@ trap message EXIT
 function message()
 {
   ret=$?
-  if [ $ret -eq 0 ]
+  if [ "$ret" -eq 0 ]
   then
-    echo exit $ret from last command: $command
+    echo "exit $ret from last command: $command"
   else
-    echo ${RED}exit $ret from last command: $command${NC}
-    echo ${RED}returning to branch development
+    echo "${RED}exit $ret from last command: $command${NC}"
+    echo "${RED}returning to branch development"
     git checkout development
 fi
-  exit $ret
+  exit "$ret"
 }
 command="git push -u origin development"
 eval "$command"
