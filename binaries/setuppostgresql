@@ -3,11 +3,11 @@ function require() {
 hash "$@" || exit 127;
 }
 require mkdir initdb pg_ctl createuser createdb
-mkdir -p $PREFIX/var/lib/postgresql
-initdb $PREFIX/var/lib/postgresql
+mkdir -p "${PREFIX}/var/lib/postgresql"
+initdb "${PREFIX}/var/lib/postgresql"
 
 # Starting the database
-pg_ctl -D $PREFIX/var/lib/postgresql start
+pg_ctl -D "${PREFIX}/var/lib/postgresql" start
 
 # Create User
 createuser --superuser --pwprompt adminpgsql
@@ -16,4 +16,4 @@ createuser --superuser --pwprompt adminpgsql
 createdb mydb
 
 # Similarly stop the database using
-pg_ctl -D $PREFIX/var/lib/postgresql stop
+pg_ctl -D "${PREFIX}/var/lib/postgresql" stop
