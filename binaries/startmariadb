@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
+function require() {
+hash "$@" || exit 127
+}
+require mysqld_safe
 mysqld_safe -u root &

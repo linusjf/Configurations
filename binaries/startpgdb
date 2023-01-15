@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
+function require() {
+hash "$@" || exit 127
+}
+require pg_ctl
 # Starting the database
 pg_ctl -D $PREFIX/var/lib/postgresql start
