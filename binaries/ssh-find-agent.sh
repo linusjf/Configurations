@@ -22,6 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
  
+function require() {
+hash "$@" || exit 127;
+}
+require find ssh-add ssh-keygen grep cut \
+  sort tr uniq tail awk sed
+
 _LIVE_AGENT_LIST=""
 declare -a _LIVE_AGENT_SOCK_LIST
 _LIVE_AGENT_SOCK_LIST=()
