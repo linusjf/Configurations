@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+function require() {
+hash "$@" || exit 127
+}
+require sqlite3
 if [ "$#" -ne 3 ];
 then 
   echo "$0 db script"
