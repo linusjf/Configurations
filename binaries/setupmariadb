@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+function require() {
+hash "$@" || exit 127;
+}
+require mkdir mysql_install_db
 (
  cd "$PREFIX"/etc;
 mkdir my.cnf.d;
