@@ -3,7 +3,7 @@
 
 # Display usage if no parameters given
 if [[ -z "$*" ]]; then
-    echo " ${0##*/} <archive> - extract common file formats)"
+  echo " ${0##*/} <archive(s)> - extract common file formats)"
     exit
 fi
 
@@ -14,26 +14,28 @@ for p in "${req_progs[@]}"; do
     { echo >&2 " Required program \"$p\" not installed."; exit 1; }
 done
 
-# Test if file exists
-if [ ! -f "$@" ]; then
-    echo "File $@ doesn't exist"
-    exit
-fi
-
-# Extract file by using extension as reference
-case "$@" in
-    *.7z ) 7z x "$@" ;;
-    *.tar.bz2 ) tar xvjf "$@" ;;
-    *.bz2 ) bunzip2 "$@" ;;
-    *.deb ) ar vx "$@" ;;
-    *.tar.gz ) tar xvf "$@" ;;
-    *.gz ) gunzip "$@" ;;
-    *.tar ) tar xvf "$@" ;;
-    *.tbz2 ) tar xvjf "$@" ;;
-    *.tar.xz ) tar xvf "$@" ;;
-    *.tgz ) tar xvzf "$@" ;;
-    *.rar ) unrar x "$@" ;;
-    *.zip ) unzip "$@" ;;
-    *.Z ) uncompress "$@" ;;
-    * ) echo " Unsupported file format" ;;
-esac
+for f in "$@"
+do
+  # Test if file exists
+  if [ ! -f "$f" ]; then
+    echo "File $f doesn't exist"
+    continue
+  fi
+  # Extract file by using extension as reference
+  case "$f" in
+      *.7z ) 7z x "$@" ;;
+      *.tar.bz2 ) tar xvjf "$@" ;;
+      *.bz2 ) bunzip2 "$@" ;;
+      *.deb ) ar vx "$@" ;;
+      *.tar.gz ) tar xvf "$@" ;;
+      *.gz ) gunzip "$@" ;;
+      *.tar ) tar xvf "$@" ;;
+      *.tbz2 ) tar xvjf "$@" ;;
+      *.tar.xz ) tar xvf "$@" ;;
+      *.tgz ) tar xvzf "$@" ;;
+      *.rar ) unrar x "$@" ;;
+      *.zip ) unzip "$@" ;;
+      *.Z ) uncompress "$@" ;;
+      * ) echo " Unsupported file format" ;;
+    esac
+done
