@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 if "$DEBUG"
 then
   echo "DEBUG mode on."
