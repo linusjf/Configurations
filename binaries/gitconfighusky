@@ -2,4 +2,4 @@
 # Active hooks
 npx husky install
 # Add hook
-npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
+npx husky add .husky/commit-msg "npx --no -- commitlint --edit $1"

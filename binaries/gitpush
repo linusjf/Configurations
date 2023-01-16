@@ -10,6 +10,8 @@
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 
+# Don't warn about unreachable commands in this function
+# shellcheck disable=SC2317  
 function message()
 {
   ret=$?
