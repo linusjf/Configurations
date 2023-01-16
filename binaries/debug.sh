@@ -1,4 +1,5 @@
+#!/usr/bin/env bash
 function debug() { 
-  echo "Executing: $@";
-  "$@";
+  echo "Executing: $*";
+  eval "$*";
 }
