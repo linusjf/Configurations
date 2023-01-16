@@ -4,9 +4,12 @@ shellcheck.net()
 {
   for i in "$@"
   do
-    if test -x "$i" || [ "${i: -3}" == ".sh" ]
+    if test -f "$i";
     then
-      (curl --data-urlencode "script@$i" -sS 'https://www.shellcheck.net/shellcheck.php' | jq .) > "$i.out"
+      if test -x "$i" || [ "${i: -3}" == ".sh" ];
+      then
+        (curl --data-urlencode "script@$i" -sS 'https://www.shellcheck.net/shellcheck.php' | jq .) > "$i.out"
+      fi
     fi
   done
 }
