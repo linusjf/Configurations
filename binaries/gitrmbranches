@@ -55,7 +55,7 @@ command="git fetch -p"
 eval "$command"
 command="git branch -r --merged $mainBranch"
 
-for var in "$($command)"
+for var in $(eval "$command")
 do
   if [[ "$var" == *"development"* ]] \
     || [[ "$var" == *"$mainBranch"* ]] \
@@ -65,7 +65,7 @@ do
       continue
     else
       echo "Delete branch $var (y/n)?"
-      read answer
+      read -r answer
       if [ "$answer" = 'Y' ] || [ "$answer" = 'y' ]
       then
         git push origin --delete "$(branchName "$var")"
@@ -74,9 +74,8 @@ do
 done
 
 command="delUnmerged $mainBranch 1"
-eval "$command"
-if [[ $? == 0 ]];
-then
+
+if eval "$command";then
   command="echo 'About to delete all unmerged branches. Are you sure (y/n)?'"
   eval "$command"
   command="read var"
