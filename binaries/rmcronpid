@@ -3,5 +3,5 @@ function require() {
 hash "$@" | exit 127;
 }
 require rm
-rm $PREFIX/var/run/crond.pid
+rm -f "${PREFIX}/var/run/crond.pid"
 exit "$?"
