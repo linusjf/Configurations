@@ -4,8 +4,8 @@ hash "$@" || exit 127;
 }
 require mkdir mysql_install_db
 (
- cd "$PREFIX"/etc;
-mkdir my.cnf.d;
+ cd "${PREFIX}/etc" || exit 1;
+ mkdir my.cnf.d;
 )
 
 # use the following command to install securely

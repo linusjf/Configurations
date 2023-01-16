@@ -10,7 +10,7 @@
 function require() {
 hash "$@" || exit 127;
 }
-require sed mkdir
+require mkdir
 usage ()
 {
   echo 'Usage : mkpackagedirs <package>'
@@ -20,7 +20,7 @@ usage ()
 if test "$1" = ""; then
   usage
 else
-  dir=$(echo "$1" | sed -e 's|\.|/|g')
+  dir="${1//\./\/}"
   echo "$dir"
   mkdir -p "$dir"
   exit $?
