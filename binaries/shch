@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Here's one that uploads a local script onto the live demo at shellcheck.net
+shellcheck.net()
+{
+  for i in "$@"
+  do
+    if test -x "$i" || [ "${i: -3}" == ".sh" ]
+    then
+      (curl --data-urlencode "script@$i" -sS 'https://www.shellcheck.net/shellcheck.php' | jq .) > "$i.out"
+    fi
+  done
+}
+shellcheck.net "$@"
+
