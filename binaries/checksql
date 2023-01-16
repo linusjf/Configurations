@@ -5,7 +5,7 @@ hash "$@" || exit 127;
 require rm sqlcheck tee
 declare -i exitCode=0
 rm ./check.errors
-for f in .\*.sql
+for f in *.sql
 do
   test -e "$f" || continue
   sqlcheck -c -v -f "$f" | tee -a check.errors
