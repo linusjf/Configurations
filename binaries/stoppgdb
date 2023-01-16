@@ -3,4 +3,4 @@ function require() {
 hash "$@" || exit 127
 }
 require pg_ctl
-pg_ctl -D $PREFIX/var/lib/postgresql stop
+pg_ctl -D "${PREFIX}/var/lib/postgresql" stop
