@@ -72,4 +72,5 @@ let g:neomake_javascript_eslint_maker =  {
   let g:neomake_javascript_jsx_enabled_makers = ['eslint']
 
   let g:neoformat_enabled_javascript = ['npxprettier']
+  au FileType markdown setlocal wrap
 endfunction
