@@ -9,10 +9,12 @@ shellcheck.net()
       if test -x "$i" || [ "${i: -3}" == ".sh" ];
       then
         (curl --data-urlencode "script@$i" -sS 'https://www.shellcheck.net/shellcheck.php' | jq .) > "$i.out"
+        filesize="$(stat -c%s "${i}.out")"
+        if test "$filesize" -lt 4;then 
+          rm -f "${i}.out"
+        fi
       fi
     fi
   done
 }
 shellcheck.net "$@"
-find . -name "*.out" -type f -size -4c -delete
-
