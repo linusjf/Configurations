@@ -27,7 +27,7 @@ shellcheck.net()
       ret=$ret+$?
     done
   fi
-  return "$ret"
+  return $ret
 }
 
 function check() {
