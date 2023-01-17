@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2016
+find . -name "*.out" -print0 |
+  xargs --null -I'@' bash -c 'shch "$(basename @ .out)"' 
