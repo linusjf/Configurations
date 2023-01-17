@@ -6,14 +6,8 @@ shellcheck.net()
   then
     for i in "$@"
     do
-      if test -f "$i";
-      then
-        if test -x "$i" || [ "${i: -3}" == ".sh" ];
-        then
-          check "$i"
-        else
-          echo "$i is not an executable script"
-        fi
+      if test -f "$i"; then
+        check "$i"
       else
         echo "$i is not a file."
       fi
