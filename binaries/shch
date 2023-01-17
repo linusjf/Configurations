@@ -2,19 +2,41 @@
 # Here's one that uploads a local script onto the live demo at shellcheck.net
 shellcheck.net()
 {
-  for i in "$@"
-  do
-    if test -f "$i";
-    then
-      if test -x "$i" || [ "${i: -3}" == ".sh" ];
+  if test "$#" -gt 0;
+  then
+    for i in "$@"
+    do
+      if test -f "$i";
       then
-        (curl --data-urlencode "script@$i" -sS 'https://www.shellcheck.net/shellcheck.php' | jq .) > "$i.out"
-        filesize="$(stat -c%s "${i}.out")"
-        if test "$filesize" -lt 4;then 
-          rm -f "${i}.out"
+        if test -x "$i" || [ "${i: -3}" == ".sh" ];
+        then
+          check "$i"
+        else
+          echo "$i is not an executable script"
         fi
+      else
+        echo "$i is not a file."
       fi
-    fi
-  done
+    done
+  else
+    cmd="find . -maxdepth 1 -type f -executable -print"
+    readarray -t execs < <(eval "$cmd")
+    cmd="find . -maxdepth 1 -name '*.sh' -print"
+    readarray -t scripts < <(eval "$cmd")
+    scripts+=("${execs[@]}")
+    for i in "${scripts[@]}"
+    do
+      check "$i"
+    done
+  fi
+
+}
+
+function check() {
+  (curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' | jq .) > "$1.out"
+  filesize="$(stat -c%s "${1}.out")"
+  if test "$filesize" -lt 4;then 
+    rm -f "${1}.out"
+  fi
 }
 shellcheck.net "$@"
