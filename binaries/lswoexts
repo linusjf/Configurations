@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ls -l -I '*.*' | grep -v '^d' | awk '{if ($9) print $9}'
