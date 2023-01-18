@@ -8,6 +8,7 @@ if [[ -z "$*" ]]; then
 fi
 
 # Required program(s)
+# require functionality
 req_progs=(7z unrar unzip tar bunzip2 ar gunzip uncompress)
 for p in "${req_progs[@]}"; do
     hash "$p" 2>&- || \
