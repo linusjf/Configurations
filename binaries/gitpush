@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : gitpush
@@ -26,6 +25,10 @@ fi
   exit "$ret"
 }
 
+require() {
+hash "$@" || exit
+}
+require git
 set -e
 command=""
 trap message EXIT

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : gitpush
@@ -7,6 +6,10 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description : 
 ######################################################################
+require() {
+hash "$@" || exit
+}
+require git
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 set -e

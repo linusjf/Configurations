@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-
+function require() {
+hash "$@" || exit 127;
+}
+require git
 revisioncount="$(git log --oneline | wc -l)"
 projectversion="$(git describe --tags --long)"
 cleanversion=${projectversion%%-*}
