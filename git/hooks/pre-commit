@@ -10,29 +10,26 @@ hash "$@" || exit 127;
 }
 require ggshield git shch
 declare -i ret=0
-if [ "$ret" -eq 0 ]
-then
-  # Regexp for grep to only choose sh file extension for checking
-  exts="\.sh$"
-  files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
-  echo "files: $files"
-  # shellcheck staged .sh files
-  if [ ! -z "$files" ]
-  then 
-    shch "$files"
-    ret=$?
-  fi
-  files="$(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.')"
-  echo "execs: $files"
-  # shellcheck staged executable files
-  for file in "$files"
-  do
-    if test -x "$file"; then
-      shch "$file"
-      ret="$ret"+$?
-    fi
-  done
+# Regexp for grep to only choose sh file extension for checking
+exts="\.sh$"
+files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
+echo "files: $files"
+# shellcheck staged .sh files
+if [ ! -z "$files" ]
+then 
+  shch "$files"
+  ret=$?
 fi
+files="$(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.')"
+echo "execs: $files"
+# shellcheck staged executable files
+for file in "$files"
+do
+  if test -x "$file"; then
+    shch "$file"
+    ret="$ret"+$?
+  fi
+done
 if test "$ret" -eq 0;then
   ggshield secret scan pre-commit "$@"
 fi
