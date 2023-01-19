@@ -1,5 +1,4 @@
-#!/usr/bin/env sh
-
+#!/usr/bin/env bash
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : sshagent
@@ -7,6 +6,10 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
+require() {
+hash "$@" || exit 127;
+}
+require termux-wake-lock ssh-agent
 termux-wake-lock
-echo hello
+echo "hello"
 eval "$(ssh-agent -s)"

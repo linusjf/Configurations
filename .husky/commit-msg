@@ -1,4 +1,9 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env bash
+require() {
+hash "$@" || exit 127;
+}
+require npx dirname
+#shellcheck disable=SC1091
+source "$(dirname "$0")/_/husky.sh"
 
 npx --no -- commitlint --edit
