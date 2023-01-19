@@ -1,8 +1,8 @@
 [
   {
     "file": "-",
-    "line": 16,
-    "endLine": 16,
+    "line": 14,
+    "endLine": 14,
     "column": 1,
     "endColumn": 1,
     "level": "info",
@@ -12,8 +12,8 @@
   },
   {
     "file": "-",
-    "line": 21,
-    "endLine": 21,
+    "line": 19,
+    "endLine": 19,
     "column": 3,
     "endColumn": 3,
     "level": "error",
@@ -23,8 +23,8 @@
   },
   {
     "file": "-",
-    "line": 21,
-    "endLine": 21,
+    "line": 19,
+    "endLine": 19,
     "column": 22,
     "endColumn": 22,
     "level": "error",
