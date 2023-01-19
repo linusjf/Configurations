@@ -8,21 +8,22 @@ fi
 require() {
 hash "$@" || exit 127;
 }
-require ggshield
-declare -r ret=0
-ggshield secret scan pre-commit "$@"
-ret=$?
-if test "$ret" -eq 0;
+require ggshield git shch
+declare -i ret=0
+if [ "$ret" -eq 0 ]
 then
   # Regexp for grep to only choose sh file extension for checking
   exts="\.sh$"
   files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
-  echo "$files"
+  echo "files: $files"
   # shellcheck staged .sh files
-  shch "$files"
-  ret=$?
+  if [ ! -z "$files" ]
+  then 
+    shch "$files"
+    ret=$?
+  fi
   files="$(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.')"
-  echo "$files"
+  echo "execs: $files"
   # shellcheck staged executable files
   for file in "$files"
   do
@@ -32,4 +33,6 @@ then
     fi
   done
 fi
-exit "$ret"
+if test "$ret" -eq 0;then
+  ggshield secret scan pre-commit "$@"
+fi
