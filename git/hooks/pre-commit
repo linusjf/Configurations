@@ -14,7 +14,6 @@ declare -i ret=0
 exts="\.sh$"
 files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
 echo "files: $files"
-# shellcheck staged .sh files
 if [ ! -z "$files" ]
 then 
   shch "$files"
@@ -22,7 +21,6 @@ then
 fi
 files="$(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.')"
 echo "execs: $files"
-# shellcheck staged executable files
 for file in "$files"
 do
   if test -x "$file"; then
