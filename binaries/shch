@@ -31,10 +31,11 @@ shellcheck.net()
 }
 
 function check() {
-  curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' > "${1}.json"
+  f="$(basename "$1")"
+  curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' > "${PREFIX}/tmp/${f}.json"
   if test "$?" -eq 0; then
-    jq . < "${1}.json" > "$1.out"
-    rm -f "${1}.json"
+    jq . < "${PREFIX}/tmp/${f}.json" > "${1}.out"
+    rm -f "${PREFIX}/tmp/${f}.json"
     filesize="$(stat -c%s "${1}.out")"
     if test "$filesize" -lt 4;then 
       rm -f "${1}.out"
