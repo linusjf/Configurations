@@ -29,4 +29,6 @@ do
 done
 if test "$ret" -eq 0;then
   ggshield secret scan pre-commit "$@"
+  ret=$?
 fi
+exit "$ret"
