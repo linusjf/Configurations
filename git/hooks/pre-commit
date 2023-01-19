@@ -8,16 +8,11 @@ fi
 require() {
 hash "$@" || exit 127;
 }
-require ggshield git shch
+require ggshield git shch parallel
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
-files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
-if [ -n "$files" ]
-then 
-  shch "$files"
-  ret=$?
-fi
+ret="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts | parallel  "shch {}" )"
 cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
 readarray -t files < <(eval "$cmd")
 for file in "${files[@]}"
