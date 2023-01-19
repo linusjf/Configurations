@@ -7,7 +7,7 @@ shellcheck.net()
   then
     for i in "$@"
     do
-      if test -f "$i"; then
+      if test -f "$i" && test -s "$i"; then
         check "$i"
         ret=$ret+$?
       else
@@ -23,8 +23,10 @@ shellcheck.net()
     scripts+=("${execs[@]}")
     for i in "${scripts[@]}"
     do
-      check "$i"
-      ret=$ret+$?
+      if test -s "$i"; then
+        check "$i"
+        ret=$ret+$?
+      fi
     done
   fi
   return $ret
