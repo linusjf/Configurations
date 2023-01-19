@@ -13,7 +13,6 @@ declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
 files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
-echo "files: $files"
 if [ -n "$files" ]
 then 
   shch "$files"
@@ -21,10 +20,9 @@ then
 fi
 cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
 readarray -t files < <(eval "$cmd")
-echo "execs: $files"
 for file in "${files[@]}"
 do
-  if test -x $file; then
+  if test -x "$file"; then
     shch "$file"
     ret="$ret"+$?
   fi
