@@ -1,24 +1,45 @@
 [
   {
     "file": "-",
-    "line": 17,
-    "endLine": 17,
-    "column": 6,
-    "endColumn": 7,
-    "level": "style",
-    "code": 2236,
-    "message": "Use -n instead of ! -z.",
+    "line": 24,
+    "endLine": 24,
+    "column": 14,
+    "endColumn": 20,
+    "level": "warning",
+    "code": 2128,
+    "message": "Expanding an array without an index only gives the first element.",
     "fix": null
   },
   {
     "file": "-",
-    "line": 24,
-    "endLine": 24,
-    "column": 13,
-    "endColumn": 21,
-    "level": "error",
-    "code": 2066,
-    "message": "Since you double quoted this, it will not word split, and the loop will only run once.",
-    "fix": null
+    "line": 27,
+    "endLine": 27,
+    "column": 14,
+    "endColumn": 19,
+    "level": "info",
+    "code": 2086,
+    "message": "Double quote to prevent globbing and word splitting.",
+    "fix": {
+      "replacements": [
+        {
+          "column": 14,
+          "endColumn": 14,
+          "endLine": 27,
+          "insertionPoint": "afterEnd",
+          "line": 27,
+          "precedence": 13,
+          "replacement": "\""
+        },
+        {
+          "column": 19,
+          "endColumn": 19,
+          "endLine": 27,
+          "insertionPoint": "beforeStart",
+          "line": 27,
+          "precedence": 13,
+          "replacement": "\""
+        }
+      ]
+    }
   }
 ]
