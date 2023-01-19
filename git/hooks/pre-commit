@@ -12,7 +12,8 @@ require ggshield git shch parallel
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
-ret="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts | parallel  "shch {}" )"
+git diff --cached --name-only --diff-filter=ACMR | grep $exts | parallel  "shch {}"
+ret=$?
 cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
 readarray -t files < <(eval "$cmd")
 for file in "${files[@]}"
