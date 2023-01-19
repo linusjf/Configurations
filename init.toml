@@ -121,6 +121,10 @@
     repo = 'mzlogin/vim-markdown-toc'
     merged = false
 
+[[custom_plugins]]
+    repo = 'z0mbix/vim-shfmt'
+    merged = false
+
 [[layers]] 
     name = "lang#java"
 

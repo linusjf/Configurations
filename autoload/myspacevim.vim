@@ -52,6 +52,8 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_auto_extension_ext = 'md'
+let g:shfmt_extra_args = '-i 2'
+let g:shfmt_fmt_on_save = 1
 iabbrev <buffer> --- <c-k>-M
 " Show column numbers
 set ruler
