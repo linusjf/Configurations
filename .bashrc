@@ -95,7 +95,7 @@ shopt -s cmdhist
 shopt -s direxpand
 shopt -s dirspell
 shopt -s dotglob
-shopt -s nullglob globstar
+shopt -s globstar
 #set -euo pipefail
 set -o noclobber
 export DISPLAY=":0"
