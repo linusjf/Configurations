@@ -5,7 +5,8 @@ shellcheck.net() {
 	if test "$#" -gt 0; then
 		for i in "$@"; do
 			if test -f "$i" && test -s "$i"; then
-				check "$i"
+				echo "Checking ${i}..."
+        check "$i"
 				ret=$ret+$?
 			else
 				echo "$i is not a file."
@@ -20,6 +21,7 @@ shellcheck.net() {
 		scripts+=("${execs[@]}")
 		for i in "${scripts[@]}"; do
 			if test -s "$i"; then
+				echo "Checking ${i}..."
 				check "$i"
 				ret=$ret+$?
 			fi
