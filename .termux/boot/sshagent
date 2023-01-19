@@ -5,7 +5,7 @@
 # @file        : sshagent
 # @created     : Tuesday Apr 30, 2019 11:10:49 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description : 
+# @description :
 ######################################################################
 termux-wake-lock
 echo hello

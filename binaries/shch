@@ -6,7 +6,7 @@ shellcheck.net() {
 		for i in "$@"; do
 			if test -f "$i" && test -s "$i"; then
 				echo "Checking ${i}..."
-        check "$i"
+				check "$i"
 				ret=$ret+$?
 			else
 				echo "$i is not a file."

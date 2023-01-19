@@ -1,30 +1,29 @@
 #!/usr/bin/env bash
 if [[ -f .git/hooks/pre-commit ]]; then
-    if ! .git/hooks/pre-commit "$@"; then
-        echo 'Local pre-commit hook failed, please see output above'
-        exit 1
-    fi
+	if ! .git/hooks/pre-commit "$@"; then
+		echo 'Local pre-commit hook failed, please see output above'
+		exit 1
+	fi
 fi
 require() {
-hash "$@" || exit 127;
+	hash "$@" || exit 127
 }
 require ggshield git shch parallel
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
-git diff --cached --name-only --diff-filter=ACMR | grep $exts | parallel  "shch {}"
+git diff --cached --name-only --diff-filter=ACMR | grep $exts | parallel "shch {}"
 ret=$?
 cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
 readarray -t files < <(eval "$cmd")
-for file in "${files[@]}"
-do
-  if test -x "$file"; then
-    shch "$file"
-    ret="$ret"+$?
-  fi
+for file in "${files[@]}"; do
+	if test -x "$file"; then
+		shch "$file"
+		ret="$ret"+$?
+	fi
 done
-if test "$ret" -eq 0;then
-  ggshield secret scan pre-commit "$@"
-  ret=$?
+if test "$ret" -eq 0; then
+	ggshield secret scan pre-commit "$@"
+	ret=$?
 fi
 exit "$ret"

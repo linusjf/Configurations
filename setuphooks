@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 function require() {
- hash "$@" || exit 127;
+	hash "$@" || exit 127
 }
 require rm cp ln realpath mv
 if test -f "${HOME}/.git/hooks/pre-commit"; then
-  cp "${HOME}/.git/hooks/pre-commit" "${HOME}/.git/hooks/pre-commit.bak"
-  rm -f "$HOME/.git/hooks/pre-commit"
+	cp "${HOME}/.git/hooks/pre-commit" "${HOME}/.git/hooks/pre-commit.bak"
+	rm -f "$HOME/.git/hooks/pre-commit"
 fi
 f="$(realpath git/hooks/pre-commit)"
-cd "${HOME}/.git/hooks" || { echo "Unable to access ${HOME}/.git/hooks"; exit 1; }
+cd "${HOME}/.git/hooks" || {
+	echo "Unable to access ${HOME}/.git/hooks"
+	exit 1
+}
 ln -s "$f" pre-commit
