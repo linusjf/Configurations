@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 require() {
-hash "$@" || exit
+	hash "$@" || exit
 }
 require find xargs basename shch
 # shellcheck disable=SC2016
 find . -name "*.out" -print0 |
-  xargs --null -I'@' bash -c 'shch "$(basename @ .out)"' 
+	xargs --null -I'@' bash -c 'shch "$(basename @ .out)"'

@@ -4,10 +4,10 @@
 # @file        : gitlastcommit
 # @created     : Thursday Dec 15, 2022 07:43:00 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description : 
+# @description :
 ######################################################################
 require() {
-hash "$@" || exit
+	hash "$@" || exit
 }
 require git
 command="git log -n 1"

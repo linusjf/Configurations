@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
-function require() { 
-  hash "$@" || exit 127; 
+function require() {
+	hash "$@" || exit 127
 }
 require curl sort tr grep uniq head
 NUM_WORDS="${1:-10}"
 STOP_WORDS="${2:-stopwords}"
-if [[ ! -f "$STOP_WORDS" ]];
-then
-  curl -sL "https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/stopwords-en.txt" \
-  | sort > "$STOP_WORDS"
+if [[ ! -f "$STOP_WORDS" ]]; then
+	curl -sL "https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/stopwords-en.txt" |
+		sort >"$STOP_WORDS"
 fi
-tr '[:upper:]' '[:lower:]' \
-  | grep -oE "[a-z\']{2,}" \
-  |sort | grep -Fvwf "${STOP_WORDS}" \
-  | uniq -c | sort -nr \
-  | head -n "${NUM_WORDS}"
+tr '[:upper:]' '[:lower:]' |
+	grep -oE "[a-z\']{2,}" |
+	sort | grep -Fvwf "${STOP_WORDS}" |
+	uniq -c | sort -nr |
+	head -n "${NUM_WORDS}"

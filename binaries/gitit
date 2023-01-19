@@ -4,7 +4,7 @@
 # @file        : gitit
 # @created     : Friday Feb 11, 2022 08:00:00 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description : 
+# @description :
 ######################################################################
 gitadd && gitcommit && gitpush
 exit $?

@@ -4,10 +4,10 @@
 # @file        : gitcommit
 # @created     : Tuesday Jan 11, 2022 08:00:00 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description : 
+# @description :
 ######################################################################
 require() {
-hash "$@" || exit
+	hash "$@" || exit
 }
 require git
 command="git commit -F commit.txt"

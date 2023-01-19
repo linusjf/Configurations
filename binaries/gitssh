@@ -5,10 +5,10 @@
 # @file        : gitssh
 # @created     : Thursday May 02, 2019 21:09:20 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description : 
+# @description :
 ######################################################################
 function require() {
-hash "$@" || exit 127;
+	hash "$@" || exit 127
 }
 require ssh-add grep awk ssh-agent
 eval "$(ssh-agent -s)"

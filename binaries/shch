@@ -1,57 +1,53 @@
 #!/usr/bin/env bash
 # Here's one that uploads a local script onto the live demo at shellcheck.net
-shellcheck.net()
-{
-  declare -i ret=0
-  if test "$#" -gt 0;
-  then
-    for i in "$@"
-    do
-      if test -f "$i" && test -s "$i"; then
-        check "$i"
-        ret=$ret+$?
-      else
-        echo "$i is not a file."
-        ret=$ret+1
-      fi
-    done
-  else
-    cmd="find . -maxdepth 1 -type f -executable -print"
-    readarray -t execs < <(eval "$cmd")
-    cmd="find . -maxdepth 1 -name '*.sh' -print"
-    readarray -t scripts < <(eval "$cmd")
-    scripts+=("${execs[@]}")
-    for i in "${scripts[@]}"
-    do
-      if test -s "$i"; then
-        check "$i"
-        ret=$ret+$?
-      fi
-    done
-  fi
-  return $ret
+shellcheck.net() {
+	declare -i ret=0
+	if test "$#" -gt 0; then
+		for i in "$@"; do
+			if test -f "$i" && test -s "$i"; then
+				check "$i"
+				ret=$ret+$?
+			else
+				echo "$i is not a file."
+				ret=$ret+1
+			fi
+		done
+	else
+		cmd="find . -maxdepth 1 -type f -executable -print"
+		readarray -t execs < <(eval "$cmd")
+		cmd="find . -maxdepth 1 -name '*.sh' -print"
+		readarray -t scripts < <(eval "$cmd")
+		scripts+=("${execs[@]}")
+		for i in "${scripts[@]}"; do
+			if test -s "$i"; then
+				check "$i"
+				ret=$ret+$?
+			fi
+		done
+	fi
+	return $ret
 }
 
 function check() {
-  f="$(basename "$1")"
-  curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' > "${PREFIX}/tmp/${f}.json"
-  if test "$?" -eq 0; then
-    jq . < "${PREFIX}/tmp/${f}.json" > "${1}.out"
-    rm -f "${PREFIX}/tmp/${f}.json"
-    filesize="$(stat -c%s "${1}.out")"
-    if test "$filesize" -lt 4;then 
-      rm -f "${1}.out"
-      return 0
-    else
-      return 1
-    fi
-  else
-    exit 255
-  fi
+	f="$(basename "$1")"
+	curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' >"${PREFIX}/tmp/${f}.json"
+	if test "$?" -eq 0; then
+		jq . <"${PREFIX}/tmp/${f}.json" >"${1}.out"
+		rm -f "${PREFIX}/tmp/${f}.json"
+		filesize="$(stat -c%s "${1}.out")"
+		if test "$filesize" -lt 4; then
+			rm -f "${1}.out"
+			return 0
+		else
+			return 1
+		fi
+	else
+		exit 255
+	fi
 }
 
 function require() {
-hash "$@" || exit
+	hash "$@" || exit
 }
-require jq rm curl find stat 
+require jq rm curl find stat
 shellcheck.net "$@"

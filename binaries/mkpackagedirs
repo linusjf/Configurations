@@ -8,20 +8,19 @@
 # @description : Makes package directories from specified package name.
 ######################################################################
 function require() {
-hash "$@" || exit 127;
+	hash "$@" || exit 127
 }
 require mkdir
-usage ()
-{
-  echo 'Usage : mkpackagedirs <package>'
-  echo 'package - name of java package'
-  exit 1
+usage() {
+	echo 'Usage : mkpackagedirs <package>'
+	echo 'package - name of java package'
+	exit 1
 }
 if test "$1" = ""; then
-  usage
+	usage
 else
-  dir="${1//\./\/}"
-  echo "$dir"
-  mkdir -p "$dir"
-  exit $?
+	dir="${1//\./\/}"
+	echo "$dir"
+	mkdir -p "$dir"
+	exit $?
 fi

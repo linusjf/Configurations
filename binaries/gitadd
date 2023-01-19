@@ -4,10 +4,10 @@
 # @file        : gitadd
 # @created     : Tuesday Feb 8, 2022 08:00:00 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description : 
+# @description :
 ######################################################################
 function require() {
-hash "$@" || exit 127;
+	hash "$@" || exit 127
 }
 require git
 command="git add ."

@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 function require() {
-hash "$@" || exit 127
+	hash "$@" || exit 127
 }
 require psql
-if [ "$#" -ne 3 ];
-then 
-  echo "$0 host db script"
-  echo "host - host name or ip address"
-  echo "db - database name"
-  echo "script - sql script"
-  exit 1
+if [ "$#" -ne 3 ]; then
+	echo "$0 host db script"
+	echo "host - host name or ip address"
+	echo "db - database name"
+	echo "script - sql script"
+	exit 1
 fi
 host="$1"
 db="$2"

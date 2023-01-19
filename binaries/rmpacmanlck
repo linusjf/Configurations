@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 function require() {
-hash "$@" || exit 127;
+	hash "$@" || exit 127
 }
 require rm
 rm -f "${PREFIX}/var/lib/pacman/db.lck"
