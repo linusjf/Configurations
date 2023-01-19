@@ -1,0 +1,57 @@
+[
+  {
+    "file": "-",
+    "line": 1,
+    "endLine": 1,
+    "column": 1,
+    "endColumn": 1,
+    "level": "error",
+    "code": 1073,
+    "message": "Couldn't parse this test expression. Fix to allow more checks.",
+    "fix": null
+  },
+  {
+    "file": "-",
+    "line": 1,
+    "endLine": 1,
+    "column": 2,
+    "endColumn": 2,
+    "level": "error",
+    "code": 1080,
+    "message": "You need \\ before line feeds to break lines in [ ].",
+    "fix": null
+  },
+  {
+    "file": "-",
+    "line": 2,
+    "endLine": 2,
+    "column": 3,
+    "endColumn": 3,
+    "level": "warning",
+    "code": 1083,
+    "message": "This { is literal. Check expression (missing ;/\\n?) or quote it.",
+    "fix": null
+  },
+  {
+    "file": "-",
+    "line": 2,
+    "endLine": 2,
+    "column": 4,
+    "endColumn": 4,
+    "level": "error",
+    "code": 1080,
+    "message": "When breaking lines in [ ], you need \\ before the linefeed.",
+    "fix": null
+  },
+  {
+    "file": "-",
+    "line": 3,
+    "endLine": 3,
+    "column": 5,
+    "endColumn": 5,
+    "level": "error",
+    "code": 1072,
+    "message": "Expected test to end here (don't wrap commands in []/[[]]). Fix any mentioned problems and try again.",
+    "fix": null
+  }
+]

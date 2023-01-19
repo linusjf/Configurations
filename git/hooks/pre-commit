@@ -14,16 +14,17 @@ declare -i ret=0
 exts="\.sh$"
 files="$(git diff --cached --name-only --diff-filter=ACMR | grep $exts)"
 echo "files: $files"
-if [ ! -z "$files" ]
+if [ -n "$files" ]
 then 
   shch "$files"
   ret=$?
 fi
-files="$(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.')"
+cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
+readarray -t files < <(eval "$cmd")
 echo "execs: $files"
-for file in "$files"
+for file in "${files[@]}"
 do
-  if test -x "$file"; then
+  if test -x $file; then
     shch "$file"
     ret="$ret"+$?
   fi
