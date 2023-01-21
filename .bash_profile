@@ -1,8 +1,7 @@
 source ~/.bashrc
 require() {
-  hssh "$@" || exit 127
+  hash "$@"
 }
-require archlinux-java updatedb tty cat
 declare -i istermux=1
 if [ -f "$PREFIX/etc/os-release" ]; then
   istermux=0
@@ -12,11 +11,13 @@ else
 fi
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]; then
+  require archlinux-java tty cat rm
   jvm="$(archlinux-java status | grep 'default' | awk '{print $1}')"
   export JAVA_HOME="/usr/lib/jvm/${jvm}"
   export PATH="$JAVA_HOME/bin:$PATH:~/jacorb-3.9/bin:~/LearnJava:$HOME/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
   export PYTHON3_HOST_PROG="/usr/bin/python"
 else
+  require updatedb tty cat rm
   export PATH="$HOME/binaries:$PATH:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
 fi
