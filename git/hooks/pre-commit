@@ -49,6 +49,57 @@ for file in "${files[@]}"; do
   optimize "$file"
   ret=$((ret + $?))
 done
+
+declare -r configFileName="tidy.config"
+configFilePath="$(find .. -maxdepth 2 \
+  -type f -name "$configFileName" ! -path \
+  "**/.git/**" | head -n 1)"
+
+# Regexp for grep to only choose some file extensions for formatting
+exts="\.xml$"
+
+# The formatter to use
+formatter=$(which tidy)
+
+# Check availability of the formatter
+if [ -z "$formatter" ]; then
+  echo 1>&2 "$formatter not found. Pre-commit formatting will not be done."
+  exit 0
+fi
+
+cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+readarray -t files < <(eval "$cmd")
+ret=$((ret + $?))
+
+# Format staged files
+for file in "${files[@]}"; do
+  # don't format empty files
+  if test -s "$file"; then
+    echo "Formatting $file"
+    # Get the file from index
+    git show ":$file" >"${file}.tmp"
+    # Format it
+    "$formatter" -config "$configFilePath" -quiet -xml -m -i "${file}.tmp"
+    ret=$((ret + $?))
+    # Create a blob object from the formatted file
+    hash=$(git hash-object -w "${file}.tmp")
+    # Add it back to index
+    mode=$(stat -c "%a" "$file")
+    git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+    git cat-file -p "$hash" >"${file}"
+    rm "${file}.tmp"
+  fi
+done
+
+# If no files left in index after formatting - fail
+# i.e., if files are similar after changes
+# no commit required
+diffs="$(git diff --cached --name-only)"
+if [ ! "$diffs" ]; then
+  echo 1>&2 "No files changed from previous commit after processing..."
+  ret=$((ret + 1))
+fi
+
 if test "$ret" -eq 0; then
   ggshield secret scan pre-commit "$@"
   ret=$?
