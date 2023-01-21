@@ -80,7 +80,7 @@ for file in "${files[@]}"; do
     # Get the file from index
     git show ":$file" >"${file}.tmp"
     # Format it
-    eval "$formatter -config $configFilePath -quiet -xml -m -i ${file}.tmp >/dev/null"
+    eval "$formatter -config $configFilePath -quiet -xml -m -i ${file}.tmp &>/dev/null"
     ret=$((ret + $?))
     # Create a blob object from the formatted file
     hash=$(git hash-object -w "${file}.tmp")
