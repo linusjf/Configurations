@@ -80,7 +80,7 @@ for file in "${files[@]}"; do
     # Get the file from index
     git show ":$file" >"${file}.tmp"
     # Format it
-    "$formatter" -config "$configFilePath" -quiet -xml -m -i "${file}.tmp"
+    eval "$formatter -config $configFilePath -quiet -xml -m -i ${file}.tmp >/dev/null"
     ret=$((ret + $?))
     # Create a blob object from the formatted file
     hash=$(git hash-object -w "${file}.tmp")
@@ -103,6 +103,8 @@ isxmlfile() {
   if (file "$1" | grep 'XML' &>/dev/null); then
     return 0
   elif (file "$1" | grep 'HTML' &>/dev/null); then
+    return 0
+  elif (file "$1" | grep 'SGML' &>/dev/null); then
     return 0
   else
     return 1
