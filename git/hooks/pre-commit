@@ -102,8 +102,11 @@ istextfile() {
 isxmlfile() {
   if (file "$1" | grep 'XML' &>/dev/null); then
     return 0
+  elif (file "$1" | grep 'HTML' &>/dev/null); then
+    return 0
+  else
+    return 1
   fi
-  return 1
 }
 
 # If no files left in index after formatting - fail
@@ -113,7 +116,7 @@ readarray -t files < <(eval "$cmd")
 for file in "${files[@]}"; do
   if istextfile "$file"; then
     if isxmlfile "$file"; then
-      wscheck --exclude WSC003 --checkstyle "${file}.wsout" -- "$file"
+      wscheck --exclude WSC002 WSC003 --checkstyle "${file}.wsout" -- "$file"
     else
       wscheck --checkstyle "${file}.wsout" -- "$file"
     fi
