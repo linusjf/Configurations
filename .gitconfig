@@ -1,5 +1,5 @@
 [user]
-	name = Linus Fernandes
-	email = linus.fernandes@gmail.com
+  name = Linus Fernandes
+  email = linus.fernandes@gmail.com
 [init]
-	defaultBranch = main
+  defaultBranch = main
