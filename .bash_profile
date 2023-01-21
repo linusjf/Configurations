@@ -25,11 +25,11 @@ fi
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]
 then
-	[ -e $PREFIX/etc/mota ] && . $PREFIX/etc/mota
+  [ -e $PREFIX/etc/mota ] && . $PREFIX/etc/mota
 fi
 if [ -e "$HOME"/.chushlogin ]
 then
-	rm -f "$HOME"/.chushlogin
+  rm -f "$HOME"/.chushlogin
 fi
 PS1="\[\e[38;5;148m\]\u\[\e[1;0m\]\A\[\e[1;38;5;112m\]\W\[\e[0m\]$ "
 export ANDROID_DATA="/data"
