@@ -17,7 +17,8 @@ optimize() {
     git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
   return $?
 }
-require ggshield git shch parallel jpegoptim stat
+require ggshield git shch parallel jpegoptim stat find head tidy rm
+
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
@@ -93,10 +94,9 @@ done
 
 # If no files left in index after formatting - fail
 # i.e., if files are similar after changes
-# no commit required
 diffs="$(git diff --cached --name-only)"
 if [ ! "$diffs" ]; then
-  echo 1>&2 "No files changed from previous commit after processing..."
+  echo 1>&2 "No files changed after processing..."
   ret=$((ret + 1))
 fi
 
