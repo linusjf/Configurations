@@ -52,9 +52,7 @@ for file in "${files[@]}"; do
 done
 
 declare -r configFileName="tidy.config"
-configFilePath="$(find .. -maxdepth 2 \
-  -type f -name "$configFileName" ! -path \
-  "**/.git/**" | head -n 1)"
+configFilePath="$(readlink -f "$configFileName")"
 
 # Regexp for grep to only choose some file extensions for formatting
 exts="\.xml$"
