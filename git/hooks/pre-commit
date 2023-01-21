@@ -76,7 +76,7 @@ ret=$((ret + $?))
 for file in "${files[@]}"; do
   # don't format empty files
   if test -s "$file"; then
-    echo "Formatting $file"
+    echo "Formatting ${file}..."
     # Get the file from index
     git show ":$file" >"${file}.tmp"
     # Format it
@@ -115,6 +115,7 @@ cmd="git diff --cached --name-only"
 readarray -t files < <(eval "$cmd")
 for file in "${files[@]}"; do
   if istextfile "$file"; then
+    echo "Checking ${file} for whitespace..."
     if isxmlfile "$file"; then
       wscheck --exclude WSC002 WSC003 --checkstyle "${file}.wsout" -- "$file"
     else
