@@ -1,5 +1,11 @@
 [user]
-	name = Linus Fernandes
-	email = linus.fernandes@gmail.com
+  name = Linus Fernandes
+  email = linus.fernandes@gmail.com
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[core]
+  hooksPath = /data/data/com.termux/files/home/.git/hooks
+  autocrlf = input
+[filter "spacify"]
+  clean = expand --tabs=2 --initial
+  smudge = expand --tabs=2 --initial
