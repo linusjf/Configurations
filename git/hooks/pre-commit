@@ -8,7 +8,16 @@ fi
 require() {
   hash "$@" || exit 127
 }
-require ggshield git shch parallel
+optimize() {
+  file="$1"
+  mode=$(stat -c "%a" "$file")
+  jpegoptim -f "$file" &&
+    hash=$(git hash-object -w "${file}") &&
+    # Add it back to index \
+    git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
+  return $?
+}
+require ggshield git shch parallel jpegoptim stat
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
@@ -16,19 +25,29 @@ git diff --cached --name-only --diff-filter=ACMR | grep $exts | parallel "shch {
 ret=$?
 cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
 readarray -t files < <(eval "$cmd")
+ret=$((ret + $?))
 for file in "${files[@]}"; do
   if test -x "$file"; then
     shch "$file"
-    ret="$ret"+$?
+    ret=$((ret + $?))
   fi
 done
 cmd="git diff --cached --name-only --diff-filter=ACMR | grep '^\.'"
 readarray -t files < <(eval "$cmd")
+ret=$((ret + $?))
 for file in "${files[@]}"; do
   if test -x "$file"; then
     shch "$file"
-    ret="$ret"+$?
+    ret=$((ret + $?))
   fi
+done
+exts="'.*(\.jpg$|\.jpeg$)'"
+cmd="git diff --cached --name-only --diff-filter=ACMR | grep -o -E $exts"
+readarray -t files < <(eval "$cmd")
+ret=$((ret + $?))
+for file in "${files[@]}"; do
+  optimize "$file"
+  ret=$((ret + $?))
 done
 if test "$ret" -eq 0; then
   ggshield secret scan pre-commit "$@"
