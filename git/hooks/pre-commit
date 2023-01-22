@@ -148,49 +148,42 @@ checkshs() {
   return "$ret"
 }
 
+checkexecs() {
+  local ret=0
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
+  readarray -t files < <(eval "$cmd")
+  ret=$((ret + $?))
+  exts="^\."
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  readarray -t dots < <(eval "$cmd")
+  ret=$((ret + $?))
+  files+="${dots[@]}"
+  for file in "${files[@]}"; do
+    if test -x "$file"; then
+      # Get the file from index
+      git show ":$file" >"${file}.tmp"
+      shfmt -i 2 -w -- "${file}.tmp"
+      # Create a blob object from the formatted file
+      hash=$(git hash-object -w "${file}.tmp")
+      # Add it back to index
+      mode=$(stat -c "%a" "$file")
+      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+      git cat-file -p "$hash" >"${file}"
+      rm "${file}.tmp"
+      shch "$file"
+      ret=$((ret + $?))
+    fi
+  done
+  return "$ret"
+}
+
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
 checkshs "$exts"
 ret=$((ret + $?))
-cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
-readarray -t files < <(eval "$cmd")
+checkexecs
 ret=$((ret + $?))
-for file in "${files[@]}"; do
-  if test -x "$file"; then
-    # Get the file from index
-    git show ":$file" >"${file}.tmp"
-    shfmt -i 2 -w -- "${file}.tmp"
-    # Create a blob object from the formatted file
-    hash=$(git hash-object -w "${file}.tmp")
-    # Add it back to index
-    mode=$(stat -c "%a" "$file")
-    git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-    git cat-file -p "$hash" >"${file}"
-    rm "${file}.tmp"
-    shch "$file"
-    ret=$((ret + $?))
-  fi
-done
-cmd="git diff --cached --name-only --diff-filter=ACMR | grep '^\.'"
-readarray -t files < <(eval "$cmd")
-ret=$((ret + $?))
-for file in "${files[@]}"; do
-  if test -x "$file"; then
-    # Get the file from index
-    git show ":$file" >"${file}.tmp"
-    shfmt -i 2 -w -- "${file}.tmp"
-    # Create a blob object from the formatted file
-    hash=$(git hash-object -w "${file}.tmp")
-    # Add it back to index
-    mode=$(stat -c "%a" "$file")
-    git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-    git cat-file -p "$hash" >"${file}"
-    rm "${file}.tmp"
-    shch "$file"
-    ret=$((ret + $?))
-  fi
-done
 
 optimizejpgs
 ret=$((ret + $?))
