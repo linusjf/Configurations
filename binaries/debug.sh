@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 function debug() {
-	echo "Executing: $*"
-	eval "$*"
+  printf "Executing: %s\n" "$*"
+  eval "$*"
 }
