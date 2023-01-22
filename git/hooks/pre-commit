@@ -123,7 +123,21 @@ checkws() {
   return "$ret"
 }
 
-require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt
+formatandcheck() {
+  file="$1"
+  # Get the file from index
+  git show ":$file" >"${file}.tmp"
+  shfmt -i 2 -w -- "${file}.tmp"
+  # Create a blob object from the formatted file
+  hash=$(git hash-object -w "${file}.tmp")
+  # Add it back to index
+  mode=$(stat -c "%a" "$file")
+  git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+  git cat-file -p "$hash" >"${file}"
+  rm "${file}.tmp"
+  shch "$file"
+  return $?
+}
 
 checkshs() {
   local exts="$1"
@@ -132,17 +146,7 @@ checkshs() {
   readarray -t files < <(eval "$cmd")
   ret=$((ret + $?))
   for file in "${files[@]}"; do
-    # Get the file from index
-    git show ":$file" >"${file}.tmp"
-    shfmt -i 2 -w -- "${file}.tmp"
-    # Create a blob object from the formatted file
-    hash=$(git hash-object -w "${file}.tmp")
-    # Add it back to index
-    mode=$(stat -c "%a" "$file")
-    git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-    git cat-file -p "$hash" >"${file}"
-    rm "${file}.tmp"
-    shch "$file"
+    formatandcheck "$file"
     ret=$((ret + $?))
   done
   return "$ret"
@@ -160,23 +164,14 @@ checkexecs() {
   files+="${dots[@]}"
   for file in "${files[@]}"; do
     if test -x "$file"; then
-      # Get the file from index
-      git show ":$file" >"${file}.tmp"
-      shfmt -i 2 -w -- "${file}.tmp"
-      # Create a blob object from the formatted file
-      hash=$(git hash-object -w "${file}.tmp")
-      # Add it back to index
-      mode=$(stat -c "%a" "$file")
-      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-      git cat-file -p "$hash" >"${file}"
-      rm "${file}.tmp"
-      shch "$file"
+      formatandcheck "$file"
       ret=$((ret + $?))
     fi
   done
   return "$ret"
 }
 
+require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
 exts="\.sh$"
