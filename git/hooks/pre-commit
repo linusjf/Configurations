@@ -162,6 +162,7 @@ checkexecs() {
   readarray -t dots < <(eval "$cmd")
   ret=$((ret + $?))
   files+=("${dots[@]}")
+  echo "${files[@]}"
   for file in "${files[@]}"; do
     if test -x "$file"; then
       formatandcheck "$file"
