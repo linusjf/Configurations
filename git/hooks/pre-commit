@@ -176,7 +176,7 @@ require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file
 declare -i ret=0
 
 # Regexp for grep to only choose sh file extension for checking
-exts="\.sh$"
+exts="'\.sh$'"
 checkshs "$exts"
 ret=$((ret + $?))
 checkexecs
