@@ -17,7 +17,7 @@ optimize() {
     git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
   return $?
 }
-require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file
+require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink
 
 declare -i ret=0
 # Regexp for grep to only choose sh file extension for checking
@@ -117,16 +117,19 @@ for file in "${files[@]}"; do
   if istextfile "$file"; then
     declare -i wsout=0
     echo "Checking ${file} for whitespace..."
+    tmp="$(mktemp)"
     if isxmlfile "$file"; then
-      wscheck --exclude WSC002 WSC003 --checkstyle "${file}.wsout" -- "$file"
+      wscheck --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
       wsout=$?
     else
-      wscheck --checkstyle "${file}.wsout" -- "$file"
+      wscheck --checkstyle "$tmp" -- "$file"
       wsout=$?
     fi
     ret=$((ret + wsout))
-    if test "$wsout" -eq 0; then
-      rm "${file}.wsout"
+    if test "$wsout" -ne 0; then
+      mv "$tmp" "${file}.wsout"
+    else
+      rm "$tmp"
     fi
   fi
 done
