@@ -5,9 +5,11 @@ if [[ -f .git/hooks/pre-commit ]]; then
     exit 1
   fi
 fi
+
 require() {
   hash "$@" || exit 127
 }
+
 optimize() {
   file="$1"
   mode=$(stat -c "%a" "$file")
@@ -16,6 +18,19 @@ optimize() {
     # Add it back to index \
     git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
   return $?
+}
+
+optimizejpgs() {
+  local ret=0
+  exts="'.*(\.jpg$|\.jpeg$)'"
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -o -E $exts"
+  readarray -t files < <(eval "$cmd")
+  ret=$((ret + $?))
+  for file in "${files[@]}"; do
+    optimize "$file"
+    ret=$((ret + $?))
+  done
+  return "$ret"
 }
 
 formatxml() {
@@ -168,14 +183,9 @@ for file in "${files[@]}"; do
     ret=$((ret + $?))
   fi
 done
-exts="'.*(\.jpg$|\.jpeg$)'"
-cmd="git diff --cached --name-only --diff-filter=ACMR | grep -o -E $exts"
-readarray -t files < <(eval "$cmd")
+
+optimizejpgs
 ret=$((ret + $?))
-for file in "${files[@]}"; do
-  optimize "$file"
-  ret=$((ret + $?))
-done
 
 formatxml
 ret=$((ret + $?))
