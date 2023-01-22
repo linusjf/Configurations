@@ -161,7 +161,7 @@ checkexecs() {
   cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
   readarray -t dots < <(eval "$cmd")
   ret=$((ret + $?))
-  files+="${dots[@]}"
+  files+=("${dots[@]}")
   for file in "${files[@]}"; do
     if test -x "$file"; then
       formatandcheck "$file"
