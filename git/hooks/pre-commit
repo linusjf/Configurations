@@ -109,13 +109,6 @@ checkws() {
         wscheck --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       else
-        sed -i 's/[[:space:]]*$//' "${file}"
-        # Create a blob object from the cleant file
-        hash=$(git hash-object -w "${file}")
-        # Add it back to index
-        mode=$(stat -c "%a" "$file")
-        git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-        git cat-file -p "$hash" >"${file}"
         wscheck --checkstyle "$tmp" -- "$file"
         wsout=$?
       fi
