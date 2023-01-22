@@ -157,8 +157,7 @@ checkexecs() {
   cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
   readarray -t files < <(eval "$cmd")
   ret=$((ret + $?))
-  exts="^\."
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep '^\.'"
   readarray -t dots < <(eval "$cmd")
   ret=$((ret + $?))
   files+=("${dots[@]}")
