@@ -56,7 +56,7 @@ set fileencoding=utf-8
 scriptencoding utf-8
 " Display different types of white spaces.
 set list
-set listchars=tab:›,trail:•,extends:#,nbsp:.
+#set listchars=tab:›,trail:•,extends:#,nbsp:.
 
 " Show line numbers
 set number
