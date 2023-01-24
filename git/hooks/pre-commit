@@ -33,6 +33,38 @@ optimizejpgs() {
   return "$ret"
 }
 
+formatjson() {
+  local ret=0
+  # Regexp for grep to only choose some file extensions for formatting
+  exts="\.json$"
+
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  readarray -t files < <(eval "$cmd")
+  ret=$((ret + $?))
+
+  # Format staged files
+  for file in "${files[@]}"; do
+    # don't format empty files
+    if test -s "$file"; then
+      echo "Formatting ${file}..."
+      # Get the file from index
+      git show ":$file" >"${file}.tmp"
+      # Format it
+      tmp=$(mktemp)
+      jq -e -S . "${file}.tmp" >"$tmp" && mv "$tmp" "${file}.tmp"
+      ret=$((ret + $?))
+      # Create a blob object from the formatted file
+      hash=$(git hash-object -w "${file}.tmp")
+      # Add it back to index
+      mode=$(stat -c "%a" "$file")
+      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+      git cat-file -p "$hash" >"${file}"
+      rm "${file}.tmp"
+    fi
+  done
+  return "$ret"
+}
+
 formatxml() {
   local ret=0
   declare -r configFileName="tidy.config"
@@ -170,8 +202,7 @@ checkexecs() {
   return "$ret"
 }
 
-require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt
-
+require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt jq
 declare -i ret=0
 
 # Regexp for grep to only choose sh file extension for checking
@@ -185,6 +216,9 @@ optimizejpgs
 ret=$((ret + $?))
 
 formatxml
+ret=$((ret + $?))
+
+formatjson
 ret=$((ret + $?))
 
 checkws
