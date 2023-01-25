@@ -13,7 +13,7 @@ require() {
 optimize() {
   file="$1"
   mode=$(stat -c "%a" "$file")
-  jpegoptim -f "$file" &&
+  jpegoptim -f -s "$file" &&
     hash=$(git hash-object -w "${file}") &&
     # Add it back to index \
     git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
