@@ -9,3 +9,6 @@
 [filter "spacify"]
   clean = expand --tabs=2 --initial
   smudge = expand --tabs=2 --initial
+[alias]
+  rank = shortlog -s -n --no-merges
+  alias = config --get-regexp ^alias\\.

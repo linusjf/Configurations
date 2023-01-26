@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
-# @file        : gitlastcommit
-# @created     : Thursday Dec 15, 2022 07:43:00 IST
+# @file        : gitalias
+# @created     : Friday Jan 27, 2023 04:55:00 IST
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
@@ -10,6 +10,6 @@ require() {
   hash "$@" || exit
 }
 require git
-command="git log -n 1"
+command="git config --get-regexp ^alias\."
 eval "$command"
 exit $?
