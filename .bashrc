@@ -1,27 +1,25 @@
-
 function _AM_() {
-command -v am 1>/dev/null || cp "/data/data/com.termux/files/usr"/bin/am "/usr/local/termuxarch/bin"
+  command -v am 1>/dev/null || cp "/data/data/com.termux/files/usr"/bin/am "/usr/local/termuxarch/bin"
 }
 function _PWD_() {
-printf '%s\n' "$PWD"
+  printf '%s\n' "$PWD"
 }
 function git-branch() {
-if [ -d .git ]
-then
-printf "%s" "($(git branch | awk '/\*/{print $2}'))";
-fi
+  if [ -d .git ]; then
+    printf "%s" "($(git branch | awk '/\*/{print $2}'))"
+  fi
 }
 function em() {
-[ -x /usr/bin/make ] || { pc base base-devel || pci base base-devel ; }
-{ [ -x /usr/local/termuxarch/bin/uemacs ] && /usr/local/termuxarch/bin/uemacs "$@" ; } || { { { cd || exit 69 ; } && [ -d uemacs ] || gcl https://github.com/torvalds/uemacs ; } && { [ -d uemacs ] && { cd uemacs || exit 69 ; } ; } && printf '%s\n' "making uemacs" && make && cp -f em /usr/local/termuxarch/bin/uemacs && make clean && /usr/local/termuxarch/bin/uemacs emacs.hlp ; }
+  [ -x /usr/bin/make ] || { pc base base-devel || pci base base-devel; }
+  { [ -x /usr/local/termuxarch/bin/uemacs ] && /usr/local/termuxarch/bin/uemacs "$@"; } || { { { cd || exit 69; } && [ -d uemacs ] || gcl https://github.com/torvalds/uemacs; } && { [ -d uemacs ] && { cd uemacs || exit 69; }; } && printf '%s\n' "making uemacs" && make && cp -f em /usr/local/termuxarch/bin/uemacs && make clean && /usr/local/termuxarch/bin/uemacs emacs.hlp; }
 }
 alias pkgclean='pkg clean && pkg autoclean'
 alias ..='cd ../.. && pwd'
 alias ...='cd ../../.. && pwd'
 alias ....='cd ../../../.. && pwd'
 alias .....='cd ../../../../.. && pwd'
-alias aiabrowser='am start -a android.intent.action.VIEW -d "content://com.android.externalstorage.documents/root/primary"'	## Reference [Android 11 (with Termux storage permission denied) question; What's the source for the shortcut to the file manager of the settings app?](https://www.reddit.com/r/termux/comments/msq7lm/android_11_with_termux_storage_permission_denied/) Contributors u/DutchOfBurdock u/xeffyr
-alias aiachrome='am start --user 0 -n com.android.chrome/com.google.android.apps.chrome.Main'	## Reference [Can I start an app from Termux's command line? How?](https://www.reddit.com/r/termux/comments/62zi71/can_i_start_an_app_from_termuxs_command_line_how/) Contributors u/u/fornwall u/Kramshet
+alias aiabrowser='am start -a android.intent.action.VIEW -d "content://com.android.externalstorage.documents/root/primary"' ## Reference [Android 11 (with Termux storage permission denied) question; What's the source for the shortcut to the file manager of the settings app?](https://www.reddit.com/r/termux/comments/msq7lm/android_11_with_termux_storage_permission_denied/) Contributors u/DutchOfBurdock u/xeffyr
+alias aiachrome='am start --user 0 -n com.android.chrome/com.google.android.apps.chrome.Main'                               ## Reference [Can I start an app from Termux's command line? How?](https://www.reddit.com/r/termux/comments/62zi71/can_i_start_an_app_from_termuxs_command_line_how/) Contributors u/u/fornwall u/Kramshet
 alias aiadial='am start -a android.intent.action.DIAL'
 alias aiafilemanager='am start -a android.intent.action.VIEW -d "content://com.android.externalstorage.documents/root/primary"'
 alias aiasearch='am start -a android.intent.action.SEARCH'
@@ -101,14 +99,18 @@ set -o noclobber
 export DISPLAY=":0"
 export BROWSER=termux-open-url
 export GITGUARDIAN_API_KEY="$(cat ~/.gitguardiantoken)"
-fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
+fac() { (
+  echo 1
+  seq $1
+) | paste -s -d\* - | bc; }
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/root/.sdkman"
 [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
-`which env_parallel.bash`
+$(which env_parallel.bash)
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
+env_parallel --install
