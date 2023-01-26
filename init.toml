@@ -114,6 +114,10 @@
     merged = false
 
 [[custom_plugins]]
+    repo = "XadillaX/json-formatter.vim"
+    merged = false
+
+[[custom_plugins]]
     repo = 'shougo/neocomplete.vim'
     merged = false
 
