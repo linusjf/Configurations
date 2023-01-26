@@ -58,8 +58,8 @@ alias GCA='git commit -a -S'
 alias gca='git commit -a -S'
 alias GCAM='git commit -a -S -m'
 alias gcam='git commit -a -S -m'
-alias H='history >> $HOME/.historyfile'
-alias h='history >> $HOME/.historyfile'
+alias H='history >> ${HOME}/.historyfile'
+alias h='history >> ${HOME}/.historyfile'
 alias HW='head $(which' # use a ) to complete this alias
 alias Hw='head $(which' # use a ) to complete this alias
 alias hw='head $(which' # use a ) to complete this alias
@@ -72,7 +72,7 @@ alias getclip='termux-get-clipboard'
 alias ls='ls --color=auto'
 alias vim='nvim'
 alias node='node --unhandled-rejections=strict'
-alias loadbash='source ~/.bash_profile'
+alias loadbash='source ${HOME}/.bash_profile'
 alias arch='startarch'
 alias kali='startkali'
 alias archlinus='startarch login linus'
@@ -86,7 +86,7 @@ export EDITOR=vim
 export PAGER=less
 export HISTSIZE=10000
 export HISTFILESIZE=120000
-source "$HOME/binaries/ssh-find-agent.sh"
+source "${HOME}/binaries/ssh-find-agent.sh"
 set_ssh_agent_socket
 unset GREP_OPTIONS
 shopt -s autocd
@@ -110,8 +110,8 @@ export SDKMAN_DIR="/root/.sdkman"
 [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then source '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then source '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
 source "$(which env_parallel.bash)"
