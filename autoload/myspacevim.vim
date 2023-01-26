@@ -60,6 +60,11 @@ let g:jq_highlight_objects = 1
 " Highlight all function calls (default: 0)
 " This will highlight all words directly followed by an opening parenthesis
 let g:jq_highlight_function_calls = 1
+let g:jqplay = {
+      \ 'exe': 'jq',
+      \ 'opts': '-e -S .',
+      \ 'autocmds': ['TextChanged','TextChangedI','InsertLeave']
+      \}
 iabbrev <buffer> --- <c-k>-M
 " Show column numbers
 set ruler
