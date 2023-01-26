@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#shellcheck disable=SC1091,SC2155,SC1090
 function _AM_() {
   command -v am 1>/dev/null || cp "/data/data/com.termux/files/usr"/bin/am "/usr/local/termuxarch/bin"
 }
@@ -84,7 +86,7 @@ export EDITOR=vim
 export PAGER=less
 export HISTSIZE=10000
 export HISTFILESIZE=120000
-source ~/binaries/ssh-find-agent.sh
+source "$HOME/binaries/ssh-find-agent.sh"
 set_ssh_agent_socket
 unset GREP_OPTIONS
 shopt -s autocd
@@ -98,10 +100,10 @@ shopt -s globstar
 set -o noclobber
 export DISPLAY=":0"
 export BROWSER=termux-open-url
-export GITGUARDIAN_API_KEY="$(cat ~/.gitguardiantoken)"
+export GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
 fac() { (
   echo 1
-  seq $1
+  seq "$1"
 ) | paste -s -d\* - | bc; }
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/root/.sdkman"
@@ -112,4 +114,4 @@ if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
-source $(which env_parallel.bash)
+source "$(which env_parallel.bash)"
