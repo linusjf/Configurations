@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : gitpushfromrem
+# @created     : Friday Jan 27, 2023 04:19:00 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description :
+######################################################################
+RED="\033[0;31m"
+NC="\033[0m" # No Color
+
+# Don't warn about unreachable commands in this function
+# shellcheck disable=SC2317
+function message() {
+  ret=$?
+  if [ "$ret" -eq 0 ]; then
+    echo "exit $ret from last command: $command"
+  else
+    echo "${RED}exit $ret from last command: $command${NC}"
+    echo "${RED}returning to branch development"
+    git checkout development
+  fi
+  exit "$ret"
+}
+
+usage() {
+  echo "Usage: $0 main|development"
+  exit 127
+}
+
+require() {
+  hash "$@" || exit
+}
+require git
+set -e
+command=""
+trap message EXIT
+
+if [ $# -le 0 ]; then
+  usage
+fi
+mainBranch="main"
+developmentBranch="development"
+if [ "$1" != "$mainBranch" ] && [ "$1" != "$developmentBranch" ]; then
+  usage
+fi
+
+if [ "$1" = "$developmentBranch" ]; then
+  command="git push . origin/development:development"
+  eval "$command"
+  command="git checkout ${mainBranch}"
+  eval "$command"
+  command="git merge --no-edit development"
+  eval "$command"
+  command="git push -u origin ${mainBranch}"
+  eval "$command"
+  command="git checkout development"
+  eval "$command"
+  exit $?
+else
+  command="git push . origin/main:main"
+  eval "$command"
+  command="git checkout ${developmentBranch}"
+  eval "$command"
+  command="git merge --no-edit main"
+  eval "$command"
+  command="git push -u origin ${developmentBranch}"
+  eval "$command"
+  exit $?
+fi
