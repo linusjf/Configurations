@@ -40,13 +40,13 @@
     bootstrap_after = "myspacevim#after"
 
 [[layers]]
-    name = "core#banner" 
+    name = "core#banner"
 
 [[layers]]
-    name = "core#statusline" 
+    name = "core#statusline"
 
 [[layers]]
-    name = "core#tabline" 
+    name = "core#tabline"
 
 # Enable autocomplete layer
 [[layers]]
@@ -64,7 +64,7 @@
 [[custom_plugins]]
     repo = "vim-scripts/dbext.vim"
     merged = false
-    
+
 [[custom_plugins]]
     repo = "lilydjwg/colorizer"
     merged = false
@@ -72,7 +72,7 @@
 [[custom_plugins]]
     repo = "junegunn/vim-github-dashboard"
     merged = false
-    
+
 [[custom_plugins]]
     repo = "github/copilot.vim"
     merged = false
@@ -82,8 +82,8 @@
     merged = false
 
 [[custom_plugins]]
-   repo = 'tibabit/vim-templates'
-   merged = false
+    repo = 'tibabit/vim-templates'
+    merged = false
 
 [[custom_plugins]]
     repo = 'editorconfig/editorconfig-vim'
@@ -106,6 +106,14 @@
     merged = false
 
 [[custom_plugins]]
+    repo = "elzr/vim-json"
+    merged = false
+
+[[custom_plugins]]
+    repo = "bfrg/vim-jq"
+    merged = false
+
+[[custom_plugins]]
     repo = 'shougo/neocomplete.vim'
     merged = false
 
@@ -125,13 +133,13 @@
     repo = 'z0mbix/vim-shfmt'
     merged = false
 
-[[layers]] 
-    name = "lang#java"
+[[layers]]
+  name = "lang#java"
 
 [[layers]]
   name = "lang#php"
 
-[[layers]] 
+[[layers]]
     name = "lang#html"
 
 [[layers]]
@@ -139,27 +147,27 @@
     bash_file_head = []
 
 [[layers]]
-  name = "lang#jsonnet"
+    name = "lang#jsonnet"
 
-[[layers]] 
+[[layers]]
     name = "lang#python"
     python_file_head = []
     enable_typeinfo = true
     format_on_save = true
     enabled_linters = ['python']
 
-[[layers]] 
+[[layers]]
     name = "lang#javascript"
     auto_fix = true
     enable_flow_syntax = true
 
-[[layers]] 
+[[layers]]
     name = "lang#perl"
 
-[[layers]] 
+[[layers]]
     name = "lang#ruby"
 
-[[layers]] 
+[[layers]]
     name = "lang#c"
     clang_executable = "/data/data/com.termux/files/usr/bin/clang"
     enable_clang_syntax_highlight = true
@@ -167,11 +175,11 @@
     c = "c17"
     cpp = "c++20"
 
-[[layers]] 
+[[layers]]
     name = "lang#r"
     repl_command = "R --no-save"
 
-[[layers]] 
+[[layers]]
     name = "format"
 
 [[layers]]
@@ -180,9 +188,9 @@
     enable_ale = true
     lint_on_the_fly = true
 
-[[layers]] 
-    name = 'shell' 
-    default_position = 'top' 
+[[layers]]
+    name = 'shell'
+    default_position = 'top'
     default_height = 30
 
 [[layers]]

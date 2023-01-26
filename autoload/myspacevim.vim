@@ -36,7 +36,7 @@ let g:JuliaFormatter_options = {
 "other configs
 let g:github_dashboard = { 'username': 'fernal73', 'password': $GITHUB_TOKEN }
 let g:gista#client#default_username = 'monkeyxite'
-let g:tmpl_auto_initialize = 1 
+let g:tmpl_auto_initialize = 1
 let g:tmpl_search_paths = ['~/templates']
 let g:tmpl_author_email = 'linusfernandes at gmail dot com'
 let g:tmpl_author_name = 'Linus Fernandes'
@@ -54,6 +54,12 @@ let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_auto_extension_ext = 'md'
 let g:shfmt_extra_args = '-i 2'
 let g:shfmt_fmt_on_save = 1
+" Highlight objects like .foo (default: 0)
+let g:jq_highlight_objects = 1
+
+" Highlight all function calls (default: 0)
+" This will highlight all words directly followed by an opening parenthesis
+let g:jq_highlight_function_calls = 1
 iabbrev <buffer> --- <c-k>-M
 " Show column numbers
 set ruler
