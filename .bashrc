@@ -112,4 +112,4 @@ if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
-$(which env_parallel.bash)
+source $(which env_parallel.bash)
