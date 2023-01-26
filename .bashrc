@@ -106,7 +106,6 @@ fac() { (
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/root/.sdkman"
 [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
-$(which env_parallel.bash)
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
@@ -114,3 +113,4 @@ if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then
 # The next line enables shell command completion for gcloud.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
 env_parallel --install
+$(which env_parallel.bash)
