@@ -1,6 +1,7 @@
 [user]
   name = Linus Fernandes
   email = linus.fernandes@gmail.com
+  useConfigOnly = true
 [init]
   defaultBranch = main
 [core]
