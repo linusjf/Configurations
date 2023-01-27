@@ -12,3 +12,5 @@
 [alias]
   rank = shortlog -s -n --no-merges
   alias = config --get-regexp ^alias\\.
+[receive]
+  denyCurrentBranch = updateInstead
