@@ -45,26 +45,36 @@ if [ "$1" != "$mainBranch" ] && [ "$1" != "$developmentBranch" ]; then
   usage
 fi
 
-if [ "$1" = "$developmentBranch" ]; then
-  command="git push . origin/development:development"
-  eval "$command"
-  command="git checkout ${mainBranch}"
-  eval "$command"
-  command="git merge --no-edit development"
-  eval "$command"
-  command="git push -u origin ${mainBranch}"
-  eval "$command"
-  command="git checkout development"
-  eval "$command"
-  exit $?
-else
-  command="git push . origin/main:main"
-  eval "$command"
-  command="git checkout ${developmentBranch}"
-  eval "$command"
-  command="git merge --no-edit main"
-  eval "$command"
-  command="git push -u origin ${developmentBranch}"
-  eval "$command"
-  exit $?
+if ! root="$(git rev-parse --show-toplevel)"; then
+  exit 127
 fi
+(
+  cd "$root" || exit
+  command="git fetch"
+  if eval "$command"; then
+    if [ "$1" == "$developmentBranch" ]; then
+      command="git push . origin/development:development"
+      eval "$command"
+      command="git checkout ${mainBranch}"
+      eval "$command"
+      command="git merge --no-edit development"
+      eval "$command"
+      command="git push -u origin ${mainBranch}"
+      eval "$command"
+      command="git checkout development"
+      eval "$command"
+      exit $?
+    else
+      command="git push . origin/main:main"
+      eval "$command"
+      command="git checkout ${developmentBranch}"
+      eval "$command"
+      command="git merge --no-edit main"
+      eval "$command"
+      command="git push -u origin ${developmentBranch}"
+      eval "$command"
+      exit $?
+    fi
+  fi
+)
+exit $?
