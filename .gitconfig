@@ -7,6 +7,7 @@
 [core]
   hooksPath = /data/data/com.termux/files/home/.git/hooks
   autocrlf = input
+  excludesFile = /data/data/com.termux/files/home/.git/ignore
 [filter "spacify"]
   clean = expand --tabs=2 --initial
   smudge = expand --tabs=2 --initial
