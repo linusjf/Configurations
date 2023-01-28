@@ -225,6 +225,9 @@ checkws
 ret=$((ret + $?))
 
 if [ ${#files[@]} -eq 0 ]; then
+  # this will also fail empty commits
+  # if you wish to commit an empty commit
+  # use the --no-verify option which will skip thie pre-commit
   echo 1>&2 "No files changed after processing..."
   ret=$((ret + 1))
 fi
