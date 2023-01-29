@@ -14,5 +14,8 @@
 [alias]
   rank = shortlog -s -n --no-merges
   alias = config --get-regexp ^alias\\.
+  last = cat-file commit HEAD
 [receive]
   denyCurrentBranch = updateInstead
+[protocol "file"]
+  allow = always
