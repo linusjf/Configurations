@@ -194,7 +194,7 @@ checkexecs() {
   ret=$((ret + $?))
   files+=("${dots[@]}")
   for file in "${files[@]}"; do
-    if test -x "$file"; then
+    if test -x "$file" && test ! -d "$file"; then
       formatandcheck "$file"
       ret=$((ret + $?))
     fi
