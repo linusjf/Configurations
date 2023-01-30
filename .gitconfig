@@ -19,3 +19,5 @@
   denyCurrentBranch = updateInstead
 [protocol "file"]
   allow = always
+[merge]
+  conflictstyle = diff3
