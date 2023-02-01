@@ -18,6 +18,7 @@ function message() {
     echo "${RED}returning to branch development"
     git checkout development
     git diff development main
+    git gc
   fi
   exit "$ret"
 }
