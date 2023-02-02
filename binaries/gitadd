@@ -7,7 +7,7 @@
 # @description :
 ######################################################################
 function require() {
-	hash "$@" || exit 127
+  hash "$@" || exit 127
 }
 require git
 command="git add ."

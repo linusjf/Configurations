@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 require() {
-	hash "$@" || exit
+  hash "$@" || exit
 }
 require git
 if [ $# -lt 1 ]; then
-	echo "usage: $0 searchstring"
-	exit 1
+  echo "usage: $0 searchstring"
+  exit 1
 fi
 git log --all --grep="$1"
 exit "$?"

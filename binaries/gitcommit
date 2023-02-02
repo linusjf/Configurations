@@ -7,7 +7,7 @@
 # @description :
 ######################################################################
 require() {
-	hash "$@" || exit
+  hash "$@" || exit
 }
 require git
 command="git commit -F commit.txt"
