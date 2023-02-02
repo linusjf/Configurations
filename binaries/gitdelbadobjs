@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+require() {
+  hash "$@" || exit
+}
+require git find
+
+if root="$(gitroot)"; then
+  find "${root}/.git" -name "*.tmp_obj*" -delete
+fi

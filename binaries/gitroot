@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+require() {
+  hash "$@" || exit
+}
+require git
+git rev-parse --show-toplevel
