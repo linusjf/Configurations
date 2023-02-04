@@ -141,7 +141,7 @@ checkws() {
         wscheck --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       else
-        striptabs "$file"
+        striptabsandlines "$file"
         wscheck --checkstyle "$tmp" -- "$file"
         wsout=$?
       fi
@@ -172,11 +172,12 @@ formatandcheck() {
   return $?
 }
 
-striptabs() {
+striptabsandlines() {
   file="$1"
   # Get the file from index
   git show ":$file" >"${file}.tmp"
   expand -i -t 2 "${file}.tmp" | sponge "${file}.tmp"
+  awk 'NF {p=1} p' <<<"$(<"${file}.tmp")" | sponge "${file}.tmp"
   # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
   # Add it back to index
