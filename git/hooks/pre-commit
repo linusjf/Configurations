@@ -178,6 +178,7 @@ striptabsandlines() {
   git show ":$file" >"${file}.tmp"
   expand -i -t 2 "${file}.tmp" | sponge "${file}.tmp"
   awk 'NF {p=1} p' <<<"$(<"${file}.tmp")" | sponge "${file}.tmp"
+  sed 's/[[:blank:]]*$//' "${file}.tmp"
   # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
   # Add it back to index
@@ -219,7 +220,7 @@ checkexecs() {
   return "$ret"
 }
 
-require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt jq sponge expand
+require ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt jq sponge expand sed
 declare -i ret=0
 
 # Regexp for grep to only choose sh file extension for checking
