@@ -138,6 +138,7 @@ checkws() {
       echo "Checking ${file} for whitespace..."
       tmp="$(mktemp)"
       if isxmlfile "$file"; then
+        striptabsandlines "$file" 0
         wscheck --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       else
@@ -172,13 +173,20 @@ formatandcheck() {
   return $?
 }
 
+stripnewlines() {
+  awk 'NF {p=1} p' <<<"$(<"$1")" | sponge "$1"
+  sed -i 's/[[:blank:]]*$//' "$1"
+}
+
 striptabsandlines() {
   file="$1"
+  isxml="${2:-1}"
   # Get the file from index
   git show ":$file" >"${file}.tmp"
-  expand -i -t 2 "${file}.tmp" | sponge "${file}.tmp"
-  awk 'NF {p=1} p' <<<"$(<"${file}.tmp")" | sponge "${file}.tmp"
-  sed -i 's/[[:blank:]]*$//' "${file}.tmp"
+  if test "$isxml" -ne 0; then
+    expand -i -t 2 "${file}.tmp" | sponge "${file}.tmp"
+  fi
+  stripnewlines "${file}.tmp"
   # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
   # Add it back to index
