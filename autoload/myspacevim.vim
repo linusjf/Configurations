@@ -68,6 +68,13 @@ let g:jqplay = {
       \ 'opts': '-e -S .',
       \ 'autocmds': ['TextChanged','TextChangedI','InsertLeave']
       \}
+let g:neoformat_python_black = {
+    \ 'exe': 'black',
+    \ 'stdin': 1,
+    \ 'args': ['-q', '-'],
+    \ }
+let g:neoformat_enabled_python = ['black']
+
 iabbrev <buffer> --- <c-k>-M
 " Show column numbers
 set ruler
