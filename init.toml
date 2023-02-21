@@ -158,9 +158,9 @@
     python_file_head = []
     enable_typeinfo = true
     format_on_save = true
-    enabled_linters = ['python','pylint']
+    enabled_linters = ['python']
     name = 'lsp'
-    enabled_clients = ['pyright']
+    enabled_clients = ['pylsp']
 
 [[layers]]
     name = "lang#javascript"
