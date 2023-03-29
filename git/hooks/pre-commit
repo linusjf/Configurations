@@ -107,6 +107,14 @@ formatxml() {
   return "$ret"
 }
 
+isjavafile() {
+  FILE="$1"
+  if [ "${FILE##*.}" = "java" ]; then
+    return 0
+  fi
+  return 1
+}
+
 istextfile() {
   if (file "$1" | grep 'ASCII' &>/dev/null); then
     return 0
@@ -140,6 +148,9 @@ checkws() {
       if isxmlfile "$file"; then
         striptabsandlines "$file" 0
         wscheck --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
+        wsout=$?
+      elif isjavafile "$file"; then
+        wscheck --exclude WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       else
         striptabsandlines "$file"
