@@ -9,6 +9,8 @@
   excludesFile = /data/data/com.termux/files/home/.git/ignore
   hooksPath = /data/data/com.termux/files/home/.git/hooks
   longpaths = true
+[push]
+  autoSetupRemote = true
 [filter "spacify"]
   clean = expand --tabs=2 --initial
   smudge = expand --tabs=2 --initial
