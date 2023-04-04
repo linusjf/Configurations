@@ -18,6 +18,7 @@ if [[ "$istermux" != 1 ]]; then
   export JAVA_HOME="/usr/lib/jvm/${jvm}"
   export PATH="$JAVA_HOME/bin:$PATH:~/jacorb-3.9/bin:~/LearnJava:$HOME/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
   export PYTHON3_HOST_PROG="/usr/bin/python"
+  export ANT_OPTS="-Xmx1024m -Xms512m"
 else
   require updatedb tty cat rm
   export PATH="$HOME/binaries:$PATH:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
