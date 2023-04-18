@@ -45,6 +45,7 @@ fac() { (
   seq "$1"
 ) | paste -s -d\* - | bc; }
 source "$(which env_parallel.bash)"
+source "${HOME}/PMD/shell/pmd-completion.sh"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/root/.sdkman"
 [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
