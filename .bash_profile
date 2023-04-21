@@ -14,7 +14,7 @@ fi
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]; then
   require archlinux-java tty cat rm grep awk
-  if ! (archlinux-java status | grep "(default)"); then
+  if ! (archlinux-java status | grep "(default)"> /dev/null); then
     archlinux-java fix
   fi
   jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
