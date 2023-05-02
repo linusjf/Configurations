@@ -138,6 +138,12 @@
     merged = false
 
 [[layers]]
+  name = "lang#cmake"
+
+[[layers]]
+  name = "lang#lua"
+
+[[layers]]
   name = "lang#java"
 
 [[layers]]
