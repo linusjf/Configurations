@@ -26,7 +26,7 @@ if [[ "$istermux" != 1 ]]; then
   export IVY_HOME="${HOME}/.ivy2"
 else
   require updatedb tty cat rm
-  export PATH="$HOME/binaries:$PATH:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
+  export PATH="$HOME/binaries:$HOME/bin:$PATH:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
 fi
 

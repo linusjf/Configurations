@@ -37,6 +37,7 @@ shopt -s dotglob
 shopt -s globstar
 #set -euo pipefail
 set -o noclobber
+export DOWNLOAD_STATIC_LIBV8=1
 export DISPLAY=":0"
 export BROWSER=termux-open-url
 export GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
