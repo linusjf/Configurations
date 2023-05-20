@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
+eval "$(hub alias -s)"
 function _AM_() {
   command -v am 1>/dev/null || cp "/data/data/com.termux/files/usr"/bin/am "/usr/local/termuxarch/bin"
 }
