@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
 source ~/.bashrc
-require() {
-  hash "$@"
-}
 declare -i istermux=1
 if [ -f "$PREFIX/etc/os-release" ]; then
   istermux=0
@@ -11,6 +8,9 @@ if [ -f "$PREFIX/etc/os-release" ]; then
 else
   export TERMUX=1
 fi
+require() {
+  hash "$@"
+}
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]; then
   require archlinux-java tty cat rm grep awk
