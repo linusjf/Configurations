@@ -62,3 +62,4 @@ alias archlinus='startarch login linus'
 alias which='command -v'
 alias view='nvim -R'
 alias scapy='scapy -s scapy.sess'
+alias git=hub
