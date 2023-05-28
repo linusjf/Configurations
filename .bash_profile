@@ -14,19 +14,19 @@ require() {
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]; then
   require archlinux-java tty cat rm grep awk
-  if ! (archlinux-java status | grep "(default)"> /dev/null); then
+  if ! (archlinux-java status | grep "(default)" >/dev/null); then
     archlinux-java fix
   fi
   jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
   export JAVA_HOME="/usr/lib/jvm/${jvm}"
-  export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:~/LearnJava"
+  export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava"
   export PYTHON3_HOST_PROG="/usr/bin/python"
   export ANT_HOME="/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
 else
   require updatedb tty cat rm
-  export PATH="$HOME/binaries:$HOME/bin:$PATH:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin"
+  export PATH="${HOME}/binaries:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin:${HOME}/wabt/bin"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
 fi
 
