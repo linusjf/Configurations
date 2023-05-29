@@ -268,3 +268,6 @@
 
 [[layers]]
   name = "lang#graphql"
+
+[[layers]]
+  name = "lang#WebAssembly"
