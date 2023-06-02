@@ -28,6 +28,7 @@ else
   require updatedb tty cat rm
   export PATH="${HOME}/binaries:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin:${HOME}/wabt/bin"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
+  export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
 fi
 
 if [[ "$istermux" == 1 ]]; then
