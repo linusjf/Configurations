@@ -171,7 +171,7 @@
 [[layers]]
     name = "lang#javascript"
     auto_fix = true
-    enable_flow_syntax = true
+    enable_flow_syntax = false
 
 [[layers]]
     name = "lang#perl"
