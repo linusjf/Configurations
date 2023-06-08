@@ -25,10 +25,11 @@ if [[ "$istermux" != 1 ]]; then
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
 else
-  require updatedb tty cat rm
+  require updatedb tty cat rm cowsay fortune
   export PATH="${HOME}/binaries:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin:${HOME}/wabt/bin"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
+  fortune | cowsay -r
 fi
 
 if [[ "$istermux" == 1 ]]; then
