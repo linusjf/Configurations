@@ -13,7 +13,7 @@ require() {
 }
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]; then
-  require archlinux-java tty cat rm grep awk
+  require archlinux-java tty cat rm grep awk fortune lolcat cowsay
   if ! (archlinux-java status | grep "(default)" >/dev/null); then
     archlinux-java fix
   fi
@@ -24,6 +24,7 @@ if [[ "$istermux" != 1 ]]; then
   export ANT_HOME="/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
+  fortune | cowsay -r | lolcat
 else
   require updatedb tty cat rm cowsay fortune
   export PATH="${HOME}/binaries:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:/system/bin:/system/xbin:${HOME}/wabt/bin"
