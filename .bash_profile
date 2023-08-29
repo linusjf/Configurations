@@ -19,7 +19,7 @@ if [[ "$istermux" != 1 ]]; then
   fi
   jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
   export JAVA_HOME="/usr/lib/jvm/${jvm}"
-  export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava"
+  export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd"
   export PYTHON3_HOST_PROG="/usr/bin/python"
   export ANT_HOME="/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
