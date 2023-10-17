@@ -63,4 +63,4 @@ alias which='command -v'
 alias view='nvim -R'
 alias scapy='scapy -s scapy.sess'
 alias git=hub
-alias pip install=pip install --break-system-packages
+alias pipinstall='pip install --break-system-packages'
