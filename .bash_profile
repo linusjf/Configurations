@@ -13,7 +13,7 @@ require() {
 }
 alias loadbash='source ~/.bash_profile'
 if [[ "$istermux" != 1 ]]; then
-  require archlinux-java tty cat rm grep awk fortune lolcat cowsay
+  require archlinux-java tty cat rm grep awk fortune lolcat cowsay updatedb
   if ! (archlinux-java status | grep "(default)" >/dev/null); then
     archlinux-java fix
   fi
@@ -33,9 +33,6 @@ else
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export TEMP_DIR="${PREFIX}/tmp"
   fortune | cowsay -r | lolcat
-fi
-
-if [[ "$istermux" == 1 ]]; then
   updatedb
 fi
 [[ -f "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
