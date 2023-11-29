@@ -86,5 +86,6 @@ if [[ "$istermux" != 1 ]]; then
   --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED "
 fi
 set -o vi
+export PYTHONASYNCIODEBUG=0
 #set -o nounset
 # .bash_profile EOF
