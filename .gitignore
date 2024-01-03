@@ -5,3 +5,6 @@
 *.out
 *.wsout
 1_py3_script
+.aws/cli/**
+.aws/sso/**
+.aws/config
