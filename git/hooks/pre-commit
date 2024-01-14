@@ -107,6 +107,14 @@ formatxml() {
   return "$ret"
 }
 
+iscargolock() {
+  FILE="$(basename "${1}")"
+  if [ "${FILE}" = "Cargo.lock" ]; then
+    return 0
+  fi
+  return 1
+}
+
 isjavafile() {
   FILE="$1"
   if [ "${FILE##*.}" = "java" ]; then
@@ -150,6 +158,9 @@ checkws() {
         wscheck --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       elif isjavafile "$file"; then
+        wscheck --exclude WSC003 --checkstyle "$tmp" -- "$file"
+        wsout=$?
+      elif iscargolock "$file"; then
         wscheck --exclude WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       else
