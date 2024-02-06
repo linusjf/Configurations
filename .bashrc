@@ -39,7 +39,7 @@ shopt -s globstar
 set -o noclobber
 export DOWNLOAD_STATIC_LIBV8=1
 export DISPLAY=":0"
-export BROWSER=termux-open-url
+export BROWSER=w3m
 export GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
 fac() { (
   echo 1
@@ -54,3 +54,7 @@ export SDKMAN_DIR="/root/.sdkman"
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then source '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then source '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
