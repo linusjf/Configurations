@@ -10,18 +10,14 @@
     automatic_update = false
     default_indent = 2
     expand_tab = true
-    # set spacevim theme. by default colorscheme layer is not loaded,
-    # if you want to use more colorscheme, please load the colorscheme
-    # layer, the value of this option is a string.
-    colorscheme = "gruvbox"
-    colorscheme_bg = "dark"
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors, the type of the value is boolean, true or false.
     enable_guicolors = true
-    # Disable statusline separator, if you want to use other value, please
-    # install nerd fonts
-    statusline_separator = "nil"
-    statusline_separator = "bar"
+    # options for statusline
+    # Set the statusline separators of statusline, default is "arrow"
+    statusline_separator = "arrow"
+    # Set the statusline separators of inactive statusline
+    statusline_iseparator = "bar"
     buffer_index_type = 4
     # Display file type icon on the tabline, If you do not have nerd fonts
     # installed, please change the value to false
@@ -30,6 +26,24 @@
     # only color will be changed when switch modes.
     # checkers options
     enable_statusline_mode = true
+    # left sections of statusline
+    statusline_left_sections = [
+      'winnr',
+      'major mode',
+      'filename',
+      'fileformat',
+      'minor mode lighters',
+      'version control info',
+      'search status'
+    ]
+    # right sections of statusline
+    statusline_right_sections = [
+      'cursorpos',
+      'percentage',
+      'input method',
+      'date',
+      'time'
+    ]
     enable_neomake = false
     enable_ale = true
     lint_on_the_fly = true
@@ -47,7 +61,7 @@
 
 [[layers]]
 name = 'shell'
-default_position = 'top'
+default_position = 'bottom'
 default_height = 30
 
 [[layers]]
@@ -60,6 +74,58 @@ default_height = 30
     name = "core#tabline"
 
 [[layers]]
+    name = "checkers"
+    enable_neomake = false
+    enable_ale = true
+    lint_on_the_fly = true
+
+[[layers]]
+    name = "format"
+    format_method = "codefmt"
+    format_on_save = true
+    silent_format = true
+
+[[layers]]
+  name = 'edit'
+  autosave_timeout = 60000
+  autosave_events = []
+  autosave_all_buffers = true
+
+[[layers]]
+    name = "ui"
+    enable_sidebar = true
+    enable_scrollbar = false
+    enable_indentline = true
+    enable_cursorword = false
+    indentline_char = '|'
+    conceallevel = 0
+    concealcursor = ''
+    cursorword_delay = 50
+    cursorword_exclude_filetype = []
+    indentline_exclude_filetype = []
+
+[[layers]]
+  name = "colorscheme"
+  # set spacevim theme. by default colorscheme layer is not loaded,
+  # if you want to use more colorscheme, please load the colorscheme
+  # layer, the value of this option is a string.
+  colorscheme = "gruvbox"
+  colorscheme_bg = "dark"
+  random_theme = true
+  frequency = "daily"
+
+[[layers]]
+  name = "debug"
+  debugger_plugin = "vimspector"
+
+[[layers]]
+name = "default"
+
+[[layers]]
+  name = "foldsearch"
+  foldsearch_highlight = true
+
+[[layers]]
   name = "lang#cmake"
 
 [[layers]]
@@ -67,12 +133,30 @@ default_height = 30
 
 [[layers]]
   name = "lang#java"
+  format_on_save = true
+  java_formatter_jar = 'path/to/google-java-format.jar'
+  java_file_head = [
+    '/**',
+    ' * @author : `fnamemodify(expand("~"), ":t")`',
+    ' * @created : `strftime("%Y-%m-%d")`',
+    '**/',
+    ''
+  ]
+
+[[layers]]
+  name = "lang#markdown"
+  listItemIndent = "1"
+  enableWcwidth = true
+  listItemChar = "*"
+  enabled_formater = ["remark", "prettier"]
 
 [[layers]]
   name = "lang#php"
 
 [[layers]]
     name = "lang#html"
+    emmet_leader_key = "<C-e>"
+    emmet_filetyps = ['html']
 
 [[layers]]
     name = "lang#sh"
@@ -82,12 +166,15 @@ default_height = 30
     name = "lang#jsonnet"
 
 [[layers]]
+  name = 'lsp'
+  enabled_clients = ['intelephense', 'pyright']
+
+[[layers]]
     name = "lang#python"
     python_file_head = []
     enable_typeinfo = true
     format_on_save = true
     enabled_linters = ['python','pylint']
-    name = 'lsp'
     enabled_clients = ['pyright']
 
 [[layers]]
@@ -115,15 +202,6 @@ default_height = 30
     repl_command = "R --no-save"
 
 [[layers]]
-    name = "format"
-
-[[layers]]
-    name = "checkers"
-    enable_neomake = false
-    enable_ale = true
-    lint_on_the_fly = true
-
-[[layers]]
     name = "git"
     git_plugin = 'fugitive'
 
@@ -134,11 +212,13 @@ default_height = 30
     name = "lang#latex"
 
 [[layers]]
-    name = "ui"
-    enable_sidebar = true
+    name = "sudo"
 
 [[layers]]
-    name = "sudo"
+  name = "test"
+
+[[layers]]
+  name = "tools"
 
 [[layers]]
   name = "VersionControl"
@@ -181,6 +261,8 @@ default_height = 30
 
 [[layers]]
   name = "lang#json"
+  conceal = false
+  concealcursor = ''
 
 [[layers]]
   name = "lang#d"
@@ -282,3 +364,7 @@ default_height = 30
 [[custom_plugins]]
     repo = 'mhinz/vim-signify'
     merged = false
+
+[[custom_plugins]]
+  repo = "mhartington/oceanic-next"
+  merged = false
