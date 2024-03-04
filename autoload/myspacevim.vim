@@ -1,3 +1,8 @@
+" Author        : Linus Fernandes
+" Created       : 04/03/2024
+" License       : MIT
+" Description   :
+
 function! myspacevim#before() abort
   au BufRead,BufNewFile *.R setlocal textwidth=80
   au BufRead,BufNewFile *.r setlocal textwidth=80
@@ -34,7 +39,40 @@ let g:JuliaFormatter_options = {
       \ 'format_docstrings'         : v:true
       \ }
 "other configs
-let g:github_dashboard = { 'username': 'fernal73', 'password': $GITHUB_TOKEN }
+let g:github_dashboard = {}
+
+" Dashboard window position
+" - Options: tab, top, bottom, above, below, left, right
+" - Default: tab
+let g:github_dashboard['position'] = 'top'
+
+" Disable Emoji output
+" - Default: only enable on terminal Vim on Mac
+let g:github_dashboard['emoji'] = 0
+
+" Customize emoji (see http://www.emoji-cheat-sheet.com/)
+let g:github_dashboard['emoji_map'] = {
+\   'user_dashboard': 'blush',
+\   'user_activity':  'smile',
+\   'repo_activity':  'laughing',
+\   'ForkEvent':      'fork_and_knife'
+\ }
+
+" Command to open link URLs
+" - Default: auto-detect
+let g:github_dashboard['open_command'] = 'open'
+
+" API timeout in seconds
+" - Default: 10, 20
+let g:github_dashboard['api_open_timeout'] = 10
+let g:github_dashboard['api_read_timeout'] = 20
+
+" Do not set statusline
+" - Then you can customize your own statusline with github_dashboard#status()
+let g:github_dashboard['statusline'] = 0
+
+let g:github_dashboard['username'] = 'linusjf'
+let g:github_dashboard['password'] = $GITHUB_TOKEN
 let g:gista#client#default_username = 'monkeyxite'
 let g:tmpl_auto_initialize = 1
 let g:tmpl_search_paths = ['~/templates']

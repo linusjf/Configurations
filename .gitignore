@@ -8,3 +8,4 @@
 .aws/cli/**
 .aws/sso/**
 .aws/config
+**/*.bak
