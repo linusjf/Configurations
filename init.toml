@@ -44,9 +44,7 @@
       'date',
       'time'
     ]
-    enable_neomake = false
-    enable_ale = true
-    lint_on_the_fly = true
+    lint_engine = "ale"
     bootstrap_before = "myspacevim#before"
     bootstrap_after = "myspacevim#after"
 
@@ -75,9 +73,11 @@ default_height = 30
 
 [[layers]]
     name = "checkers"
-    enable_neomake = false
-    enable_ale = true
     lint_on_the_fly = true
+    lint_on_save = true
+    lint_exclude_filetype	= []
+    open_error_list = 2
+    show_cursor_error = true
 
 [[layers]]
     name = "format"
@@ -155,8 +155,6 @@ name = "default"
 
 [[layers]]
     name = "lang#html"
-    emmet_leader_key = "<C-e>"
-    emmet_filetyps = ['html']
 
 [[layers]]
     name = "lang#sh"
@@ -335,10 +333,6 @@ name = "default"
 
 [[custom_plugins]]
     repo = "XadillaX/json-formatter.vim"
-    merged = false
-
-[[custom_plugins]]
-    repo = 'shougo/neocomplete.vim'
     merged = false
 
 [[custom_plugins]]
