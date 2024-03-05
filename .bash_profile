@@ -32,8 +32,6 @@ else
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export TEMP_DIR="${PREFIX}/tmp"
-  export DENO_INSTALL="/data/data/com.termux/files/home/.deno"
-  export PATH="$DENO_INSTALL/bin:$PATH"
   fortune | cowsay -r | lolcat
   updatedb
 fi
