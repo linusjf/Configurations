@@ -64,3 +64,4 @@ alias view='nvim -R'
 alias scapy='scapy -s scapy.sess'
 alias git=hub
 alias pipinstall='pip install --break-system-packages'
+alias ubuntu='proot-distro login --termux-home ubuntu-lts'
