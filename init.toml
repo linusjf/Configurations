@@ -271,6 +271,9 @@ name = "default"
 [[layers]]
   name = "lang#WebAssembly"
 
+[[layers]]
+  name = "lang#typescript"
+
 [[custom_plugins]]
     name = "MaxMEllon/vim-jsx-pretty"
     merged = false

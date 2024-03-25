@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
 source ~/.bashrc
-declare -i istermux=1
+istermux=true
+export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
-  istermux=0
-  export TERMUX=0
-else
-  export TERMUX=1
+  istermux=false
+  export TERMUX=false
 fi
 require() {
   hash "$@"
 }
 alias loadbash='source ~/.bash_profile'
-if [[ "$istermux" != 1 ]]; then
+if test "$istermux" = false; then
   require archlinux-java tty cat rm grep awk fortune lolcat cowsay updatedb
   if ! (archlinux-java status | grep "(default)" >/dev/null); then
     archlinux-java fix
@@ -33,8 +32,8 @@ else
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export TEMP_DIR="${PREFIX}/tmp"
   fortune | cowsay -r | lolcat
-  updatedb
 fi
+updatedb &
 [[ -f "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]; then
   [ -e "{$PREFIX}/etc/mota" ] && source "${PREFIX}/etc/mota"
@@ -47,7 +46,7 @@ export ANDROID_DATA="/data"
 export ANDROID_ROOT="/system"
 export BOOTCLASSPATH="/system/framework/core-oj.jar:/system/framework/core-libart.jar:/system/framework/conscrypt.jar:/system/framework/okhttp.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/system/framework/apache-xml.jar:/system/framework/org.apache.http.legacy.boot.jar:/system/framework/tcmiface.jar:/system/framework/WfdCommon.jar:/system/framework/oem-services.jar:/system/framework/qcom.fmradio.jar:/system/framework/qcmediaplayer.jar:/system/framework/telephony-ext.jar:/system/app/miui/miui.apk:/system/app/miuisystem/miuisystem.apk"
 export NVIM_PYTHON_LOG_FILE=1
-if [[ "$istermux" != 1 ]]; then
+if test "$istermux" = false; then
   export LANG="en_GB.UTF-8"
   export LANGUAGE="en_GB.UTF-8"
   export LC_ADDRESS="en_GB.UTF-8"
@@ -74,7 +73,7 @@ fi
 export NODE_PATH=/usr/lib/node_modules
 export TZDIR=/usr/share/zoneinfo:/usr/share/mysql/mysql-test/std_data/zoneinfo
 export PKG_CONFIG_PATH='/usr/lib/pkgconfig/libgit2.pc'
-if [[ "$istermux" != 1 ]]; then
+if test "$istermux" = false; then
   export AWS_ACCESS_KEY_ID="$(cat .aws/aws_access_key_id)"
   export AWS_SECRET_ACCESS_KEY="$(cat .aws/aws_secret_access_key)"
   export OMPI_ALLOW_RUN_AS_ROOT=1
@@ -87,5 +86,4 @@ if [[ "$istermux" != 1 ]]; then
 fi
 set -o vi
 export PYTHONASYNCIODEBUG=0
-#set -o nounset
 # .bash_profile EOF
