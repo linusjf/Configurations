@@ -6,12 +6,18 @@ export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
   istermux=false
   export TERMUX=false
+  declare -A os
+  while IFS== read -r key value; do
+    os[$key]=$value
+  done <"$PREFIX/etc/os-release"
+  os_id=${os["ID"]}
+  echo "Operating system: ${os_id}"
 fi
 require() {
   hash "$@"
 }
 alias loadbash='source ~/.bash_profile'
-if test "$istermux" = false; then
+if [[ "$os_id" =~ arch.* ]] && [[ "$istermux" == false ]]; then
   require archlinux-java tty cat rm grep awk fortune lolcat cowsay updatedb
   if ! (archlinux-java status | grep "(default)" >/dev/null); then
     archlinux-java fix
