@@ -17,12 +17,18 @@ require() {
   hash "$@"
 }
 alias loadbash='source ~/.bash_profile'
-if [[ "$os_id" =~ arch.* ]] && [[ "$istermux" == false ]]; then
-  require archlinux-java tty cat rm grep awk fortune lolcat cowsay updatedb
-  if ! (archlinux-java status | grep "(default)" >/dev/null); then
-    archlinux-java fix
+require tty cat rm grep awk fortune lolcat cowsay updatedb
+if [[ "$istermux" == false ]]; then
+  if [[ "$os_id" =~ arch.* ]]; then
+    require archlinux-java
+    if ! (archlinux-java status | grep "(default)" >/dev/null); then
+      archlinux-java fix
+    fi
+    jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
   fi
-  jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
+  if [[ "$os_id" =~ ubuntu.* ]]; then
+    jvm="default-java"
+  fi
   export JAVA_HOME="/usr/lib/jvm/${jvm}"
   export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd"
   export PYTHON3_HOST_PROG="/usr/bin/python"
@@ -32,7 +38,6 @@ if [[ "$os_id" =~ arch.* ]] && [[ "$istermux" == false ]]; then
   export TEMP_DIR="/tmp"
   fortune | cowsay | lolcat
 else
-  require updatedb tty cat rm cowsay fortune lolcat
   export PATH="${HOME}/binaries:${HOME}/.cargo/bin:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/wabt/bin:${HOME}/go/bin"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
