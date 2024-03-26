@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
-source ~/.bashrc
+# Put this in your .bash_profile file.
+if [ -f ~/.bashrc ]; then
+  source ~/.bashrc
+fi
 istermux=true
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -25,14 +28,14 @@ if [[ "$istermux" == false ]]; then
       archlinux-java fix
     fi
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
+    export JAVA_HOME="/usr/lib/jvm/${jvm}"
   fi
   if [[ "$os_id" =~ ubuntu.* ]]; then
-    jvm="default-java"
+    source /etc/environment
   fi
-  export JAVA_HOME="/usr/lib/jvm/${jvm}"
   export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd"
-  export PYTHON3_HOST_PROG="/usr/bin/python"
-  export ANT_HOME="/usr/share/ant"
+  export PYTHON3_HOST_PROG="${PREFIX}/usr/bin/python"
+  export ANT_HOME="${PREFIX}/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
   export TEMP_DIR="/tmp"
@@ -77,13 +80,9 @@ export GPG_TTY="$(tty)"
 export MOZ_FAKE_NO_SANDBOX=1
 export PULSE_SERVER=127.0.0.1
 export TZ="Asia/Calcutta"
-# Put this in your .bash_profile file.
-if [ -f ~/.bashrc ]; then
-  source ~/.bashrc
-fi
-export NODE_PATH=/usr/lib/node_modules
-export TZDIR=/usr/share/zoneinfo:/usr/share/mysql/mysql-test/std_data/zoneinfo
-export PKG_CONFIG_PATH='/usr/lib/pkgconfig/libgit2.pc'
+export NODE_PATH="${PREFIX}/usr/lib/node_modules"
+export TZDIR="${PREFIX}/usr/share/zoneinfo:${PREFIX}/usr/share/mysql/mysql-test/std_data/zoneinfo"
+export PKG_CONFIG_PATH='${PREFIX}/usr/lib/pkgconfig/libgit2.pc'
 if test "$istermux" = false; then
   export AWS_ACCESS_KEY_ID="$(cat .aws/aws_access_key_id)"
   export AWS_SECRET_ACCESS_KEY="$(cat .aws/aws_secret_access_key)"
