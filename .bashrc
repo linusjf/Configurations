@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
 function _AM_() {
-  command -v am 1>/dev/null || cp "/data/data/com.termux/files/usr"/bin/am "/usr/local/termuxarch/bin"
+  command -v am 1>/dev/null || cp "${PREFIX}/usr/bin/am" "/usr/local/termuxarch/bin"
 }
 function _PWD_() {
   printf '%s\n' "$PWD"
@@ -51,10 +51,10 @@ source "${HOME}/PMD/shell/pmd-completion.sh"
 export SDKMAN_DIR="/root/.sdkman"
 [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then source '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc'; fi
+if [ -f "${PREFIX}/usr/google-cloud-sdk/path.bash.inc" ]; then source "${PREFIX}/usr/google-cloud-sdk/path.bash.inc"; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then source '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc" ]; then source "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc"; fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
