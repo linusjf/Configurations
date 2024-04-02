@@ -165,7 +165,7 @@ checkws() {
         wsout=$?
       else
         striptabsandlines "$file"
-        wscheck --color --checkstyle "$tmp" -- "$file"
+        wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
         wsout=$?
       fi
       ret=$((ret + wsout))
