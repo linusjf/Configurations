@@ -10,7 +10,7 @@ if [ -f "$PREFIX/etc/os-release" ]; then
   istermux=false
   export TERMUX=false
   declare -A os
-  while IFS== read -r key value; do
+  while IFS='=' read -r key value; do
     os[$key]=$value
   done <"$PREFIX/etc/os-release"
   os_id=${os["ID"]}
@@ -82,7 +82,7 @@ export PULSE_SERVER=127.0.0.1
 export TZ="Asia/Calcutta"
 export NODE_PATH="${PREFIX}/usr/lib/node_modules"
 export TZDIR="${PREFIX}/usr/share/zoneinfo:${PREFIX}/usr/share/mysql/mysql-test/std_data/zoneinfo"
-export PKG_CONFIG_PATH='${PREFIX}/usr/lib/pkgconfig/libgit2.pc'
+export PKG_CONFIG_PATH="${PREFIX}/usr/lib/pkgconfig/libgit2.pc"
 if test "$istermux" = false; then
   export AWS_ACCESS_KEY_ID="$(cat .aws/aws_access_key_id)"
   export AWS_SECRET_ACCESS_KEY="$(cat .aws/aws_secret_access_key)"
