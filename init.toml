@@ -307,6 +307,10 @@ name = "default"
     merged = false
 
 [[custom_plugins]]
+    repo = 'farmergreg/vim-lastplace'
+    merged = false
+
+[[custom_plugins]]
     repo = 'editorconfig/editorconfig-vim'
     merged = false
 
