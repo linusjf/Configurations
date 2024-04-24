@@ -234,8 +234,10 @@ checkshs() {
   readarray -t files < <(eval "$cmd")
   ret=$((ret + $?))
   for file in "${files[@]}"; do
-    formatandcheck "$file"
-    ret=$((ret + $?))
+    if isshellscript "$file"; then
+      formatandcheck "$file"
+      ret=$((ret + $?))
+    fi
   done
   return "$ret"
 }
