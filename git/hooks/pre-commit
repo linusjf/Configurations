@@ -13,8 +13,9 @@ require() {
 optimize() {
   file="$1"
   mode=$(stat -c "%a" "$file")
-  jpegoptim -f -s "$file" &&
-    hash=$(git hash-object -w "${file}") &&
+  jpegoptim -f -s "$file" \
+    && hash=$(git hash-object -w "${file}") \
+    &&
     # Add it back to index \
     git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
   return $?
@@ -48,17 +49,17 @@ formatjson() {
     if test -s "$file"; then
       echo "Formatting ${file}..."
       # Get the file from index
-      git show ":$file" >"${file}.tmp"
+      git show ":$file" > "${file}.tmp"
       # Format it
       tmp=$(mktemp)
-      jq -e -S . "${file}.tmp" >"$tmp" && mv "$tmp" "${file}.tmp"
+      jq -e -S . "${file}.tmp" > "$tmp" && mv "$tmp" "${file}.tmp"
       ret=$((ret + $?))
       # Create a blob object from the formatted file
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
       mode=$(stat -c "%a" "$file")
       git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-      git cat-file -p "$hash" >"${file}"
+      git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
     fi
   done
@@ -91,7 +92,7 @@ formatxml() {
     if test -s "$file"; then
       echo "Formatting ${file}..."
       # Get the file from index
-      git show ":$file" >"${file}.tmp"
+      git show ":$file" > "${file}.tmp"
       # Format it
       eval "$formatter -config $configFilePath -quiet -xml -m -i ${file}.tmp"
       ret=$((ret + $?))
@@ -100,7 +101,7 @@ formatxml() {
       # Add it back to index
       mode=$(stat -c "%a" "$file")
       git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-      git cat-file -p "$hash" >"${file}"
+      git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
     fi
   done
@@ -124,18 +125,18 @@ isjavafile() {
 }
 
 istextfile() {
-  if (file "$1" | grep 'ASCII' &>/dev/null); then
+  if (file "$1" | grep 'ASCII' &> /dev/null); then
     return 0
   fi
   return 1
 }
 
 isxmlfile() {
-  if (file "$1" | grep 'XML' &>/dev/null); then
+  if (file "$1" | grep 'XML' &> /dev/null); then
     return 0
-  elif (file "$1" | grep 'HTML' &>/dev/null); then
+  elif (file "$1" | grep 'HTML' &> /dev/null); then
     return 0
-  elif (file "$1" | grep 'SGML' &>/dev/null); then
+  elif (file "$1" | grep 'SGML' &> /dev/null); then
     return 0
   else
     return 1
@@ -182,21 +183,21 @@ checkws() {
 formatandcheck() {
   file="$1"
   # Get the file from index
-  git show ":$file" >"${file}.tmp"
-  shfmt -i 2 -w -- "${file}.tmp"
+  git show ":$file" > "${file}.tmp"
+  shfmt -i 2 -bn -ci -sr -w -- "${file}.tmp"
   # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
   # Add it back to index
   mode=$(stat -c "%a" "$file")
   git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-  git cat-file -p "$hash" >"${file}"
+  git cat-file -p "$hash" > "${file}"
   rm "${file}.tmp"
   shellcheck --check-sourced --color --shell=bash -- "$file"
   return $?
 }
 
 stripnewlines() {
-  awk 'NF {p=1} p' <<<"$(<"$1")" | sponge "$1"
+  awk 'NF {p=1} p' <<< "$(< "$1")" | sponge "$1"
   sed -i 's/[[:blank:]]*$//' "$1"
 }
 
@@ -204,7 +205,7 @@ striptabsandlines() {
   file="$1"
   isxml="${2:-1}"
   # Get the file from index
-  git show ":$file" >"${file}.tmp"
+  git show ":$file" > "${file}.tmp"
   if test "$isxml" -ne 0; then
     expand -i -t 2 "${file}.tmp" | sponge "${file}.tmp"
   fi
@@ -214,7 +215,7 @@ striptabsandlines() {
   # Add it back to index
   mode=$(stat -c "%a" "$file")
   git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
-  git cat-file -p "$hash" >"${file}"
+  git cat-file -p "$hash" > "${file}"
   rm "${file}.tmp"
   return $?
 }
