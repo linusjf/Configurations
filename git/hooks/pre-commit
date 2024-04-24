@@ -250,7 +250,7 @@ checkexecs() {
   return "$ret"
 }
 
-require shellcheck ggshield git shch parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt jq sponge expand sed
+require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt jq sponge expand sed
 declare -i ret=0
 
 # Regexp for grep to only choose sh file extension for checking
