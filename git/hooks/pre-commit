@@ -191,7 +191,7 @@ formatandcheck() {
   git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
   git cat-file -p "$hash" >"${file}"
   rm "${file}.tmp"
-  shellcheck "$file"
+  shellcheck -- "$file"
   return $?
 }
 
