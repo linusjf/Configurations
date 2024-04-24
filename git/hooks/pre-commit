@@ -131,6 +131,13 @@ istextfile() {
   return 1
 }
 
+isshellscript() {
+  if (file "$1" | grep 'shell script' &> /dev/null); then
+    return 0
+  fi
+  return 1
+}
+
 isxmlfile() {
   if (file "$1" | grep 'XML' &> /dev/null); then
     return 0
@@ -243,7 +250,7 @@ checkexecs() {
   ret=$((ret + $?))
   files+=("${dots[@]}")
   for file in "${files[@]}"; do
-    if test -x "$file" && test ! -d "$file"; then
+    if test -x "$file" && test ! -d "$file" && isshellscript "$file"; then
       formatandcheck "$file"
       ret=$((ret + $?))
     fi
