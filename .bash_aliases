@@ -62,7 +62,7 @@ alias archlinus='startarch login linus'
 alias which='command -v'
 alias view='nvim -R'
 alias scapy='scapy -s scapy.sess'
-alias git=hub
+alias git='hub -c hooksPath="${GIT_HOOKS_PATH}" -c excludesFile="${GIT_EXCLUDES_FILE}"'
 alias pipinstall='pip install --break-system-packages'
 alias ubuntu='proot-distro login --termux-home ubuntu-lts'
 alias python='python3'
