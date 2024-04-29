@@ -1,6 +1,6 @@
 export GIT_EXCLUDES_FILES="${HOME}/.git/.ignore"
 export GIT_HOOKS_PATH="${HOME}/.git/hooks"
 git() {
-  hub -c core.excludesFile="${GIT_EXCLUDES_FILE}" -c core.hooksPath="${GIT_HOOKS_PATH}" "$@"
+  hub -c core.excludesFile="${GIT_EXCLUDES_FILES}" -c core.hooksPath="${GIT_HOOKS_PATH}" "$@"
   return $?
 }
