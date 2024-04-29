@@ -9,7 +9,9 @@
 function require() {
   hash "$@" || exit 127
 }
-require git
+# shellcheck source=/dev/null
+source ~/.gitrc
+require git hub
 command="git add ."
 eval "$command"
 command="git status"
