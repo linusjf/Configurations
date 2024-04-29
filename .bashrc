@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 :
 #shellcheck disable=SC1091,SC2155,SC1090
@@ -43,12 +43,12 @@ export HISTFILESIZE=120000
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -57,42 +57,42 @@ esac
 force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+xterm* | rxvt*)
+  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+  ;;
+*) ;;
 esac
 
 # enable color support of ls and also add handy aliases
-if [ -x ${PREFIX}/usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+if [ -x "${PREFIX}/usr/bin/dircolors" ]; then
+  # shellcheck disable=SC2015
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -105,26 +105,29 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f ${PREFIX}/usr/share/bash-completion/bash_completion ]; then
-    . ${PREFIX}/usr/share/bash-completion/bash_completion
-  elif [ -f ${PREFIX}/etc/bash_completion ]; then
-    . ${PREFIX}/etc/bash_completion
+  if [ -f "${PREFIX}/usr/share/bash-completion/bash_completion" ]; then
+    # shellcheck source=/dev/null
+    source "${PREFIX}/usr/share/bash-completion/bash_completion"
+  elif [ -f "${PREFIX}/etc/bash_completion" ]; then
+    # shellcheck source=/dev/null
+    source "${PREFIX}/etc/bash_completion"
   fi
 fi
 
-
 if test -f "${HOME}/.bash_aliases"; then
+  # shellcheck source=/dev/null
   source "${HOME}/.bash_aliases"
 fi
 if test -f "${HOME}/binaries/ssh-find-agent.sh"; then
-	source "${HOME}/binaries/ssh-find-agent.sh"
-	set_ssh_agent_socket
+  # shellcheck source=/dev/null
+  source "${HOME}/binaries/ssh-find-agent.sh"
+  set_ssh_agent_socket
 fi
 if test -f "${HOME}/bin/ssh-find-agent.sh"; then
-	source "${HOME}/bin/ssh-find-agent.sh"
-	set_ssh_agent_socket
+  # shellcheck source=/dev/null
+  source "${HOME}/bin/ssh-find-agent.sh"
+  set_ssh_agent_socket
 fi
-
 
 unset GREP_OPTIONS
 # check the window size after each command and, if necessary,
@@ -148,40 +151,49 @@ export DOWNLOAD_STATIC_LIBV8=1
 export DISPLAY=":0"
 export BROWSER=w3m
 if test -f "$HOME/.gitguardiantoken"; then
-	export GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
+  GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
+  export GITGUARDIAN_API_KEY
 fi
 fac() { (
   echo 1
   seq "$1"
 ) | paste -s -d\* - | bc; }
+# shellcheck source=/dev/null
 source "$(which env_parallel.bash)"
 if test -f "${HOME}/PMD/shell/pmd-completion.sh"; then
-	source "${HOME}/PMD/shell/pmd-completion.sh"
+  # shellcheck source=/dev/null
+  source "${HOME}/PMD/shell/pmd-completion.sh"
 fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 if test -f "/root/.sdkman"; then
-	export SDKMAN_DIR="/root/.sdkman"
-	[[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
+  export SDKMAN_DIR="/root/.sdkman"
+  # shellcheck source=/dev/null
+  [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
 fi
 # The next line updates PATH for the Google Cloud SDK.
+# shellcheck source=/dev/null
 if [ -f "${PREFIX}/usr/google-cloud-sdk/path.bash.inc" ]; then source "${PREFIX}/usr/google-cloud-sdk/path.bash.inc"; fi
 # The next line enables shell command completion for gcloud.
+# shellcheck source=/dev/null
 if [ -f "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc" ]; then source "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc"; fi
 
 if test -f "${HOME}/.nvm"; then
-	export NVM_DIR="$HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-	[-s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+  export NVM_DIR="$HOME/.nvm"
+  # shellcheck source=/dev/null
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  # shellcheck source=/dev/null
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 fi
 # pnpm
 if test -f "${HOME}/.local/share/pnpm"; then
-	export PNPM_HOME="${HOME}/.local/share/pnpm"
-	case ":$PATH:" in
-		*":$PNPM_HOME:"*) ;;
-		*) export PATH="$PNPM_HOME:$PATH" ;;
-	esac
+  export PNPM_HOME="${HOME}/.local/share/pnpm"
+  case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
 fi
 # pnpm end
-if test -f "~/.gitrc"; then
-source ~/.gitrc
+if test -f "${HOME}/.gitrc"; then
+  # shellcheck source=/dev/null
+  source ~/.gitrc
 fi
