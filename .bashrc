@@ -148,8 +148,6 @@ shopt -s globstar
 #set -euo pipefail
 set -o noclobber
 export DOWNLOAD_STATIC_LIBV8=1
-export DISPLAY=":0"
-export BROWSER=w3m
 if test -f "$HOME/.gitguardiantoken"; then
   GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
   export GITGUARDIAN_API_KEY

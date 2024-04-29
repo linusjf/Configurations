@@ -58,6 +58,8 @@ else
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export TEMP_DIR="${PREFIX}/tmp"
+  export DISPLAY=":0"
+  export BROWSER=w3m
   fortune | cowsay -r | lolcat
 fi
 username="$(whoami)"
