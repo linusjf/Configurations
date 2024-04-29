@@ -185,7 +185,7 @@ if test -f "${HOME}/.nvm"; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 fi
 # pnpm
-if test -f "${HOME}/.local/share/pnpm"; then
+if test -d "${HOME}/.local/share/pnpm"; then
   export PNPM_HOME="${HOME}/.local/share/pnpm"
   case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
