@@ -1,0 +1,2 @@
+export GIT_EXCLUDE_FILES="${HOME}/.git/ignore"
+export GIT_HOOKS_PATH="${HOME}/.git/hooks"

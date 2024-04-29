@@ -8,6 +8,8 @@
 ######################################################################
 shopt -s expand_aliases
 # shellcheck source=/dev/null
+source "${HOME}/.gitrc"
+# shellcheck source=/dev/null
 source "${HOME}/.bash_aliases"
 gitadd && gitcommit && gitpush
 exit $?

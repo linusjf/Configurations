@@ -66,5 +66,4 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export GIT_EXCLUDE_FILES="${HOME}/.git/ignore"
-export GIT_HOOKS_PATH="${HOME}/.git/hooks"
+source ~/.gitrc
