@@ -9,7 +9,9 @@
 require() {
   hash "$@" || exit
 }
-require git
+require git hub
+# shellcheck source=/dev/null
+source ~/.gitrc
 command="git commit -F commit.txt"
 eval "$command"
 exit $?
