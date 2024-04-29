@@ -6,10 +6,16 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
-shopt -s expand_aliases
+#shopt -s expand_aliases
 # shellcheck source=/dev/null
-source "${HOME}/.gitrc"
+#source "${HOME}/.gitrc"
 # shellcheck source=/dev/null
-source "${HOME}/.bash_aliases"
+#source "${HOME}/.bash_aliases"
+
+git() {
+  hub -c core.excludesFile="${GIT_EXCLUDES_FILE}" -c core.hooksPath="${GIT_HOOKS_PATH}" "$@"
+  return $?
+}
+git --help
 gitadd && gitcommit && gitpush
 exit $?
