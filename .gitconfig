@@ -6,8 +6,6 @@
   defaultBranch = main
 [core]
   autocrlf = input
-  excludesFile = /data/data/com.termux/files/home/.git/ignore
-  hooksPath = /data/data/com.termux/files/home/.git/hooks
   longpaths = true
 [push]
   autoSetupRemote = true
