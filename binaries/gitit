@@ -6,5 +6,8 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
+shopt -s expand_aliases
+# shellcheck source=/dev/null
+source "${HOME}/.bash_aliases"
 gitadd && gitcommit && gitpush
 exit $?
