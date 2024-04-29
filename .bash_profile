@@ -1,9 +1,28 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
 # Put this in your .bash_profile file.
-if [ -f ~/.bashrc ]; then
-  source ~/.bashrc
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+      source "$HOME/.bashrc"
+    fi
 fi
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+export LC_CTYPE=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
+
+## termux hacks for bash_profile
+
 istermux=true
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -30,10 +49,7 @@ if [[ "$istermux" == false ]]; then
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
     export JAVA_HOME="/usr/lib/jvm/${jvm}"
   fi
-  if [[ "$os_id" =~ ubuntu.* ]]; then
-    source /etc/environment
-  fi
-  export PATH="${JAVA_HOME}/bin:${PATH}:~/jacorb-3.9/bin:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd"
+  export PATH="${JAVA_HOME}/bin:${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd"
   export PYTHON3_HOST_PROG="${PREFIX}/usr/bin/python"
   export ANT_HOME="${PREFIX}/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
@@ -47,8 +63,14 @@ else
   export TEMP_DIR="${PREFIX}/tmp"
   fortune | cowsay -r | lolcat
 fi
+username="$(whoami)"
+if [[ "$username" == "root" ]]; then
 updatedb &
-[[ -f "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+fi
+if [[ "$istermux" == true ]]; then
+  updatedb &
+fi
+
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]; then
   [ -e "{$PREFIX}/etc/mota" ] && source "${PREFIX}/etc/mota"
 fi
@@ -84,8 +106,12 @@ export NODE_PATH="${PREFIX}/usr/lib/node_modules"
 export TZDIR="${PREFIX}/usr/share/zoneinfo:${PREFIX}/usr/share/mysql/mysql-test/std_data/zoneinfo"
 export PKG_CONFIG_PATH="${PREFIX}/usr/lib/pkgconfig/libgit2.pc"
 if test "$istermux" = false; then
-  export AWS_ACCESS_KEY_ID="$(cat .aws/aws_access_key_id)"
-  export AWS_SECRET_ACCESS_KEY="$(cat .aws/aws_secret_access_key)"
+  if test -f "${HOME}/.aws/aws_access_key_id"; then
+    export AWS_ACCESS_KEY_ID="$(cat "${HOME}/.aws/aws_access_key_id")"
+  fi
+  if test -f "${HOME}/.aws/aws_secret_access_key"; then
+    export AWS_SECRET_ACCESS_KEY="$(cat "${HOME}/.aws/aws_secret_access_key")"
+  fi
   export OMPI_ALLOW_RUN_AS_ROOT=1
   export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
   export MAVEN_OPTS=" --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
