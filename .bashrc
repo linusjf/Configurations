@@ -193,5 +193,5 @@ fi
 # pnpm end
 if test -f "${HOME}/.gitrc"; then
   # shellcheck source=/dev/null
-  source ~/.gitrc
+  source "${HOME}/.gitrc"
 fi
