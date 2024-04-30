@@ -1,2 +1,3 @@
-commit.txt
-1_py3_script
+**/commit.txt
+**/1_py3_script
+**/*.wsout
