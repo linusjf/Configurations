@@ -4,9 +4,13 @@
   useConfigOnly = true
 [init]
   defaultBranch = main
+[cola]
+  spellcheck = true
+  maxrecent = 6
 [core]
   autocrlf = input
   longpaths = true
+  editor = vim
 [push]
   autoSetupRemote = true
 [filter "spacify"]
@@ -36,3 +40,5 @@
   helper = !gh auth git-credential
 [fetch]
     prune = true
+[color]
+  ui = auto
