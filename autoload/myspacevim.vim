@@ -15,7 +15,7 @@ let g:ale_fixers = {
 \   'r': ['styler']
 \}
 " Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 " Enable completion where available.
 " This setting must be set before ALE is loaded.
 " You should not turn this setting on if you wish to use ALE as a completion
@@ -120,7 +120,7 @@ set rulerformat=%l,%v
 endfunction
 
 function! myspacevim#after() abort
-iunmap jk
+" iunmap jk
 let g:neomake_javascript_eslint_maker =  {
         \ 'exe': 'npx',
         \ 'args': ['--quiet', 'eslint', '--format=compact'],

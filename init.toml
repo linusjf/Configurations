@@ -47,6 +47,10 @@
     lint_engine = "ale"
     bootstrap_before = "myspacevim#before"
     bootstrap_after = "myspacevim#after"
+    vimcompatible = true
+
+[[layers]]
+name = "default"
 
 # Enable autocomplete layer
 [[layers]]
@@ -117,9 +121,6 @@ default_height = 30
 [[layers]]
   name = "debug"
   debugger_plugin = "vimspector"
-
-[[layers]]
-name = "default"
 
 [[layers]]
   name = "foldsearch"
