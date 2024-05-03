@@ -85,7 +85,8 @@ set viminfo='100,<9999,s100
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
+
 set clipboard=unnamedplus
+set clipboard+=unnamed
 
 set belloff=all
-
