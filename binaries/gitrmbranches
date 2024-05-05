@@ -6,6 +6,11 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
+parentpath="$(dirname "${0}")"
+if test -e "${parentpath}/internet.sh"; then
+  # shellcheck disable=SC1091
+  source "${parentpath}/internet.sh"
+fi
 require() {
   hash "$@" || exit
 }
@@ -35,15 +40,15 @@ export -f branchName
 
 function delUnmerged() {
   if [[ "$2" == 0 ]]; then
-    git branch -r --no-merged "$1" |
-      grep -v "$1" |
-      xargs -I{} bash -c "branchName {}" |
-      xargs git push origin --delete
+    git branch -r --no-merged "$1" \
+      | grep -v "$1" \
+      | xargs -I{} bash -c "branchName {}" \
+      | xargs git push origin --delete
   else
-    git branch -r --no-merged "$1" |
-      grep -v "$1" |
-      xargs -I{} bash -c "branchName {}" |
-      xargs git push origin --delete --dry-run
+    git branch -r --no-merged "$1" \
+      | grep -v "$1" \
+      | xargs -I{} bash -c "branchName {}" \
+      | xargs git push origin --delete --dry-run
   fi
 }
 export -f delUnmerged
@@ -59,10 +64,10 @@ eval "$command"
 command="git branch -r --merged $mainBranch"
 
 for var in $(eval "$command"); do
-  if [[ "$var" == *"development"* ]] ||
-    [[ "$var" == *"$mainBranch"* ]] ||
-    [[ "$var" == *"HEAD"* ]] ||
-    [[ "$var" == *"->"* ]]; then
+  if [[ "$var" == *"development"* ]] \
+    || [[ "$var" == *"$mainBranch"* ]] \
+    || [[ "$var" == *"HEAD"* ]] \
+    || [[ "$var" == *"->"* ]]; then
     continue
   else
     echo "Delete branch $var (y/n)?"
