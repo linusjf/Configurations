@@ -10,9 +10,6 @@ parentpath="$(dirname "${0}")"
 if test -e "${parentpath}/internet.sh"; then
   # shellcheck disable=SC1091
   source "${parentpath}/internet.sh"
-  if ! checkinternet; then
-    exit 1
-  fi
 fi
 gitadd && gitcommit && gitpush
 exit $?

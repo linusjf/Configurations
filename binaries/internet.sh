@@ -17,3 +17,6 @@ checkinternet() {
     return 1
   fi
 }
+if ! checkinternet; then
+  exit 1
+fi
