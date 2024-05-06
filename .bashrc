@@ -175,13 +175,6 @@ if [ -f "${PREFIX}/usr/google-cloud-sdk/path.bash.inc" ]; then source "${PREFIX}
 # shellcheck source=/dev/null
 if [ -f "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc" ]; then source "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc"; fi
 
-if test -f "${HOME}/.nvm"; then
-  export NVM_DIR="$HOME/.nvm"
-  # shellcheck source=/dev/null
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-  # shellcheck source=/dev/null
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-fi
 # pnpm
 if test -d "${HOME}/.local/share/pnpm"; then
   export PNPM_HOME="${HOME}/.local/share/pnpm"
@@ -195,3 +188,7 @@ if test -f "${HOME}/.gitrc"; then
   # shellcheck source=/dev/null
   source "${HOME}/.gitrc"
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
