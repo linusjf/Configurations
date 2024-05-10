@@ -8,8 +8,7 @@
 # @description :
 ######################################################################
 checkinternet() {
-  hash telnet || exit
-  telnet 8.8.8.8 53 &> /dev/null
+  true > /dev/tcp/8.8.8.8/53
   if test $? -eq 0; then
     return 0
   else
