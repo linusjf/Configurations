@@ -8,7 +8,8 @@
 # @description :
 ######################################################################
 checkinternet() {
-  true > /dev/tcp/8.8.8.8/53
+  hash ping | exit
+  ping -q -w 1 -c 1 8.8.8.8 &> /dev/null
   if test $? -eq 0; then
     return 0
   else
