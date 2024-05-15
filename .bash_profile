@@ -62,14 +62,6 @@ else
   export BROWSER=w3m
   fortune | cowsay -r | lolcat
 fi
-username="$(whoami)"
-if [[ "$username" == "root" ]]; then
-  updatedb &
-fi
-if [[ "$istermux" == true ]]; then
-  updatedb &
-fi
-
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]; then
   [ -e "{$PREFIX}/etc/mota" ] && source "${PREFIX}/etc/mota"
 fi
