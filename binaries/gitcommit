@@ -11,7 +11,7 @@ require() {
 }
 require git hub
 # shellcheck source=/dev/null
-source ~/.gitrc
+source "${HOME}/.gitrc"
 command="git commit -F commit.txt"
 eval "$command"
 exit $?
