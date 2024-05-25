@@ -34,6 +34,38 @@ optimizejpgs() {
   return "$ret"
 }
 
+formatgo() {
+  local ret=0
+  # Regexp for grep to only choose some file extensions for formatting
+  exts="\.go$"
+
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  readarray -t files < <(eval "$cmd")
+  ret=$((ret + $?))
+
+  # Format staged files
+  for file in "${files[@]}"; do
+    # don't format empty files
+    if test -s "$file"; then
+      echo "Formatting ${file}..."
+      # Get the file from index
+      git show ":$file" > "${file}.tmp"
+      # Format it
+      tmp=$(mktemp)
+      gofmt "${file}.tmp" > "$tmp" && mv "$tmp" "${file}.tmp"
+      ret=$((ret + $?))
+      # Create a blob object from the formatted file
+      hash=$(git hash-object -w "${file}.tmp")
+      # Add it back to index
+      mode=$(stat -c "%a" "$file")
+      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+      git cat-file -p "$hash" > "${file}"
+      rm "${file}.tmp"
+    fi
+  done
+  return "$ret"
+}
+
 formatjson() {
   local ret=0
   # Regexp for grep to only choose some file extensions for formatting
@@ -124,6 +156,38 @@ isjavafile() {
   return 1
 }
 
+isgofile() {
+  FILE="$1"
+  if [ "${FILE##*.}" = "go" ]; then
+    return 0
+  fi
+  return 1
+}
+
+ishtmlfileextension() {
+  FILE="$1"
+  if [ "${FILE##*.}" = "html" ] || [ "${FILE##*.}" = "xhtml" ]; then
+    return 0
+  fi
+  return 1
+}
+
+isxmlfileextension() {
+  FILE="$1"
+  if [ "${FILE##*.}" = "xml" ]; then
+    return 0
+  fi
+  return 1
+}
+
+issgmlfileextension() {
+  FILE="$1"
+  if [ "${FILE##*.}" = "sgml" ]; then
+    return 0
+  fi
+  return 1
+}
+
 istextfile() {
   if (file "$1" | grep 'ASCII' &> /dev/null); then
     return 0
@@ -139,11 +203,11 @@ isshellscript() {
 }
 
 isxmlfile() {
-  if (file "$1" | grep 'XML' &> /dev/null); then
+  if (file "$1" | grep 'XML' &> /dev/null) && (isxmlfileextension "${1}"); then
     return 0
-  elif (file "$1" | grep 'HTML' &> /dev/null); then
+  elif (file "$1" | grep 'HTML' &> /dev/null) && (ishtmlfileextension "${1}"); then
     return 0
-  elif (file "$1" | grep 'SGML' &> /dev/null); then
+  elif (file "$1" | grep 'SGML' &> /dev/null) && (issgmlfileextension "${1}"); then
     return 0
   else
     return 1
@@ -164,6 +228,10 @@ checkws() {
       if isxmlfile "$file"; then
         striptabsandlines "$file" 0
         wscheck --color --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
+        wsout=$?
+      elif isgofile "$file"; then
+        striptabsandlines "$file" 0
+        wscheck --color --exclude WSC004 --checkstyle "$tmp" -- "$file"
         wsout=$?
       elif isjavafile "$file"; then
         wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
@@ -277,6 +345,9 @@ formatxml
 ret=$((ret + $?))
 
 formatjson
+ret=$((ret + $?))
+
+formatgo
 ret=$((ret + $?))
 
 checkws
