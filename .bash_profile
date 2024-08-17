@@ -52,6 +52,7 @@ if [[ "$istermux" == false ]]; then
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
   export TEMP_DIR="/tmp"
+  export WARP_ENABLE_WAYLAND=1
   fortune | cowsay | lolcat
 else
   export PATH="${HOME}/binaries:${HOME}/.cargo/bin:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/wabt/bin:${HOME}/go/bin"
@@ -92,7 +93,7 @@ fi
 export GPG_TTY="$(tty)"
 export MOZ_FAKE_NO_SANDBOX=1
 export PULSE_SERVER=127.0.0.1
-export TZ="Asia/Calcutta"
+export TZ="Asia/Kolkata"
 export NODE_PATH="${PREFIX}/usr/lib/node_modules"
 export TZDIR="${PREFIX}/usr/share/zoneinfo:${PREFIX}/usr/share/mysql/mysql-test/std_data/zoneinfo"
 export PKG_CONFIG_PATH="${PREFIX}/usr/lib/pkgconfig/libgit2.pc"
