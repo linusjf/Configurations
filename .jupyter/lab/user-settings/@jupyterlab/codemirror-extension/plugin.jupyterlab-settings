@@ -1,0 +1,11 @@
+{
+    "defaultConfig": {
+        "indentUnit": "2",
+        "tabSize": 2,
+        "customStyles": {
+            "fontFamily": null,
+            "fontSize": 15,
+            "lineHeight": null
+        }
+    }
+}

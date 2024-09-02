@@ -1,0 +1,11 @@
+{
+    "auto:percent": true,
+    "auto:light": false,
+    "auto:hydrogen": false,
+    "auto:nomarker": false,
+    "md:myst": true,
+    "md": true,
+    "Rmd": true,
+    "qmd": false,
+    "NOTE": null
+}
