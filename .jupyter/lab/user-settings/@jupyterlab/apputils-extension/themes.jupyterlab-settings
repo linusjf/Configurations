@@ -8,5 +8,5 @@
     "adaptive-theme": true,
     "preferred-light-theme": "JupyterLab Light",
     "preferred-dark-theme": "JupyterLab Dark",
-    "theme-scrollbars": false
+    "theme-scrollbars": true
 }

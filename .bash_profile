@@ -46,7 +46,7 @@ if [[ "$istermux" == false ]]; then
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
     export JAVA_HOME="/usr/lib/jvm/${jvm}"
   fi
-  export PATH="${JAVA_HOME}/bin:${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd:/usr/local/go/bin"
+  export PATH="${HOME}/userpythonenv/bin:${JAVA_HOME}/bin:${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd:/usr/local/go/bin"
   export PYTHON3_HOST_PROG="${PREFIX}/usr/bin/python"
   export ANT_HOME="${PREFIX}/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"

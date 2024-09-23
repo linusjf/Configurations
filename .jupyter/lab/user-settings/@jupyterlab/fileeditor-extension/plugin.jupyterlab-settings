@@ -1,6 +1,7 @@
 {
     "editorConfig": {
-        "indentUnit": "2"
+        "indentUnit": "2",
+        "tabSize": 2
     },
     "scrollPastEnd": true,
     "toolbar": []

@@ -4,7 +4,90 @@
     // Document Manager settings.
     // ***************************************
 
+    // Autosave Documents
+    // Whether to autosave documents
+    "autosave": true,
+
+    // Autosave Interval
+    // Length of save interval in seconds
+    "autosaveInterval": 120,
+
+    // Ask for confirmation to close a document
+    // Whether to ask for confirmation to close a document or not.
+    "confirmClosingDocument": false,
+
+    // Default Viewers
+    // Overrides for the default viewers for file types.
+    // Specify a mapping from file type name to document viewer name, for example:
+    //
+    // defaultViewers: {
+    //   markdown: "Markdown Preview"
+    // }
+    //
+    // If you specify non-existent file types or viewers, or if a viewer cannot
+    // open a given file type, the override will not function.
+    //
+    // Available viewers:
+    // CSVTable
+    // TSVTable
+    // HTML Viewer
+    // Image
+    // Image (Text)
+    // JSON
+    // JSONLines
+    // Mermaid
+    // PDF
+    // Vega5
+    // Vega-Lite5
+    // Notebook
+    // Markdown Preview
+    // Workspace loader
+    // Voila Preview
+    // Jupytext Notebook
+    // Editor
+    //
+    // Available file types:
+    // text
+    // notebook
+    // directory
+    // markdown
+    // PDF
+    // python
+    // json
+    // jsonl
+    // julia
+    // csv
+    // tsv
+    // r
+    // yaml
+    // svg
+    // tiff
+    // jpeg
+    // gif
+    // png
+    // bmp
+    // webp
+    // html
+    // mermaid
+    // vega5
+    // vega-lite5
+    // vega-lite4
+    // vega-lite3
+    // jupyterlab-workspace
+    // myst
+    // r-markdown
+    // quarto
+    "defaultViewers": {},
+
+    // Margin for last modified timestamp check
+    // Max acceptable difference, in milliseconds, between last modified timestamps on disk and client
+    "lastModifiedCheckMargin": 500,
+
+    // Recent Items Number
+    // Number of recently opened/closed files and directories to remember.
+    "maxNumberRecents": 10,
+
     // Rename Untitled File On First Save
     // Whether to prompt to rename untitled file on first manual save.
-    "renameUntitledFileOnSave": false
+    "renameUntitledFileOnSave": true
 }
