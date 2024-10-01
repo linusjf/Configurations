@@ -2,6 +2,10 @@
 
 c = get_config()  #noqa
 
+#-----------------------------------------------------------------------------
+# JupyterLab Templates configuration
+#------------------------------------------------------------------------------
+c.JupyterLabTemplates.templates_dir = ['/home/linus/.jupyter/templates']
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
