@@ -28,23 +28,24 @@
     // open a given file type, the override will not function.
     //
     // Available viewers:
-    // CSVTable
-    // TSVTable
     // HTML Viewer
     // Image
     // Image (Text)
+    // CSVTable
+    // TSVTable
     // JSON
     // JSONLines
     // Mermaid
     // PDF
     // Vega5
     // Vega-Lite5
+    // Plotly
     // Notebook
     // Markdown Preview
     // Workspace loader
     // Voila Preview
-    // Jupytext Notebook
     // Editor
+    // Jupytext Notebook
     //
     // Available file types:
     // text
@@ -73,6 +74,7 @@
     // vega-lite5
     // vega-lite4
     // vega-lite3
+    // plotly
     // jupyterlab-workspace
     // myst
     // r-markdown
@@ -89,5 +91,5 @@
 
     // Rename Untitled File On First Save
     // Whether to prompt to rename untitled file on first manual save.
-    "renameUntitledFileOnSave": true
+    "renameUntitledFileOnSave": false
 }

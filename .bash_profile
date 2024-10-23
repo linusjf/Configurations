@@ -95,7 +95,7 @@ export MOZ_FAKE_NO_SANDBOX=1
 export PULSE_SERVER=127.0.0.1
 export TZ="Asia/Kolkata"
 export NODE_PATH="${PREFIX}/usr/lib/node_modules"
-export TZDIR="${PREFIX}/usr/share/zoneinfo:${PREFIX}/usr/share/mysql/mysql-test/std_data/zoneinfo"
+export TZDIR="${PREFIX}/usr/share/zoneinfo"
 export PKG_CONFIG_PATH="${PREFIX}/usr/lib/pkgconfig/libgit2.pc"
 if test "$istermux" = false; then
   if test -f "${HOME}/.aws/aws_access_key_id"; then

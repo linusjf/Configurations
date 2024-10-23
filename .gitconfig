@@ -11,6 +11,7 @@
   autocrlf = input
   longpaths = true
   editor = vim
+  symlinks = true
 [push]
   autoSetupRemote = true
 [filter "spacify"]
