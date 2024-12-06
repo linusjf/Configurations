@@ -1,3 +1,4 @@
 .headers on
 .mode table
 .eqp on
+.nullvalue NULL
