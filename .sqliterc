@@ -1,4 +1,5 @@
 .headers on
 .mode table
-.eqp on
+.eqp full
 .nullvalue NULL
+.echo on
