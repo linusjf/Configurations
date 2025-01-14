@@ -55,7 +55,7 @@ if [[ "$istermux" == false ]]; then
   export WARP_ENABLE_WAYLAND=1
   fortune | cowsay | lolcat
 else
-  export PATH="${HOME}/binaries:${HOME}/.cargo/bin:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/wabt/bin:${HOME}/go/bin"
+  export PATH="${HOME}/binaries:${HOME}/.cargo/bin:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/wabt/bin:${HOME}/go/bin:${HOME}/bld"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export TEMP_DIR="${PREFIX}/tmp"
@@ -114,4 +114,10 @@ if test "$istermux" = false; then
 fi
 set -o vi
 export PYTHONASYNCIODEBUG=0
+if test -f "${HOME}/.groq/groq_secret_access_key"; then
+    export GROQ_SECRET_ACCESS_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
+fi
+if test -f "${HOME}/.groq/groq_secret_access_key"; then
+    export GROQ_API_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
+fi
 # .bash_profile EOF

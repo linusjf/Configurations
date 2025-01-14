@@ -43,3 +43,5 @@
     prune = true
 [color]
   ui = auto
+[help]
+  autocorrect = prompt
