@@ -1,8 +1,35 @@
 {
+    // Text Editor
+    // @jupyterlab/fileeditor-extension:plugin
+    // Text editor settings.
+    // ***************************************
+
+    // Editor Configuration
+    // The configuration for all text editors; it will override the CodeMirror default configuration.
+    // If `fontFamily`, `fontSize` or `lineHeight` are `null`,
+    // values from current theme are used.
     "editorConfig": {
+        "autoClosingBrackets": true,
+        "codeFolding": true,
+        "highlightActiveLine": true,
+        "highlightTrailingWhitespace": true,
+        "highlightWhitespace": true,
         "indentUnit": "2",
-        "tabSize": 2
+        "tabSize": 2,
+        "customStyles": {
+            "fontFamily": "Times New Roman",
+            "fontSize": 13,
+            "lineHeight": 1.5
+        }
     },
+
+    // Scroll behavior
+    // Whether to scroll past the end of text document.
     "scrollPastEnd": true,
+
+    // Text editor toolbar items
+    // Note: To disable a toolbar item,
+    // copy it to User Preferences and add the
+    // "disabled" key. Toolbar description:
     "toolbar": []
 }

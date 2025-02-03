@@ -120,4 +120,5 @@ fi
 if test -f "${HOME}/.groq/groq_secret_access_key"; then
     export GROQ_API_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
 fi
+source "$HOME/.cargo/env"
 # .bash_profile EOF

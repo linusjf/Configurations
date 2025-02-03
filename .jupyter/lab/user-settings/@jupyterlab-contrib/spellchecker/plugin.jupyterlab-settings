@@ -1,0 +1,45 @@
+{
+    // Spellchecker
+    // @jupyterlab-contrib/spellchecker:plugin
+    // Spellchecker settings.
+    // ***************************************
+
+    // Words to be ignored by the spellchecker
+    // Case-sensitive list of words to be ignored
+    "ignore": [
+        "F1",
+        "NIC",
+        "dataframe",
+        "LOOCV",
+        "crossvalidation",
+        "iteratively",
+        "MSE",
+        "splitter",
+        "LogVolume",
+        "sqrt4",
+        "sqrt",
+        "overfit",
+        "QDA",
+        "dimensionality",
+        "Power3",
+        "KNN",
+        "mpg01",
+        "Smarket",
+        "misclassify",
+        "dataset",
+        "wasn",
+        "LDA",
+        "FN",
+        "TP",
+        "TPR",
+        "FP",
+        "FPR",
+        "ROC",
+        "JupyterLab",
+        "Jupyter",
+        "JupyterHub",
+        "Voilà",
+        "Xeus",
+        "IPython"
+    ]
+}
