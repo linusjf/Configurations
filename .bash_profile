@@ -46,7 +46,7 @@ if [[ "$istermux" == false ]]; then
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
     export JAVA_HOME="/usr/lib/jvm/${jvm}"
   fi
-  export PATH="${HOME}/userpythonenv/bin:${JAVA_HOME}/bin:${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd:/usr/local/go/bin"
+  export PATH="${HOME}/userpythonenv/bin:${JAVA_HOME}/bin:${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd:/usr/local/go/bin:${HOME}/.local/share/gem/ruby/3.3.0/bin"
   export PYTHON3_HOST_PROG="${PREFIX}/usr/bin/python"
   export ANT_HOME="${PREFIX}/usr/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
@@ -121,4 +121,8 @@ if test -f "${HOME}/.groq/groq_secret_access_key"; then
     export GROQ_API_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
 fi
 source "$HOME/.cargo/env"
+if test -f "${HOME}/.openai/.secretkey"; then
+    export OPENAI_API_KEY="$(cat "${HOME}/.openai/.secretkey")"
+fi
+export GIT_USER="linusjf"
 # .bash_profile EOF
