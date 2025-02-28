@@ -15,7 +15,8 @@ if [[ -e "${parentpath}/internet.sh" ]]; then
 fi
 
 gitadd && gitcommit && gitpush
-if ! $?; then
+# shellcheck disable=2181
+if [ $? -ne 0 ]; then
   printf "Error automating Git operations\n" >&2
   exit 1
 fi
