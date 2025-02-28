@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : gitadd
@@ -6,14 +7,23 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
+
 function require() {
   hash "$@" || exit 127
 }
+
+set -e
 # shellcheck source=/dev/null
 source "${HOME}/.gitrc"
+
 require git hub
-command="git add ."
-eval "$command"
-command="git status"
-eval "$command"
+
+command=("git" "add" ".")
+if ! "${command[@]}"; then
+  echo "Error adding files to Git staging area" >&2
+  exit 1
+fi
+
+command=("git" "status")
+"${command[@]}"
 exit $?

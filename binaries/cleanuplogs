@@ -1,4 +1,4 @@
-#!/usr/bin/env -e bash
+#!/usr/bin/env bash
 
 # Cleanup, version 3
 
@@ -6,6 +6,7 @@ function require() {
   hash "$@" || exit 127
 }
 
+set -e
 require mv tail dirname readlink basename
 
 MY_DIR="$(dirname "$(readlink -f "$0")")"
@@ -34,7 +35,7 @@ E_XCD=86
 E_NOTROOT=87
 
 # Run as root, of course.
-if (( UID != ROOT_UID )); then
+if ((UID != ROOT_UID)); then
   printf "Must be root to run this script.\n" >&2
   exit "$E_NOTROOT"
 fi
@@ -61,11 +62,11 @@ cd "$LOG_DIR" || {
 }
 
 # Save last section of pacman log file.
-tail -n "$lines" pacman.log >pacman.temp &&
-  mv pacman.temp pacman.log
+tail -n "$lines" pacman.log > pacman.temp \
+  && mv pacman.temp pacman.log
 
 # ': > wtmp' and '> wtmp' have the same effect.
-> wtmp
+: > wtmp
 
 printf "Log files cleaned up.\n"
 
