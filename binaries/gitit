@@ -6,7 +6,7 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
-
+set -e
 parentpath="$(dirname "$(readlink -f "$0")")"
 
 if [[ -e "${parentpath}/internet.sh" ]]; then
@@ -14,7 +14,8 @@ if [[ -e "${parentpath}/internet.sh" ]]; then
   source "${parentpath}/internet.sh"
 fi
 
-if ! gitadd && gitcommit && gitpush; then
+gitadd && gitcommit && gitpush
+if ! $?; then
   printf "Error automating Git operations\n" >&2
   exit 1
 fi
