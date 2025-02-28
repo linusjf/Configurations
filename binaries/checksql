@@ -1,13 +1,19 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -e bash
+
 function require() {
-	hash "$@" || exit 127
+  hash "$@" || exit 127
 }
+
 require rm sqlcheck tee
+
 declare -i exitCode=0
-rm ./check.errors
+
+rm ./check.errors || { echo "Error removing check.errors"; exit 1; }
+
 for f in *.sql; do
-	test -e "$f" || continue
-	sqlcheck -c -v -f "$f" | tee -a check.errors
-	exitCode="$exitCode"+"$?"
+  [[ -e "$f" ]] || continue
+  sqlcheck -c -v -f "$f" | tee -a check.errors
+  (( exitCode |= $? ))
 done
+
 exit "$exitCode"
