@@ -4,23 +4,21 @@
 # @file        : gitpush
 # @created     : Thursday May 02, 2019 21:07:57 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description :
+# @description : Sync and push Git branches
 ######################################################################
+
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 
-# Don't warn about unreachable commands in this function
 # shellcheck disable=SC2317
 function message() {
-  ret=$?
+  local ret=$1
   if [ "$ret" -eq 0 ]; then
-    echo "exit $ret from last command: $command"
     git diff development main
     git gc
   else
-    echo "${RED}exit $ret from last command: $command${NC}"
-    echo "${RED}returning to branch development"
-    git checkout development
+    echo -e "${RED}Returning to branch development${NC}"
+    git switch development || exit 1
   fi
   exit "$ret"
 }
@@ -28,32 +26,35 @@ function message() {
 require() {
   hash "$@" || exit
 }
-parentpath="$(dirname "${0}")"
+
+parentpath="$(dirname "$0")"
 if test -e "${parentpath}/internet.sh"; then
   # shellcheck disable=SC1091
   source "${parentpath}/internet.sh"
 fi
-require git
+
 set -e
-command=""
-trap message EXIT
+require git
 
 mainBranch="main"
 
-command="git pull --rebase"
-eval "$command"
-command="git push -u origin development"
-eval "$command"
-command="git checkout ${mainBranch}"
-eval "$command"
-command="git merge --no-edit development"
-eval "$command"
-command="git pull --rebase"
-eval "$command"
-command="git push -u origin ${mainBranch}"
-eval "$command"
-command="git checkout development"
-eval "$command"
-command="git merge ${mainBranch}"
-eval "$command"
-exit $?
+trap 'ret=$?; message $ret' EXIT
+
+# Ensure latest changes
+git pull --rebase
+
+# Push development branch
+git push origin development
+
+# Switch to main branch and merge/rebase changes
+git switch "$mainBranch"
+git rebase development # Use rebase instead of merge for cleaner history
+git pull --rebase
+git push origin "$mainBranch"
+
+# Switch back to development and update it
+git switch development
+git rebase "$mainBranch"
+git push origin development # Push updated development branch
+
+exit 0
