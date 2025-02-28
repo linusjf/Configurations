@@ -6,10 +6,17 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
-parentpath="$(dirname "${0}")"
-if test -e "${parentpath}/internet.sh"; then
+
+parentpath="$(dirname "$(readlink -f "$0")")"
+
+if [[ -e "${parentpath}/internet.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/internet.sh"
 fi
-gitadd && gitcommit && gitpush
-exit $?
+
+if ! gitadd && gitcommit && gitpush; then
+  printf "Error automating Git operations\n" >&2
+  exit 1
+fi
+
+exit 0
