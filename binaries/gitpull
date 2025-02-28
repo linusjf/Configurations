@@ -4,21 +4,20 @@
 # @file        : gitpull
 # @created     : Wednesday Feb 19, 2020 21:59:57 IST
 # @copyright   : Copyright (c) Linus Fernandes
-# @description :
+# @description : Git branch sync script
 ######################################################################
+
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 
 function message() {
-  ret=$?
+  local ret=$1
   if [ "$ret" -eq 0 ]; then
-    echo "exit $ret from last command: $command"
     git diff development main
     git gc
   else
-    echo "${RED}exit $ret from last command: $command${NC}"
-    echo "${RED}returning to branch development"
-    git checkout development
+    echo -e "${RED}Returning to branch development${NC}"
+    git switch development || exit 1
   fi
   exit "$ret"
 }
@@ -26,25 +25,26 @@ function message() {
 require() {
   hash "$@" || exit
 }
-parentpath="$(dirname "${0}")"
+
+parentpath="$(dirname "$0")"
 if test -e "${parentpath}/internet.sh"; then
   # shellcheck disable=SC1091
   source "${parentpath}/internet.sh"
 fi
-require git
+
 set -e
-command=""
-trap message EXIT
+require git
 
 mainBranch="main"
 
-command="git checkout development"
-eval "$command"
-command="git pull"
-eval "$command"
-command="git checkout ${mainBranch}"
-eval "$command"
-command="git pull"
-eval "$command"
-command="git checkout development"
-eval "$command"
+trap 'ret=$?; message $ret' EXIT
+
+git switch development
+git fetch --all
+git pull --rebase
+
+git switch "$mainBranch"
+git fetch --all
+git pull --rebase
+
+git switch development
