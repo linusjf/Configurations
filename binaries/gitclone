@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
+
 require() {
   hash "$@" || exit
 }
-parentpath="$(dirname "${0}")"
-if test -e "${parentpath}/internet.sh"; then
+
+set -e
+parentpath="$(dirname "$(readlink -f "$0")")"
+
+if [[ -e "${parentpath}/internet.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/internet.sh"
 fi
+
 require gh
-gh repo clone "$@"
+
+if [[ $# -lt 1 ]]; then
+  echo "Error: repository not specified" >&2
+  exit 1
+fi
+
+if ! gh repo clone "$@"; then
+  echo "Error cloning repository" >&2
+  exit 1
+fi
