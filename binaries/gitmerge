@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : gitmerge
@@ -6,18 +7,17 @@
 # @copyright   : Copyright (c) Linus Fernandes
 # @description :
 ######################################################################
+
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 
 function message() {
-  ret=$?
-  if [ "$ret" -eq 0 ]; then
-    echo "exit $ret from last command: $command"
+  local ret=$?
+  if ((ret == 0)); then
     git diff development main
     git gc
   else
-    echo "${RED}exit $ret from last command: $command${NC}"
-    echo "${RED}returning to branch development"
+    printf "%sReturning to branch development%s\n" "$RED" "$NC"
     git checkout development
   fi
   exit "$ret"
@@ -26,22 +26,40 @@ function message() {
 require() {
   hash "$@" || exit
 }
-require git
+
 set -e
-command=""
-trap message EXIT
+require git
 
 mainBranch="main"
 
-command="git checkout ${mainBranch}"
-eval "$command"
-command="git config pull.rebase false"
-eval "$command"
-command="git pull"
-eval "$command"
-command="git checkout development"
-eval "$command"
-command="git merge ${mainBranch}"
-eval "$command"
-command="gitpush"
-eval "$command"
+trap message EXIT
+
+if ! git checkout "$mainBranch"; then
+  echo "Error checking out $mainBranch" >&2
+  exit 1
+fi
+
+if ! git config pull.rebase false; then
+  echo "Error configuring pull rebase" >&2
+  exit 1
+fi
+
+if ! git pull; then
+  echo "Error pulling changes" >&2
+  exit 1
+fi
+
+if ! git checkout development; then
+  echo "Error checking out development" >&2
+  exit 1
+fi
+
+if ! git merge "$mainBranch"; then
+  echo "Error merging changes" >&2
+  exit 1
+fi
+
+if ! gitpush; then
+  echo "Error pushing changes" >&2
+  exit 1
+fi
