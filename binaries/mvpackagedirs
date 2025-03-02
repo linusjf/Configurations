@@ -1,38 +1,61 @@
 #!/usr/bin/env bash
-
 ######################################################################
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : mvpackagedirs
 # @created     : Friday May 03, 2019 08:13:05 IST
-# @copyright   : Copyright (c) Linus Fernandes
-# @description : Creates package folders and moves java source to these directories.
-#                Behaviour unspecified if first line in file does not have package directive
-#                Use from directory containing source files.
-#                Also creates package-info.java if it does not exist already.
+# @lastupdated : Sunday Mar 01, 2025 13:19:00 IST
+# @description : Moves Java source files into package-based directories.
+#                Assumes the package directive is on the first line.
+#                Creates 'package-info.java' if it does not exist.
 ######################################################################
-function require() {
-	hash "$@" || exit 127
+
+# Function to check if required commands exist
+require() {
+  command -v "$1" > /dev/null 2>&1 || {
+    echo "Error: Required command '$1' not found." >&2
+    exit 127
+  }
 }
-require head grep mv awk sed find
-package=""
+
+# Ensure necessary commands are available
+require head
+require grep
+require mv
+require awk
+require sed
+require find
+
 pkgInfoFile="package-info.java"
-dir=""
-declare -i count
-readarray -t args < <(find . -maxdepth 1 \
-	-name "*.java" -type f \
-	! -path "**/.git/**" ! -path .)
-for file in "${args[@]}"; do
-	count=$(head -1 "$file" | grep -c 'package')
-	if [ "$count" -ne 0 ]; then
-		package=$(head -1 "$file" | grep 'package' | awk '{print $2}' | sed 's/;//')
-		dir=$(mkpackagedirs "$package")
-		mv "$file" "$dir"
-		if [ -e "$dir"/"$pkgInfoFile" ]; then
-			continue
-		else
-			echo "package $package;" >"$dir/$pkgInfoFile"
-			echo "Created $dir/$pkgInfoFile"
-		fi
-	fi
+
+# Find all Java source files in the current directory
+find . -maxdepth 1 -name "*.java" -type f | while read -r file; do
+  # Extract the package name from the first line
+  package=$(sed -n '1s/package[[:space:]]\+\([^;]\+\);/\1/p' "$file")
+
+  # Skip files without a package directive
+  if [[ -z "$package" ]]; then
+    echo "Warning: Skipping $file (no package directive found)"
+    continue
+  fi
+
+  # Convert package name to directory structure
+  dir="${package//./\/}"
+
+  # Create package directory
+  mkdir -p "$dir"
+
+  # Move Java file to corresponding package directory
+  mv "$file" "$dir" || {
+    echo "Error: Failed to move $file to $dir" >&2
+    continue
+  }
+
+  # Create package-info.java if it does not exist
+  if [[ ! -e "$dir/$pkgInfoFile" ]]; then
+    echo "package $package;" > "$dir/$pkgInfoFile"
+    echo "Created $dir/$pkgInfoFile"
+  fi
 done
+
+echo "All Java files processed successfully."
 exit 0
