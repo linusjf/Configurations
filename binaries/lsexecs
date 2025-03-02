@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+
 require() {
-	hash "$@" || exit 127
+  if ! command -v "$1" &> /dev/null; then
+    echo "Error: Required command '$1' not found. Please install it." >&2
+    exit 127
+  fi
 }
-require fd
-fd -tx -d 1
+
+require fdfind
+fdfind -tx -d 1
