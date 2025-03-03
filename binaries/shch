@@ -1,58 +1,70 @@
 #!/usr/bin/env bash
-# Here's one that uploads a local script onto the live demo at shellcheck.net
-shellcheck.net() {
-  declare -i ret=0
-  if test "$#" -gt 0; then
+set -euo pipefail
+
+PREFIX="${PREFIX:-/tmp}"
+mkdir -p "${PREFIX}/tmp/"
+
+shellcheck_net() {
+  local -i ret=0
+  if [[ "$#" -gt 0 ]]; then
     for i in "$@"; do
-      if test -f "$i" && test -s "$i"; then
+      if [[ -r "$i" && -s "$i" ]]; then
         echo "Checking ${i}..."
         check "$i"
-        ret=$ret+$?
+        ((ret += $?))
       else
-        echo "$i is not a file."
-        ret=$ret+1
+        echo "Error: '$i' is not a readable file or is empty."
+        ((ret += 1))
       fi
     done
   else
-    cmd="find . -maxdepth 1 -type f -executable -print"
-    readarray -t execs < <(eval "$cmd")
-    cmd="find . -maxdepth 1 -name '*.sh' -print"
-    readarray -t scripts < <(eval "$cmd")
+    readarray -t execs < <(find . -maxdepth 1 -type f -executable -print)
+    readarray -t scripts < <(find . -maxdepth 1 -name '*.sh' -print)
     scripts+=("${execs[@]}")
+
     for i in "${scripts[@]}"; do
-      if test -s "$i"; then
-        echo "Checking ${i}..."
-        check "$i"
-        ret=$ret+$?
-      fi
+      [[ -s "$i" ]] || continue
+      echo "Checking ${i}..."
+      check "$i"
+      ((ret += $?))
     done
   fi
-  if test "$ret" -gt 0; then
-    printf "Shellcheck failed. Kindly check *.out files for errors.\n"
+
+  if [[ "$ret" -gt 0 ]]; then
+    echo "ShellCheck found issues. Check *.out files for details."
   fi
+
   return $ret
 }
 
-function check() {
+check() {
+  local f
   f="$(basename "$1")"
-  curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' >"${PREFIX}/tmp/${f}.json"
-  if test "$?" -eq 0; then
-    jq . <"${PREFIX}/tmp/${f}.json" >"${1}.out"
-    rm -f "${PREFIX}/tmp/${f}.json"
-    filesize="$(stat -c%s "${1}.out")"
-    if test "$filesize" -lt 4; then
-      rm -f "${1}.out"
-      return 0
-    else
-      return 1
-    fi
+
+  if ! curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' > "${PREFIX}/tmp/${f}.json"; then
+    echo "Error: Failed to connect to ShellCheck API" >&2
+    return 1
+  fi
+
+  jq . < "${PREFIX}/tmp/${f}.json" > "${1}.out"
+  rm -f "${PREFIX}/tmp/${f}.json"
+
+  if [[ ! -s "${1}.out" ]]; then
+    rm -f "${1}.out"
+    return 0
   else
-    exit 255
+    return 1
   fi
 }
 
-function require() {
-  hash "$@" || exit
+require() {
+  for cmd in "$@"; do
+    if ! command -v "$cmd" &> /dev/null; then
+      echo "Error: Required command '$cmd' not found." >&2
+      exit 1
+    fi
+  done
 }
+
 require jq rm curl find stat
-shellcheck.net "$@"
+shellcheck_net "$@"
