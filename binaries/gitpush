@@ -10,7 +10,7 @@
 RED="\033[0;31m"
 NC="\033[0m" # No Color
 
-# shellcheck disable=SC2317
+# shellcheck disable=SC2317,SC2329
 function message() {
   local ret=$1
   if [ "$ret" -eq 0 ]; then

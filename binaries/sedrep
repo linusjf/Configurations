@@ -1,9 +1,10 @@
-#!/usr/bin/env -e bash
+#!/usr/bin/env bash
 
 function require() {
   hash "$@" || exit 127
 }
 
+set -e
 require sed
 
 if [ $# -eq 0 ]; then

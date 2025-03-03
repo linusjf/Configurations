@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
-PREFIX="${PREFIX:-/tmp}"
-mkdir -p "${PREFIX}/tmp/"
+set -eo pipefail
 
 shellcheck_net() {
   local -i ret=0
@@ -11,10 +8,10 @@ shellcheck_net() {
       if [[ -r "$i" && -s "$i" ]]; then
         echo "Checking ${i}..."
         check "$i"
-        ((ret += $?))
+        ret=$((ret + $?))
       else
         echo "Error: '$i' is not a readable file or is empty."
-        ((ret += 1))
+        ret=$((ret + 1))
       fi
     done
   else
@@ -26,7 +23,7 @@ shellcheck_net() {
       [[ -s "$i" ]] || continue
       echo "Checking ${i}..."
       check "$i"
-      ((ret += $?))
+      ret=$((ret += $?))
     done
   fi
 
@@ -41,20 +38,21 @@ check() {
   local f
   f="$(basename "$1")"
 
-  if ! curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' > "${PREFIX}/tmp/${f}.json"; then
-    echo "Error: Failed to connect to ShellCheck API" >&2
-    return 1
-  fi
-
-  jq . < "${PREFIX}/tmp/${f}.json" > "${1}.out"
-  rm -f "${PREFIX}/tmp/${f}.json"
-
-  if [[ ! -s "${1}.out" ]]; then
-    rm -f "${1}.out"
-    return 0
+  if checkbashisms "$f"; then
+    if ! curl --data-urlencode "script@$1" -sS 'https://www.shellcheck.net/shellcheck.php' > "${PREFIX}/tmp/${f}.json"; then
+      echo "Error: Failed to connect to ShellCheck API" >&2
+      return 1
+    fi
+    if jq -e '. | length > 0' "${PREFIX}/tmp/${f}.json" &> /dev/null; then
+      mv "${PREFIX}/tmp/${f}.json" "${1}.out"
+      return 1
+    else
+      return 0
+    fi
   else
-    return 1
+    printf "Skipping %s...\n" "$1"
   fi
+
 }
 
 require() {
@@ -66,5 +64,5 @@ require() {
   done
 }
 
-require jq rm curl find stat
+require jq rm curl find stat checkbashisms
 shellcheck_net "$@"

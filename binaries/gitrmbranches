@@ -56,7 +56,7 @@ function delUnmerged() {
   fi
 }
 
-# shellcheck disable=SC2317
+# shellcheck disable=SC2317,SC2329
 # Function to handle exit messages
 function message() {
   ret=$?
