@@ -32,4 +32,4 @@ else
 fi
 
 # Keep session open (optional)
-exec "$SHELL"
+#exec "$SHELL"
