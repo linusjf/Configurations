@@ -3,13 +3,33 @@
 # @author      : Linus Fernandes (linusfernandes@gmail.com)
 # @file        : sshagent
 # @created     : Tuesday Apr 30, 2019 11:10:49 IST
-# @copyright   : Copyright (c) Linus Fernandes
-# @description :
+# @updated     : (Updated Date)
+# @description : Starts ssh-agent in Termux with wake-lock
 ######################################################################
+
+# Function to check required binaries
 require() {
-hash "$@" || exit 127;
+  for cmd in "$@"; do
+    if ! command -v "$cmd" &> /dev/null; then
+      echo "Error: $cmd is not installed. Install it using 'pkg install $cmd'"
+      exit 127
+    fi
+  done
 }
+
+# Ensure required tools are installed
 require termux-wake-lock ssh-agent
+
+# Prevent device from sleeping
 termux-wake-lock
-echo "hello"
-eval "$(ssh-agent -s)"
+
+# Check if ssh-agent is already running
+if pgrep -x "ssh-agent" > /dev/null; then
+  echo "ssh-agent is already running."
+else
+  echo "Starting ssh-agent..."
+  eval "$(ssh-agent -s)"
+fi
+
+# Keep session open (optional)
+exec "$SHELL"
