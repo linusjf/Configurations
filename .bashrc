@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 # If not running interactively, don't do anything
 case $- in
-*i*) ;;
-*) return ;;
 esac
 :
 #shellcheck disable=SC1091,SC2155,SC1090
 function _AM_() {
-  command -v am 1>/dev/null || cp "${PREFIX}/usr/bin/am" "/usr/local/termuxarch/bin"
+  local am_bin="${PREFIX}/usr/bin/am"
+  local termux_bin="/usr/local/termuxarch/bin"
+  command -v am &>/dev/null || [ -f "$am_bin" ] && cp "$am_bin" "$termux_bin"
 }
+
 function _PWD_() {
   printf '%s\n' "$PWD"
 }
-function git-branch() {
-  if [ -d .git ]; then
-    printf "%s" "($(git branch | awk '/\*/{print $2}'))"
-  fi
+
+git-branch() {
+  [ -d .git ] && printf "(%s)" "$(git branch --show-current)"
 }
+
 function em() {
   [ -x /usr/bin/make ] || { pc base base-devel || pci base base-devel; }
   { [ -x /usr/local/termuxarch/bin/uemacs ] && /usr/local/termuxarch/bin/uemacs "$@"; } || { { { cd || exit 69; } && [ -d uemacs ] || gcl https://github.com/torvalds/uemacs; } && { [ -d uemacs ] && { cd uemacs || exit 69; }; } && printf '%s\n' "making uemacs" && make && cp -f em /usr/local/termuxarch/bin/uemacs && make clean && /usr/local/termuxarch/bin/uemacs emacs.hlp; }
@@ -48,31 +49,14 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color | *-256color) color_prompt=yes ;;
+  xterm-color | *-256color) color_prompt=yes ;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-  else
-    color_prompt=
-  fi
-fi
-
-if [ "$color_prompt" = yes ]; then
+if [ "$color_prompt" = yes ] && command -v tput &>/dev/null && tput setaf 1 &>/dev/null; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -114,20 +98,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if test -f "${HOME}/.bash_aliases"; then
-  # shellcheck source=/dev/null
-  source "${HOME}/.bash_aliases"
-fi
-if test -f "${HOME}/binaries/ssh-find-agent.sh"; then
-  # shellcheck source=/dev/null
-  source "${HOME}/binaries/ssh-find-agent.sh"
-  set_ssh_agent_socket
-fi
-if test -f "${HOME}/bin/ssh-find-agent.sh"; then
-  # shellcheck source=/dev/null
-  source "${HOME}/bin/ssh-find-agent.sh"
-  set_ssh_agent_socket
-fi
+for file in "$HOME/.gitrc" "$HOME/.bash_aliases"; do
+  [ -f "$file" ] && source "$file"
+done
+
+for path in "$HOME/binaries/ssh-find-agent.sh" "$HOME/bin/ssh-find-agent.sh"; do
+  [ -f "$path" ] && source "$path" && set_ssh_agent_socket
+done
 
 unset GREP_OPTIONS
 # check the window size after each command and, if necessary,
@@ -179,15 +156,11 @@ if [ -f "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc" ]; then source "${P
 if test -d "${HOME}/.local/share/pnpm"; then
   export PNPM_HOME="${HOME}/.local/share/pnpm"
   case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+	  *":$PNPM_HOME:"*) ;;
+	  *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 fi
 # pnpm end
-if test -f "${HOME}/.gitrc"; then
-  # shellcheck source=/dev/null
-  source "${HOME}/.gitrc"
-fi
 
 export NVM_DIR="$HOME/.nvm"
 # shellcheck source=/dev/null
