@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 require() {
-  hash "$@" || exit 127
+  for cmd in "$@"; do
+    if ! hash "$cmd" 2> /dev/null; then
+      echo "Error: Required command '$cmd' not found. Please install it." >&2
+      exit 127
+    fi
+  done
 }
 
 # Check for existence of local pre-commit hook and execute it first
@@ -46,40 +51,31 @@ declare -a FILES=()
 exts="'\.sh$'"
 
 # run shellcheck against shell executables and shell script functions
-checkshs "$exts"
-ret=$((ret + $?))
-checkexecs
-ret=$((ret + $?))
+checkshs "$exts" || ((ret = 1))
+checkexecs || ((ret = 1))
 
 # optimize jpeg files
-optimizejpgs
-ret=$((ret + $?))
+optimizejpgs || ((ret = 1))
 
 # format xml files
-formatxml
-ret=$((ret + $?))
-
+formatxml || ((ret = 1))
 # format json files
-formatjson
-ret=$((ret + $?))
+formatjson || ((ret = 1))
 
 # format go files
-formatgo
-ret=$((ret + $?))
+formatgo || ((ret = 1))
 
 # check for whitespace
-checkws
-ret=$((ret + $?))
+checkws || ((ret = 1))
 
 if [ ${#FILES[@]} -eq 0 ]; then
   # this will also fail empty commits
   # if you wish to commit an empty commit
-  # use the --no-verify option which will skip thie pre-commit
+  # use the --no-verify option which will skip this pre-commit
   echo 1>&2 "No files changed after processing or empty commit. Commit failed."
-  ret=$((ret + 1))
+  ((ret = 1))
 fi
 
 # execute ggshield to check if any of files have any security tokens or secrets encoded
-ggshield secret scan pre-commit "$@"
-ret=$((ret + $?))
+ggshield secret scan pre-commit "$@" || ((ret = 1))
 exit "$ret"
