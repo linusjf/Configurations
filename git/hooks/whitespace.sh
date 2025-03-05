@@ -5,8 +5,8 @@ checkws() {
   # If no files left in index after formatting - fail
   # i.e., if files are similar after changes
   cmd="git diff --cached --name-only"
-  readarray -t files < <(eval "$cmd")
-  for file in "${files[@]}"; do
+  readarray -t FILES < <(eval "$cmd")
+  for file in "${FILES[@]}"; do
     if istextfile "$file"; then
       declare -i wsout=0
       echo "Checking ${file} for whitespace..."

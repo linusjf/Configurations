@@ -32,43 +32,15 @@ if [[ -e "${parentpath}/whitespace.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/whitespace.sh"
 fi
-
-checkshs() {
-  local exts="$1"
-  local ret=0
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
-  readarray -t files < <(eval "$cmd")
-  ret=$((ret + $?))
-  for file in "${files[@]}"; do
-    if isshellscript "$file"; then
-      formatandcheck "$file"
-      ret=$((ret + $?))
-    fi
-  done
-  return "$ret"
-}
-
-checkexecs() {
-  local ret=0
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -v '\.'"
-  readarray -t files < <(eval "$cmd")
-  ret=$((ret + $?))
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep '^\.'"
-  readarray -t dots < <(eval "$cmd")
-  ret=$((ret + $?))
-  files+=("${dots[@]}")
-  for file in "${files[@]}"; do
-    if test -x "$file" && test ! -d "$file" && isshellscript "$file"; then
-      formatandcheck "$file"
-      ret=$((ret + $?))
-    fi
-  done
-  return "$ret"
-}
+if [[ -e "${parentpath}/shellcheck.sh" ]]; then
+  # shellcheck disable=SC1091
+  source "${parentpath}/shellcheck.sh"
+fi
 
 # check that all required dependencies are installed
 require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt jq sponge expand sed
 declare -i ret=0
+declare -a FILES=()
 
 # Regexp for grep to only choose sh file extension for checking
 exts="'\.sh$'"
@@ -99,7 +71,7 @@ ret=$((ret + $?))
 checkws
 ret=$((ret + $?))
 
-if [ ${#files[@]} -eq 0 ]; then
+if [ ${#FILES[@]} -eq 0 ]; then
   # this will also fail empty commits
   # if you wish to commit an empty commit
   # use the --no-verify option which will skip thie pre-commit

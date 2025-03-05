@@ -6,11 +6,11 @@ formatgo() {
   exts="\.go$"
 
   cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
-  readarray -t files < <(eval "$cmd")
+  readarray -t FILES < <(eval "$cmd")
   ret=$((ret + $?))
 
   # Format staged files
-  for file in "${files[@]}"; do
+  for file in "${FILES[@]}"; do
     # don't format empty files
     if test -s "$file"; then
       echo "Formatting ${file}..."
@@ -38,11 +38,11 @@ formatjson() {
   exts="\.json$"
 
   cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
-  readarray -t files < <(eval "$cmd")
+  readarray -t FILES < <(eval "$cmd")
   ret=$((ret + $?))
 
   # Format staged files
-  for file in "${files[@]}"; do
+  for file in "${FILES[@]}"; do
     # don't format empty files
     if test -s "$file"; then
       echo "Formatting ${file}..."
@@ -81,11 +81,11 @@ formatxml() {
   fi
 
   cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
-  readarray -t files < <(eval "$cmd")
+  readarray -t FILES < <(eval "$cmd")
   ret=$((ret + $?))
 
   # Format staged files
-  for file in "${files[@]}"; do
+  for file in "${FILES[@]}"; do
     # don't format empty files
     if test -s "$file"; then
       echo "Formatting ${file}..."
