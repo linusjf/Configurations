@@ -45,7 +45,7 @@ formatjson() {
   # Regexp for grep to only choose some file extensions for formatting
   exts="\.json$"
 
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E '${exts}' || true"
   readarray -t FILES < <(eval "$cmd")
   ret=$((ret + $?))
 
@@ -88,7 +88,7 @@ formatxml() {
     exit 0
   fi
 
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E '${exts}' || true"
   readarray -t FILES < <(eval "$cmd")
   ret=$((ret + $?))
 
