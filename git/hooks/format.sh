@@ -25,8 +25,8 @@ formatgo() {
       # Get the file from index
       git show ":$file" > "${file}.tmp"
       # Format it
-      tmp=$(mktemp)
-      gofmt "${file}.tmp" > "$tmp" && mv "$tmp" "${file}.tmp"
+      tmpfile=$(mktemp)
+      gofmt "${file}.tmp" > "$tmpfile" && mv "$tmpfile" "${file}.tmp"
       ret=$((ret + $?))
       # Create a blob object from the formatted file
       hash=$(git hash-object -w "${file}.tmp")
@@ -57,8 +57,8 @@ formatjson() {
       # Get the file from index
       git show ":$file" > "${file}.tmp"
       # Format it
-      tmp=$(mktemp)
-      jq -e -S . "${file}.tmp" > "$tmp" && mv "$tmp" "${file}.tmp"
+      tmpfile=$(mktemp)
+      jq -e -S . "${file}.tmp" > "$tmpfile" && mv "$tmpfile" "${file}.tmp"
       ret=$((ret + $?))
       # Create a blob object from the formatted file
       hash=$(git hash-object -w "${file}.tmp")
