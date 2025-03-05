@@ -14,32 +14,36 @@ iscargolock() {
 
 # Checks if the given file has a .java extension
 isjavafile() {
-  [[ "${1##*.}" == "java" ]]
+  [[ "$1" == *.* && "${1##*.}" == "java" ]]
 }
 
 # Checks if the given file has a .go extension (for Go files)
 isgofile() {
-  [[ "${1##*.}" == "go" ]]
+  [[ "$1" == *.* && "${1##*.}" == "go" ]]
 }
 
 # Checks if the given file has an HTML or XHTML extension
 ishtmlfileextension() {
-  [[ "${1##*.}" == "html" ]] || [[ "${1##*.}" == "xhtml" ]]
+  if [[ "$1" == *.* ]]; then
+    [[ "${1##*.}" == "html" ]] || [[ "${1##*.}" == "xhtml" ]]
+  else
+    return 1
+  fi
 }
 
 # Checks if the given file has an XML extension
 isxmlfileextension() {
-  [[ "${1##*.}" == "xml" ]]
+  [[ "$1" == *.* && "${1##*.}" == "xml" ]]
 }
 
 # Checks if the given file has an SGML extension
 issgmlfileextension() {
-  [[ "${1##*.}" == "sgml" ]]
+  [[ "$1" == *.* && "${1##*.}" == "sgml" ]]
 }
 
 # Checks if the given file is a text file by looking for 'ASCII' in its type
 istextfile() {
-  file -b "$1" | grep -q 'ASCII'
+  file -b --mime-type "$1" | grep -q 'text/'
 }
 
 # Checks if the given file is a shell script by looking for 'shell script' in its type
