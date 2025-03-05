@@ -53,10 +53,12 @@ isshellscript() {
 
 # Checks if the given file is an XML, HTML, or SGML file
 isxmlfile() {
-  case "$(file "$1")" in
-    *XML*) isxmlfileextension "$1" && return 0 ;;
-    *HTML*) ishtmlfileextension "$1" && return 0 ;;
-    *SGML*) issgmlfileextension "$1" && return 0 ;;
+  local filetype
+  filetype=$(file -b "$1")
+  case "$filetype" in
+    *XML*) isxmlfileextension "$1" ;;
+    *HTML*) ishtmlfileextension "$1" ;;
+    *SGML*) issgmlfileextension "$1" ;;
+    *) return 1 ;;
   esac
-  return 1
 }
