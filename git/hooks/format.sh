@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 getmode() {
-  mode="100644"
+  mode="644"
   if [ -x "${1}" ]; then
-    mode="100755"
+    mode="755"
   fi
   printf "%s" "${mode}"
 }
