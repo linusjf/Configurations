@@ -118,7 +118,7 @@ formatandcheck() {
   file="$1"
   # Get the file from index
   git show ":$file" > "${file}.tmp"
-  shellcheck --check-sourced --color --shell=bash -- "$file.tmp" || return 1
+  shellcheck --check-sourced --color --shell=bash -- "${file}.tmp" || return 1
   shfmt -i 2 -bn -ci -sr -w -- "${file}.tmp"
   # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
