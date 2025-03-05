@@ -265,28 +265,36 @@ checkexecs() {
   return "$ret"
 }
 
+# check that all required dependencies are installed
 require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt jq sponge expand sed
 declare -i ret=0
 
 # Regexp for grep to only choose sh file extension for checking
 exts="'\.sh$'"
+
+# run shellcheck against shell executables and shell script functions
 checkshs "$exts"
 ret=$((ret + $?))
 checkexecs
 ret=$((ret + $?))
 
+# optimize jpeg files
 optimizejpgs
 ret=$((ret + $?))
 
+# format xml files
 formatxml
 ret=$((ret + $?))
 
+# format json files
 formatjson
 ret=$((ret + $?))
 
+# format go files
 formatgo
 ret=$((ret + $?))
 
+# check for whitespace
 checkws
 ret=$((ret + $?))
 
@@ -298,6 +306,7 @@ if [ ${#files[@]} -eq 0 ]; then
   ret=$((ret + 1))
 fi
 
+# execute ggshield to check if any of files have any security tokens or secrets encoded
 ggshield secret scan pre-commit "$@"
 ret=$((ret + $?))
 exit "$ret"
