@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
+getmode() {
+  mode="100644"
+  if [ -x "${1}" ]; then
+    mode="100755"
+  fi
+  printf "%s" "${mode}"
+}
 
 formatgo() {
   local ret=0
   # Regexp for grep to only choose some file extensions for formatting
   exts="\.go$"
 
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep $exts"
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E '${exts}' || true"
+
   readarray -t FILES < <(eval "$cmd")
   ret=$((ret + $?))
 
@@ -23,7 +31,7 @@ formatgo() {
       # Create a blob object from the formatted file
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
-      mode=$(stat -c "%a" "$file")
+      mode="$(getmode "${file}")"
       git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
       git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
@@ -55,7 +63,7 @@ formatjson() {
       # Create a blob object from the formatted file
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
-      mode=$(stat -c "%a" "$file")
+      mode="$(getmode "${file}")"
       git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
       git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
@@ -97,7 +105,7 @@ formatxml() {
       # Create a blob object from the formatted file
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
-      mode=$(stat -c "%a" "$file")
+      mode="$(getmode "${file}")"
       git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
       git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
@@ -114,7 +122,7 @@ formatandcheck() {
   # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
   # Add it back to index
-  mode=$(stat -c "%a" "$file")
+  mode="$(getmode "${file}")"
   git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
   git cat-file -p "$hash" > "${file}"
   rm "${file}.tmp"
