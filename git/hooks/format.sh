@@ -1,132 +1,67 @@
 #!/usr/bin/env bash
-getmode() {
-  mode="644"
-  if [ -x "${1}" ]; then
+get_mode() {
+  local file="$1"
+  local mode="644"
+  if [ -x "$file" ]; then
     mode="755"
   fi
-  printf "%s" "${mode}"
+  printf "%s" "$mode"
 }
 
-formatgo() {
-  local ret=0
-  # Regexp for grep to only choose some file extensions for formatting
-  exts="\.go$"
+format_file() {
+  local file="$1"
+  local formatter="$2"
+  local tmp_file
+  tmp_file="$(mktemp)"
 
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E '${exts}' || true"
+  git show ":$file" > "$tmp_file"
+  "$formatter" "$tmp_file"
+  local hash
+  hash=$(git hash-object -w "$tmp_file")
+  local mode
+  mode=$(get_mode "$file")
+  git update-index --add --cacheinfo "$mode" "$hash" "$file"
+  git cat-file -p "$hash" > "$file"
+  rm "$tmp_file"
+}
 
-  readarray -t FILES < <(eval "$cmd")
-  ret=$((ret + $?))
-
-  # Format staged files
+format_go() {
+  readarray -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.go$')
   for file in "${FILES[@]}"; do
-    # don't format empty files
-    if test -s "$file"; then
-      echo "Formatting ${file}..."
-      # Get the file from index
-      git show ":$file" > "${file}.tmp"
-      # Format it
-      tmpfile=$(mktemp)
-      gofmt "${file}.tmp" > "$tmpfile" && mv "$tmpfile" "${file}.tmp"
-      ret=$((ret + $?))
-      # Create a blob object from the formatted file
-      hash=$(git hash-object -w "${file}.tmp")
-      # Add it back to index
-      mode="$(getmode "${file}")"
-      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
-      git cat-file -p "$hash" > "${file}"
-      rm "${file}.tmp"
-    fi
+    format_file "$file" gofmt
   done
-  return "$ret"
 }
 
-formatjson() {
-  local ret=0
-  # Regexp for grep to only choose some file extensions for formatting
-  exts="\.json$"
-
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E '${exts}' || true"
-  readarray -t FILES < <(eval "$cmd")
-  ret=$((ret + $?))
-
-  # Format staged files
+format_json() {
+  readarray -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.json$')
   for file in "${FILES[@]}"; do
-    # don't format empty files
-    if test -s "$file"; then
-      echo "Formatting ${file}..."
-      # Get the file from index
-      git show ":$file" > "${file}.tmp"
-      # Format it
-      tmpfile=$(mktemp)
-      jq -e -S . "${file}.tmp" > "$tmpfile" && mv "$tmpfile" "${file}.tmp"
-      ret=$((ret + $?))
-      # Create a blob object from the formatted file
-      hash=$(git hash-object -w "${file}.tmp")
-      # Add it back to index
-      mode="$(getmode "${file}")"
-      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
-      git cat-file -p "$hash" > "${file}"
-      rm "${file}.tmp"
-    fi
+    format_file "$file" jq
   done
-  return "$ret"
 }
 
-formatxml() {
-  local ret=0
-  declare -r configFileName="tidy.config"
-  configFilePath="$(readlink -f "$configFileName")"
-  # Regexp for grep to only choose some file extensions for formatting
-  exts="\.xml$"
-
-  # The formatter to use
-  formatter=$(which tidy)
-
-  # Check availability of the formatter
-  if [ -z "$formatter" ]; then
-    echo 1>&2 "$formatter not found. Pre-commit formatting will not be done."
-    exit 0
+format_xml() {
+  local tidy_path
+  tidy_path=$(command -v tidy)
+  if [ -z "$tidy_path" ]; then
+    echo "Error: tidy command not found"
+    exit 1
   fi
 
-  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E '${exts}' || true"
-  readarray -t FILES < <(eval "$cmd")
-  ret=$((ret + $?))
-
-  # Format staged files
+  readarray -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.xml$')
   for file in "${FILES[@]}"; do
-    # don't format empty files
-    if test -s "$file"; then
-      echo "Formatting ${file}..."
-      # Get the file from index
-      git show ":$file" > "${file}.tmp"
-      # Format it
-      eval "$formatter -config $configFilePath -quiet -xml -m -i ${file}.tmp"
-      ret=$((ret + $?))
-      # Create a blob object from the formatted file
-      hash=$(git hash-object -w "${file}.tmp")
-      # Add it back to index
-      mode="$(getmode "${file}")"
-      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
-      git cat-file -p "$hash" > "${file}"
-      rm "${file}.tmp"
-    fi
+    format_file "$file" "$tidy_path"
   done
-  return "$ret"
 }
 
 formatandcheck() {
   file="$1"
-  # Get the file from index
   git show ":$file" > "${file}.tmp"
   shellcheck --check-sourced --color --shell=bash -- "${file}.tmp" || return 1
   shfmt -i 2 -bn -ci -sr -w -- "${file}.tmp"
-  # Create a blob object from the formatted file
   hash=$(git hash-object -w "${file}.tmp")
-  # Add it back to index
-  mode="$(getmode "${file}")"
+  mode="$(get_mode "${file}")"
   git update-index --add --cacheinfo "${mode}" "$hash" "$file"
   git cat-file -p "$hash" > "${file}"
   rm "${file}.tmp"
-
   return $?
 }

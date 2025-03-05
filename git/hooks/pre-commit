@@ -58,12 +58,12 @@ checkexecs || ((ret = 1))
 optimizejpgs || ((ret = 1))
 
 # format xml files
-formatxml || ((ret = 1))
+format_xml || ((ret = 1))
 # format json files
-formatjson || ((ret = 1))
+format_json || ((ret = 1))
 
 # format go files
-formatgo || ((ret = 1))
+format_go || ((ret = 1))
 
 # check for whitespace
 checkws || ((ret = 1))
