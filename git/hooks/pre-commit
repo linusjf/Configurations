@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
+require() {
+  hash "$@" || exit 127
+}
 
-set -e
-parentpath="$(dirname "$(readlink -f "$0")")"
-
-if [[ -e "${parentpath}/checkfiletypes.sh" ]]; then
-  # shellcheck disable=SC1091
-  source "${parentpath}/checkfiletypes.sh"
-fi
-
+# Check for existence of local pre-commit hook and execute it first
 if [[ -f .git/hooks/pre-commit ]]; then
   if ! .git/hooks/pre-commit "$@"; then
     echo 'Local pre-commit hook failed, please see output above'
@@ -15,9 +11,15 @@ if [[ -f .git/hooks/pre-commit ]]; then
   fi
 fi
 
-require() {
-  hash "$@" || exit 127
-}
+set -e
+require dirname readlink
+
+# include functions that check different file types
+parentpath="$(dirname "$(readlink -f "$0")")"
+if [[ -e "${parentpath}/checkfiletypes.sh" ]]; then
+  # shellcheck disable=SC1091
+  source "${parentpath}/checkfiletypes.sh"
+fi
 
 optimize() {
   file="$1"
@@ -263,7 +265,7 @@ checkexecs() {
   return "$ret"
 }
 
-require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp readlink shfmt jq sponge expand sed
+require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt jq sponge expand sed
 declare -i ret=0
 
 # Regexp for grep to only choose sh file extension for checking
