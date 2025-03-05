@@ -6,76 +6,53 @@
 # @description : Checks for file types functions
 ######################################################################
 
+# Checks if the given file is a Cargo.lock file (used in Rust projects)
 iscargolock() {
   FILE="$(basename "${1}")"
-  if [ "${FILE}" = "Cargo.lock" ]; then
-    return 0
-  fi
-  return 1
+  [[ "${FILE}" == "Cargo.lock" ]]
 }
 
+# Checks if the given file has a .java extension
 isjavafile() {
-  FILE="$1"
-  if [ "${FILE##*.}" = "java" ]; then
-    return 0
-  fi
-  return 1
+  [[ "${1##*.}" == "java" ]]
 }
 
+# Checks if the given file has a .go extension (for Go files)
 isgofile() {
-  FILE="$1"
-  if [ "${FILE##*.}" = "go" ]; then
-    return 0
-  fi
-  return 1
+  [[ "${1##*.}" == "go" ]]
 }
 
+# Checks if the given file has an HTML or XHTML extension
 ishtmlfileextension() {
-  FILE="$1"
-  if [ "${FILE##*.}" = "html" ] || [ "${FILE##*.}" = "xhtml" ]; then
-    return 0
-  fi
-  return 1
+  [[ "${1##*.}" == "html" ]] || [[ "${1##*.}" == "xhtml" ]]
 }
 
+# Checks if the given file has an XML extension
 isxmlfileextension() {
-  FILE="$1"
-  if [ "${FILE##*.}" = "xml" ]; then
-    return 0
-  fi
-  return 1
+  [[ "${1##*.}" == "xml" ]]
 }
 
+# Checks if the given file has an SGML extension
 issgmlfileextension() {
-  FILE="$1"
-  if [ "${FILE##*.}" = "sgml" ]; then
-    return 0
-  fi
-  return 1
+  [[ "${1##*.}" == "sgml" ]]
 }
 
+# Checks if the given file is a text file by looking for 'ASCII' in its type
 istextfile() {
-  if (file "$1" | grep 'ASCII' &> /dev/null); then
-    return 0
-  fi
-  return 1
+  file -b "$1" | grep -q 'ASCII'
 }
 
+# Checks if the given file is a shell script by looking for 'shell script' in its type
 isshellscript() {
-  if (file "$1" | grep 'shell script' &> /dev/null); then
-    return 0
-  fi
-  return 1
+  file -b "$1" | grep -q 'shell script'
 }
 
+# Checks if the given file is an XML, HTML, or SGML file
 isxmlfile() {
-  if (file "$1" | grep 'XML' &> /dev/null) && (isxmlfileextension "${1}"); then
-    return 0
-  elif (file "$1" | grep 'HTML' &> /dev/null) && (ishtmlfileextension "${1}"); then
-    return 0
-  elif (file "$1" | grep 'SGML' &> /dev/null) && (issgmlfileextension "${1}"); then
-    return 0
-  else
-    return 1
-  fi
+  case "$(file "$1")" in
+    *XML*) isxmlfileextension "$1" && return 0 ;;
+    *HTML*) ishtmlfileextension "$1" && return 0 ;;
+    *SGML*) issgmlfileextension "$1" && return 0 ;;
+  esac
+  return 1
 }
