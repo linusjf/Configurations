@@ -32,7 +32,7 @@ formatgo() {
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
       mode="$(getmode "${file}")"
-      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
       git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
     fi
@@ -64,7 +64,7 @@ formatjson() {
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
       mode="$(getmode "${file}")"
-      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
       git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
     fi
@@ -106,7 +106,7 @@ formatxml() {
       hash=$(git hash-object -w "${file}.tmp")
       # Add it back to index
       mode="$(getmode "${file}")"
-      git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
       git cat-file -p "$hash" > "${file}"
       rm "${file}.tmp"
     fi
@@ -123,7 +123,7 @@ formatandcheck() {
   hash=$(git hash-object -w "${file}.tmp")
   # Add it back to index
   mode="$(getmode "${file}")"
-  git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
+  git update-index --add --cacheinfo "${mode}" "$hash" "$file"
   git cat-file -p "$hash" > "${file}"
   rm "${file}.tmp"
   shellcheck --check-sourced --color --shell=bash -- "$file"
