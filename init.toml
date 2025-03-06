@@ -91,7 +91,7 @@ default_height = 30
 
 [[layers]]
   name = 'edit'
-  autosave_timeout = 60000
+  autosave_timeout = 5000
   autosave_events = []
   autosave_all_buffers = true
 
@@ -115,7 +115,7 @@ default_height = 30
   # layer, the value of this option is a string.
   colorscheme = "gruvbox"
   colorscheme_bg = "dark"
-  random_theme = true
+  random_theme = false
   frequency = "daily"
 
 [[layers]]
@@ -135,7 +135,7 @@ default_height = 30
 [[layers]]
   name = "lang#java"
   format_on_save = true
-  java_formatter_jar = 'path/to/google-java-format.jar'
+  java_formatter_jar = '~/javaformatter/google-java-format.jar'
   java_file_head = [
     '/**',
     ' * @author : `fnamemodify(expand("~"), ":t")`',
@@ -297,7 +297,7 @@ default_height = 30
 
 [[custom_plugins]]
     repo = "github/copilot.vim"
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = "nono/jquery.vim"
@@ -309,7 +309,7 @@ default_height = 30
 
 [[custom_plugins]]
     repo = 'farmergreg/vim-lastplace'
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = 'editorconfig/editorconfig-vim'
@@ -333,15 +333,15 @@ default_height = 30
 
 [[custom_plugins]]
     repo = "elzr/vim-json"
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = "bfrg/vim-jq"
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = "XadillaX/json-formatter.vim"
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = 'godlygeek/tabular'
@@ -349,15 +349,15 @@ default_height = 30
 
 [[custom_plugins]]
     repo = 'preservim/vim-markdown'
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = 'mzlogin/vim-markdown-toc'
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = 'z0mbix/vim-shfmt'
-    merged = false
+    merged = true
 
 [[custom_plugins]]
     repo = 'mhinz/vim-signify'
