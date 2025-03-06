@@ -22,11 +22,11 @@ checkws() {
       tmp="$(mktemp)"
       case "$file" in
         *.xml | *.sgml | *.html | *.xhtml)
-    # check file content and not empty or something else
-    if isxmlfile "$file"; then
+          # check file content and not empty or something else
+          if isxmlfile "$file"; then
             striptabsandlines "$file" 0
             wscheck --color --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
-    fi
+          fi
           ;;
         *.go)
           striptabsandlines "$file" 0

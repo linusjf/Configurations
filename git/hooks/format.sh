@@ -54,14 +54,18 @@ format_xml() {
 }
 
 formatandcheck() {
-  file="$1"
-  git show ":$file" > "${file}.tmp"
-  shellcheck --check-sourced --color --shell=bash -- "${file}.tmp" || return 1
-  shfmt -i 2 -bn -ci -sr -w -- "${file}.tmp"
-  hash=$(git hash-object -w "${file}.tmp")
+  local file="$1"
+  local tmpfile
+  tmpfile="$(mktemp -t "$(basename "${file}").XXXXXX")"
+  git show ":$file" > "$tmpfile"
+  shellcheck --check-sourced --color --shell=bash -- "$tmpfile" || return 1
+  shfmt -i 2 -bn -ci -sr -w -- "$tmpfile"
+  local hash
+  hash=$(git hash-object -w "$tmpfile")
+  local mode
   mode="$(get_mode "${file}")"
   git update-index --add --cacheinfo "${mode}" "$hash" "$file"
   git cat-file -p "$hash" > "${file}"
-  rm "${file}.tmp"
+  rm "$tmpfile"
   return $?
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 require() {
   for cmd in "$@"; do
     if ! hash "$cmd" 2> /dev/null; then
@@ -48,7 +49,7 @@ declare -i ret=0
 declare -a FILES=()
 
 # Regexp for grep to only choose sh file extension for checking
-exts="'\.sh$'"
+exts="\.sh$"
 
 # run shellcheck against shell executables and shell script functions
 checkshs "$exts" || ((ret = 1))
