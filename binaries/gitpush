@@ -43,6 +43,13 @@ trap 'ret=$?; message $ret' EXIT
 # Ensure latest changes
 git pull --rebase
 
+# check if local branch development exists.
+# If not, create it
+if ! git show-ref --quiet refs/heads/development; then
+  printf "Local branch development does not exist. Creating it ...\n"
+  git checkout -b development
+fi
+
 # Push development branch
 git push origin development
 
