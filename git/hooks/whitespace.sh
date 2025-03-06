@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+requirefns() {
+  for fn in "$@"; do
+    if [[ "$(type -t "$fn")" != "function" ]]; then
+      echo "$fn function does not exist."
+      exit 1
+    fi
+  done
+}
+
+requirefns istextfile isxmlfile isgofile isjavafile iscargolock
 
 checkws() {
   local ret=0

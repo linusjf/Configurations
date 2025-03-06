@@ -4,7 +4,7 @@ requirefns() {
     if [[ "$(type -t "$fn")" == function ]]; then
       continue
     else
-      printf "%s function does not exist." "$fn"
+      printf "%s function does not exist.\n" "$fn"
       exit 1
     fi
   done
