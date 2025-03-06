@@ -8,7 +8,7 @@ requirefns() {
   done
 }
 
-requirefns istextfile isxmlfile isgofile isjavafile iscargolock
+requirefns istextfile
 
 checkws() {
   local ret=0
