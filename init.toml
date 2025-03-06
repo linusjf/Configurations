@@ -7,7 +7,7 @@
 #=============================================================================
 # All SpaceVim options are below [options] snippet
 [options]
-    automatic_update = false
+    automatic_update = true
     default_indent = 2
     expand_tab = true
     # Disable guicolors in basic mode, many terminal do not support 24bit
