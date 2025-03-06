@@ -8,8 +8,9 @@
 
 # Checks if the given file is a Cargo.lock file (used in Rust projects)
 iscargolock() {
-  FILE="$(basename "${1}")"
-  [[ "${FILE}" == "Cargo.lock" ]]
+  local file
+  file="$(basename "${1}")"
+  [[ "${file}" == "Cargo.lock" ]]
 }
 
 # Checks if the given file has a .java extension

@@ -16,7 +16,6 @@ requirefns isshellscript formatandcheck
 checkshs() {
   local exts="$1"
   local ret=0
-  local -a FILES
 
   mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep -E "$exts" || true)
 
@@ -32,7 +31,7 @@ checkshs() {
 
 checkexecs() {
   local ret=0
-  local -a FILES dots
+  local -a dots
 
   mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.' || true)
   mapfile -t dots < <(git diff --cached --name-only --diff-filter=ACMR | grep '^\.' || true)
