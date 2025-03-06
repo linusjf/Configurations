@@ -50,7 +50,13 @@ checkws() {
 }
 
 stripnewlines() {
+  # convert contents of file to here string
+  # using the <<< input operator which strips
+  # out any trailing new lines
+  # which is then piped to sponge rewriting
+  # the buffered output
   cat <<< $(cat  < "${1}") | sponge "${1}"
+  # strip out trailing white spaces on every line
   sed -i 's/[[:blank:]]*$//' "${1}"
 }
 
