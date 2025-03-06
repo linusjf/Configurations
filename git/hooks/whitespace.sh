@@ -50,7 +50,7 @@ checkws() {
 }
 
 stripnewlines() {
-  awk 'NF {p=1} p' <<< "$(< "${1}")" | sponge "$1"
+  cat <<< "$(< "${1}")" | sponge "$1"
   sed -i 's/[[:blank:]]*$//' "${1}"
 }
 
