@@ -12,42 +12,46 @@ requirefns istextfile isxmlfile isgofile isjavafile iscargolock
 
 checkws() {
   local ret=0
-  # If no files left in index after formatting - fail
-  # i.e., if files are similar after changes
-  cmd="git diff --cached --name-only"
-  readarray -t FILES < <(eval "$cmd")
+  local tmp wsout
+
+  # Get list of staged files
+  readarray -t FILES < <(git diff --cached --name-only)
+
   for file in "${FILES[@]}"; do
     if istextfile "$file"; then
-      declare -i wsout=0
+      wsout=0
       echo "Checking ${file} for whitespace..."
       tmp="$(mktemp)"
-      if isxmlfile "$file"; then
-        striptabsandlines "$file" 0
-        wscheck --color --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
-        wsout=$?
-      elif isgofile "$file"; then
-        striptabsandlines "$file" 0
-        wscheck --color --exclude WSC004 --checkstyle "$tmp" -- "$file"
-        wsout=$?
-      elif isjavafile "$file"; then
-        wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
-        wsout=$?
-      elif iscargolock "$file"; then
-        wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
-        wsout=$?
-      else
-        striptabsandlines "$file"
-        wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
-        wsout=$?
-      fi
-      ret=$((ret + wsout))
-      if test "$wsout" -ne 0; then
+
+      case "$file" in
+        *.xml)
+          striptabsandlines "$file" 0
+          wscheck --color --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
+          ;;
+        *.go)
+          striptabsandlines "$file" 0
+          wscheck --color --exclude WSC004 --checkstyle "$tmp" -- "$file"
+          ;;
+        *.java | Cargo.lock)
+          wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
+          ;;
+        *)
+          striptabsandlines "$file"
+          wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
+          ;;
+      esac
+
+      wsout=$?
+      ((ret += wsout))
+
+      if [[ "$wsout" -ne 0 ]]; then
         mv "$tmp" "${file}.wsout"
       else
         rm "$tmp"
       fi
     fi
   done
+
   return "$ret"
 }
 
