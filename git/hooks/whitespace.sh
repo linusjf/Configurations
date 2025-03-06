@@ -32,7 +32,7 @@ checkws() {
           striptabsandlines "$file" 0
           wscheck --color --exclude WSC004 --checkstyle "$tmp" -- "$file"
           ;;
-        *.java | Cargo.lock)
+        *.java | *Cargo.lock)
           wscheck --color --exclude WSC003 --checkstyle "$tmp" -- "$file"
           ;;
         *)
