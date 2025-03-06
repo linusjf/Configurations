@@ -7,7 +7,9 @@ requirefns() {
     fi
   done
 }
+
 requirefns istextfile
+
 checkws() {
   local ret=0
   local tmp wsout
@@ -46,10 +48,12 @@ checkws() {
   done
   return "$ret"
 }
+
 stripnewlines() {
+  awk 'NF {p=1} p' <<< "$(< "${1}")" | sponge "$1"
   sed -i 's/[[:blank:]]*$//' "${1}"
-  sed -i '/^$/d' "${1}"
 }
+
 striptabsandlines() {
   file="$1"
   isxml="${2:-1}"
