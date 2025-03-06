@@ -21,7 +21,7 @@
     buffer_index_type = 4
     # Display file type icon on the tabline, If you do not have nerd fonts
     # installed, please change the value to false
-    enable_tabline_filetype_icon = false
+    enable_tabline_filetype_icon = true
     # Display current mode text on statusline, by default It is disabled,
     # only color will be changed when switch modes.
     # checkers options
@@ -55,7 +55,7 @@ name = "default"
 # Enable autocomplete layer
 [[layers]]
     name = "autocomplete"
-    auto_completion_tab_key_behavior = "smart"
+    auto_completion_tab_key_behavior = "cycle"
     auto_completion_delay = 200
     auto_completion_complete_with_key_sequence = "nil"
     auto_completion_complete_with_key_sequence_delay = 0.1
@@ -91,8 +91,8 @@ default_height = 30
 
 [[layers]]
   name = 'edit'
-  autosave_timeout = 5000
-  autosave_events = []
+  autosave_timeout = 2000
+  autosave_events = ['InsertLeave', 'TextChanged']
   autosave_all_buffers = true
 
 [[layers]]
@@ -116,7 +116,6 @@ default_height = 30
   colorscheme = "gruvbox"
   colorscheme_bg = "dark"
   random_theme = false
-  frequency = "daily"
 
 [[layers]]
   name = "debug"
@@ -166,7 +165,7 @@ default_height = 30
 
 [[layers]]
   name = 'lsp'
-  enabled_clients = ['intelephense', 'pyright']
+  enabled_clients = ['intelephense', 'pyright', 'rust_analyzer']
 
 [[layers]]
     name = "lang#python"
@@ -202,7 +201,7 @@ default_height = 30
 
 [[layers]]
     name = "git"
-    git_plugin = 'fugitive'
+    git_plugin = 'vim-gitgutter'
 
 [[layers]]
     name = "github"
@@ -275,6 +274,9 @@ default_height = 30
 [[layers]]
   name = "lang#typescript"
 
+[[layers]]
+  name = "nvim-treesitter"
+
 [[custom_plugins]]
     name = "MaxMEllon/vim-jsx-pretty"
     merged = false
@@ -289,10 +291,6 @@ default_height = 30
 
 [[custom_plugins]]
     repo = "junegunn/vim-github-dashboard"
-    merged = false
-
-[[custom_plugins]]
-    repo = "nvim-treesitter/nvim-treesitter"
     merged = false
 
 [[custom_plugins]]
