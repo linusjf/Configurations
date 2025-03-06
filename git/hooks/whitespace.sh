@@ -61,20 +61,30 @@ stripnewlines() {
 }
 
 striptabsandlines() {
-  file="$1"
-  isxml="${2:-1}"
+  local file="$1"
+  local is_xml_file="${2:-1}"
+  local tmp_file
+
+  # Create a temporary file
+  tmp_file="$(mktemp)"
   # Get the file from index
-  git show ":$file" > "${file}.tmp"
-  if test "$isxml" -ne 0; then
-    expand -i -t 2 "${file}.tmp" | sponge "${file}.tmp"
+  git cat-file -p ":$file" > "$tmp_file"
+
+  # strip tabs and new lines
+  if test "$is_xml_file" -ne 0; then
+    expand -i -t 2 "$tmp_file" | sponge "$tmp_file"
   fi
-  stripnewlines "${file}.tmp"
-  # Create a blob object from the formatted file
-  hash=$(git hash-object -w "${file}.tmp")
+  stripnewlines "$tmp_file"
+  # Create a new git blob object from the formatted file
+  local hash
+  hash=$(git hash-object -w "$tmp_file")
   # Add it back to index
+  local mode
   mode=$(stat -c "%a" "$file")
   git update-index --add --cacheinfo "100${mode}" "$hash" "$file"
   git cat-file -p "$hash" > "${file}"
-  rm "${file}.tmp"
+
+  # Clean-up
+  rm "$tmp_file"
   return $?
 }
