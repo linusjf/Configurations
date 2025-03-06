@@ -12,8 +12,10 @@ optimize() {
 
 optimizejpgs() {
   local ret=0
-  local exts=".*\.(jpg|jpeg)$"
-  local cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E \"$exts\""
+  local exts
+  exts=".*\.(jpg|jpeg)$"
+  local cmd
+  cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E \"$exts\""
 
   readarray -t FILES < <(eval "$cmd")
   ret=$?
