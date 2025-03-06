@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 optimize() {
-  file="$1"
+  local file="$1"
+  local mode
   mode=$(stat -c "%a" "$file")
   jpegoptim -f -s "$file" \
     && hash=$(git hash-object -w "${file}") \

@@ -8,7 +8,7 @@ requirefns() {
   done
 }
 
-requirefns istextfile
+requirefns istextfile isxmlfile
 
 checkws() {
   local ret=0
@@ -21,9 +21,12 @@ checkws() {
       echo "Checking ${file} for whitespace..."
       tmp="$(mktemp)"
       case "$file" in
-        *.xml)
-          striptabsandlines "$file" 0
-          wscheck --color --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
+        *.xml | *.sgml | *.html | *.xhtml)
+    # check file content and not empty or something else
+    if isxmlfile "$file"; then
+            striptabsandlines "$file" 0
+            wscheck --color --exclude WSC002 WSC003 --checkstyle "$tmp" -- "$file"
+    fi
           ;;
         *.go)
           striptabsandlines "$file" 0
