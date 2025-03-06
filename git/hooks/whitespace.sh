@@ -50,7 +50,7 @@ checkws() {
 }
 
 stripnewlines() {
-  cat <<< "$(< "${1}")" | sponge "$1"
+  cat <<< $(cat  < "${1}") | sponge "${1}"
   sed -i 's/[[:blank:]]*$//' "${1}"
 }
 
