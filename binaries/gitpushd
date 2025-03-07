@@ -32,7 +32,7 @@ command="git push -u origin development"
 trap message EXIT
 
 function message() {
-  ret=$?
+  local ret=$?
   if [[ "$ret" -eq 0 ]]; then
     echo -e "${GREEN}✅ Successfully exited with code $ret from last command: $command${NC}"
     if [[ "$(git rev-parse development)" != "$(git rev-parse main)" ]]; then

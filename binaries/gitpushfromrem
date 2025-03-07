@@ -13,7 +13,7 @@ NC="\033[0m" # No Color
 
 # shellcheck disable=SC2317,SC2329
 function message() {
-  ret=$?
+  local ret=$?
   if [ "$ret" -eq 0 ]; then
     echo -e "${GREEN}✅ Successfully executed: $command${NC}"
     if [ "$(git rev-parse development)" != "$(git rev-parse main)" ]; then
