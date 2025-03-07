@@ -1,2 +1,78 @@
 #!/usr/bin/env bash
-find . -xtype l -print -delete
+#
+# Script to delete broken links.
+#
+# The script:
+# - Includes a `--dry-run` option to print links to be deleted instead of deleting them
+# - Uses `rm -f` to force deletion of links without prompting for confirmation
+# - Asks the user to confirm deletion for each link, with options "yes", "no", or "all"
+# - If the user chooses "all", the script deletes the current link and all remaining links without asking for further confirmation
+
+usage() {
+  echo "Usage: $0 [OPTION]"
+  echo "Remove broken symbolic links"
+  echo ""
+  echo "Options:"
+  echo "  --dry-run  Print links to be deleted instead of deleting"
+  echo "  -h, --help  Display this help message"
+  exit 1
+}
+
+dry_run=no
+while [ $# -gt 0 ]; do
+  case $1 in
+    --dry-run)
+      dry_run=yes
+      ;;
+    -h | --help)
+      usage
+      ;;
+    *)
+      usage
+      ;;
+  esac
+  shift
+done
+
+mapfile -t broken_links < <(find . -xtype l -print)
+
+if [ ${#broken_links[@]} -eq 0 ]; then
+  echo "No broken symbolic links found."
+  exit 0
+fi
+
+all_links=no
+for link in "${broken_links[@]}"; do
+  read -p -r "Delete $link? (yes/no/all): " response
+  case $response in
+    yes)
+      if [ "$dry_run" = "yes" ]; then
+        echo "Would delete $link"
+      else
+        rm -f "$link"
+        echo "Deleted $link"
+      fi
+      ;;
+    all)
+      all_links=yes
+      if [ "$dry_run" = "yes" ]; then
+        echo "Would delete $link"
+      else
+        rm -f "$link"
+        echo "Deleted $link"
+      fi
+      ;;
+    *) ;;
+  esac
+  if [ "$all_links" = "yes" ]; then
+    for remaining_link in "${broken_links[@]:${broken_links[@]/$link/}}"; do
+      if [ "$dry_run" = "yes" ]; then
+        echo "Would delete $remaining_link"
+      else
+        rm -f "$remaining_link"
+        echo "Deleted $remaining_link"
+      fi
+    done
+    break
+  fi
+done
