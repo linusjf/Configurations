@@ -13,16 +13,21 @@ usage() {
   echo "Remove broken symbolic links"
   echo ""
   echo "Options:"
-  echo "  --dry-run  Print links to be deleted instead of deleting"
+  echo "  -d, --dry-run  Print links to be deleted instead of deleting"
   echo "  -h, --help  Display this help message"
+  echo "  -p, --print Print list of broken links"
   exit 1
 }
 
-dry_run=no
+dry_run=false
+print=false
 while [ $# -gt 0 ]; do
   case $1 in
-    --dry-run)
-      dry_run=yes
+    -d | --dry-run)
+      dry_run=true
+      ;;
+    -p | --print)
+      print=true
       ;;
     -h | --help)
       usage
@@ -41,13 +46,20 @@ if [ ${#broken_links[@]} -eq 0 ]; then
   exit 0
 fi
 
+if "$print"; then
+  printf "Broken links:\n"
+  printf "%s\n" "${broken_links[@]}"
+  exit 0
+fi
+
 all_links=no
 # shellcheck disable=SC2162
-for link in "${broken_links[@]}"; do
-  read -p "Delete $link? (yes/no/all): " response
+for i in "${!broken_links[@]}"; do
+  link="${broken_links[$i]}"
+  read -p "Delete $link? (yes/no/all/abort): " response
   case $response in
     y | yes)
-      if [ "$dry_run" = "yes" ]; then
+      if [[ "$dry_run" ]]; then
         echo "Would delete $link"
       else
         rm -f "$link"
@@ -56,18 +68,21 @@ for link in "${broken_links[@]}"; do
       ;;
     all)
       all_links=yes
-      if [ "$dry_run" = "yes" ]; then
+      if [[ "$dry_run" ]]; then
         echo "Would delete $link"
       else
         rm -f "$link"
         echo "Deleted $link"
       fi
       ;;
+    abort)
+      exit 1
+      ;;
     *) ;;
   esac
   if [ "$all_links" = "yes" ]; then
-    for remaining_link in "${broken_links[@]:${broken_links[@]/$link/}}"; do
-      if [ "$dry_run" = "yes" ]; then
+    for remaining_link in "${broken_links[@]:${i}}"; do
+      if [[ "$dry_run" = "yes" ]]; then
         echo "Would delete $remaining_link"
       else
         rm -f "$remaining_link"
