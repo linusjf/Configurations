@@ -26,15 +26,17 @@ format_file() {
 }
 
 format_go() {
-  readarray -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.go$')
-  for file in "${FILES[@]}"; do
+  local -a files=()
+  readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.go$')
+  for file in "${files[@]}"; do
     format_file "$file" gofmt
   done
 }
 
 format_json() {
-  readarray -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.json$')
-  for file in "${FILES[@]}"; do
+  local -a files=()
+  readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.json$')
+  for file in "${files[@]}"; do
     format_file "$file" jq
   done
 }
@@ -47,8 +49,9 @@ format_xml() {
     exit 1
   fi
 
-  readarray -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.xml$')
-  for file in "${FILES[@]}"; do
+  local -a files=()
+  readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.xml$')
+  for file in "${files[@]}"; do
     format_file "$file" "$tidy_path"
   done
 }

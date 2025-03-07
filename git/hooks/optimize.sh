@@ -17,12 +17,13 @@ optimizejpgs() {
   local cmd
   cmd="git diff --cached --name-only --diff-filter=ACMR | grep -E \"$exts\""
 
-  readarray -t FILES < <(eval "$cmd")
+  local -a files=()
+  readarray -t files < <(eval "$cmd")
   ret=$?
 
-  if [[ ${#FILES[@]} -eq 0 ]]; then return 0; fi
+  if [[ ${#files[@]} -eq 0 ]]; then return 0; fi
 
-  for file in "${FILES[@]}"; do
+  for file in "${files[@]}"; do
     optimize "$file"
     ret=$((ret + $?))
   done

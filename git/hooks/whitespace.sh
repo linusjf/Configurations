@@ -14,8 +14,9 @@ checkws() {
   local ret=0
   local tmp wsout
   # Get list of staged files
-  readarray -t FILES < <(git diff --cached --name-only)
-  for file in "${FILES[@]}"; do
+  local -a files=()
+  readarray -t files < <(git diff --cached --name-only)
+  for file in "${files[@]}"; do
     if istextfile "$file"; then
       wsout=0
       echo "Checking ${file} for whitespace..."

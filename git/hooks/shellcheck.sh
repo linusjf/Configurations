@@ -17,9 +17,10 @@ checkshs() {
   local exts="$1"
   local ret=0
 
-  mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep -E "$exts" || true)
+  local -a files=()
+  mapfile -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep -E "$exts" || true)
 
-  for file in "${FILES[@]}"; do
+  for file in "${files[@]}"; do
     if [[ -n "$file" && -f "$file" ]] && isshellscript "$file"; then
       formatandcheck "$file"
       ret=$((ret + $?))
@@ -31,14 +32,15 @@ checkshs() {
 
 checkexecs() {
   local ret=0
-  local -a dots
+  local -a dots=()
 
-  mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.' || true)
+  local -a files=()
+  mapfile -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep -v '\.' || true)
   mapfile -t dots < <(git diff --cached --name-only --diff-filter=ACMR | grep '^\.' || true)
 
-  FILES+=("${dots[@]}")
+  files+=("${dots[@]}")
 
-  for file in "${FILES[@]}"; do
+  for file in "${files[@]}"; do
     if [[ -n "$file" && -x "$file" && ! -d "$file" ]] && isshellscript "$file"; then
       formatandcheck "$file"
       ret=$((ret + $?))
