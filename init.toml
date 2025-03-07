@@ -190,7 +190,7 @@ default_height = 30
 
 [[layers]]
     name = "lang#c"
-    clang_executable = "/data/data/com.termux/files/usr/bin/clang"
+    clang_executable = "clang"
     enable_clang_syntax_highlight = true
     [layer.clang_std]
     c = "c17"
