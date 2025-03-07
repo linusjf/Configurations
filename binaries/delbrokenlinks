@@ -47,7 +47,7 @@ if [ ${#broken_links[@]} -eq 0 ]; then
 fi
 
 if "$print"; then
-  printf "Broken links:\n"
+  printf "Broken symbolic links:\n"
   printf "%s\n" "${broken_links[@]}"
   exit 0
 fi
