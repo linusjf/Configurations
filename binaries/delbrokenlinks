@@ -46,7 +46,7 @@ all_links=no
 for link in "${broken_links[@]}"; do
   read -p "Delete $link? (yes/no/all): " response
   case $response in
-    yes)
+    y | yes)
       if [ "$dry_run" = "yes" ]; then
         echo "Would delete $link"
       else
