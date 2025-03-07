@@ -92,7 +92,8 @@ default_height = 30
 [[layers]]
   name = 'edit'
   autosave_timeout = 2000
-  autosave_events = ['InsertLeave', 'TextChanged']
+ # autosave_events = ['InsertLeave', 'TextChanged']
+  autosave_events = []
   autosave_all_buffers = true
 
 [[layers]]
