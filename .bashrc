@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091,SC2181,SC1090
 # If not running interactively, don't do anything
 case $- in
 esac
@@ -7,7 +8,7 @@ esac
 function _AM_() {
   local am_bin="${PREFIX}/usr/bin/am"
   local termux_bin="/usr/local/termuxarch/bin"
-  command -v am &>/dev/null || [ -f "$am_bin" ] && cp "$am_bin" "$termux_bin"
+  command -v am &> /dev/null || [ -f "$am_bin" ] && cp "$am_bin" "$termux_bin"
 }
 
 function _PWD_() {
@@ -52,7 +53,7 @@ case "$TERM" in
   xterm-color | *-256color) color_prompt=yes ;;
 esac
 
-if [ "$color_prompt" = yes ] && command -v tput &>/dev/null && tput setaf 1 &>/dev/null; then
+if [ "$color_prompt" = yes ] && command -v tput &> /dev/null && tput setaf 1 &> /dev/null; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -60,10 +61,10 @@ fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm* | rxvt*)
-  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-  ;;
-*) ;;
+  xterm* | rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+  *) ;;
 esac
 
 # enable color support of ls and also add handy aliases
@@ -156,8 +157,8 @@ if [ -f "${PREFIX}/usr/google-cloud-sdk/completion.bash.inc" ]; then source "${P
 if test -d "${HOME}/.local/share/pnpm"; then
   export PNPM_HOME="${HOME}/.local/share/pnpm"
   case ":$PATH:" in
-	  *":$PNPM_HOME:"*) ;;
-	  *) export PATH="$PNPM_HOME:$PATH" ;;
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 fi
 # pnpm end
@@ -172,15 +173,15 @@ test -s "$NVM_DIR/bash_completion" && source "$NVM_DIR/bash_completion" # This l
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/linus/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "/home/linus/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/linus/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/linus/miniconda3/bin:$PATH"
-    fi
+  if [ -f "/home/linus/miniconda3/etc/profile.d/conda.sh" ]; then
+    source "/home/linus/miniconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="/home/linus/miniconda3/bin:$PATH"
+  fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-. "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
