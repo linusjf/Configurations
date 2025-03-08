@@ -7,7 +7,7 @@
 #=============================================================================
 # All SpaceVim options are below [options] snippet
 [options]
-    automatic_update = true
+    automatic_update = false
     default_indent = 2
     expand_tab = true
     # Disable guicolors in basic mode, many terminal do not support 24bit
@@ -296,7 +296,7 @@ default_height = 30
 
 [[custom_plugins]]
     repo = "github/copilot.vim"
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = "nono/jquery.vim"
@@ -308,7 +308,7 @@ default_height = 30
 
 [[custom_plugins]]
     repo = 'farmergreg/vim-lastplace'
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = 'editorconfig/editorconfig-vim'
@@ -332,15 +332,15 @@ default_height = 30
 
 [[custom_plugins]]
     repo = "elzr/vim-json"
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = "bfrg/vim-jq"
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = "XadillaX/json-formatter.vim"
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = 'godlygeek/tabular'
@@ -348,15 +348,15 @@ default_height = 30
 
 [[custom_plugins]]
     repo = 'preservim/vim-markdown'
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = 'mzlogin/vim-markdown-toc'
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = 'z0mbix/vim-shfmt'
-    merged = true
+    merged = false
 
 [[custom_plugins]]
     repo = 'mhinz/vim-signify'

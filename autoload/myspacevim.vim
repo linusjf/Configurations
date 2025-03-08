@@ -84,6 +84,9 @@ let g:tmpl_copyright = 'Copyright (c) g:tmpl_company, all rights reserved.'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_jump = 1
+let g:syntastic_sh_checkers = ['shellcheck']
+let g:syntastic_debug = 3  " Enable debugging if needed
+
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_frontmatter = 1
@@ -112,6 +115,8 @@ let g:neoformat_python_black = {
     \ 'args': ['-q', '-'],
     \ }
 let g:neoformat_enabled_python = ['black']
+
+let g:NERDTreeHijackNetrw=0
 
 iabbrev <buffer> --- <c-k>-M
 " Show column numbers
