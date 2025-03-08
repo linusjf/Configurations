@@ -101,7 +101,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-for file in "$HOME/.gitrc" "$HOME/.bash_aliases"; do
+for file in "$HOME/.gitrc" "$HOME/.bash_aliases" "$HOME/.bash_profile"; do
   [ -f "$file" ] && source "$file"
 done
 
@@ -187,3 +187,9 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 source "$HOME/.cargo/env"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+eval "$(pyenv virtualenv-init -)"

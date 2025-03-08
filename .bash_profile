@@ -5,7 +5,7 @@
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
   if [ -f "$HOME/.bashrc" ]; then
-    source "$HOME/.bashrc"
+    : # source "$HOME/.bashrc"
   fi
 fi
 # set PATH so it includes user's private bin if it exists
@@ -19,7 +19,6 @@ if [ -d "$HOME/.local/bin" ]; then
 fi
 
 ## termux hacks for bash_profile
-
 istermux=true
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -28,7 +27,7 @@ if [ -f "$PREFIX/etc/os-release" ]; then
   declare -A os
   while IFS='=' read -r key value; do
     os[$key]=$value
-  done <"$PREFIX/etc/os-release"
+  done < "$PREFIX/etc/os-release"
   os_id=${os["ID"]}
   echo "Operating system: ${os_id}"
 fi
@@ -40,7 +39,7 @@ require tty cat rm grep awk fortune lolcat cowsay updatedb
 if [[ "$istermux" == false ]]; then
   if [[ "$os_id" =~ arch.* ]]; then
     require archlinux-java
-    if ! (archlinux-java status | grep "(default)" >/dev/null); then
+    if ! (archlinux-java status | grep "(default)" > /dev/null); then
       archlinux-java fix
     fi
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
@@ -115,14 +114,14 @@ fi
 set -o vi
 export PYTHONASYNCIODEBUG=0
 if test -f "${HOME}/.groq/groq_secret_access_key"; then
-    export GROQ_SECRET_ACCESS_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
+  export GROQ_SECRET_ACCESS_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
 fi
 if test -f "${HOME}/.groq/groq_secret_access_key"; then
-    export GROQ_API_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
+  export GROQ_API_KEY="$(cat "${HOME}/.groq/groq_secret_access_key")"
 fi
 source "$HOME/.cargo/env"
 if test -f "${HOME}/.openai/.secretkey"; then
-    export OPENAI_API_KEY="$(cat "${HOME}/.openai/.secretkey")"
+  export OPENAI_API_KEY="$(cat "${HOME}/.openai/.secretkey")"
 fi
 export GIT_USER="linusjf"
 # .bash_profile EOF
