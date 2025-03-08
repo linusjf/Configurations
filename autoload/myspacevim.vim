@@ -38,42 +38,6 @@ let g:JuliaFormatter_options = {
       \ 'annotate_untyped_fields_with_any' : v:true,
       \ 'format_docstrings'         : v:true
       \ }
-"other configs
-let g:github_dashboard = {}
-
-" Dashboard window position
-" - Options: tab, top, bottom, above, below, left, right
-" - Default: tab
-let g:github_dashboard['position'] = 'top'
-
-" Disable Emoji output
-" - Default: only enable on terminal Vim on Mac
-let g:github_dashboard['emoji'] = 0
-
-" Customize emoji (see http://www.emoji-cheat-sheet.com/)
-let g:github_dashboard['emoji_map'] = {
-\   'user_dashboard': 'blush',
-\   'user_activity':  'smile',
-\   'repo_activity':  'laughing',
-\   'ForkEvent':      'fork_and_knife'
-\ }
-
-" Command to open link URLs
-" - Default: auto-detect
-let g:github_dashboard['open_command'] = 'open'
-
-" API timeout in seconds
-" - Default: 10, 20
-let g:github_dashboard['api_open_timeout'] = 10
-let g:github_dashboard['api_read_timeout'] = 20
-
-" Do not set statusline
-" - Then you can customize your own statusline with github_dashboard#status()
-let g:github_dashboard['statusline'] = 0
-
-let g:github_dashboard['username'] = 'linusjf'
-let g:github_dashboard['password'] = $GITHUB_TOKEN
-let g:gista#client#default_username = 'monkeyxite'
 let g:tmpl_auto_initialize = 1
 let g:tmpl_search_paths = ['~/templates']
 let g:tmpl_author_email = 'linusfernandes at gmail dot com'
@@ -81,18 +45,6 @@ let g:tmpl_author_name = 'Linus Fernandes'
 let g:tmpl_project = 'Github Learning Repos'
 let g:tmpl_company = 'Linus Fernandes'
 let g:tmpl_copyright = 'Copyright (c) g:tmpl_company, all rights reserved.'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_auto_jump = 1
-let g:syntastic_sh_checkers = ['shellcheck']
-let g:syntastic_debug = 3  " Enable debugging if needed
-
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_math = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_auto_extension_ext = 'md'
 let g:vmt_auto_update_on_save = 1
 let g:vmt_dont_insert_fence = 0
 let g:vmt_cycle_list_item_markers = 1
@@ -115,8 +67,6 @@ let g:neoformat_python_black = {
     \ 'args': ['-q', '-'],
     \ }
 let g:neoformat_enabled_python = ['black']
-
-let g:NERDTreeHijackNetrw=0
 
 iabbrev <buffer> --- <c-k>-M
 " Show column numbers
