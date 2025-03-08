@@ -57,7 +57,7 @@ alias view='nvim -R'
 alias python='python3'
 alias node='node --unhandled-rejections=strict'
 alias pipinstall='pip install --break-system-packages'
-alias piptermux='python -m pip --extra-index-url https://termux-user-repository.github.io/pypi/ install'
+alias piptermux='python -m pip install --extra-index-url https://termux-user-repository.github.io/pypi/'
 
 # Linux Distro aliases
 alias ubuntu='proot-distro login --termux-home ubuntu-lts'

@@ -1,0 +1,41 @@
+{
+  "configurations": {
+    "Python": {
+      "adapter": "debugpy",
+      "configuration": {
+        "name": "Python",
+        "type": "python",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "justMyCode": true,
+        "args": []
+      }
+    },
+    "JavaScript": {
+      "adapter": "node",
+      "configuration": {
+        "name": "JavaScript",
+        "type": "node",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "justMyCode": true,
+        "args": []
+      }
+    },
+    "C++": {
+      "adapter": "cppdbg",
+      "configuration": {
+        "name": "C++",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "justMyCode": true,
+        "args": [],
+        "MIDebuggerPath": "/usr/bin/gdb"
+      }
+    }
+  }
+}
