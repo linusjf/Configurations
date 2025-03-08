@@ -26,6 +26,7 @@
     # only color will be changed when switch modes.
     # checkers options
     enable_statusline_mode = true
+    enable_vimfiler_welcome = false
     # left sections of statusline
     statusline_left_sections = [
       'winnr',
@@ -48,6 +49,7 @@
     bootstrap_before = "myspacevim#before"
     bootstrap_after = "myspacevim#after"
     vimcompatible = true
+    filetree_direction = "right"
 
 [[layers]]
 name = "default"
@@ -120,7 +122,7 @@ default_height = 30
 
 [[layers]]
   name = "debug"
-  debugger_plugin = "vimspector"
+  debugger_plugin = "vim-vebugger"
 
 [[layers]]
   name = "foldsearch"
