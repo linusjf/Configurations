@@ -14,6 +14,13 @@ for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
   [ -f "$file" ] && source "$file"
 done
 
+# Let there be color in grep!
+# export GREP_OPTIONS=' — color=auto'
+
+# Set Vim as my default editor
+export EDITOR=vim
+export PAGER=less
+
 ## termux hacks for bash_profile
 istermux=true
 export TERMUX=true
@@ -27,6 +34,7 @@ if [ -f "$PREFIX/etc/os-release" ]; then
   os_id=${os["ID"]}
   echo "Operating system: ${os_id}"
 fi
+
 require() {
   hash "$@"
 }
