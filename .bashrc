@@ -24,9 +24,7 @@ function em() {
   { [ -x /usr/local/termuxarch/bin/uemacs ] && /usr/local/termuxarch/bin/uemacs "$@"; } || { { { cd || exit 69; } && [ -d uemacs ] || gcl https://github.com/torvalds/uemacs; } && { [ -d uemacs ] && { cd uemacs || exit 69; }; } && printf '%s\n' "making uemacs" && make && cp -f em /usr/local/termuxarch/bin/uemacs && make clean && /usr/local/termuxarch/bin/uemacs emacs.hlp; }
 }
 
-for file in "$HOME/.bash_profile" "$HOME/.bash_aliases" "$HOME/.gitrc"; do
-  [ -f "$file" ] && source "$file"
-done
+[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
 
 # Let there be color in grep!
 # export GREP_OPTIONS=' — color=auto'
@@ -96,12 +94,13 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f "${PREFIX}/usr/share/bash-completion/bash_completion" ]; then
+  if [ -f "${PREFIX}/share/bash-completion/bash_completion" ]; then
     # shellcheck source=/dev/null
-    source "${PREFIX}/usr/share/bash-completion/bash_completion"
-  elif [ -f "${PREFIX}/etc/bash_completion" ]; then
+    source "${PREFIX}/share/bash-completion/bash_completion"
+  fi
+  if [ -f "/usr/share/bash-completion/bash_completion" ]; then
     # shellcheck source=/dev/null
-    source "${PREFIX}/etc/bash_completion"
+    source "/usr/share/bash-completion/bash_completion"
   fi
 fi
 

@@ -10,6 +10,10 @@ if [ -d "$HOME/.local/bin" ]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 
+for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
+  [ -f "$file" ] && source "$file"
+done
+
 ## termux hacks for bash_profile
 istermux=true
 export TERMUX=true

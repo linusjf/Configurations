@@ -4,7 +4,7 @@
 *.txt
 *.out
 *.wsout
-1_py3_script
+1_py3_*
 .aws/cli/**
 .aws/sso/**
 .aws/config
