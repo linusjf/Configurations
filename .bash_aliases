@@ -63,5 +63,5 @@ alias piptermux='python -m pip install --extra-index-url https://termux-user-rep
 alias ubuntu='proot-distro login --termux-home ubuntu-lts'
 alias arch='proot-distro login --termux-home archlinux'
 alias kali='startkali'
-alias archlinus='startarch login linus'
+alias archlinus='proot-distro login --user linusjf --termux-home archlinux'
 alias pacman='pacman --disable-sandbox'
