@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
-# Put this in your .bash_profile file.
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-  # include .bashrc if it exists
-  if [ -f "$HOME/.bashrc" ]; then
-    : # source "$HOME/.bashrc"
-  fi
-fi
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
   export PATH="$HOME/bin:$PATH"

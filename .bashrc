@@ -24,6 +24,10 @@ function em() {
   { [ -x /usr/local/termuxarch/bin/uemacs ] && /usr/local/termuxarch/bin/uemacs "$@"; } || { { { cd || exit 69; } && [ -d uemacs ] || gcl https://github.com/torvalds/uemacs; } && { [ -d uemacs ] && { cd uemacs || exit 69; }; } && printf '%s\n' "making uemacs" && make && cp -f em /usr/local/termuxarch/bin/uemacs && make clean && /usr/local/termuxarch/bin/uemacs emacs.hlp; }
 }
 
+for file in "$HOME/.bash_profile" "$HOME/.bash_aliases" "$HOME/.gitrc"; do
+  [ -f "$file" ] && source "$file"
+done
+
 # Let there be color in grep!
 # export GREP_OPTIONS=' — color=auto'
 
@@ -100,10 +104,6 @@ if ! shopt -oq posix; then
     source "${PREFIX}/etc/bash_completion"
   fi
 fi
-
-for file in "$HOME/.gitrc" "$HOME/.bash_aliases" "$HOME/.bash_profile"; do
-  [ -f "$file" ] && source "$file"
-done
 
 for path in "$HOME/binaries/ssh-find-agent.sh" "$HOME/bin/ssh-find-agent.sh"; do
   [ -f "$path" ] && source "$path" && set_ssh_agent_socket
