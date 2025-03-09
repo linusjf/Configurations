@@ -38,7 +38,7 @@ fi
 require() {
   hash "$@"
 }
-alias loadbash='source ~/.bash_profile'
+
 require tty cat rm grep awk fortune lolcat cowsay updatedb
 if [[ "$istermux" == false ]]; then
   if [[ "$os_id" =~ arch.* ]]; then
@@ -50,8 +50,8 @@ if [[ "$istermux" == false ]]; then
     export JAVA_HOME="/usr/lib/jvm/${jvm}"
   fi
   export PATH="${HOME}/userpythonenv/bin:${JAVA_HOME}/bin:${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd:/usr/local/go/bin:${HOME}/.local/share/gem/ruby/3.3.0/bin:${HOME}/Duckdb:${HOME}/go/bin"
-  export PYTHON3_HOST_PROG="${PREFIX}/usr/bin/python"
-  export ANT_HOME="${PREFIX}/usr/share/ant"
+  export PYTHON3_HOST_PROG="${USR}/bin/python"
+  export ANT_HOME="${USR}/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
   export TEMP_DIR="/tmp"
@@ -97,9 +97,9 @@ export GPG_TTY="$(tty)"
 export MOZ_FAKE_NO_SANDBOX=1
 export PULSE_SERVER=127.0.0.1
 export TZ="Asia/Kolkata"
-export NODE_PATH="${PREFIX}/usr/lib/node_modules"
-export TZDIR="${PREFIX}/usr/share/zoneinfo"
-export PKG_CONFIG_PATH="${PREFIX}/usr/lib/pkgconfig/libgit2.pc"
+export NODE_PATH="${USR}/lib/node_modules"
+export TZDIR="${USR}/share/zoneinfo"
+export PKG_CONFIG_PATH="${USR}/lib/pkgconfig/libgit2.pc"
 if test "$istermux" = false; then
   if test -f "${HOME}/.aws/aws_access_key_id"; then
     export AWS_ACCESS_KEY_ID="$(cat "${HOME}/.aws/aws_access_key_id")"

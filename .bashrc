@@ -5,6 +5,8 @@ case $- in
 esac
 :
 
+alias loadbash='source ~/.bash_profile'
+
 function _AM_() {
   local am_bin="${PREFIX}/usr/bin/am"
   local termux_bin="/usr/local/termuxarch/bin"
