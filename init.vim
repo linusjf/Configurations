@@ -188,3 +188,6 @@ let g:spacevim_layer_lang_json = {
       \ 'conceal': 0,
       \ 'concealcursor': ''
       \ }
+
+let custom_repo = {'repo': 'z0mbix/vim-shfmt', 'merged': 0}
+call add(g:spacevim_custom_plugins,[custom_repo.repo,custom_repo])
