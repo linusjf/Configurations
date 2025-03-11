@@ -111,12 +111,12 @@ call SpaceVim#layers#load('lang#python', {
       \ 'enabled_linters': ['python', 'pylint'],
       \ 'enabled_clients': ['pyright']
       \ })
-call SpaceVim#layers#load('lang#javascript', {
-       \ 'auto_fix': v:true,
-       \ 'enable_flow_syntax': v:false,
-       \ 'format_on_save': v:true,
-       \ 'enable_tern': v:false
-       \ })
+"call SpaceVim#layers#load('lang#javascript', {
+ "      \ 'auto_fix': v:true,
+  "     \ 'enable_flow_syntax': v:false,
+   "    \ 'format_on_save': v:true,
+    "   \ 'enable_tern': v:false
+     "  \ })
 call SpaceVim#layers#load('lang#perl')
 call SpaceVim#layers#load('lang#ruby')
 
@@ -206,6 +206,7 @@ let custom_repos = [
   \ {'repo': 'mhartington/oceanic-next', 'merged': 0},
   \ {'repo': 'godlygeek/tabular', 'merged': 0},
   \ {'repo': 'preservim/vim-markdown', 'merged': 0},
+  \ {'repo': 'pangloss/vim-javascript.git', 'merged': 0},
 \ ]
 
 for custom_repo in custom_repos
