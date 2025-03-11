@@ -206,7 +206,7 @@ let custom_repos = [
   \ {'repo': 'mhartington/oceanic-next', 'merged': 0},
   \ {'repo': 'godlygeek/tabular', 'merged': 0},
   \ {'repo': 'preservim/vim-markdown', 'merged': 0},
-  \ {'repo': 'pangloss/vim-javascript.git', 'merged': 0},
+  \ {'repo': 'pangloss/vim-javascript', 'merged': 0},
 \ ]
 
 for custom_repo in custom_repos
