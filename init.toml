@@ -50,8 +50,6 @@
     bootstrap_after = "myspacevim#after"
     vimcompatible = true
     filetree_direction = "left"
-    plugin_manager = "dein"
-
 
 [[layers]]
 name = "default"
@@ -180,11 +178,12 @@ default_height = 30
     enabled_linters = ['python','pylint']
     enabled_clients = ['pyright']
 
-[[layers]]
-    name = "lang#javascript"
-    auto_fix = true
-    enable_flow_syntax = false
-    format_on_save = true
+#[[layers]]
+#   name = "lang#javascript"
+#   auto_fix = true
+#   enable_flow_syntax = false
+#   format_on_save = true
+#   enable_tern = false
 
 [[layers]]
     name = "lang#perl"
