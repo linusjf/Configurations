@@ -89,12 +89,12 @@ call SpaceVim#layers#load('lang#java', {
       \   ''
       \   ]
       \ })
-call SpaceVim#layers#load('lang#markdown', {
-      \ 'listItemIndent': '1',
-      \ 'enableWcwidth': v:true,
-      \ 'listItemChar': '*',
-      \ 'enabled_formater': ['remark', 'prettier']
-      \ })
+"call SpaceVim#layers#load('lang#markdown', {
+"      \ 'listItemIndent': '1',
+"     \ 'enableWcwidth': v:true,
+"     \ 'listItemChar': '*',
+"     \ 'enabled_formater': ['remark', 'prettier']
+""    \ })
 call SpaceVim#layers#load('lang#php')
 call SpaceVim#layers#load('lang#html')
 call SpaceVim#layers#load('lang#sh', {
@@ -204,6 +204,8 @@ let custom_repos = [
   \ {'repo': 'z0mbix/vim-shfmt', 'merged': 0},
   \ {'repo': 'mhinz/vim-signify', 'merged': 0},
   \ {'repo': 'mhartington/oceanic-next', 'merged': 0},
+  \ {'repo': 'godlygeek/tabular', 'merged': 0},
+  \ {'repo': 'preservim/vim-markdown', 'merged': 0},
 \ ]
 
 for custom_repo in custom_repos

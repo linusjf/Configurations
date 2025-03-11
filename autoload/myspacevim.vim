@@ -9,7 +9,7 @@ function! myspacevim#before() abort
   au BufRead,BufNewFile *.jl setlocal textwidth=80
   au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
   let g:python3_host_prog = exepath('python3')
-
+  echom 'Into bootstrap_before'
   let g:neomake_enabled_c_makers = ['clang']
   let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -77,6 +77,7 @@ function! myspacevim#before() abort
 endfunction
 
 function! myspacevim#after() abort
+  echom 'Into bootstrap_after'
   " iunmap jk
   let g:neomake_javascript_eslint_maker =  {
         \ 'exe': 'npx',
