@@ -189,7 +189,7 @@ let g:spacevim_layer_lang_json = {
       \ 'concealcursor': ''
       \ }
 
-let custom_repos = [
+let custom_plugins = [
   \ {'repo': 'MaxMEllon/vim-jsx-pretty', 'merged': 0},
   \ {'repo': 'vim-scripts/dbext.vim', 'merged': 0},
   \ {'repo': 'lilydjwg/colorizer', 'merged': 0},
@@ -209,6 +209,6 @@ let custom_repos = [
   \ {'repo': 'pangloss/vim-javascript', 'merged': 0},
 \ ]
 
-for custom_repo in custom_repos
-  call add(g:spacevim_custom_plugins, [custom_repo.repo, custom_repo])
+for plugin in custom_plugins
+  call add(g:spacevim_custom_plugins, [plugin.repo, plugin])
 endfor
