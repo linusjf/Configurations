@@ -52,6 +52,7 @@
     filetree_direction = "left"
     plugin_manager = "dein"
 
+
 [[layers]]
 name = "default"
 
