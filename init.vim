@@ -189,5 +189,23 @@ let g:spacevim_layer_lang_json = {
       \ 'concealcursor': ''
       \ }
 
-let custom_repo = {'repo': 'z0mbix/vim-shfmt', 'merged': 0}
-call add(g:spacevim_custom_plugins,[custom_repo.repo,custom_repo])
+let custom_repos = [
+  \ {'repo': 'MaxMEllon/vim-jsx-pretty', 'merged': 0},
+  \ {'repo': 'vim-scripts/dbext.vim', 'merged': 0},
+  \ {'repo': 'lilydjwg/colorizer', 'merged': 0},
+  \ {'repo': 'nono/jquery.vim', 'merged': 0},
+  \ {'repo': 'tibabit/vim-templates', 'merged': 0},
+  \ {'repo': 'farmergreg/vim-lastplace', 'merged': 0},
+  \ {'repo': 'tpope/vim-surround', 'merged': 0},
+  \ {'repo': 'pangloss/vim-javascript', 'merged': 0},
+  \ {'repo': 'elzr/vim-json', 'merged': 0},
+  \ {'repo': 'bfrg/vim-jq', 'merged': 0},
+  \ {'repo': 'XadillaX/json-formatter.vim', 'merged': 0},
+  \ {'repo': 'z0mbix/vim-shfmt', 'merged': 0},
+  \ {'repo': 'mhinz/vim-signify', 'merged': 0},
+  \ {'repo': 'mhartington/oceanic-next', 'merged': 0},
+\ ]
+
+for custom_repo in custom_repos
+  call add(g:spacevim_custom_plugins, [custom_repo.repo, custom_repo])
+endfor
