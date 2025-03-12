@@ -68,6 +68,12 @@ curl -sLf "$SPACEVIM_INSTALL_SCRIPT" | bash
 # Create .SpaceVim.d directory
 "$VIM_EXECUTABLE"
 
+# Delete SpaceVim default init.toml
+# We want to use our init.vim instead
+if [ -f "${HOME_DIR}/.SpaceVim.d/init.toml" ]; then
+  mv "${HOME_DIR}/.SpaceVim.d/init.toml" "${HOME_DIR}/.SpaceVim.d/init.toml.bak"
+fi
+
 # Configure SpaceVim
 if [ -f "${HOME_DIR}/Configurations/init.vim" ]; then
   ln -sf "${HOME_DIR}/Configurations/init.vim" "${HOME_DIR}/.SpaceVim.d/init.vim"
