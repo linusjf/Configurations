@@ -8,26 +8,73 @@
 # @description :
 ######################################################################
 
-function require() {
-  hash "$@" || exit 127
+# Set Bash version
+BASH_VERSION_REQUIRED="4.4"
+if [ "${BASH_VERSION}" \< "$BASH_VERSION_REQUIRED" ]; then
+  echo "Error: Bash version $BASH_VERSION_REQUIRED or higher is required."
+  exit 1
+fi
+
+# Define functions
+ensure_dependencies() {
+  for dependency in "$@"; do
+    if ! hash "$dependency" &> /dev/null; then
+      echo "Error: Dependency '$dependency' not found."
+      exit 1
+    fi
+  done
 }
 
-set -e
+usage() {
+  echo "Usage: $0 [OPTION]"
+  echo ""
+  echo "Options:"
+  echo " -n Use Neovim instead of Vim"
+  echo " -h Display this help message"
+  echo ""
+  exit 0
+}
 
-require curl vim nvim
+# Define variables
+HOME_DIR="$HOME"
+SPACEVIM_INSTALL_SCRIPT="https://spacevim.org/install.sh"
+VIM_EXECUTABLE="vim"
 
-[[ -d "${HOME}/.vim" ]] && rm -rf "${HOME}/.vim"
-[[ -d "${HOME}/.config/nvim" ]] && rm -rf "${HOME}/.config/nvim"
-[[ -d "${HOME}/.cache/SpaceVim" ]] && rm -rf "${HOME}/.cache/SpaceVim"
-[[ -d "${HOME}/.SpaceVim" ]] && rm -rf "${HOME}/.SpaceVim"
-[[ -d "${HOME}/.SpaceVim.d" ]] && rm -rf "${HOME}/.SpaceVim.d"
+# Parse command-line options
+while getopts ":hn" opt; do
+  case $opt in
+    n) VIM_EXECUTABLE="nvim" ;;
+    h) usage ;;
+    \?)
+      echo "Invalid option: -$OPTARG"
+      usage
+      ;;
+  esac
+done
 
-curl -sLf https://spacevim.org/install.sh | bash
+# Ensure dependencies
+ensure_dependencies curl "$VIM_EXECUTABLE" nvim
 
-vim
+# Remove existing SpaceVim directories
+for dir in "${HOME_DIR}/.vim" "${HOME_DIR}/.config/nvim" "${HOME_DIR}/.cache/SpaceVim" "${HOME_DIR}/.SpaceVim" "${HOME_DIR}/.SpaceVim.d"; do
+  if [ -d "$dir" ]; then
+    rm -rf "$dir"
+  fi
+done
 
-[[ -f "${HOME}/.SpaceVim.d/init.toml" ]] && mv "${HOME}/.SpaceVim.d/init.toml" "${HOME}/.SpaceVim.d/init.toml.bak" || printf "%s not found.\n" "${HOME}/.SpaceVim.d/init.toml"
+# Install SpaceVim
+curl -sLf "$SPACEVIM_INSTALL_SCRIPT" | bash
 
-[[ -f "${HOME}/Configurations/init.vim" ]] && ln -s "${HOME}/Configurations/init.vim" "${HOME}/.SpaceVim.d/init.vim" || printf "%s not found.\n" "${HOME}/.SpaceVim.d/init.vim"
+# Create .SpaceVim.d directory
+"$VIM_EXECUTABLE"
 
+# Configure SpaceVim
+if [ -f "${HOME_DIR}/Configurations/init.vim" ]; then
+  ln -sf "${HOME_DIR}/Configurations/init.vim" "${HOME_DIR}/.SpaceVim.d/init.vim"
+else
+  echo "Error: Configuration file '${HOME_DIR}/Configurations/init.vim' not found."
+  exit 1
+fi
+
+# Exit successfully
 exit 0
