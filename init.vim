@@ -197,7 +197,6 @@ let custom_plugins = [
   \ {'repo': 'tibabit/vim-templates', 'merged': 0},
   \ {'repo': 'farmergreg/vim-lastplace', 'merged': 0},
   \ {'repo': 'tpope/vim-surround', 'merged': 0},
-  \ {'repo': 'pangloss/vim-javascript', 'merged': 0},
   \ {'repo': 'elzr/vim-json', 'merged': 0},
   \ {'repo': 'bfrg/vim-jq', 'merged': 0},
   \ {'repo': 'XadillaX/json-formatter.vim', 'merged': 0},
