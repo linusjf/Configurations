@@ -211,7 +211,7 @@ for plugin in custom_plugins
   call add(g:spacevim_custom_plugins, [plugin.repo, plugin])
 endfor
 
-function! SetupMarkdown()
+function! s:SetupMarkdown()
   let g:vim_markdown_folding_disabled = 1
   let g:vim_markdown_folding_style_pythonic = 1
   let g:vim_markdown_override_foldtext = 0
@@ -239,9 +239,9 @@ function! SetupMarkdown()
   let g:vim_markdown_edit_url_in = 'current'
 endfunction
 
-call SetupMarkdown()
+call s:SetupMarkdown()
 
-function! SetupJavaScript()
+function! s:SetupJavaScript()
   let g:javascript_plugin_jsdoc = 1
   let g:javascript_plugin_ngdoc = 1
   let g:javascript_plugin_flow = 1
@@ -267,4 +267,4 @@ function! SetupJavaScript()
   let g:javascript_conceal_underscore_arrow_function = "🞅"
 endfunction
 
-call SetupJavaScript()
+call s:SetupJavaScript()
