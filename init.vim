@@ -203,7 +203,6 @@ let custom_plugins = [
   \ {'repo': 'z0mbix/vim-shfmt', 'merged': 0},
   \ {'repo': 'mhinz/vim-signify', 'merged': 0},
   \ {'repo': 'mhartington/oceanic-next', 'merged': 0},
-  \ {'repo': 'godlygeek/tabular', 'merged': 0},
   \ {'repo': 'preservim/vim-markdown', 'merged': 0},
   \ {'repo': 'pangloss/vim-javascript', 'merged': 0},
 \ ]
@@ -251,6 +250,8 @@ function! SetupJavaScript()
     au!
     au FileType javascript setlocal foldmethod=syntax
   augroup END
+
+  set foldlevel=99
 
   let g:javascript_conceal_function = "ƒ"
   let g:javascript_conceal_null = "ø"
