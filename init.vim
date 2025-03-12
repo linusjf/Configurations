@@ -189,27 +189,25 @@ let g:spacevim_layer_lang_json = {
       \ 'concealcursor': ''
       \ }
 
-let custom_plugins = [
-  \ {'repo': 'MaxMEllon/vim-jsx-pretty', 'merged': 0},
-  \ {'repo': 'vim-scripts/dbext.vim', 'merged': 0},
-  \ {'repo': 'lilydjwg/colorizer', 'merged': 0},
-  \ {'repo': 'nono/jquery.vim', 'merged': 0},
-  \ {'repo': 'tibabit/vim-templates', 'merged': 0},
-  \ {'repo': 'farmergreg/vim-lastplace', 'merged': 0},
-  \ {'repo': 'tpope/vim-surround', 'merged': 0},
-  \ {'repo': 'elzr/vim-json', 'merged': 0},
-  \ {'repo': 'bfrg/vim-jq', 'merged': 0},
-  \ {'repo': 'XadillaX/json-formatter.vim', 'merged': 0},
-  \ {'repo': 'z0mbix/vim-shfmt', 'merged': 0},
-  \ {'repo': 'mhinz/vim-signify', 'merged': 0},
-  \ {'repo': 'mhartington/oceanic-next', 'merged': 0},
-  \ {'repo': 'preservim/vim-markdown', 'merged': 0},
-  \ {'repo': 'pangloss/vim-javascript', 'merged': 0},
+" # Custom plugins in Spacevim start
+let g:spacevim_custom_plugins = [
+      \ ['MaxMEllon/vim-jsx-pretty'],
+\ ['vim-scripts/dbext.vim'],
+\ ['lilydjwg/colorizer'],
+\ ['nono/jquery.vim'],
+\ ['tibabit/vim-templates'],
+\ ['farmergreg/vim-lastplace'],
+\ ['tpope/vim-surround'],
+\ ['elzr/vim-json'],
+\ ['bfrg/vim-jq'],
+\ ['XadillaX/json-formatter.vim'],
+\ ['z0mbix/vim-shfmt'],
+\ ['mhinz/vim-signify'],
+\ ['mhartington/oceanic-next'],
+\ ['preservim/vim-markdown'],
+\ ['pangloss/vim-javascript'],
 \ ]
-
-for plugin in custom_plugins
-  call add(g:spacevim_custom_plugins, [plugin.repo, plugin])
-endfor
+" # Custom plugins in Spacevim end
 
 function! s:SetupMarkdown()
   let g:vim_markdown_folding_disabled = 1
