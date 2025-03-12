@@ -211,3 +211,33 @@ let custom_plugins = [
 for plugin in custom_plugins
   call add(g:spacevim_custom_plugins, [plugin.repo, plugin])
 endfor
+
+function! SetupMarkdown()
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_folding_style_pythonic = 1
+  let g:vim_markdown_override_foldtext = 0
+  let g:vim_markdown_folding_level = 6
+  let g:vim_markdown_no_default_key_mappings = 1
+  let g:vim_markdown_toc_autofit = 1
+  let g:vim_markdown_emphasis_multiline = 0
+  let g:vim_markdown_conceal = 0
+  let g:tex_conceal = ""
+  let g:vim_markdown_math = 1
+  let g:vim_markdown_conceal_code_blocks = 0
+  let g:vim_markdown_follow_anchor = 1
+  let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
+  let g:vim_markdown_math = 1
+  let g:vim_markdown_frontmatter = 1
+  let g:vim_markdown_toml_frontmatter = 1
+  let g:vim_markdown_json_frontmatter = 1
+  let g:vim_markdown_strikethrough = 1
+  let g:vim_markdown_new_list_item_indent = 2
+  let g:vim_markdown_no_extensions_in_markdown = 1
+  let g:vim_markdown_autowrite = 1
+  let g:vim_markdown_auto_extension_ext = 'md'
+  let g:vim_markdown_auto_insert_bullets = 0
+  let g:vim_markdown_borderless_table = 1
+  let g:vim_markdown_edit_url_in = 'current'
+endfunction
+
+call SetupMarkdown()
