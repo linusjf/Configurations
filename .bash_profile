@@ -39,7 +39,7 @@ require() {
   hash "$@"
 }
 
-require tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh 
+require tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh
 if [[ "$istermux" == false ]]; then
   if [[ "$os_id" =~ arch.* ]]; then
     require archlinux-java
@@ -129,3 +129,6 @@ if test -f "${HOME}/.openai/.secretkey"; then
 fi
 export GIT_USER="linusjf"
 # .bash_profile EOF
+
+# Created by `pipx` on 2025-03-12 08:24:09
+export PATH="$PATH:/home/linusjf/.local/bin"

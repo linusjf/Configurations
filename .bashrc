@@ -190,3 +190,7 @@ eval "$(pyenv init - bash)"
 
 eval "$(pyenv virtualenv-init -)"
 eval "$(gh copilot alias -- bash)"
+eval "$(register-python-argcomplete pipx)"
+
+# Created by `pipx` on 2025-03-12 08:24:09
+export PATH="$PATH:/home/linusjf/.local/bin"
