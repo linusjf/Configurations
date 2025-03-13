@@ -70,7 +70,9 @@ format_go || ((ret = 1))
 checkws || ((ret = 1))
 
 # check if there are any files to be committed after formatting
-mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMR)
+# add D to filter to include deleted files
+# deleted files are to be included as committed files
+mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMRD)
 
 if [ ${#FILES[@]} -eq 0 ]; then
   # this will also fail empty commits
