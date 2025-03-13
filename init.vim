@@ -89,12 +89,7 @@ call SpaceVim#layers#load('lang#java', {
       \   ''
       \   ]
       \ })
-"call SpaceVim#layers#load('lang#markdown', {
-"      \ 'listItemIndent': '1',
-"     \ 'enableWcwidth': v:true,
-"     \ 'listItemChar': '*',
-"     \ 'enabled_formater': ['remark', 'prettier']
-""    \ })
+"call SpaceVim#layers#load('lang#markdown')
 call SpaceVim#layers#load('lang#php')
 call SpaceVim#layers#load('lang#html')
 call SpaceVim#layers#load('lang#sh', {
@@ -111,12 +106,7 @@ call SpaceVim#layers#load('lang#python', {
       \ 'enabled_linters': ['python', 'pylint'],
       \ 'enabled_clients': ['pyright']
       \ })
-"call SpaceVim#layers#load('lang#javascript', {
- "      \ 'auto_fix': v:true,
-  "     \ 'enable_flow_syntax': v:false,
-   "    \ 'format_on_save': v:true,
-    "   \ 'enable_tern': v:false
-     "  \ })
+"call SpaceVim#layers#load('lang#javascript')
 call SpaceVim#layers#load('lang#perl')
 call SpaceVim#layers#load('lang#ruby')
 
@@ -162,6 +152,17 @@ call SpaceVim#layers#load('lang#typescript')
 call SpaceVim#layers#load('nvim-treesitter')
 
 " Set options for specific layers
+let g:spacevim_layer_lang_markdown = {
+ \ 'listItemIndent': '1',
+    \ 'enableWcwidth': v:true,
+     \ 'listItemChar': '*',
+    \ 'enabled_formater': ['remark', 'prettier']
+    \ }
+let g:spacevim_layer_lang_javascript = {
+  \ 'auto_fix': v:true,
+  \ 'enable_flow_syntax': v:false,
+  \ 'format_on_save': v:true,
+  \ }
 let g:spacevim_layer_lang_c = {
       \ 'clang_executable': 'clang',
       \ 'enable_clang_syntax_highlight': 1,
@@ -204,9 +205,9 @@ let g:spacevim_custom_plugins = [
 \ ['z0mbix/vim-shfmt'],
 \ ['mhinz/vim-signify'],
 \ ['mhartington/oceanic-next'],
-\ ['preservim/vim-markdown'],
-\ ['pangloss/vim-javascript'],
 \ ]
+"" \ ['preservim/vim-markdown'],
+"" ['pangloss/vim-javascript'],*/
 " # Custom plugins in Spacevim end
 
 function! s:SetupMarkdown()
@@ -237,7 +238,7 @@ function! s:SetupMarkdown()
   let g:vim_markdown_edit_url_in = 'current'
 endfunction
 
-call s:SetupMarkdown()
+"call s:SetupMarkdown()
 
 function! s:SetupJavaScript()
   let g:javascript_plugin_jsdoc = 1
@@ -265,4 +266,4 @@ function! s:SetupJavaScript()
   let g:javascript_conceal_underscore_arrow_function = "🞅"
 endfunction
 
-call s:SetupJavaScript()
+"call s:SetupJavaScript()

@@ -31,6 +31,7 @@ usage() {
   echo "Options:"
   echo " -n Use Neovim instead of Vim"
   echo " -h Display this help message"
+  echo " -t Use init.toml not init.vim"
   echo ""
   exit 0
 }
@@ -39,12 +40,14 @@ usage() {
 HOME_DIR="$HOME"
 SPACEVIM_INSTALL_SCRIPT="https://spacevim.org/install.sh"
 VIM_EXECUTABLE="vim"
+use_toml=false
 
 # Parse command-line options
-while getopts ":hn" opt; do
+while getopts ":hnt" opt; do
   case $opt in
     n) VIM_EXECUTABLE="nvim" ;;
     h) usage ;;
+    t) use_toml=true ;;
     \?)
       echo "Invalid option: -$OPTARG"
       usage
@@ -69,17 +72,26 @@ curl -sLf "$SPACEVIM_INSTALL_SCRIPT" | bash
 "$VIM_EXECUTABLE"
 
 # Delete SpaceVim default init.toml
-# We want to use our init.vim instead
+# We want to use our init instead
 if [ -f "${HOME_DIR}/.SpaceVim.d/init.toml" ]; then
   mv "${HOME_DIR}/.SpaceVim.d/init.toml" "${HOME_DIR}/.SpaceVim.d/init.toml.bak"
 fi
 
 # Configure SpaceVim
-if [ -f "${HOME_DIR}/Configurations/init.vim" ]; then
-  ln -sf "${HOME_DIR}/Configurations/init.vim" "${HOME_DIR}/.SpaceVim.d/init.vim"
+if "$use_toml"; then
+  if [ -f "${HOME_DIR}/Configurations/init.toml" ]; then
+    ln -sf "${HOME_DIR}/Configurations/init.toml" "${HOME_DIR}/.SpaceVim.d/init.toml"
+  else
+    echo "Error: Configuration file '${HOME_DIR}/Configurations/init.toml' not found."
+    exit 1
+  fi
 else
-  echo "Error: Configuration file '${HOME_DIR}/Configurations/init.vim' not found."
-  exit 1
+  if [ -f "${HOME_DIR}/Configurations/init.vim" ]; then
+    ln -sf "${HOME_DIR}/Configurations/init.vim" "${HOME_DIR}/.SpaceVim.d/init.vim"
+  else
+    echo "Error: Configuration file '${HOME_DIR}/Configurations/init.vim' not found."
+    exit 1
+  fi
 fi
 
 # Exit successfully
