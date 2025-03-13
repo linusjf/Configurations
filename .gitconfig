@@ -45,3 +45,7 @@
   ui = auto
 [help]
   autocorrect = prompt
+[advice]
+  skippedCherryPicks = false
+[pull]
+  rebase = true
