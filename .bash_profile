@@ -40,7 +40,7 @@ require() {
 }
 
 require tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh neofetch
-neofetch
+neofetch --off
 if [[ "$istermux" == false ]]; then
   if [[ "$os_id" =~ arch.* ]]; then
     require archlinux-java

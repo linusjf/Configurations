@@ -102,6 +102,7 @@ for path in "$HOME/binaries/ssh-find-agent.sh" "$HOME/bin/ssh-find-agent.sh"; do
 done
 
 unset GREP_OPTIONS
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
