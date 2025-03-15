@@ -13,7 +13,6 @@ fi
 for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
   [ -f "$file" ] && source "$file"
 done
-
 # Let there be color in grep!
 # export GREP_OPTIONS=' — color=auto'
 
@@ -32,7 +31,6 @@ if [ -f "$PREFIX/etc/os-release" ]; then
     os[$key]=$value
   done < "$PREFIX/etc/os-release"
   os_id=${os["ID"]}
-  echo "Operating system: ${os_id}"
 fi
 
 require() {
