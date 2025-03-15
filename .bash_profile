@@ -39,7 +39,8 @@ require() {
   hash "$@"
 }
 
-require tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh
+require tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh neofetch
+neofetch
 if [[ "$istermux" == false ]]; then
   if [[ "$os_id" =~ arch.* ]]; then
     require archlinux-java
