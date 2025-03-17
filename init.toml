@@ -54,6 +54,14 @@
 [[layers]]
 name = "default"
 
+[[layers]]
+    name = 'telescope'
+    enable = 'has("nvim")'
+
+[[layers]]
+    name = 'leaderf'
+    enable = '!has("nvim")'
+
 # Enable autocomplete layer
 [[layers]]
     name = "autocomplete"
