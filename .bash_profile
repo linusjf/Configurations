@@ -131,3 +131,6 @@ export GIT_USER="linusjf"
 
 # Created by `pipx` on 2025-03-12 08:24:09
 export PATH="$PATH:/home/linusjf/.local/bin"
+if test -f "${HOME}/.openroutertoken"; then
+  export OPENROUTER_API_KEY="$(cat "${HOME}/.openroutertoken")"
+fi
