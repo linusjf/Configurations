@@ -123,10 +123,7 @@ if test -f "$HOME/.gitguardiantoken"; then
   GITGUARDIAN_API_KEY="$(cat "$HOME/.gitguardiantoken")"
   export GITGUARDIAN_API_KEY
 fi
-fac() { (
-  echo 1
-  seq "$1"
-) | paste -s -d\* - | bc; }
+
 # shellcheck source=/dev/null
 source "$(which env_parallel.bash)"
 if test -f "${HOME}/PMD/shell/pmd-completion.sh"; then
