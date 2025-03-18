@@ -11,3 +11,4 @@
 **/*.bak
 **/commit.txt
 .aider*
+!.aider*.yml
