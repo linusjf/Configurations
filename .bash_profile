@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC1091,SC2155,SC1090
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-  export PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-  export PATH="$HOME/.local/bin:$PATH"
-fi
-
-for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
-  [ -f "$file" ] && source "$file"
-done
-# Let there be color in grep!
-# export GREP_OPTIONS=' — color=auto'
-
-# Set Vim as my default editor
-export EDITOR=vim
-export PAGER=less
 
 ## termux hacks for bash_profile
 istermux=true
@@ -33,13 +14,31 @@ if [ -f "$PREFIX/etc/os-release" ]; then
   os_id=${os["ID"]}
 fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
+for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
+  [ -f "$file" ] && source "$file"
+done
+
+# Set Vim as my default editor
+export EDITOR=vim
+export PAGER=less
+
 require() {
   hash "$@"
 }
 
 require tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh neofetch
 neofetch --off
-if [[ "$istermux" == false ]]; then
+if ! "$istermux"; then
   if [[ "$os_id" =~ arch.* ]]; then
     require archlinux-java
     if ! (archlinux-java status | grep "(default)" > /dev/null); then
@@ -53,18 +52,16 @@ if [[ "$istermux" == false ]]; then
   export ANT_HOME="${USR}/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
-  export TEMP_DIR="/tmp"
   export WARP_ENABLE_WAYLAND=1
   fortune | cowsay | lolcat
 else
   export PATH="${HOME}/binaries:${HOME}/.cargo/bin:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/wabt/bin:${HOME}/go/bin:${HOME}/bld"
   export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
-  export TEMP_DIR="${PREFIX}/tmp"
-  #export DISPLAY=":0"
   export BROWSER=w3m
   fortune | cowsay -r | lolcat
 fi
+export TEMP_DIR="${PREFIX}/tmp"
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]; then
   [ -e "{$PREFIX}/etc/mota" ] && source "${PREFIX}/etc/mota"
 fi

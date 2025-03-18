@@ -185,7 +185,7 @@ eval "$(register-python-argcomplete pipx)"
 # Created by `pipx` on 2025-03-12 08:24:09
 export PATH="$PATH:/home/linusjf/.local/bin"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-if test -d "${HOME}/.sdkman"; then
+if ! $TERMUX && test -d "${HOME}/.sdkman"; then
   export SDKMAN_DIR="${HOME}/.sdkman"
   # shellcheck source=/dev/null
   [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
