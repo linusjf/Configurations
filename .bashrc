@@ -5,8 +5,6 @@ case $- in
 esac
 :
 
-alias loadbash='source ~/.bash_profile'
-
 function _AM_() {
   local am_bin="${PREFIX}/usr/bin/am"
   local termux_bin="/usr/local/termuxarch/bin"
@@ -135,12 +133,6 @@ if test -f "${HOME}/PMD/shell/pmd-completion.sh"; then
   # shellcheck source=/dev/null
   source "${HOME}/PMD/shell/pmd-completion.sh"
 fi
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-if test -f "/root/.sdkman"; then
-  export SDKMAN_DIR="/root/.sdkman"
-  # shellcheck source=/dev/null
-  [[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
-fi
 # The next line updates PATH for the Google Cloud SDK.
 # shellcheck source=/dev/null
 if [ -f "${USR}/google-cloud-sdk/path.bash.inc" ]; then
@@ -195,3 +187,9 @@ eval "$(register-python-argcomplete pipx)"
 
 # Created by `pipx` on 2025-03-12 08:24:09
 export PATH="$PATH:/home/linusjf/.local/bin"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+if test -f "${HOME}/.sdkman"; then
+  export SDKMAN_DIR="${HOME}/.sdkman"
+  # shellcheck source=/dev/null
+  [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+fi

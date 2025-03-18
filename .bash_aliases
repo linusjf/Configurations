@@ -1,3 +1,6 @@
+# reload bash
+alias loadbash='source ~/.bash_profile'
+
 # Ensure termux notification works
 alias alert='termux-notification --title "Task Complete" --content "$(history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
