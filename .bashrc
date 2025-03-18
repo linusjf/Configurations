@@ -2,8 +2,9 @@
 # shellcheck disable=SC1091,SC2181,SC1090,SC2155
 # If not running interactively, don't do anything
 case $- in
+    *i*) ;;
+    *) return ;;
 esac
-:
 
 function _AM_() {
   local am_bin="${PREFIX}/usr/bin/am"
@@ -25,7 +26,7 @@ function em() {
 }
 
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
-:
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -85,9 +86,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   if [ -f "${USR}/share/bash-completion/bash_completion" ]; then
     # shellcheck source=/dev/null
@@ -125,16 +123,21 @@ if test -f "$HOME/.gitguardiantoken"; then
 fi
 
 # shellcheck source=/dev/null
-source "$(which env_parallel.bash)"
+if command -v env_parallel.bash &> /dev/null; then
+  source "$(which env_parallel.bash)"
+fi
+
 if test -f "${HOME}/PMD/shell/pmd-completion.sh"; then
   # shellcheck source=/dev/null
   source "${HOME}/PMD/shell/pmd-completion.sh"
 fi
+
 # The next line updates PATH for the Google Cloud SDK.
 # shellcheck source=/dev/null
 if [ -f "${USR}/google-cloud-sdk/path.bash.inc" ]; then
   source "${USR}/google-cloud-sdk/path.bash.inc"
 fi
+
 # The next line enables shell command completion for gcloud.
 # shellcheck source=/dev/null
 if [ -f "${USR}/google-cloud-sdk/completion.bash.inc" ]; then
@@ -172,20 +175,35 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-source "$HOME/.cargo/env"
+# Load Cargo environment if it exists
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
 
+# Setup pyenv if installed
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+if [[ -d $PYENV_ROOT/bin ]]; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init - bash)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
-eval "$(pyenv virtualenv-init -)"
-eval "$(gh copilot alias -- bash)"
-eval "$(register-python-argcomplete pipx)"
+# GitHub Copilot CLI
+if command -v gh &> /dev/null; then
+  eval "$(gh copilot alias -- bash)"
+fi
+
+# Python argcomplete
+if command -v register-python-argcomplete &> /dev/null; then
+  eval "$(register-python-argcomplete pipx)"
+fi
 
 # Created by `pipx` on 2025-03-12 08:24:09
 export PATH="$PATH:/home/linusjf/.local/bin"
+
+# SDKMAN setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-if ! $TERMUX && test -d "${HOME}/.sdkman"; then
+if [ -z "${TERMUX:-}" ] || [ "${TERMUX:-}" = false ] && test -d "${HOME}/.sdkman"; then
   export SDKMAN_DIR="${HOME}/.sdkman"
   # shellcheck source=/dev/null
   [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"

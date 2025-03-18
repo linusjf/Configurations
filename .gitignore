@@ -10,3 +10,4 @@
 .aws/config
 **/*.bak
 **/commit.txt
+.aider*
