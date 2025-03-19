@@ -2,6 +2,26 @@
 
 #shellcheck disable=SC1091,SC2155,SC1090
 
+pathmunge() {
+  local dir="$1"
+  local position="$2"
+
+  if [[ ":$PATH:" != *":$dir:"* ]]; then
+    case "$position" in
+      before)
+        PATH="$dir:$PATH"
+        ;;
+      after)
+        PATH="$PATH:$dir"
+        ;;
+      *)
+        echo "Invalid position. Use 'before' or 'after'."
+        return 1
+        ;;
+    esac
+  fi
+}
+
 ## termux hacks for bash_profile
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -48,12 +68,12 @@ export PKG_CONFIG_PATH="${USR:-/usr}/lib/pkgconfig/libgit2.pc"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
-  export PATH="$HOME/bin:$PATH"
+  pathmunge "$HOME/bin" before
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ]; then
-  export PATH="$HOME/.local/bin:$PATH"
+  pathmunge "$HOME/.local/bin" before
 fi
 
 for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
@@ -149,4 +169,4 @@ fi
 export GIT_USER="linusjf"
 
 # Created by `pipx` on 2025-03-12 08:24:09
-export PATH="$PATH:/home/linusjf/.local/bin"
+pathmunge "${HOME}/.local/bin" aftet

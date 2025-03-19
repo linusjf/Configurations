@@ -2,8 +2,8 @@
 # shellcheck disable=SC1091,SC2181,SC1090,SC2155
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-    *) return ;;
+  *i*) ;;
+  *) return ;;
 esac
 
 function _AM_() {
@@ -197,9 +197,6 @@ fi
 if command -v register-python-argcomplete &> /dev/null; then
   eval "$(register-python-argcomplete pipx)"
 fi
-
-# Created by `pipx` on 2025-03-12 08:24:09
-export PATH="$PATH:/home/linusjf/.local/bin"
 
 # SDKMAN setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
