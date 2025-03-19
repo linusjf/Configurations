@@ -181,7 +181,7 @@ fi
 # Setup pyenv if installed
 export PYENV_ROOT="$HOME/.pyenv"
 if [[ -d $PYENV_ROOT/bin ]]; then
-  export PATH="$PYENV_ROOT/bin:$PATH"
+  pathmunge "$PYENV_ROOT/bin" before
   eval "$(pyenv init - bash)"
   eval "$(pyenv virtualenv-init -)"
 fi
