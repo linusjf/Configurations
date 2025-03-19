@@ -1,3 +1,10 @@
+- name: aider/extra_params
+  extra_params:
+    extra_headers:
+      Custom-Header: value
+    max_tokens: 8192
+    extra_body:
+      reasoning_effort: high
 - name: openrouter/anthropic/claude-3.7-sonnet
   extra_params:
     extra_body:
