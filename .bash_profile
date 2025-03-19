@@ -8,7 +8,8 @@ pathmunge() {
   local dir="$1"
   local position="$2"
 
-  if [[ ":$PATH:" != *":$dir:"* ]]; then
+  # Check if directory exists before adding to PATH
+  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
     case "$position" in
       before)
         PATH="$dir:$PATH"
@@ -69,14 +70,8 @@ export TZDIR="${USR:-/usr}/share/zoneinfo"
 export PKG_CONFIG_PATH="${USR:-/usr}/lib/pkgconfig/libgit2.pc"
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-  pathmunge "$HOME/bin" before
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-  pathmunge "$HOME/.local/bin" before
-fi
+pathmunge "$HOME/bin" before
+pathmunge "$HOME/.local/bin" before
 
 for file in "$HOME/.gitrc" "$HOME/.bashrc"; do
   [ -f "$file" ] && source "$file"
@@ -102,16 +97,13 @@ if ! "$TERMUX"; then
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
     export JAVA_HOME="/usr/lib/jvm/${jvm}"
   fi
-  export PATH="${HOME}/userpythonenv/bin:${JAVA_HOME:+${JAVA_HOME}/bin:}${PATH}:${HOME}/binaries:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/PMD/bin:${HOME}/wabt/bin:${HOME}/LearnJava:${HOME}/LearnBnd:/usr/local/go/bin:${HOME}/.local/share/gem/ruby/3.3.0/bin:${HOME}/Duckdb:${HOME}/go/bin"
-  export PYTHON3_HOST_PROG="${USR:-/usr}/bin/python"
-  export ANT_HOME="${USR:-/usr}/share/ant"
+
+  export ANT_HOME="${USR}/share/ant"
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
   export WARP_ENABLE_WAYLAND=1
   fortune | cowsay | lolcat
 else
-  export PATH="${HOME}/binaries:${HOME}/.cargo/bin:${HOME}/bin:${PATH}:/usr/sbin:/sbin:/bin:${PREFIX}/bin:${PREFIX}/local/bin:/system/bin:/system/xbin:${HOME}/wabt/bin:${HOME}/go/bin:${HOME}/bld"
-  export PYTHON3_HOST_PROG="${PREFIX}/bin/python"
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export BROWSER=w3m
   fortune | cowsay -r | lolcat
@@ -169,6 +161,28 @@ if [[ -f "$HOME/.cargo/env" ]]; then
 fi
 
 export GIT_USER="linusjf"
+export PYTHON3_HOST_PROG="${USR}/bin/python"
 
-# Created by `pipx` on 2025-03-12 08:24:09
-pathmunge "${HOME}/.local/bin" aftet
+pathmunge "${HOME}/.cargo/bin" after
+pathmunge "/usr/sbin" after
+pathmunge "/sbin" after
+pathmunge "/bin" after
+pathmunge "${USR}/bin" after
+pathmunge "${USR}/local/bin" after
+pathmunge "/system/bin" after
+pathmunge "/system/xbin" after
+pathmunge "${HOME}/wabt/bin" after
+pathmunge "${HOME}/go/bin" after
+pathmunge "${HOME}/bld" after
+
+pathmunge "${HOME}/userpythonenv/bin" before
+[ -n "${JAVA_HOME}" ] && pathmunge "${JAVA_HOME}/bin" before
+pathmunge "${USR}/local/go/bin" after
+pathmunge "${HOME}/.local/share/gem/ruby/3.3.0/bin" after
+pathmunge "${HOME}/Duckdb" after
+
+# add our scripts
+pathmunge "${HOME}/binaries" after
+pathmunge "${HOME}/PMD/bin" after
+pathmunge "${HOME}/LearnJava" after
+pathmunge "${HOME}/LearnBnd" after

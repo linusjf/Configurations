@@ -9,7 +9,7 @@ esac
 function _AM_() {
   local am_bin="${PREFIX}/usr/bin/am"
   local termux_bin="/usr/local/termuxarch/bin"
-  command -v am &> /dev/null || [ -f "$am_bin" ] && cp "$am_bin" "$termux_bin"
+  command -v am &> /dev/null || [ -f "$am_bin" ] && [ -d "$termux_bin" ] && cp "$am_bin" "$termux_bin"
 }
 
 function _PWD_() {
