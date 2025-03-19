@@ -2,6 +2,8 @@
 
 #shellcheck disable=SC1091,SC2155,SC1090
 
+export USR=${PREFIX:-/usr}
+
 pathmunge() {
   local dir="$1"
   local position="$2"

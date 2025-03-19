@@ -38,8 +38,6 @@ shopt -s histappend
 export HISTSIZE=10000
 export HISTFILESIZE=120000
 
-USR=${PREFIX:-/usr}
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x "${USR}/bin/lesspipe" ] && eval "$(SHELL=/bin/sh lesspipe)"
 
