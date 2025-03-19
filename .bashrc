@@ -12,10 +12,6 @@ function _AM_() {
   command -v am &> /dev/null || [ -f "$am_bin" ] && [ -d "$termux_bin" ] && cp "$am_bin" "$termux_bin"
 }
 
-function _PWD_() {
-  printf '%s\n' "$PWD"
-}
-
 git-branch() {
   [ -d .git ] && printf "(%s)" "$(git branch --show-current)"
 }
