@@ -125,6 +125,10 @@ apt update && apt upgrade -y
 
 `sudo pacman -S coreutils grep gawk fortune-mod cowsay lolcat mlocate parallel pyenv github-cli neofetch`
 
+#### Install pyenv for Arch Linux
+
+`curl -fsSL https://pyenv.run | bash`
+
 #### Enable mlocate (updatedb)
 
 `sudo updatedb`
