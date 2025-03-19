@@ -102,12 +102,12 @@ if ! "$TERMUX"; then
   export ANT_OPTS="-Xmx1024m -Xms512m"
   export IVY_HOME="${HOME}/.ivy2"
   export WARP_ENABLE_WAYLAND=1
-  fortune | cowsay | lolcat
 else
   export C_INCLUDE_PATH="${PREFIX}/opt/emscripten/cache/sysroot/include/"
   export BROWSER=w3m
-  fortune | cowsay -r | lolcat
 fi
+
+fortune | cowsay | lolcat
 
 export TEMP_DIR="${PREFIX}/tmp"
 if [ ! -e "$HOME"/.hushlogin ] && [ ! -e "$HOME"/.chushlogin ]; then
@@ -163,6 +163,7 @@ fi
 export GIT_USER="linusjf"
 export PYTHON3_HOST_PROG="${USR}/bin/python"
 
+# Update $PATH variable
 pathmunge "${HOME}/.cargo/bin" after
 pathmunge "/usr/sbin" after
 pathmunge "/sbin" after
