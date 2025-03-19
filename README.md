@@ -33,6 +33,7 @@ Termux is a powerful terminal emulator for Android that allows you to run a Linu
 #### Install Termux
 
 ##### Method 1: F-Droid (Recommended)
+
 - Download and install Termux from F-Droid.
 - Open Termux and run the following command to update packages:
   ```bash
@@ -40,6 +41,7 @@ Termux is a powerful terminal emulator for Android that allows you to run a Linu
   ```
 
 ##### Method 2: Google Play Store (Deprecated)
+
 - The Play Store version is outdated, so avoid it.
 
 #### Install the Required Packages
@@ -63,6 +65,7 @@ pkg install neofetch -y       # System information tool
 ```
 
 ##### Verify Installation
+
 After installing, check if the commands work:
 
 ```bash
@@ -91,6 +94,7 @@ Grant permission when prompted.
 ##### Configure fortune, cowsay, and lolcat Together
 
 For a fun output:
+
 ```bash
 fortune | cowsay | lolcat
 ```
@@ -104,6 +108,7 @@ echo "neofetch" >> ~/.bashrc
 ```
 
 ##### Keeping Termux Updated
+
 Regularly update your packages to avoid issues:
 
 ```bash
@@ -113,15 +118,19 @@ apt update && apt upgrade -y
 ### Arch Linux
 
 #### Update system
+
 `sudo pacman -Syu`
 
 #### Install required packages
+
 `sudo pacman -S coreutils grep gawk fortune-mod cowsay lolcat mlocate parallel pyenv github-cli neofetch`
 
 #### Enable mlocate (updatedb)
+
 `sudo updatedb`
 
 #### Verify installation
+
 ```bash
 tty
 
@@ -147,26 +156,33 @@ neofetch
 ```
 
 #### Enable storage access (if needed)
+
 `sudo chmod -R 755 /mnt`
 
 #### Set up Neofetch on login
+
 `echo "neofetch" >> ~/.bashrc`
 
 #### Keep system updated
+
 `sudo pacman -Syu`
 
 ### Ubuntu
 
-#### Update system
+#### Update ubuntu system
+
 `sudo apt update && sudo apt upgrade -y`
 
-#### Install required packages
+#### Install required packages for Ubuntu
+
 `sudo apt install coreutils grep gawk fortune cowsay lolcat mlocate parallel pyenv gh neofetch -y`
 
-# Enable mlocate (updatedb)
+#### Enable mlocate (updatedb) for Ubuntu
+
 `sudo updatedb`
 
-# Verify installation
+#### Verify Ubuntu installation
+
 ```bash
 tty
 
@@ -192,10 +208,13 @@ neofetch
 ```
 
 #### Enable storage access (if needed)
+
 `sudo chmod -R 755 /mnt`
 
 #### Set up Neofetch on login
+
 `echo "neofetch" >> ~/.bashrc`
 
-#### Keep system updated
+#### Keep Ubuntu system updated
+
 `sudo apt update && sudo apt upgrade -y`
