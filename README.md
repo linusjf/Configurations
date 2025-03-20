@@ -4,7 +4,7 @@
 
 Configuration files for my Termux, ArchLinux and Ubuntu installations.
 
-## Dependencies needed by .bash_profile
+## Dependencies needed by \.bash_profile
 
 The following dependencies are checked for in .bash_profile:
 
