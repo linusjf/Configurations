@@ -11,11 +11,12 @@ get_mode() {
 format_file() {
   local file="$1"
   local formatter="$2"
+  shift 2
   local tmp_file
   tmp_file="$(mktemp)"
 
   git show ":$file" > "$tmp_file"
-  "$formatter" "$tmp_file"
+  "$formatter" "$@" "$tmp_file"
   local hash
   hash=$(git hash-object -w "$tmp_file")
   local mode
