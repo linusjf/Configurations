@@ -156,14 +156,14 @@ test -s "$NVM_DIR/bash_completion" && source "$NVM_DIR/bash_completion" # This l
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/linus/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$("${HOME}/miniconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
   eval "$__conda_setup"
 else
-  if [ -f "/home/linus/miniconda3/etc/profile.d/conda.sh" ]; then
-    source "/home/linus/miniconda3/etc/profile.d/conda.sh"
+  if [ -f "${HOME}/miniconda3/etc/profile.d/conda.sh" ]; then
+    source "${HOME}/miniconda3/etc/profile.d/conda.sh"
   else
-    export PATH="/home/linus/miniconda3/bin:$PATH"
+    export PATH="${HOME}/miniconda3/bin:$PATH"
   fi
 fi
 unset __conda_setup
@@ -194,8 +194,10 @@ fi
 
 # SDKMAN setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-if [ -z "${TERMUX:-}" ] || [ "${TERMUX:-}" = false ] && test -d "${HOME}/.sdkman"; then
-  export SDKMAN_DIR="${HOME}/.sdkman"
-  # shellcheck source=/dev/null
-  [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+if [[ -n "$TERMUX" ]]; then
+  if ! "${TERMUX}" && test -d "${HOME}/.sdkman"; then
+    export SDKMAN_DIR="${HOME}/.sdkman"
+    # shellcheck source=/dev/null
+    [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+  fi
 fi
