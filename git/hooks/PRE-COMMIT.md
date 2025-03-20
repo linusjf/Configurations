@@ -64,7 +64,7 @@ These dependencies are used for specific file types:
 
 Before installing any packages, ensure your Termux environment is up to date:
 
-```sh
+```bash
 pkg update && pkg upgrade -y
 ```
 
@@ -72,7 +72,7 @@ pkg update && pkg upgrade -y
 
 Run the following command to install the essential dependencies:
 
-```sh
+```bash
 pkg install git parallel jpegoptim findutils coreutils jq sed tidy
 ```
 
@@ -93,13 +93,13 @@ Some dependencies require manual installation or alternative methods.
 
 #### 1. Install `shellcheck`
 
-```sh
+```bash
 pkg install shellcheck
 ```
 
 #### 2. Install `shfmt`
 
-```sh
+```bash
 pkg install shfmt
 ```
 
@@ -107,7 +107,7 @@ pkg install shfmt
 
 GitGuardian requires `pip`. Install it as follows:
 
-```sh
+```bash
 pkg install python
 pip install --upgrade pip
 pip install ggshield
@@ -117,7 +117,7 @@ pip install ggshield
 
 Prettier requires `nodejs`. Install it using:
 
-```sh
+```bash
 pkg install nodejs
 npm install -g prettier
 ```
@@ -126,7 +126,7 @@ npm install -g prettier
 
 `moreutils` provides `sponge`:
 
-```sh
+```bash
 pkg install moreutils
 ```
 
@@ -134,7 +134,7 @@ pkg install moreutils
 
 Run the following command to confirm all tools are installed:
 
-```sh
+```bash
 command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
 ```
 
@@ -150,7 +150,7 @@ This ensures all dependencies are available for your pre-commit hooks in Termux.
 
 Before installing any packages, ensure your system is up to date:
 
-```sh
+```bash
 sudo pacman -Syu
 ```
 
@@ -158,7 +158,7 @@ sudo pacman -Syu
 
 Run the following command to install the essential dependencies:
 
-```sh
+```bash
 sudo pacman -S git parallel jpegoptim findutils coreutils jq sed tidy
 ```
 
@@ -179,13 +179,13 @@ Some dependencies require manual installation or alternative methods.
 
 #### 1. Install `shellcheck`
 
-```sh
+```bash
 sudo pacman -S shellcheck
 ```
 
 #### 2. Install `shfmt`
 
-```sh
+```bash
 sudo pacman -S shfmt
 ```
 
@@ -193,7 +193,7 @@ sudo pacman -S shfmt
 
 GitGuardian requires `pip`. Install it as follows:
 
-```sh
+```bash
 sudo pacman -S python
 pip install --upgrade pip
 pip install ggshield
@@ -203,7 +203,7 @@ pip install ggshield
 
 Prettier requires `nodejs`. Install it using:
 
-```sh
+```bash
 sudo pacman -S nodejs npm
 npm install -g prettier
 ```
@@ -212,7 +212,7 @@ npm install -g prettier
 
 `moreutils` provides `sponge`:
 
-```sh
+```bash
 sudo pacman -S moreutils
 ```
 
@@ -220,7 +220,7 @@ sudo pacman -S moreutils
 
 Run the following command to confirm all tools are installed:
 
-```sh
+```bash
 command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
 ```
 
@@ -236,7 +236,7 @@ This ensures all dependencies are available for your pre-commit hooks in Arch Li
 
 Before installing any packages, ensure your system is up to date:
 
-```sh
+```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
@@ -244,7 +244,7 @@ sudo apt update && sudo apt upgrade -y
 
 Run the following command to install the essential dependencies:
 
-```sh
+```bash
 sudo apt install -y git parallel jpegoptim findutils coreutils jq sed tidy
 ```
 
@@ -265,13 +265,13 @@ Some dependencies require manual installation or alternative methods.
 
 #### 1. Install `shellcheck`
 
-```sh
+```bash
 sudo apt install -y shellcheck
 ```
 
 #### 2. Install `shfmt`
 
-```sh
+```bash
 sudo apt install -y shfmt
 ```
 
@@ -279,7 +279,7 @@ sudo apt install -y shfmt
 
 GitGuardian requires `pip`. Install it as follows:
 
-```sh
+```bash
 sudo apt install -y python3 python3-pip
 pip3 install --upgrade pip
 pip3 install ggshield
@@ -289,7 +289,7 @@ pip3 install ggshield
 
 Prettier requires `nodejs`. Install it using:
 
-```sh
+```bash
 sudo apt install -y nodejs npm
 npm install -g prettier
 ```
@@ -298,7 +298,7 @@ npm install -g prettier
 
 `moreutils` provides `sponge`:
 
-```sh
+```bash
 sudo apt install -y moreutils
 ```
 
@@ -306,10 +306,10 @@ sudo apt install -y moreutils
 
 Run the following command to confirm all tools are installed:
 
-```sh
+```bash
 command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
 ```
 
-If any tool is missing, re-run the installation commands.
----
+## If any tool is missing, re-run the installation commands.
+
 This ensures all dependencies are available for your pre-commit hooks in Ubuntu. 🚀
