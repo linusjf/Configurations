@@ -14,8 +14,9 @@ format_file() {
   local tmp_file
   tmp_file="$(mktemp)"
 
+  read -r formattercmds <<< "$formatter"
   git show ":$file" > "$tmp_file"
-  "$formatter" "$tmp_file"
+  "${formattercmds[@]}" "$tmp_file"
   local hash
   hash=$(git hash-object -w "$tmp_file")
   local mode
