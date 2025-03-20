@@ -311,7 +311,5 @@ command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt
 ```
 
 If any tool is missing, re-run the installation commands.
-
 ---
-
 This ensures all dependencies are available for your pre-commit hooks in Ubuntu. 🚀
