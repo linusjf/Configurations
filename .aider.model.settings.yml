@@ -5,12 +5,12 @@
     max_tokens: 8192
     extra_body:
       reasoning_effort: high
-- name: openrouter/anthropic/claude-3.7-sonnet
+- name: deepseek/deepseek-chat
   extra_params:
     extra_body:
       provider:
         # Only use these providers, in this order
-        order: ["Anthropic", "Together"]
+        order: ["DeepSeek"]
         # Don't fall back to other providers
         allow_fallbacks: false
         # Skip providers that may train on inputs
