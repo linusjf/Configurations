@@ -82,6 +82,7 @@ if [ ${#FILES[@]} -eq 0 ]; then
   ((ret = 1))
 fi
 
+echo "Executing ggshield..."
 # execute ggshield to check if any of files have any security tokens or secrets encoded
 ggshield secret scan pre-commit "$@" || ((ret = 1))
 exit "$ret"

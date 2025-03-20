@@ -45,6 +45,10 @@ analytics: false # Disable analytics for privacy
 # Upgrading:
 check-update: true # Check for updates on launch
 
+############
+# Conventions
+read: CONVENTIONS.md
+
 #################
 # Other settings:
 vim: true # Use standard editing mode (change to true if you prefer vim)
