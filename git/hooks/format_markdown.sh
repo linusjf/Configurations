@@ -9,7 +9,7 @@ format_markdown() {
   fi
 
   for file in "${files[@]}"; do
-    format_file "$file" prettier --parser markdown --write
+    format_file "$file" prettier --parser markdown --log-level silent --write
   done
 
   return 0
