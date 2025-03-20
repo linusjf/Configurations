@@ -52,11 +52,8 @@ require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wschec
 declare -i ret=0
 declare -a FILES=()
 
-# Regexp for grep to only choose sh file extension for checking
-exts="\.sh$"
-
 # run shellcheck against shell executables and shell script functions
-checkshs "$exts" || ((ret = 1))
+checkshs || ((ret = 1))
 checkexecs || ((ret = 1))
 
 # optimize jpeg files

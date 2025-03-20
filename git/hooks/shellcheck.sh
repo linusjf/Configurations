@@ -14,7 +14,8 @@ requirefns() {
 requirefns isshellscript formatandcheck
 
 checkshs() {
-  local exts="$1"
+  # Regexp for grep to only choose sh file extension for checking
+  local exts="\.sh$"
   local ret=0
 
   local -a files=()
