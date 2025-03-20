@@ -52,5 +52,6 @@ suggest-shell-commands: true # Allow suggesting shell commands
 fancy-input: true # Enable fancy input with history and completion
 multiline: false # Enable multi-line input mode
 notifications: true # Enable notifications when responses are ready
+notifications_command: "notify-send 'Aider done.'" # Custom notification command
 detect-urls: true # Detect and offer to add URLs to chat
 dark-mode: true # Dark mode
