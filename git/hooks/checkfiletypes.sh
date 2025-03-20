@@ -23,6 +23,11 @@ isgofile() {
   [[ "$1" == *.* && "${1##*.}" == "go" ]]
 }
 
+# Checks if the given file has a .md extension (for Markdown files)
+ismarkdownfile() {
+  [[ "$1" == *.* && "${1##*.}" == "md" ]]
+}
+
 # Checks if the given file has an HTML or XHTML extension
 ishtmlfileextension() {
   if [[ "$1" == *.* ]]; then
