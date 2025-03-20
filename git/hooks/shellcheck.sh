@@ -1,16 +1,4 @@
 #!/usr/bin/env bash
-requirefns() {
-  for fn in "$@"; do
-    if [[ "$(type -t "$fn")" == function ]]; then
-      continue
-    else
-      printf "%s function does not exist.\n" "$fn"
-      exit 1
-    fi
-  done
-  return 0
-}
-
 requirefns isshellscript formatandcheck
 
 checkshs() {

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+requirefns format_file
+
 format_markdown() {
   local -a files=()
   readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.md$')
