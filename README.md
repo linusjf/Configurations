@@ -36,6 +36,7 @@ Termux is a powerful terminal emulator for Android that allows you to run a Linu
 
 - Download and install Termux from F-Droid.
 - Open Termux and run the following command to update packages:
+
   ```bash
   apt update && apt upgrade -y
   ```
@@ -87,7 +88,7 @@ neofetch
 Enable Storage Access (If Required)
 If you need access to internal storage, run:
 
-`bash termux-setup-storage`
+`termux-setup-storage`
 
 Grant permission when prompted.
 
@@ -179,7 +180,11 @@ neofetch
 
 #### Install required packages for Ubuntu
 
-`sudo apt install coreutils grep gawk fortune cowsay lolcat mlocate parallel pyenv gh neofetch -y`
+`sudo apt install coreutils grep gawk fortune cowsay lolcat mlocate parallel gh neofetch -y`
+
+#### Install pyenv for Ubuntu
+
+`curl -fsSL https://pyenv.run | bash`
 
 #### Enable mlocate (updatedb) for Ubuntu
 
