@@ -16,7 +16,10 @@ format_file() {
   tmp_file="$(mktemp)"
 
   git show ":$file" > "$tmp_file"
-  "$formatter" "$@" "$tmp_file"
+  "$formatter" "$@" "$tmp_file" || {
+    printf "%s" "Error formatting ${file}"
+    return 1
+  }
   local hash
   hash=$(git hash-object -w "$tmp_file")
   local mode
@@ -63,7 +66,7 @@ formatandcheck() {
   tmpfile="$(mktemp -t "$(basename "${file}").XXXXXX")"
   git show ":$file" > "$tmpfile"
   shellcheck --check-sourced --color --shell=bash -- "$tmpfile" || return 1
-  shfmt -i 2 -bn -ci -sr -w -- "$tmpfile"
+  shfmt -i 2 -bn -ci -sr -w -- "$tmpfile" || return 1
   local hash
   hash=$(git hash-object -w "$tmpfile")
   local mode

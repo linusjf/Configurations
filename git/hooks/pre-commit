@@ -22,6 +22,9 @@ requirefns() {
   return 0
 }
 
+set -euo pipefail
+shopt -s inherit_errexit
+
 # Check for existence of local pre-commit hook and execute it first
 if [[ -f .git/hooks/pre-commit ]]; then
   if ! .git/hooks/pre-commit "$@"; then
@@ -29,9 +32,6 @@ if [[ -f .git/hooks/pre-commit ]]; then
     exit 1
   fi
 fi
-
-set -euo pipefail
-shopt -s inherit_errexit
 
 require dirname readlink
 
@@ -64,6 +64,7 @@ fi
 
 # check that all required dependencies are installed
 require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt jq sponge expand sed prettier
+
 declare -i ret=0
 declare -a FILES=()
 
