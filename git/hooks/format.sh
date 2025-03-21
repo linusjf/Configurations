@@ -38,11 +38,13 @@ format_go() {
 }
 
 format_json() {
+  local ret=0
   local -a files=()
   readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.json$')
   for file in "${files[@]}"; do
-    format_file "$file" jq .
+    format_file "$file" json -I -f
   done
+  return "$ret"
 }
 
 format_xml() {
