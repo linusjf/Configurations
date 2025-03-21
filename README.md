@@ -4,7 +4,7 @@
 
 Configuration files for my Termux, ArchLinux and Ubuntu installations.
 
-## Dependencies needed by \.bash_profile
+## Dependencies needed by bash_profile
 
 The following dependencies are checked for in .bash_profile:
 
@@ -24,7 +24,7 @@ The following dependencies are checked for in .bash_profile:
 
 ## Installation Instructions
 
-### Termux
+### Termux for Android
 
 #### Installing and Using the Listed Utilities in Termux
 
