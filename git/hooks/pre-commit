@@ -61,9 +61,13 @@ if [[ -e "${parentpath}/shellcheck.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/shellcheck.sh"
 fi
+if [[ -e "${parentpath}/lint_markdown.sh" ]]; then
+  # shellcheck disable=SC1091
+  source "${parentpath}/lint_markdown.sh"
+fi
 
 # check that all required dependencies are installed
-require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt jq sponge expand sed prettier
+require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt jq sponge expand sed prettier markdownlint
 
 declare -i ret=0
 declare -a FILES=()
@@ -79,8 +83,13 @@ optimizejpgs || ((ret = 1))
 format_xml || ((ret = 1))
 # format json files
 format_json || ((ret = 1))
-# format markdown files
-format_markdown || ((ret = 1))
+
+if lint_markdown; then
+  # format markdown files
+  format_markdown || ((ret = 1))
+else
+  ((ret = 1))
+fi
 
 # format go files
 format_go || ((ret = 1))
