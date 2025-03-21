@@ -42,7 +42,7 @@ format_json() {
   local -a files=()
   readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.json$')
   for file in "${files[@]}"; do
-    format_file "$file" json -I -f
+    format_file "$file" json --quiet -I -f
   done
   return "$ret"
 }
