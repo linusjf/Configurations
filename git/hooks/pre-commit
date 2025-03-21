@@ -49,10 +49,6 @@ if [[ -e "${parentpath}/format.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/format.sh"
 fi
-if [[ -e "${parentpath}/format_markdown.sh" ]]; then
-  # shellcheck disable=SC1091
-  source "${parentpath}/format_markdown.sh"
-fi
 if [[ -e "${parentpath}/whitespace.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/whitespace.sh"
@@ -61,9 +57,9 @@ if [[ -e "${parentpath}/shellcheck.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/shellcheck.sh"
 fi
-if [[ -e "${parentpath}/lint_markdown.sh" ]]; then
+if [[ -e "${parentpath}/markdowncheck.sh" ]]; then
   # shellcheck disable=SC1091
-  source "${parentpath}/lint_markdown.sh"
+  source "${parentpath}/markdowncheck.sh"
 fi
 
 # check that all required dependencies are installed
@@ -76,6 +72,9 @@ declare -a FILES=()
 checkshs || ((ret = 1))
 checkexecs || ((ret = 1))
 
+# check markdown files and format them
+checkmds || ((ret = 1))
+
 # optimize jpeg files
 optimizejpgs || ((ret = 1))
 
@@ -83,13 +82,6 @@ optimizejpgs || ((ret = 1))
 format_xml || ((ret = 1))
 # format json files
 format_json || ((ret = 1))
-
-if lint_markdown; then
-  # format markdown files
-  format_markdown || ((ret = 1))
-else
-  ((ret = 1))
-fi
 
 # format go files
 format_go || ((ret = 1))

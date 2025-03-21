@@ -13,7 +13,7 @@ format_file() {
   local formatter="$2"
   shift 2
   local tmp_file
-  tmp_file="$(mktemp)"
+  tmp_file="$(mktemp -t "$(basename "${file}").XXXXXX")"
 
   git show ":$file" > "$tmp_file"
   "$formatter" "$@" "$tmp_file" || {
@@ -69,6 +69,23 @@ formatandcheck() {
   git show ":$file" > "$tmpfile"
   shellcheck --check-sourced --color --shell=bash -- "$tmpfile" || return 1
   shfmt -i 2 -bn -ci -sr -w -- "$tmpfile" || return 1
+  local hash
+  hash=$(git hash-object -w "$tmpfile")
+  local mode
+  mode="$(get_mode "${file}")"
+  git update-index --add --cacheinfo "${mode}" "$hash" "$file"
+  git cat-file -p "$hash" > "${file}"
+  rm "$tmpfile"
+  return $?
+}
+
+formatandcheckmd() {
+  local file="$1"
+  local tmpfile
+  tmpfile="$(mktemp -t "$(basename "${file}").XXXXXX")"
+  git show ":$file" > "$tmpfile"
+  markdownlint "$tmpfile" || return 1
+  prettier --parser markdown --log-level silent --write "$tmpfile" || return 1
   local hash
   hash=$(git hash-object -w "$tmpfile")
   local mode
