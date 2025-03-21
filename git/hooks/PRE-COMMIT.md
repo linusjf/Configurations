@@ -154,7 +154,7 @@ Before installing any packages, ensure your system is up to date:
 sudo pacman -Syu
 ```
 
-### Step 2: Install Core Dependencies
+### Step 2: Install Core Dependencies for Arch Linux
 
 Run the following command to install the essential dependencies:
 
@@ -173,23 +173,23 @@ This installs:
 - `sed` - Stream editor
 - `tidy` - HTML/XML validator and reformatter
 
-### Step 3: Install Additional Utilities
+### Step 3: Install Additional Utilities for Arch Linux
 
 Some dependencies require manual installation or alternative methods.
 
-#### 1. Install `shellcheck`
+#### 1. Install `shellcheck` on Arch Linux
 
 ```bash
 sudo pacman -S shellcheck
 ```
 
-#### 2. Install `shfmt`
+#### 2. Install `shfmt` on Arch Linux
 
 ```bash
 sudo pacman -S shfmt
 ```
 
-#### 3. Install `ggshield` (GitGuardian)
+#### 3. Install `ggshield` (GitGuardian) on Arch Linux
 
 GitGuardian requires `pip`. Install it as follows:
 
@@ -199,7 +199,7 @@ pip install --upgrade pip
 pip install ggshield
 ```
 
-#### 4. Install `prettier`
+#### 4. Install `prettier` on Arch Linux
 
 Prettier requires `nodejs`. Install it using:
 
@@ -208,7 +208,7 @@ sudo pacman -S nodejs npm
 npm install -g prettier
 ```
 
-#### 5. Install `sponge`
+#### 5. Install `sponge` on Arch Linux
 
 `moreutils` provides `sponge`:
 
@@ -216,7 +216,7 @@ npm install -g prettier
 sudo pacman -S moreutils
 ```
 
-### Step 4: Verify Installation
+### Step 4: Verify Installation on Arch Linux
 
 Run the following command to confirm all tools are installed:
 
@@ -232,7 +232,7 @@ This ensures all dependencies are available for your pre-commit hooks in Arch Li
 
 ## Installation on Ubuntu
 
-### Step 1: Update System
+### Step 1: Update System on Ubuntu
 
 Before installing any packages, ensure your system is up to date:
 
@@ -240,7 +240,7 @@ Before installing any packages, ensure your system is up to date:
 sudo apt update && sudo apt upgrade -y
 ```
 
-### Step 2: Install Core Dependencies
+### Step 2: Install Core Dependencies for Ubuntu
 
 Run the following command to install the essential dependencies:
 
@@ -259,23 +259,23 @@ This installs:
 - `sed` - Stream editor
 - `tidy` - HTML/XML validator and reformatter
 
-### Step 3: Install Additional Utilities
+### Step 3: Install Additional Utilities for Ubuntu
 
 Some dependencies require manual installation or alternative methods.
 
-#### 1. Install `shellcheck`
+#### 1. Install `shellcheck` for Ubuntu
 
 ```bash
 sudo apt install -y shellcheck
 ```
 
-#### 2. Install `shfmt`
+#### 2. Install `shfmt` for Ubuntu
 
 ```bash
 sudo apt install -y shfmt
 ```
 
-#### 3. Install `ggshield` (GitGuardian)
+#### 3. Install `ggshield` (GitGuardian) for Ubuntu
 
 GitGuardian requires `pip`. Install it as follows:
 
@@ -285,7 +285,7 @@ pip3 install --upgrade pip
 pip3 install ggshield
 ```
 
-#### 4. Install `prettier`
+#### 4. Install `prettier` for Ubuntu
 
 Prettier requires `nodejs`. Install it using:
 
@@ -294,7 +294,7 @@ sudo apt install -y nodejs npm
 npm install -g prettier
 ```
 
-#### 5. Install `sponge`
+#### 5. Install `sponge` for Ubuntu
 
 `moreutils` provides `sponge`:
 
@@ -302,7 +302,7 @@ npm install -g prettier
 sudo apt install -y moreutils
 ```
 
-### Step 4: Verify Installation
+### Step 4: Verify Installation on Ubuntu
 
 Run the following command to confirm all tools are installed:
 
@@ -310,6 +310,6 @@ Run the following command to confirm all tools are installed:
 command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
 ```
 
-## If any tool is missing, re-run the installation commands.
+## If any tool is missing, re-run the installation commands
 
 This ensures all dependencies are available for your pre-commit hooks in Ubuntu. 🚀

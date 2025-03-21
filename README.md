@@ -28,7 +28,8 @@ The following dependencies are checked for in .bash_profile:
 
 #### Installing and Using the Listed Utilities in Termux
 
-Termux is a powerful terminal emulator for Android that allows you to run a Linux-like environment. Here's how you can install and use the tools you listed.
+Termux is a powerful terminal emulator for Android that allows you to run a Linux-like environment.
+Here's how you can install and use the tools you listed.
 
 #### Install Termux
 
@@ -216,11 +217,11 @@ gh --version
 neofetch
 ```
 
-#### Enable storage access (if needed)
+#### Enable storage access for Ubuntu (if needed)
 
 `sudo chmod -R 755 /mnt`
 
-#### Set up Neofetch on login
+#### Set up Neofetch on login (Ubuntu)
 
 `echo "neofetch" >> ~/.bashrc`
 
