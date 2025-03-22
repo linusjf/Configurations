@@ -23,6 +23,9 @@
   last = cat-file commit HEAD
   root = rev-parse --show-toplevel
   dir = !bash gitdir
+  sdiff = !git diff && git submodule foreach 'git diff'
+  spush = push --recurse-submodules=on-demand
+  supdate = submodule update --remote --merge
 [receive]
   denyCurrentBranch = updateInstead
 [protocol "file"]
