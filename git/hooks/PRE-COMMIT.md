@@ -1,6 +1,6 @@
 # Pre-commit Hook Dependencies
 
-This document lists all dependencies required by the pre-commit hook, with installation\
+This document lists all dependencies required by the pre-commit hook, with installation
 instructions for Termux, Arch Linux, and Ubuntu.
 
 ## Core Dependencies
@@ -21,7 +21,7 @@ These essential dependencies must be installed:
 - `file` - Determine file type
 - `mktemp` - Create temporary files/directories
 - `shfmt` - Shell script formatter
-- `json` - Command-line JSON processor
+- `json` - Command-line JSON processor (installed via npm)
 - `sponge` - Soak up standard input and write to a file
 - `expand` - Convert tabs to spaces
 - `sed` - Stream editor
@@ -74,6 +74,7 @@ These dependencies are used for specific file types:
 
    ```bash
    pkg install git parallel jpegoptim findutils coreutils sed tidy
+   npm install -g json
    ```
 
 3. Install additional utilities:
@@ -81,7 +82,7 @@ These dependencies are used for specific file types:
    ```bash
    pkg install shellcheck shfmt moreutils
    pip install ggshield
-   npm install -g prettier json
+   npm install -g prettier
    ```
 
 4. Verify installation:
@@ -103,6 +104,7 @@ These dependencies are used for specific file types:
 
    ```bash
    sudo pacman -S git parallel jpegoptim findutils coreutils sed tidy
+   npm install -g json
    ```
 
 3. Install additional utilities:
@@ -110,7 +112,7 @@ These dependencies are used for specific file types:
    ```bash
    sudo pacman -S shellcheck shfmt moreutils
    pip install ggshield
-   npm install -g prettier json
+   npm install -g prettier
    ```
 
 4. Verify installation:
@@ -132,6 +134,7 @@ These dependencies are used for specific file types:
 
    ```bash
    sudo apt install -y git parallel jpegoptim findutils coreutils sed tidy
+   npm install -g json
    ```
 
 3. Install additional utilities:
@@ -139,7 +142,7 @@ These dependencies are used for specific file types:
    ```bash
    sudo apt install -y shellcheck shfmt moreutils
    pip3 install ggshield
-   npm install -g prettier json
+   npm install -g prettier
    ```
 
 4. Verify installation:
@@ -151,5 +154,5 @@ These dependencies are used for specific file types:
 
 ---
 
-This ensures all dependencies are available for your pre-commit hooks across\
+This ensures all dependencies are available for your pre-commit hooks across
 platforms. 🚀
