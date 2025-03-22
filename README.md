@@ -1,12 +1,12 @@
 # Configurations
 
+Configuration files for Termux, ArchLinux and Ubuntu installations.
+
 [![Hits-of-Code](https://hitsofcode.com/github/linusjf/Configurations?branch=main)](https://hitsofcode.com/github/linusjf/Configurations/view?branch=main)
 
-Configuration files for my Termux, ArchLinux and Ubuntu installations.
+## Dependencies
 
-## Dependencies needed by bash_profile
-
-The following dependencies are checked for in .bash_profile:
+The following dependencies are checked for in `.bash_profile`:
 
 - `tty` - Display the terminal path
 - `cat` - Concatenate and print files
@@ -22,35 +22,28 @@ The following dependencies are checked for in .bash_profile:
 - `gh` - GitHub CLI
 - `neofetch` - System information tool
 
-## Installation Instructions
+## Installation
 
 ### Termux for Android
 
-#### Installing and Using the Listed Utilities in Termux
+#### Installing Termux
 
-Termux is a powerful terminal emulator for Android that allows you to run a Linux-like environment.
-Here's how you can install and use the tools you listed.
+##### F-Droid (Recommended)
 
-#### Install Termux
+1. Download and install Termux from F-Droid
+2. Open Termux and run:
 
-##### Method 1: F-Droid (Recommended)
+   ```bash
+   apt update && apt upgrade -y
+   ```
 
-- Download and install Termux from F-Droid.
-- Open Termux and run the following command to update packages:
+##### Google Play Store (Deprecated)
 
-  ```bash
-  apt update && apt upgrade -y
-  ```
+The Play Store version is outdated and should be avoided.
 
-##### Method 2: Google Play Store (Deprecated)
+#### Installing Packages
 
-- The Play Store version is outdated, so avoid it.
-
-#### Install the Required Packages
-
-Once inside Termux, install the utilities using pkg (Termux package manager) or apt.
-
-##### Basic Utilities
+Install required utilities using pkg or apt:
 
 ```bash
 pkg install coreutils -y      # Includes tty, cat, rm, etc.
@@ -66,9 +59,9 @@ pkg install gh -y             # GitHub CLI
 pkg install neofetch -y       # System information tool
 ```
 
-##### Verify Installation
+#### Verifying Installation
 
-After installing, check if the commands work:
+Check if commands work:
 
 ```bash
 tty
@@ -84,34 +77,21 @@ gh --version
 neofetch
 ```
 
-##### Additional Setup
+#### Additional Setup
 
-Enable Storage Access (If Required)
-If you need access to internal storage, run:
-
-`termux-setup-storage`
-
-Grant permission when prompted.
-
-##### Configure fortune, cowsay, and lolcat Together
-
-For a fun output:
+Enable storage access if needed:
 
 ```bash
-fortune | cowsay | lolcat
+termux-setup-storage
 ```
 
-##### Run Neofetch on Startup
-
-To show system info automatically when Termux starts, add this to ~/.bashrc:
+Add neofetch to startup:
 
 ```bash
 echo "neofetch" >> ~/.bashrc
 ```
 
-##### Keeping Termux Updated
-
-Regularly update your packages to avoid issues:
+Keep Termux updated:
 
 ```bash
 apt update && apt upgrade -y
@@ -119,112 +99,120 @@ apt update && apt upgrade -y
 
 ### Arch Linux
 
-#### Update system
+#### System Update
 
-`sudo pacman -Syu`
+```bash
+sudo pacman -Syu
+```
 
-#### Install required packages
+#### Package Installation
 
-`sudo pacman -S coreutils grep gawk fortune-mod cowsay lolcat mlocate parallel pyenv github-cli neofetch`
+```bash
+sudo pacman -S coreutils grep gawk fortune-mod cowsay lolcat mlocate parallel pyenv github-cli neofetch
+```
 
-#### Install pyenv for Arch Linux
+#### Pyenv Installation
 
-`curl -fsSL https://pyenv.run | bash`
+```bash
+curl -fsSL https://pyenv.run | bash
+```
 
-#### Enable mlocate (updatedb)
+#### Enable mlocate
 
-`sudo updatedb`
+```bash
+sudo updatedb
+```
 
-#### Verify installation
+#### Verify Installation
 
 ```bash
 tty
-
 cat --version
-
 rm --help
-
 grep --version
-
 awk --version
-
 fortune | cowsay | lolcat
-
 updatedb
-
 parallel --version
-
 pyenv --version
-
 gh --version
-
 neofetch
 ```
 
-#### Enable storage access (if needed)
+#### Storage Access
 
-`sudo chmod -R 755 /mnt`
+```bash
+sudo chmod -R 755 /mnt
+```
 
-#### Set up Neofetch on login
+#### Neofetch on Login
 
-`echo "neofetch" >> ~/.bashrc`
+```bash
+echo "neofetch" >> ~/.bashrc
+```
 
-#### Keep system updated
+#### System Updates
 
-`sudo pacman -Syu`
+```bash
+sudo pacman -Syu
+```
 
 ### Ubuntu
 
-#### Update ubuntu system
+#### System Update for Ubuntu
 
-`sudo apt update && sudo apt upgrade -y`
+```bash
+sudo apt update && sudo apt upgrade -y
+```
 
-#### Install required packages for Ubuntu
+#### Package Installation for Ubuntu
 
-`sudo apt install coreutils grep gawk fortune cowsay lolcat mlocate parallel gh neofetch -y`
+```bash
+sudo apt install coreutils grep gawk fortune cowsay lolcat mlocate parallel gh neofetch -y
+```
 
-#### Install pyenv for Ubuntu
+#### Pyenv Installation for Ubuntu
 
-`curl -fsSL https://pyenv.run | bash`
+```bash
+curl -fsSL https://pyenv.run | bash
+```
 
-#### Enable mlocate (updatedb) for Ubuntu
+#### Enable mlocate for Ubuntu
 
-`sudo updatedb`
+```bash
+sudo updatedb
+```
 
-#### Verify Ubuntu installation
+#### Verify Installation for Ubuntu
 
 ```bash
 tty
-
 cat --version
-
 rm --help
-
 grep --version
-
 awk --version
-
 fortune | cowsay | lolcat
-
 updatedb
-
 parallel --version
-
 pyenv --version
-
 gh --version
-
 neofetch
 ```
 
-#### Enable storage access for Ubuntu (if needed)
+#### Storage Access in Ubuntu
 
-`sudo chmod -R 755 /mnt`
+```bash
+sudo chmod -R 755 /mnt
+```
 
-#### Set up Neofetch on login (Ubuntu)
+#### Neofetch on Login in Ubuntu
 
-`echo "neofetch" >> ~/.bashrc`
+```bash
+echo "neofetch" >> ~/.bashrc
+```
 
-#### Keep Ubuntu system updated
+#### System Updates for Ubuntu
 
-`sudo apt update && sudo apt upgrade -y`
+```bash
+sudo apt update && sudo apt upgrade -y
+```
