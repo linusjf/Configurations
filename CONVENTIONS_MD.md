@@ -20,6 +20,8 @@
   avoid the need for a `<br />` altogether.
 - Use ATX-style headings. Prefer a single space after # and newlines before\
   and after.
+- Header levels should only increment by one level at a time.
+- Avoid headings with the same text. Headings and sub-headings must be unique.
 - Use double asterisks for bold text. Avoid using double underscores for bold\
   text, as it's harder to distinguish from italics at a glance.
 - Use single underscores for italics. Avoid using single asterisks for\
