@@ -1,315 +1,154 @@
 # Pre-commit Hook Dependencies
 
-This document lists all the dependencies required by the pre-commit hook.
+This document lists all dependencies required by the pre-commit hook, with installation\
+instructions for Termux, Arch Linux, and Ubuntu.
 
 ## Core Dependencies
 
-These are the essential dependencies that must be installed:
+These essential dependencies must be installed:
 
-- `shellcheck` - Static analysis tool for shell scripts
-- `ggshield` - GitGuardian secret scanning tool
-- `git` - Version control system
-- `parallel` - GNU parallel for parallel execution
-- `jpegoptim` - JPEG optimization tool
-- `stat` - File status utility
-- `find` - File search utility
-- `head` - Output the first part of files
-- `tidy` - HTML/XML validator and reformatter
-- `rm` - Remove files/directories
-- `wscheck` - Whitespace checker
-- `file` - Determine file type
-- `mktemp` - Create temporary files/directories
-- `shfmt` - Shell script formatter
-- `jq` - Command-line JSON processor
-- `sponge` - Soak up standard input and write to a file
-- `expand` - Convert tabs to spaces
-- `sed` - Stream editor
+- `shellcheck` - Static analysis tool for shell scripts\
+- `ggshield` - GitGuardian secret scanning tool\
+- `git` - Version control system\
+- `parallel` - GNU parallel for parallel execution\
+- `jpegoptim` - JPEG optimization tool\
+- `stat` - File status utility\
+- `find` - File search utility\
+- `head` - Output the first part of files\
+- `tidy` - HTML/XML validator and reformatter\
+- `rm` - Remove files/directories\
+- `wscheck` - Whitespace checker\
+- `file` - Determine file type\
+- `mktemp` - Create temporary files/directories\
+- `shfmt` - Shell script formatter\
+- `jq` - Command-line JSON processor\
+- `sponge` - Soak up standard input and write to a file\
+- `expand` - Convert tabs to spaces\
+- `sed` - Stream editor\
 - `prettier` - Code formatter (for markdown)
 
-## Dependencies by File Types
+## Dependencies by File Type
 
 These dependencies are used for specific file types:
 
-- For shell scripts:
+### Shell Scripts
 
-  - `shellcheck`
-  - `shfmt`
+- `shellcheck`\
+- `shfmt`
 
-- For JPEG files:
+### JPEG Files
 
-  - `jpegoptim`
+- `jpegoptim`
 
-- For XML/HTML files:
+### XML/HTML Files
 
-  - `tidy`
+- `tidy`
 
-- For JSON files:
+### JSON Files
 
-  - `jq`
+- `jq`
 
-- For Markdown files:
+### Markdown Files
 
-  - `prettier`
+- `prettier`
 
-- For Go files:
+### Go Files
 
-  - `gofmt` (included with Go installation)
+- `gofmt` (included with Go installation)
 
-- For secret scanning:
-  - `ggshield`
+### Secret Scanning
 
-## Installation on Termux
+- `ggshield`
 
-### Step 1: Update and Upgrade
+## Installation Instructions
 
-Before installing any packages, ensure your Termux environment is up to date:
+### Termux (Android)
 
-```bash
-pkg update && pkg upgrade -y
-```
+1. Update and upgrade packages:
 
-### Step 2: Install Core Dependencies
+   ```bash
+   pkg update && pkg upgrade -y
+   ```
 
-Run the following command to install the essential dependencies:
+2. Install core dependencies:
 
-```bash
-pkg install git parallel jpegoptim findutils coreutils jq sed tidy
-```
+   ```bash
+   pkg install git parallel jpegoptim findutils coreutils jq sed tidy
+   ```
 
-This installs:
+3. Install additional utilities:
 
-- `git` - Version control system
-- `parallel` - GNU parallel for parallel execution
-- `jpegoptim` - JPEG optimization tool
-- `findutils` - Includes `find`, `xargs`, etc.
-- `coreutils` - Includes `stat`, `head`, `rm`, `mktemp`, `expand`, `file`, etc.
-- `jq` - Command-line JSON processor
-- `sed` - Stream editor
-- `tidy` - HTML/XML validator and reformatter
+   ```bash
+   pkg install shellcheck shfmt moreutils
+   pip install ggshield
+   npm install -g prettier
+   ```
 
-### Step 3: Install Additional Utilities
+4. Verify installation:
 
-Some dependencies require manual installation or alternative methods.
+   ```bash
+   command -v shellcheck ggshield git parallel jpegoptim find head tidy rm \
+     jq shfmt sponge expand sed prettier gofmt
+   ```
 
-#### 1. Install `shellcheck`
+### Arch Linux
 
-```bash
-pkg install shellcheck
-```
+1. Update system:
 
-#### 2. Install `shfmt`
+   ```bash
+   sudo pacman -Syu
+   ```
 
-```bash
-pkg install shfmt
-```
+2. Install core dependencies:
 
-#### 3. Install `ggshield` (GitGuardian)
+   ```bash
+   sudo pacman -S git parallel jpegoptim findutils coreutils jq sed tidy
+   ```
 
-GitGuardian requires `pip`. Install it as follows:
+3. Install additional utilities:
 
-```bash
-pkg install python
-pip install --upgrade pip
-pip install ggshield
-```
+   ```bash
+   sudo pacman -S shellcheck shfmt moreutils
+   pip install ggshield
+   npm install -g prettier
+   ```
 
-#### 4. Install `prettier`
+4. Verify installation:
 
-Prettier requires `nodejs`. Install it using:
+   ```bash
+   command -v shellcheck ggshield git parallel jpegoptim find head tidy rm \
+     jq shfmt sponge expand sed prettier gofmt
+   ```
 
-```bash
-pkg install nodejs
-npm install -g prettier
-```
+### Ubuntu
 
-#### 5. Install `sponge`
+1. Update system:
 
-`moreutils` provides `sponge`:
+   ```bash
+   sudo apt update && sudo apt upgrade -y
+   ```
 
-```bash
-pkg install moreutils
-```
+2. Install core dependencies:
 
-### Step 4: Verify Installation
+   ```bash
+   sudo apt install -y git parallel jpegoptim findutils coreutils jq sed tidy
+   ```
 
-Run the following command to confirm all tools are installed:
+3. Install additional utilities:
 
-```bash
-command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
-```
+   ```bash
+   sudo apt install -y shellcheck shfmt moreutils
+   pip3 install ggshield
+   npm install -g prettier
+   ```
 
-If any tool is missing, re-run the installation commands.
+4. Verify installation:
+
+   ```bash
+   command -v shellcheck ggshield git parallel jpegoptim find head tidy rm \
+     jq shfmt sponge expand sed prettier gofmt
+   ```
 
 ---
 
-This ensures all dependencies are available for your pre-commit hooks in Termux. 🚀
-
-## Installation on Arch Linux
-
-### Step 1: Update System
-
-Before installing any packages, ensure your system is up to date:
-
-```bash
-sudo pacman -Syu
-```
-
-### Step 2: Install Core Dependencies for Arch Linux
-
-Run the following command to install the essential dependencies:
-
-```bash
-sudo pacman -S git parallel jpegoptim findutils coreutils jq sed tidy
-```
-
-This installs:
-
-- `git` - Version control system
-- `parallel` - GNU parallel for parallel execution
-- `jpegoptim` - JPEG optimization tool
-- `findutils` - Includes `find`, `xargs`, etc.
-- `coreutils` - Includes `stat`, `head`, `rm`, `mktemp`, `expand`, `file`, etc.
-- `jq` - Command-line JSON processor
-- `sed` - Stream editor
-- `tidy` - HTML/XML validator and reformatter
-
-### Step 3: Install Additional Utilities for Arch Linux
-
-Some dependencies require manual installation or alternative methods.
-
-#### 1. Install `shellcheck` on Arch Linux
-
-```bash
-sudo pacman -S shellcheck
-```
-
-#### 2. Install `shfmt` on Arch Linux
-
-```bash
-sudo pacman -S shfmt
-```
-
-#### 3. Install `ggshield` (GitGuardian) on Arch Linux
-
-GitGuardian requires `pip`. Install it as follows:
-
-```bash
-sudo pacman -S python
-pip install --upgrade pip
-pip install ggshield
-```
-
-#### 4. Install `prettier` on Arch Linux
-
-Prettier requires `nodejs`. Install it using:
-
-```bash
-sudo pacman -S nodejs npm
-npm install -g prettier
-```
-
-#### 5. Install `sponge` on Arch Linux
-
-`moreutils` provides `sponge`:
-
-```bash
-sudo pacman -S moreutils
-```
-
-### Step 4: Verify Installation on Arch Linux
-
-Run the following command to confirm all tools are installed:
-
-```bash
-command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
-```
-
-If any tool is missing, re-run the installation commands.
-
----
-
-This ensures all dependencies are available for your pre-commit hooks in Arch Linux. 🚀
-
-## Installation on Ubuntu
-
-### Step 1: Update System on Ubuntu
-
-Before installing any packages, ensure your system is up to date:
-
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-
-### Step 2: Install Core Dependencies for Ubuntu
-
-Run the following command to install the essential dependencies:
-
-```bash
-sudo apt install -y git parallel jpegoptim findutils coreutils jq sed tidy
-```
-
-This installs:
-
-- `git` - Version control system
-- `parallel` - GNU parallel for parallel execution
-- `jpegoptim` - JPEG optimization tool
-- `findutils` - Includes `find`, `xargs`, etc.
-- `coreutils` - Includes `stat`, `head`, `rm`, `mktemp`, `expand`, `file`, etc.
-- `jq` - Command-line JSON processor
-- `sed` - Stream editor
-- `tidy` - HTML/XML validator and reformatter
-
-### Step 3: Install Additional Utilities for Ubuntu
-
-Some dependencies require manual installation or alternative methods.
-
-#### 1. Install `shellcheck` for Ubuntu
-
-```bash
-sudo apt install -y shellcheck
-```
-
-#### 2. Install `shfmt` for Ubuntu
-
-```bash
-sudo apt install -y shfmt
-```
-
-#### 3. Install `ggshield` (GitGuardian) for Ubuntu
-
-GitGuardian requires `pip`. Install it as follows:
-
-```bash
-sudo apt install -y python3 python3-pip
-pip3 install --upgrade pip
-pip3 install ggshield
-```
-
-#### 4. Install `prettier` for Ubuntu
-
-Prettier requires `nodejs`. Install it using:
-
-```bash
-sudo apt install -y nodejs npm
-npm install -g prettier
-```
-
-#### 5. Install `sponge` for Ubuntu
-
-`moreutils` provides `sponge`:
-
-```bash
-sudo apt install -y moreutils
-```
-
-### Step 4: Verify Installation on Ubuntu
-
-Run the following command to confirm all tools are installed:
-
-```bash
-command -v shellcheck ggshield git parallel jpegoptim find head tidy rm jq shfmt sponge expand sed prettier gofmt
-```
-
-## If any tool is missing, re-run the installation commands
-
-This ensures all dependencies are available for your pre-commit hooks in Ubuntu. 🚀
+This ensures all dependencies are available for your pre-commit hooks across platforms. 🚀

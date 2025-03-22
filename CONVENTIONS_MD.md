@@ -20,6 +20,7 @@
   avoid the need for a `<br />` altogether.
 - Use ATX-style headings. Prefer a single space after # and newlines before\
   and after.
+- Headers should be surrounded by blank lines.
 - Header levels should only increment by one level at a time.
 - Avoid multiple headings with the same content even under sub-headings. Headings and sub-headings must be unique.
 - Use double asterisks for bold text. Avoid using double underscores for bold\
@@ -40,7 +41,7 @@
 - For code quotations longer than a single line, use a codeblock.
 - Explicitly declare the language for long code quotations.
 - Use a single backslash at the end of long command line snippets.
-- Nest codeblocks within lists. Codeblocks should be surrounded by blank lines.
+- Nest fenced codeblocks within lists. Fenced Codeblocks should be surrounded by blank lines even in lists.
 - To create a blockquote, add a > in front of each line of a content block,\
   (including any blank lines).
 - Use admonitions to call attention to particular details within the body of a\
