@@ -7,24 +7,24 @@ instructions for Termux, Arch Linux, and Ubuntu.
 
 These essential dependencies must be installed:
 
-- `shellcheck` - Static analysis tool for shell scripts\
-- `ggshield` - GitGuardian secret scanning tool\
-- `git` - Version control system\
-- `parallel` - GNU parallel for parallel execution\
-- `jpegoptim` - JPEG optimization tool\
-- `stat` - File status utility\
-- `find` - File search utility\
-- `head` - Output the first part of files\
-- `tidy` - HTML/XML validator and reformatter\
-- `rm` - Remove files/directories\
-- `wscheck` - Whitespace checker\
-- `file` - Determine file type\
-- `mktemp` - Create temporary files/directories\
-- `shfmt` - Shell script formatter\
-- `jq` - Command-line JSON processor\
-- `sponge` - Soak up standard input and write to a file\
-- `expand` - Convert tabs to spaces\
-- `sed` - Stream editor\
+- `shellcheck` - Static analysis tool for shell scripts
+- `ggshield` - GitGuardian secret scanning tool
+- `git` - Version control system
+- `parallel` - GNU parallel for parallel execution
+- `jpegoptim` - JPEG optimization tool
+- `stat` - File status utility
+- `find` - File search utility
+- `head` - Output the first part of files
+- `tidy` - HTML/XML validator and reformatter
+- `rm` - Remove files/directories
+- `wscheck` - Whitespace checker
+- `file` - Determine file type
+- `mktemp` - Create temporary files/directories
+- `shfmt` - Shell script formatter
+- `json` - Command-line JSON processor
+- `sponge` - Soak up standard input and write to a file
+- `expand` - Convert tabs to spaces
+- `sed` - Stream editor
 - `prettier` - Code formatter (for markdown)
 
 ## Dependencies by File Type
@@ -33,7 +33,7 @@ These dependencies are used for specific file types:
 
 ### Shell Scripts
 
-- `shellcheck`\
+- `shellcheck`
 - `shfmt`
 
 ### JPEG Files
@@ -46,7 +46,7 @@ These dependencies are used for specific file types:
 
 ### JSON Files
 
-- `jq`
+- `json`
 
 ### Markdown Files
 
@@ -73,7 +73,7 @@ These dependencies are used for specific file types:
 2. Install core dependencies:
 
    ```bash
-   pkg install git parallel jpegoptim findutils coreutils jq sed tidy
+   pkg install git parallel jpegoptim findutils coreutils sed tidy
    ```
 
 3. Install additional utilities:
@@ -81,14 +81,14 @@ These dependencies are used for specific file types:
    ```bash
    pkg install shellcheck shfmt moreutils
    pip install ggshield
-   npm install -g prettier
+   npm install -g prettier json
    ```
 
 4. Verify installation:
 
    ```bash
    command -v shellcheck ggshield git parallel jpegoptim find head tidy rm \
-     jq shfmt sponge expand sed prettier gofmt
+     json shfmt sponge expand sed prettier gofmt
    ```
 
 ### Arch Linux
@@ -102,7 +102,7 @@ These dependencies are used for specific file types:
 2. Install core dependencies:
 
    ```bash
-   sudo pacman -S git parallel jpegoptim findutils coreutils jq sed tidy
+   sudo pacman -S git parallel jpegoptim findutils coreutils sed tidy
    ```
 
 3. Install additional utilities:
@@ -110,14 +110,14 @@ These dependencies are used for specific file types:
    ```bash
    sudo pacman -S shellcheck shfmt moreutils
    pip install ggshield
-   npm install -g prettier
+   npm install -g prettier json
    ```
 
 4. Verify installation:
 
    ```bash
    command -v shellcheck ggshield git parallel jpegoptim find head tidy rm \
-     jq shfmt sponge expand sed prettier gofmt
+     json shfmt sponge expand sed prettier gofmt
    ```
 
 ### Ubuntu
@@ -131,7 +131,7 @@ These dependencies are used for specific file types:
 2. Install core dependencies:
 
    ```bash
-   sudo apt install -y git parallel jpegoptim findutils coreutils jq sed tidy
+   sudo apt install -y git parallel jpegoptim findutils coreutils sed tidy
    ```
 
 3. Install additional utilities:
@@ -139,16 +139,17 @@ These dependencies are used for specific file types:
    ```bash
    sudo apt install -y shellcheck shfmt moreutils
    pip3 install ggshield
-   npm install -g prettier
+   npm install -g prettier json
    ```
 
 4. Verify installation:
 
    ```bash
    command -v shellcheck ggshield git parallel jpegoptim find head tidy rm \
-     jq shfmt sponge expand sed prettier gofmt
+     json shfmt sponge expand sed prettier gofmt
    ```
 
 ---
 
-This ensures all dependencies are available for your pre-commit hooks across platforms. 🚀
+This ensures all dependencies are available for your pre-commit hooks across\
+platforms. 🚀
