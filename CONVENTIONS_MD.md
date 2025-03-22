@@ -63,6 +63,8 @@
 - When you do decide to use a horizontal rule, always use three dashes (---)\
   on a line by themselves, surrounded by blank lines.
 - Any tables in your Markdown should be small.
+- Prefer tables with only a few columns.
+- Prefer tables with concise data.
 - Consider lists for complex content.
 - Use reference style links in tables to keep the contents of each cell as\
   short as possible.
