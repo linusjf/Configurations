@@ -28,3 +28,43 @@
 - Use lazy numbering for long lists.
 - Use consistent indentation. When nesting lists, use a 2 space indent for\
   both numbered and bulleted lists.
+- For lists with concise items most or all of which fit on one line, do not\
+  leave an empty line between list items.
+- If many of your list items are longer and wrap onto multiple lines, a blank\
+  line between list items improves legibility.
+- Use `backticks` for short code quotations and field names.
+- Use inline code when referring to file types in an abstract sense, rather \
+  than a specific file.
+- For code quotations longer than a single line, use a codeblock.
+- Explicitly declare the language for long code quotations.
+- Use a single backslash at the end of long command line snippets.
+- Nest codeblocks within lists.
+- To create a blockquote, add a > in front of each line of a content block,\
+  (including any blank lines).
+- Use admonitions to call attention to particular details within the body of a\
+  doc, such as a cautionary warning, or a bit of supplemental information that\
+  isn’t essential to its primary reading.
+- Use simulated admonitions for environments or renderers that don't support admonitions.
+- Although you should generally avoid HTML, the `<details>` element enables \
+  readers to expand and collapse sections of content on the page. This is useful\
+  when content needs to be made available, but needn't be presented in the\
+  default view of the page where it could make it needlessly long or distract\
+  from the main message.
+- Use inline links within your document. Wherever possible, shorten your links.
+- Use informative link titles.
+- Avoid bare links without any syntax.
+- If you're using the text of a link purely informatively and do not want it\
+  to function as a link, use backticks to treat it as inline code.
+- Always specify alt text for your images to improve accessibility by providing\
+  text in the brackets preceding the link.
+- Approximate captions by placing italicized text on the line immediately\
+  after your image (omit a blank line).
+- Avoid horizontal rules when possible.
+- When you do decide to use a horizontal rule, always use three dashes (---)\
+  on a line by themselves, surrounded by blank lines.
+- Any tables in your Markdown should be small.
+- Consider lists for complex content.
+- Use reference style links in tables to keep the contents of each cell as\
+  short as possible.
+- Please prefer standard Markdown syntax wherever possible and avoid HTML\
+  hacks.
