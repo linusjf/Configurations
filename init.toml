@@ -344,3 +344,7 @@ default_height = 30
 [[custom_plugins]]
   repo = "mhartington/oceanic-next"
   merged = false
+
+[[custom_plugins]]
+  repo = "aliou/bats.vim"
+  merged = false

@@ -205,6 +205,7 @@ let g:spacevim_custom_plugins = [
 \ ['z0mbix/vim-shfmt'],
 \ ['mhinz/vim-signify'],
 \ ['mhartington/oceanic-next'],
+\ ['aliou/bats.vim'],
 \ ]
 "" \ ['preservim/vim-markdown'],
 "" ['pangloss/vim-javascript'],*/
