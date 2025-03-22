@@ -51,3 +51,5 @@
   rebase = true
 [diff]
   submodule = log
+[status]
+  submodulesummary = 1
