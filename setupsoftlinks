@@ -21,14 +21,40 @@ link_configurations() {
 
     if [ -e "$link_path" ]; then
       echo "Removing existing $link_path"
-      rm -f "$link_path"
+      rm -rf "$link_path"
     fi
 
     echo "Creating link to $item_path"
     ln -sf "$item_path" "$link_path" || ((ret = 1))
   done
+
+  ln -sf "$config_dir/git" "$home_dir/.git" || ((ret = 1))
   exit "$ret"
 }
 
+function require() {
+  local missing_deps=()
+
+  for dep in "$@"; do
+    if ! command -v "$dep" &> /dev/null; then
+      missing_deps+=("$dep")
+    fi
+  done
+
+  if [ ${#missing_deps[@]} -gt 0 ]; then
+    printf "Error: The following dependencies were not found:\n" >&2
+    for dep in "${missing_deps[@]}"; do
+      printf "  - %s\n" "$dep" >&2
+    done
+    return 1
+  fi
+}
+
+set -eou pipefail
+shopt -s inherit_errexit
+
+require rm
+
 link_configurations .bashrc .bash_profile .bash_aliases .bash_logout \
-  .gitconfig .gitrc
+  .gitconfig .gitrc .github .gitguardian.yml .emacs .sqliterc .ssh .termux .tmux.conf \
+  .vimrc .jupyter .aider.conf.yml .aider.model.settings.yml
