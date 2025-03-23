@@ -61,6 +61,11 @@ isshellscript() {
   file -b "$1" | grep -q 'shell script'
 }
 
+# Checks if the given file is a json file
+isjsonfile() {
+  json --validate < "$1"
+}
+
 # Checks if the given file is an XML, HTML, or SGML file
 isxmlfile() {
   local filetype

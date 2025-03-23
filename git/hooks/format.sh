@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+requirefns isjsonfile
+
 get_mode() {
   local file="$1"
   local mode="644"
@@ -40,9 +42,11 @@ format_go() {
 format_json() {
   local ret=0
   local -a files=()
-  readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.json$')
+  readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '(\.json)|(rc)$')
   for file in "${files[@]}"; do
-    format_file "$file" json --quiet -I -f
+    if isjsonfile "$file"; then
+      format_file "$file" json --quiet -I -f
+    fi
   done
   return "$ret"
 }
