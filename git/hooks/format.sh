@@ -45,7 +45,7 @@ format_json() {
   readarray -t files < <(git diff --cached --name-only --diff-filter=ACMR | grep '(\.json)|(^\.*rc)$')
   for file in "${files[@]}"; do
     if isjsonfile "$file"; then
-      format_file "$file" json --quiet -I -f -2
+      format_file "$file" json --quiet --output json -I -f
     fi
   done
   return "$ret"
