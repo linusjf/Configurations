@@ -25,15 +25,20 @@ link_configurations() {
         cp -L "${link_path}" "${link_path}.old"
       fi
       if [ -d "$link_path" ]; then
-        local real_path
-        real_path="$(readlink "$link_path")"
-        if [[ "$real_path" == "$item_path" ]]; then
-          echo "Skipping ${link_path} as it is linked already..."
-          continue
+        if [[ -L "$link_path" ]]; then
+          local real_path
+          real_path="$(readlink "$link_path")"
+          if [[ "$real_path" == "$item_path" ]]; then
+            echo "Skipping ${link_path} as it is linked already..."
+            continue
+          else
+            echo "${link_path} is actually at $real_path"
+            echo "Safe to link to $item_path"
+            rm -rf "${link_path}"
+          fi
         else
-          echo "${link_path} is actually at $real_path"
-          echo "Safe to link to $item_path"
-          rm -rf "${link_path}"
+          echo "Copying ${link_path} to ${link_path}.old"
+          cp -L "${link_path}" "${link_path}.old"
         fi
       fi
     fi
@@ -75,6 +80,9 @@ link_configurations .bashrc .bash_profile .bash_aliases .bash_logout \
   .vimrc .jupyter .aider.conf.yml .aider.model.settings.yml
 
 # handle git differently
-ln -sf "${HOME}/Configurations/git" "${HOME}/.git"
-
+if [[ -L "${HOME}/.git" ]]; then
+  ln -sf "${HOME}/Configurations/git" "${HOME}/.git"
+else
+  cp -L "${HOME}/.git" "${HOME}/.git.old"
+fi
 exit 0
