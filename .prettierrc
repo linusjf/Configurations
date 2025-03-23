@@ -1,5 +1,4 @@
 {
-    "printWidth": 120,
     "useTabs": false,
     "semi": true,
     "singleQuote": true,
@@ -9,6 +8,7 @@
     "proseWrap": "always",
     "endOfLine": "lf",
     "tabWidth": 2,
+    "printWidth": 120,
     "overrides": [{
         "files": "*.md",
         "options": {
