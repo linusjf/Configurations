@@ -20,15 +20,20 @@ link_configurations() {
     fi
 
     if [ -e "$link_path" ]; then
-      echo "Removing existing $link_path"
-      rm -rf "$link_path"
+      if [ -f "$link_path" ]; then
+        echo "Copying ${link_path} to ${link_path}.old"
+        cp -L "${link_path}" "${link_path}.old"
+      fi
+      if [ -d "$link_path" ]; then
+        echo "Skipping ${link_path} as it is a directory..."
+        continue
+      fi
     fi
 
     echo "Creating link to $item_path"
     ln -sf "$item_path" "$link_path" || ((ret = 1))
   done
 
-  ln -sf "$config_dir/git" "$home_dir/.git" || ((ret = 1))
   exit "$ret"
 }
 
@@ -53,7 +58,9 @@ function require() {
 set -eou pipefail
 shopt -s inherit_errexit
 
-require rm
+require cp
+
+find "$HOME" -maxdepth 1 -type f -name "*.old" -name "*.old.tar" -delete -print0
 
 link_configurations .bashrc .bash_profile .bash_aliases .bash_logout \
   .gitconfig .gitrc .github .gitguardian.yml .emacs .sqliterc .ssh .termux .tmux.conf \
