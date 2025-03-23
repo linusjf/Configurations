@@ -11,7 +11,7 @@ checkws() {
     if istextfile "$file"; then
       wsout=0
       echo "Checking ${file} for whitespace..."
-      tmp="$(mktemp)"
+      tmp="$(mktemp -t "${file}.XXXXXX")"
       case "$file" in
         *.xml | *.sgml | *.html | *.xhtml)
           # check file content and not empty or something else
@@ -35,7 +35,7 @@ checkws() {
       wsout=$?
       ((ret += wsout))
       if [[ "$wsout" -ne 0 ]]; then
-        mv "$tmp" "${file}.wsout"
+        mv "$tmp" "$(basename "${tmp}").wsout"
       else
         rm "$tmp"
       fi

@@ -6,7 +6,7 @@ optimize() {
   mode=$(stat -c "%a" "$file")
   jpegoptim -f -s "$file" \
     && hash=$(git hash-object -w "${file}") \
-    && git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || exit 1
+    && git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || return 1
   return $?
 }
 
@@ -25,7 +25,7 @@ optimizejpgs() {
 
   for file in "${files[@]}"; do
     optimize "$file"
-    ret=$((ret + $?))
+    ret=$((ret | $?))
   done
 
   return "$ret"

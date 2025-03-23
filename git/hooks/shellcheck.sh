@@ -12,7 +12,7 @@ checkshs() {
   for file in "${files[@]}"; do
     if [[ -n "$file" && -f "$file" ]] && isshellscript "$file"; then
       formatandcheck "$file"
-      ret=$((ret + $?))
+      ret=$((ret | $?))
     fi
   done
 
@@ -32,7 +32,7 @@ checkexecs() {
   for file in "${files[@]}"; do
     if [[ -n "$file" && -x "$file" && ! -d "$file" ]] && isshellscript "$file"; then
       formatandcheck "$file"
-      ret=$((ret + $?))
+      ret=$((ret | $?))
     fi
   done
 
