@@ -25,8 +25,16 @@ link_configurations() {
         cp -L "${link_path}" "${link_path}.old"
       fi
       if [ -d "$link_path" ]; then
-        echo "Skipping ${link_path} as it is a directory..."
-        continue
+        local real_path
+        real_path="$(readlink "$link_path")"
+        if [[ "$real_path" == "$item_path" ]]; then
+          echo "Skipping ${link_path} as it is linked already..."
+          continue
+        else
+          echo "${link_path} is actually at $real_path"
+          echo "Safe to link to $item_path"
+          rm -rf "${link_path}"
+        fi
       fi
     fi
 
@@ -65,3 +73,8 @@ find "$HOME" -maxdepth 1 -type f -name "*.old" -name "*.old.tar" -delete -print0
 link_configurations .bashrc .bash_profile .bash_aliases .bash_logout \
   .gitconfig .gitrc .github .gitguardian.yml .emacs .sqliterc .ssh .termux .tmux.conf \
   .vimrc .jupyter .aider.conf.yml .aider.model.settings.yml
+
+# handle git differently
+ln -sf "${HOME}/Configurations/git" "${HOME}/.git"
+
+exit 0
