@@ -101,7 +101,7 @@ formatandcheckmd() {
   local tmpfile
   tmpfile="$(mktemp -t "$(basename "${file}").XXXXXX")"
   git show ":$file" > "$tmpfile"
-  markdownlint "$tmpfile" || return 1
+  markdownlint --fix "$tmpfile" || return 1
   prettier --parser markdown --log-level silent --write "$tmpfile" || return 1
   local hash
   hash=$(git hash-object -w "$tmpfile")
