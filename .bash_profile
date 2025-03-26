@@ -141,7 +141,7 @@ set -o vi
 export PYTHONASYNCIODEBUG=0
 
 # Load API keys from files if they exist
-for key_file in "${HOME}/.groq/groq_secret_access_key" "${HOME}/.openai/.secretkey" "${HOME}/.openroutertoken" "${HOME}/.deepseektoken"; do
+for key_file in "${HOME}/.groq/groq_secret_access_key" "${HOME}/.openai/.secretkey" "${HOME}/.openroutertoken" "${HOME}/.deepseektoken" "${HOME}/.youtubeapikey"; do
   if [[ -f "$key_file" ]]; then
     key_name=$(basename "$key_file" | tr '[:lower:]' '[:upper:]' | sed 's/\.//g')
     if [[ "$key_name" == "GROQ_SECRET_ACCESS_KEY" ]]; then
@@ -153,6 +153,8 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" "${HOME}/.openai/.secretk
       export OPENROUTER_API_KEY="$(cat "$key_file")"
     elif [[ "$key_name" == "DEEPSEEKTOKEN" ]]; then
       export DEEPSEEK_API_KEY="$(cat "$key_file")"
+    elif [[ "$key_name" == "YOUTUBEAPIKEY" ]]; then
+      export YOUTUBE_API_KEY="$(cat "$key_file")"
     fi
   fi
 done
