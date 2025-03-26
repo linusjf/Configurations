@@ -56,7 +56,7 @@
 [diff]
   submodule = log
 [status]
-  submodulesummary = 1
+	submodulesummary = 1
 [submodule]
   recurse = true
 [rerere]
