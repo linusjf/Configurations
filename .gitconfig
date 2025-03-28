@@ -12,6 +12,7 @@
   longpaths = true
   editor = vim
   symlinks = true
+	excludesfile = /data/data/com.termux/files/home/.gitignore_global
 [push]
   autoSetupRemote = true
   recurseSubmodules = on-demand
