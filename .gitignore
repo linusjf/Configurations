@@ -3,13 +3,9 @@
 *authorized_keys*
 *known_hosts*
 *.txt
-*.out
-*.wsout
 1_py3_*
 .aws/cli/**
 .aws/sso/**
 .aws/config
-**/*.bak
-**/commit.txt
 .aider*
 !.aider*.yml
