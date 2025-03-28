@@ -1,5 +1,5 @@
-*.out
-*.wsout
-1_py3_*
+**/*.out
+**/*.wsout
+**/*_py3_*
 **/*.bak
 **/commit.txt
