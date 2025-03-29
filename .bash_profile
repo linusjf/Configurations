@@ -171,7 +171,6 @@ if [[ -f "$HOME/.cargo/env" ]]; then
   source "$HOME/.cargo/env"
 fi
 
-export GIT_USER="linusjf"
 export GITHUB_USERNAME="linusjf"
 export PYTHON3_HOST_PROG="${USR}/bin/python"
 
