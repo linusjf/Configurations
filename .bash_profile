@@ -172,6 +172,7 @@ if [[ -f "$HOME/.cargo/env" ]]; then
 fi
 
 export GIT_USER="linusjf"
+export GITHUB_USERNAME="linusjf"
 export PYTHON3_HOST_PROG="${USR}/bin/python"
 
 # Update $PATH variable
