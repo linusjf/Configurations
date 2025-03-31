@@ -84,7 +84,7 @@ formatandcheck() {
   local tmpfile
   tmpfile="$(mktemp -t "$(basename "${file}").XXXXXX")"
   git show ":$file" > "$tmpfile"
-  shellcheck --check-sourced --color --shell=bash -- "$tmpfile" || return 1
+  shellcheck --check-sourced --external-sources --color --shell=bash --format=diff -- "$tmpfile" || return 1
   shfmt -i 2 -bn -ci -sr -w -- "$tmpfile" || return 1
   local hash
   hash=$(git hash-object -w "$tmpfile")
