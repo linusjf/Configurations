@@ -84,16 +84,21 @@ formatandcheck() {
   local tmpfile
   tmpfile="$(mktemp -t "$(basename "${file}").XXXXXX")"
   git show ":$file" > "$tmpfile"
-  shellcheck --check-sourced --external-sources --color --shell=bash -- "$tmpfile" || return 1
-  shfmt -i 2 -bn -ci -sr -w -- "$tmpfile" || return 1
-  local hash
-  hash=$(git hash-object -w "$tmpfile")
-  local mode
-  mode="$(get_mode "${file}")"
-  git update-index --add --cacheinfo "${mode}" "$hash" "$file"
-  git cat-file -p "$hash" > "${file}"
-  rm "$tmpfile"
-  return $?
+  if shellcheck --check-sourced --color -- "$tmpfile"; then
+    if shfmt -i 2 -bn -ci -sr -w -- "$tmpfile"; then
+      local hash=$(git hash-object -w "$tmpfile")
+      local mode="$(get_mode "${file}")"
+      git update-index --add --cacheinfo "${mode}" "$hash" "$file"
+      git cat-file -p "$hash" > "${file}"
+      rm "$tmpfile"
+      return $?
+    else
+      return 1
+    fi
+  else
+    return 1
+  fi
+
 }
 
 formatandcheckmd() {
