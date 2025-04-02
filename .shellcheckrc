@@ -2,5 +2,5 @@ external-sources=true
 disable=SC1090
 disable=SC1091
 disable=SC2155
-disable=SC2107
+disable=SC2015
 shell=bash
