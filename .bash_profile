@@ -25,6 +25,10 @@ pathmunge() {
   fi
 }
 
+zid() {
+  hexdump -n 16 -v -e '16/1 "%02x" "\n"' /dev/random
+}
+
 ## termux hacks for bash_profile
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -82,7 +86,7 @@ export EDITOR=vim
 export PAGER=less
 
 # Check for required commands, but don't fail if they don't exist
-for cmd in tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh neofetch; do
+for cmd in tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh neofetch hexdump; do
   command -v "$cmd" &> /dev/null || echo "Warning: $cmd not found"
 done
 
