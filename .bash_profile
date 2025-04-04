@@ -25,10 +25,6 @@ pathmunge() {
   fi
 }
 
-zid() {
-  hexdump -n 16 -v -e '16/1 "%02x" "\n"' /dev/random
-}
-
 ## termux hacks for bash_profile
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
