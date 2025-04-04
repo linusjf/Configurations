@@ -53,7 +53,7 @@
 [advice]
   skippedCherryPicks = false
 [pull]
-  rebase = true
+  rebase = false
 [diff]
   submodule = log
 [status]
