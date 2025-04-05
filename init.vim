@@ -148,7 +148,7 @@ call SpaceVim#layers#load('lang#json')
 call SpaceVim#layers#load('lang#d')
 call SpaceVim#layers#load('lang#graphql')
 call SpaceVim#layers#load('lang#WebAssembly')
-call SpaceVim#layers#load('lang#typescript')
+" call SpaceVim#layers#load('lang#typescript')
 call SpaceVim#layers#load('nvim-treesitter')
 
 " Set options for specific layers
