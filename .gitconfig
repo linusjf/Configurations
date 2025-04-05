@@ -52,6 +52,7 @@
   autocorrect = prompt
 [advice]
   skippedCherryPicks = false
+	submoduleMergeConflict = false
 [pull]
   rebase = false
 [diff]
