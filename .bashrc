@@ -192,6 +192,11 @@ if command -v register-python-argcomplete &> /dev/null; then
   eval "$(register-python-argcomplete pipx)"
 fi
 
+# Set up fzf key bindings and fuzzy completion
+if command -v fzf &> /dev/null; then
+  eval "$(fzf --bash)"
+fi
+
 # SDKMAN setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 if [[ -n "$TERMUX" ]]; then
