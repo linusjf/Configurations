@@ -5,7 +5,9 @@
 " Set SpaceVim options
 let g:spacevim_colorscheme = 'gruvbox'
 let g:spacevim_colorscheme_bg = 'dark'
-let g:spacevim_enable_guicolors = v:true
+let g:spacevim_enable_guicolors = v:false
+let g:spacevim_enable_cursorline = v:true
+let g:spacevim_enable_mouse = v:false
 let g:spacevim_statusline_separator = 'arrow'
 let g:spacevim_statusline_inactive_separator = 'bar'
 let g:spacevim_buffer_index_type = 4
@@ -148,7 +150,7 @@ call SpaceVim#layers#load('lang#json')
 call SpaceVim#layers#load('lang#d')
 call SpaceVim#layers#load('lang#graphql')
 call SpaceVim#layers#load('lang#WebAssembly')
-call SpaceVim#layers#load('lang#typescript')
+" call SpaceVim#layers#load('lang#typescript')
 call SpaceVim#layers#load('nvim-treesitter')
 
 " Set options for specific layers
@@ -206,6 +208,7 @@ let g:spacevim_custom_plugins = [
 \ ['mhinz/vim-signify'],
 \ ['mhartington/oceanic-next'],
 \ ['aliou/bats.vim'],
+\ ['junegunn/fzf.vim'],
 \ ]
 "" \ ['preservim/vim-markdown'],
 "" ['pangloss/vim-javascript'],*/
