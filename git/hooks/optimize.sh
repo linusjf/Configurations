@@ -4,7 +4,7 @@ optimize() {
   local file="$1"
   local mode
   mode=$(stat -c "%a" "$file")
-  jpegoptim -f --strip-none "$file" \
+  jpegoptim -f --max=85 --strip-none "$file" \
     && hash=$(git hash-object -w "${file}") \
     && git update-index --add --cacheinfo "100${mode}" "$hash" "$file" || return 1
   return $?
