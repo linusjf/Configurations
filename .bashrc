@@ -193,9 +193,7 @@ if command -v register-python-argcomplete &> /dev/null; then
 fi
 
 # Set up fzf key bindings and fuzzy completion
-if command -v fzf &> /dev/null; then
-  eval "$(fzf --bash)"
-fi
+[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # SDKMAN setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
