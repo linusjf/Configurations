@@ -63,7 +63,7 @@ if [[ -e "${parentpath}/markdowncheck.sh" ]]; then
 fi
 
 # check that all required dependencies are installed
-require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt json sponge expand sed prettier markdownlint
+require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt json sponge expand sed prettier markdownlint yamllint yq
 
 declare -i ret=0
 declare -a FILES=()
