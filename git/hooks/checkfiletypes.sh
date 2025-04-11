@@ -51,6 +51,12 @@ issgmlfileextension() {
   [[ "$1" == *.* && "${1##*.}" == "sgml" ]]
 }
 
+# Checks if the given file has an yaml extension
+isyamlfileextension() {
+  [[ "$1" == *.* && "${1##*.}" == "yaml" ]] \
+    || [[ "$1" == *.* && "${1##*.}" == "yml" ]]
+}
+
 # Checks if the given file is a text file by looking for 'ASCII' in its type
 istextfile() {
   file -b --mime-type "$1" | grep -q 'text/'
@@ -76,4 +82,9 @@ isxmlfile() {
     *SGML*) issgmlfileextension "$1" ;;
     *) return 1 ;;
   esac
+}
+
+# Checks if given file is yaml
+isyamlfile() {
+  yq eval '.' "$1" > /dev/null 2>&1
 }
