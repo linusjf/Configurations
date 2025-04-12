@@ -61,9 +61,13 @@ if [[ -e "${parentpath}/markdowncheck.sh" ]]; then
   # shellcheck disable=SC1091
   source "${parentpath}/markdowncheck.sh"
 fi
+if [[ -e "${parentpath}/yamlcheck.sh" ]]; then
+  # shellcheck disable=SC1091
+  source "${parentpath}/yamlcheck.sh"
+fi
 
 # check that all required dependencies are installed
-require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt json sponge expand sed prettier markdownlint yamllint yq
+require shellcheck ggshield git parallel jpegoptim stat find head tidy rm wscheck file mktemp shfmt json sponge expand sed prettier markdownlint yamllint yq yamlfmt
 
 declare -i ret=0
 declare -a FILES=()
@@ -74,6 +78,9 @@ checkexecs || ((ret = 1))
 
 # check markdown files and format them
 checkmds || ((ret = 1))
+
+# check yaml files
+checkyamls || ((ret = 1))
 
 # optimize jpeg files
 optimizejpgs || ((ret = 1))
