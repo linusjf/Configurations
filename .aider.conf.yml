@@ -1,56 +1,74 @@
 ##########################################################
 # Aider Configuration
 ##########################################################
-
+---
 #############
 # Main model:
-model: deepseek/deepseek-chat # Best balance of capability and cost
-
+# Best balance of capability and cost
+model: deepseek/deepseek-chat
 #################
 # Model settings:
-max-chat-history-tokens: 8000 # Reasonable limit to prevent excessive token usage
-map-tokens: 2000 # Good default for repo mapping
-map-refresh: auto # Automatically refresh repo map when needed
-
+# Reasonable limit to prevent excessive token usage
+max-chat-history-tokens: 8000
+# Good default for repo mapping
+map-tokens: 2000
+# Automatically refresh repo map when needed
+map-refresh: auto
 ################
 # History Files:
-restore-chat-history: true # Maintain context between sessions
-llm-history-file: .aider.llm.history # Log LLM conversations for review
-
+# Maintain context between sessions
+restore-chat-history: true
+# Log LLM conversations for review
+llm-history-file: .aider.llm.history
 ##################
 # Output settings:
-pretty: true # Colorized output
-stream: true # Stream responses for better UX
-show-diffs: true # Show diffs when committing changes
-code-theme: monokai # Popular code highlighting theme
-
+# Colorized output
+pretty: true
+# Stream responses for better UX
+stream: true
+# Show diffs when committing changes
+show-diffs: true
+# Popular code highlighting theme
+code-theme: monokai
 ###############
 # Git settings:
-auto-commits: false # Manual control over commits
-dirty-commits: false # Don't automatically commit dirty files
-attribute-author: true # Attribute AI changes in git
-attribute-committer: true # Attribute AI as committer
-attribute-commit-message-author: true # Prefix commit messages with 'aider: '
-
+# Manual control over commits
+auto-commits: false
+# Don't automatically commit dirty files
+dirty-commits: false
+# Attribute AI changes in git
+attribute-author: true
+# Attribute AI as committer
+attribute-committer: true
+# Prefix commit messages with 'aider: '
+attribute-commit-message-author: true
 ########################
 # Fixing and committing:
-auto-lint: true # Automatically lint after changes
-auto-test: false # Manual control over test runs
-
+# Automatically lint after changes
+auto-lint: true
+# Manual control over test runs
+auto-test: false
 ############
 # Analytics:
-analytics: false # Disable analytics for privacy
-
+# Disable analytics for privacy
+analytics: false
 ############
 # Upgrading:
-check-update: true # Check for updates on launch
-
+# Check for updates on launch
+check-update: true
 #################
 # Other settings:
-vim: true # Use standard editing mode (change to true if you prefer vim)
-suggest-shell-commands: true # Allow suggesting shell commands
-fancy-input: true # Enable fancy input with history and completion
-multiline: true # Enable multi-line input mode
-notifications: true # Enable notifications when responses are ready
-detect-urls: true # Detect and offer to add URLs to chat
-dark-mode: true # Dark mode
+# Use standard editing mode (change to true if you prefer vim)
+vim: true
+# Allow suggesting shell commands
+suggest-shell-commands: true
+# Enable fancy input with history and completion
+fancy-input: true
+# Enable multi-line input mode
+multiline: true
+# Enable notifications when responses are ready
+notifications: true
+# Detect and offer to add URLs to chat
+detect-urls: true
+# Dark mode
+dark-mode: true
