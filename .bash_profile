@@ -4,11 +4,6 @@
 
 export USR=${PREFIX:-/usr}
 
-# add CIAY, BIAY and RIAY year variables
-export CIAY_YEAR=2023
-export BIAY_YEAR=2024
-export RIAY_YEAR=2025
-
 pathmunge() {
   local dir="$1"
   local position="$2"
