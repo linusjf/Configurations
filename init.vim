@@ -40,7 +40,7 @@ call SpaceVim#layers#load('core#statusline')
 call SpaceVim#layers#load('core#tabline')
 call SpaceVim#layers#load('checkers', {
       \ 'lint_on_the_fly': v:true,
-      \ 'lint_on_save': v:true,
+      \ 'lint_on_save': v:false,
       \ 'lint_exclude_filetype': [],
       \ 'open_error_list': 2,
       \ 'show_cursor_error': v:true
@@ -105,6 +105,7 @@ call SpaceVim#layers#load('lang#python', {
       \ 'python_file_head': [],
       \ 'enable_typeinfo': v:true,
       \ 'format_on_save': v:true,
+      \ 'lint_on_save': v:false,
       \ 'enabled_linters': ['python', 'pylint'],
       \ 'enabled_clients': ['pyright'],
       \ 'enable_runner': v:true,
