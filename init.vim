@@ -47,7 +47,7 @@ call SpaceVim#layers#load('checkers', {
       \ })
 call SpaceVim#layers#load('format', {
       \ 'format_method': 'codefmt',
-      \ 'format_on_save': v:true,
+      \ 'format_on_save': v:false,
       \ 'silent_format': v:true
       \ })
 call SpaceVim#layers#load('edit', {

@@ -11,16 +11,16 @@ pathmunge() {
   # Check if directory exists before adding to PATH
   if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
     case "$position" in
-      before)
-        PATH="$dir:$PATH"
-        ;;
-      after)
-        PATH="$PATH:$dir"
-        ;;
-      *)
-        echo "Invalid position. Use 'before' or 'after'."
-        return 1
-        ;;
+    before)
+      PATH="$dir:$PATH"
+      ;;
+    after)
+      PATH="$PATH:$dir"
+      ;;
+    *)
+      echo "Invalid position. Use 'before' or 'after'."
+      return 1
+      ;;
     esac
   fi
 }
@@ -32,7 +32,7 @@ if [ -f "$PREFIX/etc/os-release" ]; then
   declare -A os
   while IFS='=' read -r key value; do
     os[$key]=$value
-  done < "$PREFIX/etc/os-release"
+  done <"$PREFIX/etc/os-release"
   os_id=${os["ID"]}
 fi
 
@@ -83,15 +83,15 @@ export PAGER=less
 
 # Check for required commands, but don't fail if they don't exist
 for cmd in tty cat rm grep awk fortune lolcat cowsay updatedb parallel pyenv gh neofetch hexdump; do
-  command -v "$cmd" &> /dev/null || echo "Warning: $cmd not found"
+  command -v "$cmd" &>/dev/null || echo "Warning: $cmd not found"
 done
 
 neofetch --off
 
 if ! "$TERMUX"; then
   # if os is arch linux
-  if [[ "$os_id" =~ arch.* ]] && command -v archlinux-java &> /dev/null; then
-    if ! (archlinux-java status | grep "(default)" > /dev/null 2>&1); then
+  if [[ "$os_id" =~ arch.* ]] && command -v archlinux-java &>/dev/null; then
+    if ! (archlinux-java status | grep "(default)" >/dev/null 2>&1); then
       archlinux-java fix
     fi
     jvm="$(archlinux-java status | grep '(default)' | awk '{print $1}')"
@@ -119,7 +119,8 @@ fi
 
 PS1="\[\e[38;5;148m\]\u\[\e[1;0m\]\A\[\e[1;38;5;112m\]\W\[\e[0m\]$ "
 
-export NVIM_PYTHON_LOG_FILE=1
+export NVIM_PYTHON_LOG_FILE="${HOME}/nvim-python.log"
+export NVIM_PYTHON_LOG_LEVEL=DEBUG
 
 if ! "$TERMUX"; then
   if test -f "${HOME}/.aws/aws_access_key_id"; then
