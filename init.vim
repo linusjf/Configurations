@@ -242,7 +242,7 @@ function! s:SetupMarkdown()
   let g:vim_markdown_edit_url_in = 'current'
 endfunction
 
-"call s:SetupMarkdown()
+call s:SetupMarkdown()
 
 function! s:SetupJavaScript()
   let g:javascript_plugin_jsdoc = 1
@@ -270,4 +270,13 @@ function! s:SetupJavaScript()
   let g:javascript_conceal_underscore_arrow_function = "🞅"
 endfunction
 
-"call s:SetupJavaScript()
+call s:SetupJavaScript()
+
+" Call before function
+call myspacevim#before()
+
+" Set up autocommand to call after function on VimEnter
+augroup myspacevim_bootstrap
+    autocmd!
+    autocmd VimEnter * call myspacevim#after()
+augroup END
