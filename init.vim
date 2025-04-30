@@ -106,7 +106,9 @@ call SpaceVim#layers#load('lang#python', {
       \ 'enable_typeinfo': v:true,
       \ 'format_on_save': v:true,
       \ 'enabled_linters': ['python', 'pylint'],
-      \ 'enabled_clients': ['pyright']
+      \ 'enabled_clients': ['pyright'],
+      \ 'enable_runner': v:true,
+      \ 'repl_command': 'ipython'
       \ })
 "call SpaceVim#layers#load('lang#javascript')
 call SpaceVim#layers#load('lang#perl')
