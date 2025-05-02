@@ -21,6 +21,8 @@ let g:spacevim_bootstrap_before = 'myspacevim#before'
 let g:spacevim_bootstrap_after = 'myspacevim#after'
 let g:spacevim_vimcompatible = v:true
 let g:spacevim_filetree_direction = 'left'
+let g:spacevim_logging_level = 'info'
+let g:spacevim_logging_file = "~/.SpaceVim/spacevim.log"
 
 " Load SpaceVim layers
 call SpaceVim#layers#load('default')
@@ -29,7 +31,8 @@ call SpaceVim#layers#load('autocomplete', {
       \ 'auto_completion_delay': 200,
       \ 'auto_completion_complete_with_key_sequence': 'nil',
       \ 'auto_completion_complete_with_key_sequence_delay': 0.1,
-      \ 'auto-completion-return-key-behavior': 'complete'
+      \ 'auto_completion_return_key_behavior': 'complete',
+      \ 'autocomplete_method': 'coc',
       \ })
 call SpaceVim#layers#load('shell', {
       \ 'default_position': 'bottom',
@@ -40,14 +43,14 @@ call SpaceVim#layers#load('core#statusline')
 call SpaceVim#layers#load('core#tabline')
 call SpaceVim#layers#load('checkers', {
       \ 'lint_on_the_fly': v:true,
-      \ 'lint_on_save': v:false,
-      \ 'lint_exclude_filetype': [],
+      \ 'lint_on_save': v:true,
+      \ 'lint_exclude_filetype': ['python'],
       \ 'open_error_list': 2,
       \ 'show_cursor_error': v:true
       \ })
 call SpaceVim#layers#load('format', {
       \ 'format_method': 'codefmt',
-      \ 'format_on_save': v:false,
+      \ 'format_on_save': v:true,
       \ 'silent_format': v:true
       \ })
 call SpaceVim#layers#load('edit', {
@@ -104,8 +107,8 @@ call SpaceVim#layers#load('lsp', {
 call SpaceVim#layers#load('lang#python', {
       \ 'python_file_head': [],
       \ 'enable_typeinfo': v:true,
-      \ 'format_on_save': v:true,
-      \ 'lint_on_save': v:true,
+      \ 'format_on_save': v:false,
+      \ 'lint_on_save': v:false,
       \ 'enabled_linters': ['python', 'pylint'],
       \ 'enabled_clients': ['pyright'],
       \ 'enable_runner': v:true,
