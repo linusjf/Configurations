@@ -5,8 +5,8 @@
 #############
 # Main model:
 # Best balance of capability and cost
-# model: deepseek/deepseek-chat
-model: gemini/gemini-2.0-flash
+model: deepseek/deepseek-chat
+# model: gemini/gemini-2.0-flash
 #################
 # Model settings:
 # Reasonable limit to prevent excessive token usage

@@ -69,6 +69,7 @@ function! myspacevim#before() abort
     \ 'args': ['-q', '-'],
     \ }
   let g:neoformat_enabled_python = ['black']
+  let g:loaded_perl_provider = 0
 
   iabbrev <buffer> --- <c-k>-M
   " Show column numbers
