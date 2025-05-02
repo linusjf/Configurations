@@ -105,7 +105,7 @@ call SpaceVim#layers#load('lang#python', {
       \ 'python_file_head': [],
       \ 'enable_typeinfo': v:true,
       \ 'format_on_save': v:true,
-      \ 'lint_on_save': v:false,
+      \ 'lint_on_save': v:true,
       \ 'enabled_linters': ['python', 'pylint'],
       \ 'enabled_clients': ['pyright'],
       \ 'enable_runner': v:true,
@@ -157,12 +157,6 @@ call SpaceVim#layers#load('lang#WebAssembly')
 call SpaceVim#layers#load('nvim-treesitter')
 
 " Set options for specific layers
-let g:spacevim_layer_lang_markdown = {
- \ 'listItemIndent': '1',
-    \ 'enableWcwidth': v:true,
-     \ 'listItemChar': '*',
-    \ 'enabled_formater': ['remark', 'prettier']
-    \ }
 let g:spacevim_layer_lang_javascript = {
   \ 'auto_fix': v:true,
   \ 'enable_flow_syntax': v:false,
@@ -212,6 +206,7 @@ let g:spacevim_custom_plugins = [
 \ ['mhartington/oceanic-next'],
 \ ['aliou/bats.vim'],
 \ ['junegunn/fzf.vim'],
+\ ['preservim/vim-markdown'],
 \ ]
 "" \ ['preservim/vim-markdown'],
 "" ['pangloss/vim-javascript'],*/
