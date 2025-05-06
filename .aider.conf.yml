@@ -34,7 +34,7 @@ code-theme: monokai
 ###############
 # Git settings:
 # Manual control over commits
-auto-commits: false
+auto-commits: true
 # Don't automatically commit dirty files
 dirty-commits: false
 # Attribute AI changes in git
