@@ -26,7 +26,7 @@ rules:
   line-length:
     max: 80
     allow-non-breakable-words: true
-    allow-non-breakable-inline-mappings: false
+    allow-non-breakable-inline-mappings: true
   new-line-at-end-of-file: enable
   new-lines: enable
   octal-values: disable
