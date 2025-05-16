@@ -43,14 +43,14 @@ call SpaceVim#layers#load('core#statusline')
 call SpaceVim#layers#load('core#tabline')
 call SpaceVim#layers#load('checkers', {
       \ 'lint_on_the_fly': v:true,
-      \ 'lint_on_save': v:true,
+      \ 'lint_on_save': v:false,
       \ 'lint_exclude_filetype': ['python'],
       \ 'open_error_list': 2,
       \ 'show_cursor_error': v:true
       \ })
 call SpaceVim#layers#load('format', {
       \ 'format_method': 'codefmt',
-      \ 'format_on_save': v:true,
+      \ 'format_on_save': v:false,
       \ 'silent_format': v:true
       \ })
 call SpaceVim#layers#load('edit', {
@@ -60,7 +60,7 @@ call SpaceVim#layers#load('edit', {
       \ })
 call SpaceVim#layers#load('ui', {
       \ 'enable_sidebar': v:true,
-      \ 'enable_scrollbar': v:false,
+      \ 'enable_scrollbar': v:true,
       \ 'enable_indentline': v:true,
       \ 'enable_cursorword': v:false,
       \ 'indentline_char': '|',
