@@ -203,3 +203,4 @@ pathmunge "${HOME}/binaries" after
 pathmunge "${HOME}/PMD/bin" after
 pathmunge "${HOME}/LearnJava" after
 pathmunge "${HOME}/LearnBnd" after
+pathmunge "${HOME}/deepctl/target/release" after
