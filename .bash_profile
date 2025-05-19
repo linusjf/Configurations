@@ -149,6 +149,7 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
   "${HOME}/.deepseektoken" \
   "${HOME}/.youtubeapikey" \
   "${HOME}/.geminiapikey" \
+  "${HOME}/.deepinfratoken" \
   "${HOME}/.rtdtoken"; do
   if [[ -f "$key_file" ]]; then
     key_name=$(basename "$key_file" | tr '[:lower:]' '[:upper:]' | sed 's/\.//g')
@@ -165,6 +166,8 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
       export YOUTUBE_API_KEY="$(cat "$key_file")"
     elif [[ "$key_name" == "GEMINIAPIKEY" ]]; then
       export GEMINI_API_KEY="$(cat "$key_file")"
+    elif [[ "$key_name" == "DEEPINFRATOKEN" ]]; then
+      export DEEPINFRA_TOKEN="$(cat "$key_file")"
     elif [[ "$key_name" == "RTDTOKEN" ]]; then
       export RTD_TOKEN="$(cat "$key_file")"
     fi
