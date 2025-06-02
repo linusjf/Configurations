@@ -151,6 +151,7 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
   "${HOME}/.geminiapikey" \
   "${HOME}/.deepinfratoken" \
   "${HOME}/.falaikey" \
+  "${HOME}/.lmstudioapikey" \
   "${HOME}/.rtdtoken"; do
   if [[ -f "$key_file" ]]; then
     key_name=$(basename "$key_file" | tr '[:lower:]' '[:upper:]' | sed 's/\.//g')
@@ -173,6 +174,8 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
       export RTD_TOKEN="$(cat "$key_file")"
     elif [[ "$key_name" == "FALAIKEY" ]]; then
       export FALAI_KEY="$(cat "$key_file")"
+    elif [[ "$key_name" == "LMSTUDIOAPIKEY" ]]; then
+      export LMSTUDIO_API_KEY="$(cat "$key_file")"
     fi
   fi
 done
