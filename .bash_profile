@@ -213,3 +213,4 @@ pathmunge "${HOME}/PMD/bin" after
 pathmunge "${HOME}/LearnJava" after
 pathmunge "${HOME}/LearnBnd" after
 pathmunge "${HOME}/deepctl/target/release" after
+pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
