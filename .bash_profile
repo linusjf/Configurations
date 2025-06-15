@@ -219,4 +219,4 @@ pathmunge "${HOME}/LearnBnd" after
 pathmunge "${HOME}/deepctl/target/release" after
 pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
 
-is_WSL && echo "WSL detected"
+is_WSL && echo "WSL detected."
