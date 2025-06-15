@@ -211,6 +211,10 @@ pathmunge "${USR}/local/go/bin" after
 pathmunge "${HOME}/.local/share/gem/ruby/3.3.0/bin" after
 pathmunge "${HOME}/Duckdb" after
 
+# add cuda bin
+pathmunge /usr/local/cuda-12.9/bin after
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-12.9/lib64"
+
 # add our scripts
 pathmunge "${HOME}/binaries" after
 pathmunge "${HOME}/PMD/bin" after
