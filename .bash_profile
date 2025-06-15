@@ -25,6 +25,10 @@ pathmunge() {
   fi
 }
 
+is_WSL() {
+  grep -qEi "(Microsoft|WSL)" /proc/version
+}
+
 ## termux hacks for bash_profile
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -214,3 +218,5 @@ pathmunge "${HOME}/LearnJava" after
 pathmunge "${HOME}/LearnBnd" after
 pathmunge "${HOME}/deepctl/target/release" after
 pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
+
+is_WSL && echo "WSL detected"
