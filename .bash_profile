@@ -29,6 +29,10 @@ is_WSL() {
   grep -qEi "(Microsoft|WSL)" /proc/version
 }
 
+is_termux() {
+  [[ -d /data/data/com.termux/files/usr/ ]]
+}
+
 ## termux hacks for bash_profile
 export TERMUX=true
 if [ -f "$PREFIX/etc/os-release" ]; then
@@ -224,3 +228,4 @@ pathmunge "${HOME}/deepctl/target/release" after
 pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
 
 is_WSL && echo "WSL detected."
+is_termux && echo "Termux detected."
