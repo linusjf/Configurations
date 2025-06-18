@@ -160,6 +160,7 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
   "${HOME}/.deepinfratoken" \
   "${HOME}/.falaikey" \
   "${HOME}/.lmstudioapikey" \
+  "${HOME}/.harvardartmuseumstoken" \
   "${HOME}/.rtdtoken"; do
   if [[ -f "$key_file" ]]; then
     key_name=$(basename "$key_file" | tr '[:lower:]' '[:upper:]' | sed 's/\.//g')
@@ -184,6 +185,8 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
       export FALAI_KEY="$(cat "$key_file")"
     elif [[ "$key_name" == "LMSTUDIOAPIKEY" ]]; then
       export LMSTUDIO_API_KEY="$(cat "$key_file")"
+    elif [[ "$key_name" == "HARVARDARTMUSEUMSTOKEN" ]]; then
+      export HARVARD_ART_MUSEUMS_API_KEY="$(cat "$key_file")"
     fi
   fi
 done
