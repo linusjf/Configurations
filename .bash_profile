@@ -41,6 +41,10 @@ is_ubuntu() {
   [[ -f /etc/os-release ]] && grep -q '^ID=ubuntu' /etc/os-release
 }
 
+is_ubuntu_based() {
+  [[ -f /etc/os-release ]] && grep -qi 'ubuntu' /etc/os-release
+}
+
 ## termux hacks for bash_profile
 if is_termux; then
   export TERMUX=true
@@ -238,4 +242,6 @@ pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
 is_WSL && echo "WSL detected."
 is_termux && echo "Termux detected."
 is_arch_linux && echo "Arch Linux detected."
-is_ubuntu && echo "Ubuntu detected."
+if is_ubuntu || is_ubuntu_based; then
+  echo "Ubuntu or Ubuntu variant detected."
+fi
