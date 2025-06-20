@@ -242,6 +242,4 @@ pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
 is_WSL && echo "WSL detected."
 is_termux && echo "Termux detected."
 is_arch_linux && echo "Arch Linux detected."
-if is_ubuntu || is_ubuntu_based; then
-  echo "Ubuntu or Ubuntu variant detected."
-fi
+is_ubuntu_based && echo "Ubuntu or Ubuntu variant detected."
