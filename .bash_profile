@@ -33,15 +33,20 @@ is_termux() {
   [[ -d /data/data/com.termux/files/usr/ ]]
 }
 
+is_arch_linux() {
+  [[ -f /etc/os-release ]] && grep -q '^ID=arch' /etc/os-release
+}
+
+is_ubuntu() {
+  [[ -f /etc/os-release ]] && grep -q '^ID=ubuntu' /etc/os-release
+}
+
 ## termux hacks for bash_profile
-export TERMUX=true
+if is_termux; then
+  export TERMUX=true
+fi
 if [ -f "$PREFIX/etc/os-release" ]; then
   export TERMUX=false
-  declare -A os
-  while IFS='=' read -r key value; do
-    os[$key]=$value
-  done <"$PREFIX/etc/os-release"
-  os_id=${os["ID"]}
 fi
 
 # This is specific to Termux
@@ -98,7 +103,7 @@ neofetch --off
 
 if ! "$TERMUX"; then
   # if os is arch linux
-  if [[ "$os_id" =~ arch.* ]] && command -v archlinux-java &>/dev/null; then
+  if is_arch_linux && command -v archlinux-java &>/dev/null; then
     if ! (archlinux-java status | grep "(default)" >/dev/null 2>&1); then
       archlinux-java fix
     fi
@@ -232,3 +237,5 @@ pathmunge "${HOME}/ffmpeg-master-latest-linux64-gpl/bin" after
 
 is_WSL && echo "WSL detected."
 is_termux && echo "Termux detected."
+is_arch_linux && echo "Arch Linux detected."
+is_ubuntu && echo "Ubuntu detected."
