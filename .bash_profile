@@ -26,7 +26,7 @@ pathmunge() {
 }
 
 is_WSL() {
-  grep -qEi "(Microsoft|WSL)" /proc/version
+  [[ -e /proc/version ]] && [[ -r /proc/version ]] && grep -qEi "(Microsoft|WSL)" /proc/version
 }
 
 is_termux() {
