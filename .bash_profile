@@ -173,6 +173,7 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
   "${HOME}/.serpapikey" \
   "${HOME}/.hftoken" \
   "${HOME}/.imgbbapikey" \
+  "${HOME}/.zenserpapikey" \
   "${HOME}/.rtdtoken"; do
   if [[ -f "$key_file" ]]; then
     key_name=$(basename "$key_file" | tr '[:lower:]' '[:upper:]' | sed 's/\.//g')
@@ -205,6 +206,8 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
       export HF_TOKEN="$(cat "$key_file")"
     elif [[ "$key_name" == "IMGBBAPIKEY" ]]; then
       export IMGBB_API_KEY="$(cat "$key_file")"
+    elif [[ "$key_name" == "ZENSERPAPIKEY" ]]; then
+      export ZENSERP_API_KEY="$(cat "$key_file")"
     fi
   fi
 done
