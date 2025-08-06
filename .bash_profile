@@ -192,6 +192,7 @@ for key_file in "${HOME}/.groq/groq_secret_access_key" \
       export GEMINI_API_KEY="$(cat "$key_file")"
     elif [[ "$key_name" == "DEEPINFRATOKEN" ]]; then
       export DEEPINFRA_TOKEN="$(cat "$key_file")"
+      export DEEPINFRA_API_KEY="$(cat "$key_file")"
     elif [[ "$key_name" == "RTDTOKEN" ]]; then
       export RTD_TOKEN="$(cat "$key_file")"
     elif [[ "$key_name" == "FALAIKEY" ]]; then
