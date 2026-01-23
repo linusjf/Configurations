@@ -182,11 +182,6 @@ if [[ -d $PYENV_ROOT/bin ]]; then
   eval "$(pyenv virtualenv-init -)"
 fi
 
-# GitHub Copilot CLI
-if command -v gh &> /dev/null; then
-  eval "$(gh copilot alias -- bash)"
-fi
-
 # Python argcomplete
 if command -v register-python-argcomplete &> /dev/null; then
   eval "$(register-python-argcomplete pipx)"
