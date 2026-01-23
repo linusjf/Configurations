@@ -2,14 +2,14 @@
 # shellcheck disable=SC1091,SC2181,SC1090,SC2155
 # If not running interactively, don't do anything
 case $- in
-  *i*) ;;
-  *) return ;;
+*i*) ;;
+*) return ;;
 esac
 
 function _AM_() {
   local am_bin="${PREFIX}/usr/bin/am"
   local termux_bin="/usr/local/termuxarch/bin"
-  command -v am &> /dev/null || [ -f "$am_bin" ] && [ -d "$termux_bin" ] && cp "$am_bin" "$termux_bin"
+  command -v am &>/dev/null || [ -f "$am_bin" ] && [ -d "$termux_bin" ] && cp "$am_bin" "$termux_bin"
 }
 
 git-branch() {
@@ -44,10 +44,10 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-  xterm-color | *-256color) color_prompt=yes ;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
-if [ "$color_prompt" = yes ] && command -v tput &> /dev/null && tput setaf 1 &> /dev/null; then
+if [ "$color_prompt" = yes ] && command -v tput &>/dev/null && tput setaf 1 &>/dev/null; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -55,10 +55,10 @@ fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-  xterm* | rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-  *) ;;
+xterm* | rxvt*)
+  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+  ;;
+*) ;;
 esac
 
 # enable color support of ls and also add handy aliases
@@ -117,7 +117,7 @@ if test -f "$HOME/.gitguardiantoken"; then
 fi
 
 # shellcheck source=/dev/null
-if command -v env_parallel.bash &> /dev/null; then
+if command -v env_parallel.bash &>/dev/null; then
   source "$(which env_parallel.bash)"
 fi
 
@@ -142,8 +142,8 @@ fi
 if test -d "${HOME}/.local/share/pnpm"; then
   export PNPM_HOME="${HOME}/.local/share/pnpm"
   case ":$PATH:" in
-    *":$PNPM_HOME:"*) ;;
-    *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 fi
 # pnpm end
@@ -156,7 +156,7 @@ test -s "$NVM_DIR/bash_completion" && source "$NVM_DIR/bash_completion" # This l
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("${HOME}/miniconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$("${HOME}/miniconda3/bin/conda" 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
   eval "$__conda_setup"
 else
@@ -183,7 +183,7 @@ if [[ -d $PYENV_ROOT/bin ]]; then
 fi
 
 # Python argcomplete
-if command -v register-python-argcomplete &> /dev/null; then
+if command -v register-python-argcomplete &>/dev/null; then
   eval "$(register-python-argcomplete pipx)"
 fi
 
@@ -207,7 +207,10 @@ if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/path.bash.inc' ]; then
 if [ -f '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc' ]; then . '/data/data/com.termux/files/usr/google-cloud-sdk/completion.bash.inc'; fi
 
 if [[ -z "$TERMUX" ]]; then
-    if test -d "/home/linuxbrew/.linuxbrew/bin/brew"; then
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  if test -d "/home/linuxbrew/.linuxbrew/bin/brew"; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi
 fi
+
+export PATH=/home/linusjf/.groundcover/bin:${PATH}
+export PATH="$PATH:/mnt/c/Users/<YOUR_WINDOWS_USERNAME>/AppData/Local/Programs/Microsoft VS Code/bin"
