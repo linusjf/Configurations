@@ -212,5 +212,14 @@ if [[ -z "$TERMUX" ]]; then
   fi
 fi
 
-export PATH=/home/linusjf/.groundcover/bin:${PATH}
-export PATH="$PATH:/mnt/c/Users/<YOUR_WINDOWS_USERNAME>/AppData/Local/Programs/Microsoft VS Code/bin"
+if test -d "/home/linusjf/.groundcover"; then
+  export PATH=/home/linusjf/.groundcover/bin:${PATH}
+fi
+if [[ -n "$WSL_INTEROP" || -n "$WSL_DISTRO_NAME" ]]; then
+  # get windows user name
+  windows_un="$(cmd.exe /c echo %USERNAME% 2>/dev/null)"
+fi
+
+if test -d "/mnt/c/Users/${windows_un}/AppData/Local/Programs/Microsoft VS Code"; then
+  export PATH="$PATH:/mnt/c/Users/${windows_un}/AppData/Local/Programs/Microsoft VS Code/bin"
+fi
