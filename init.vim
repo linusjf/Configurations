@@ -23,6 +23,7 @@ let g:spacevim_vimcompatible = v:true
 let g:spacevim_filetree_direction = 'left'
 let g:spacevim_logging_level = 'info'
 let g:spacevim_logging_file = "~/.SpaceVim/spacevim.log"
+let g:python3_host_prog = expand('~/.pyenv/versions/nvim-host/bin/python')
 
 " Load SpaceVim layers
 call SpaceVim#layers#load('default')
